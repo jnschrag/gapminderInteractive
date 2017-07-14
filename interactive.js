@@ -1,7 +1,7 @@
 $( function() {
     $( "#accordion" ).accordion({
         collapsible: true,
-        heightStyle: "content"
+        heightStyle: "fill"
     });
   } );
 
@@ -74,8 +74,9 @@ function getRange(data,parseFunction){
 
 function makeChart(){
 
-    var margin = {top: 19.5, right: 19.5, bottom: 49.5, left: 39.5};
-    var width = 960 - margin.right;
+    d3.select("#theGraph").remove();
+    var margin = {top: 19.5, right: 19.5, bottom: 49.5, left: 35};
+    var width = document.getElementById('graph').clientWidth - margin.right - margin.left;
     var height = 500 - margin.top - margin.bottom;
 
     xScale = d3.scaleLinear().domain(xScaleRange).range([0, width]),
@@ -86,7 +87,8 @@ function makeChart(){
     yAxis = d3.axisLeft(yScale).tickSizeOuter(0);
     // Create the SVG container and set the origin.
     var svg = d3.select("#graph").append("svg")
-    .attr("width", width + margin.left + margin.right)
+    .attr("id","theGraph")
+    .attr("width", width + margin.left)
     .attr("height", height + margin.top + margin.bottom)
     .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
@@ -197,6 +199,10 @@ function checkboxChange(){
         });
     }
 }
+
+window.onresize = makeChart;
+
+
 /*
 var margin = {top: 19.5, right: 19.5, bottom: 19.5, left: 39.5},
 width = 960 - margin.right,
