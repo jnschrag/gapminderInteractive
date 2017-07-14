@@ -1,3 +1,10 @@
+$( function() {
+    $( "#accordion" ).accordion({
+        collapsible: true,
+        heightStyle: "content"
+    });
+  } );
+
 var getX;
 var getY;
 var getCircle;
@@ -67,11 +74,6 @@ function getRange(data,parseFunction){
 
 function makeChart(){
 
-    d3.select("#slider-time")
-    .on("mousemove", function() { 
-        console.log(this.attr("value"));
-    })
-
     var margin = {top: 19.5, right: 19.5, bottom: 49.5, left: 39.5};
     var width = 960 - margin.right;
     var height = 500 - margin.top - margin.bottom;
@@ -129,7 +131,8 @@ function makeChart(){
     .data(countryList.map(function(d){return [d,getX(d),getY(d),getCircle(d)];}))
     .enter()
     .append("circle")
-    .attr("id",function(d){return d[0];})
+    .attr("id",function(d){return d[0].replace(/ /g,'');})
+    .attr("country",function(d){return d[0]})
     .attr("class","point")
     .style("fill","red")
     .attr("cx",function(d){return xScale(d[1]["1996"]);})
@@ -169,6 +172,29 @@ function play(){
     }
     else{
         update(parseInt(document.getElementById('slider').value)+1,true);
+    }
+}
+
+function checkboxChange(){
+    var anyCheckBoxOn = false;
+    d3.selectAll(".checkboxes").select(function(){
+        if(this.checked){anyCheckBoxOn=true;}
+    });
+    if(anyCheckBoxOn){
+
+        d3.selectAll(".checkboxes").select(function(){
+            if(this.checked){
+                d3.select("#"+this.getAttribute('country')).style("opacity","0.6");
+            }
+            else{
+                d3.select("#"+this.getAttribute('country')).style("opacity","0");
+            }
+        });
+    }
+    else{
+        d3.selectAll(".checkboxes").select(function(){
+            d3.select("#"+this.getAttribute('country')).style("opacity","0.6");
+        });
     }
 }
 /*
