@@ -14,6 +14,8 @@ var circleScaleRange;
 var xScale;
 var yScale;
 var radiusScale;
+var wbCode;
+var wbScale = {1:"#deebf7",2:"#c6dbef",3:"#9ecae1",4:"#6baed6",5:"#3182bd",6:"#08519c"}
 var countryList = []
 var label;
 
@@ -21,6 +23,7 @@ var q = d3.queue()
     .defer(d3.csv, "data/circle.csv")
     .defer(d3.csv, "data/xScale.csv")
     .defer(d3.csv, "data/yScale.csv")
+    .defer(d3.csv, "data/wbcode.csv")
     .awaitAll(function(error, results) {
     if (error) throw error;
     for(var i=0;i<results[0].length;i++){
@@ -32,6 +35,7 @@ var q = d3.queue()
     xScaleRange = getRange(results[1],parseFloat);
     getY = getCountryDataFunc(results[2]);
     yScaleRange = getRange(results[2],parseFloat);
+    wbCode = getCountryDataFunc(results[3]);
     makeChart();
 });
 
@@ -72,6 +76,35 @@ function getRange(data,parseFunction){
     return [min,max];
 }
 
+function reorder(){
+    var allPoints = document.getElementsByClassName("point");
+    var pointsNode = document.getElementById("points");
+    var new_pointsNode = pointsNode.cloneNode(false);
+    
+    var z=document.getElementsByClassName("point").length;
+    while(z>0)
+    {   
+        var maxIndex = findMax(allPoints);
+        var theNode = allPoints[maxIndex].cloneNode(true);
+        new_pointsNode.append(theNode);
+        d3.select(theNode).data(d3.select(allPoints[maxIndex]).data());
+        allPoints[maxIndex].remove();
+        z--;
+    }
+    document.getElementById('gRoot').appendChild(new_pointsNode);
+    pointsNode.remove();
+}
+
+function findMax(arr){
+    var max = 0;
+    for(var i=0;i<arr.length;i++){
+        if(parseFloat(arr[i].getAttribute('r'))>parseFloat(arr[max].getAttribute('r'))){
+            max = i;
+        }
+    }
+    return max;
+}
+
 function makeChart(){
 
     d3.select("#theGraph").remove();
@@ -81,7 +114,7 @@ function makeChart(){
 
     xScale = d3.scaleLinear().domain(xScaleRange).range([0, width]),
     yScale = d3.scaleLinear().domain(yScaleRange).range([height, 0]),
-    radiusScale = d3.scaleSqrt().domain(circleScaleRange).range([0, 40]);
+    radiusScale = d3.scaleSqrt().domain(circleScaleRange).range([2, 40]);
     // The x & y axes.
     var xAxis = d3.axisBottom(xScale).ticks(12, d3.format(",d")).tickSizeOuter(0),
     yAxis = d3.axisLeft(yScale).tickSizeOuter(0);
@@ -92,7 +125,7 @@ function makeChart(){
     .attr("height", height + margin.top + margin.bottom)
     .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
-    .attr("class", "gRoot");
+    .attr("id", "gRoot");
 
     svg.append("g")
     .attr("class", "x axis")
@@ -128,18 +161,19 @@ function makeChart(){
 
 
     svg.append("g")
-    .attr("class","points")
+    .attr("id","points")
     .selectAll("circle")
-    .data(countryList.map(function(d){return [d,getX(d),getY(d),getCircle(d)];}))
+    .data(countryList.map(function(d){return [d,getX(d),getY(d),getCircle(d),wbCode(d).wbcode];}))
     .enter()
     .append("circle")
     .attr("id",function(d){return d[0].replace(/ /g,'');})
     .attr("country",function(d){return d[0]})
     .attr("class","point")
-    .style("fill","red")
+    .style("fill",function(d){return wbScale[d[4]]})
     .attr("cx",function(d){return xScale(d[1]["1996"]);})
     .attr("cy",function(d){return yScale(d[2]["1996"]);})
     .attr("r",function(d){return radiusScale(d[3]["1996"])});
+    reorder();
 }
 
 function yearChange(year){
@@ -157,6 +191,9 @@ function update(year,playButton){
         if(year<2015&&playButton){
             update(year+1,playButton)
         }
+        else{
+            reorder();
+        }
     });
 
     label.text(year);
@@ -165,6 +202,8 @@ function update(year,playButton){
     .attr("cx",function(d){return xScale(d[1][year]);})
     .attr("cy",function(d){return yScale(d[2][year]);})
     .attr("r",function(d){return radiusScale(d[3][year]);});
+
+    //reorder();
 }
 
 function play(){
@@ -186,16 +225,16 @@ function checkboxChange(){
 
         d3.selectAll(".checkboxes").select(function(){
             if(this.checked){
-                d3.select("#"+this.getAttribute('country')).style("opacity","0.6");
+                d3.select("#"+this.getAttribute('country')).style("opacity","1");
             }
             else{
-                d3.select("#"+this.getAttribute('country')).style("opacity","0");
+                d3.select("#"+this.getAttribute('country')).style("opacity","0.6");
             }
         });
     }
     else{
         d3.selectAll(".checkboxes").select(function(){
-            d3.select("#"+this.getAttribute('country')).style("opacity","0.6");
+            d3.select("#"+this.getAttribute('country')).style("opacity","1");
         });
     }
 }

@@ -20,7 +20,6 @@
 circle{
 	stroke:black;
 	stroke-width:1px;
-	opacity: 0.6;
 }
 
 .axis path, .axis line {
@@ -42,6 +41,12 @@ circle{
   fill: #aaa;
 }
 
+.ui-accordion .ui-accordion-content {
+	padding:5%;
+}
+svg{
+	shape-rendering: geometricPrecision;
+}
 /*Slider code*/
 
 #slider{
