@@ -18,6 +18,7 @@ var wbCode;
 var wbScale = {1:"#deebf7",2:"#c6dbef",3:"#9ecae1",4:"#6baed6",5:"#3182bd",6:"#08519c"}
 var countryList = []
 var label;
+var currentYear = 1996;
 
 var q = d3.queue()
     .defer(d3.csv, "data/circle.csv")
@@ -93,6 +94,7 @@ function reorder(){
     }
     document.getElementById('gRoot').appendChild(new_pointsNode);
     pointsNode.remove();
+    attachListeners();
 }
 
 function findMax(arr){
@@ -108,8 +110,8 @@ function findMax(arr){
 function makeChart(){
 
     d3.select("#theGraph").remove();
-    var margin = {top: 19.5, right: 19.5, bottom: 49.5, left: 35};
-    var width = document.getElementById('graph').clientWidth - margin.right - margin.left;
+    var margin = {top: 19.5, right: 19.5, bottom: 49.5, left: 25};
+    var width = document.getElementById('graph').clientWidth - margin.right;
     var height = 500 - margin.top - margin.bottom;
 
     xScale = d3.scaleLinear().domain(xScaleRange).range([0, width]),
@@ -119,9 +121,12 @@ function makeChart(){
     var xAxis = d3.axisBottom(xScale).ticks(12, d3.format(",d")).tickSizeOuter(0),
     yAxis = d3.axisLeft(yScale).tickSizeOuter(0);
     // Create the SVG container and set the origin.
+
+    var tooltips = d3.select("#graph").append("div").attr("id","tooltips");
+
     var svg = d3.select("#graph").append("svg")
     .attr("id","theGraph")
-    .attr("width", width + margin.left)
+    .attr("width", width + margin.left+margin.right)
     .attr("height", height + margin.top + margin.bottom)
     .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
@@ -173,7 +178,42 @@ function makeChart(){
     .attr("cx",function(d){return xScale(d[1]["1996"]);})
     .attr("cy",function(d){return yScale(d[2]["1996"]);})
     .attr("r",function(d){return radiusScale(d[3]["1996"])});
+
     reorder();
+    
+    d3.selectAll(".point").select(function(d){
+        var boundingClientRect = this.getBoundingClientRect();
+        d3.select("#tooltips")
+        .append("div")
+        .attr("class","tooltip")
+        .attr("id",d[0].replace(/ /g,'')+"tooltip")
+        .style("top",boundingClientRect.top+boundingClientRect.height)
+        .style("left",boundingClientRect.left+boundingClientRect.width)
+        .text(d[0]);
+    });
+
+    attachListeners();
+}
+
+function attachListeners(){
+    d3.selectAll(".checkboxes").select(function(){
+        if(this.checked){
+            d3.select("#"+this.getAttribute('country'))
+            .on("mouseenter",null)
+            .on("mouseleave",null);
+        }
+        else{
+            d3.select("#"+this.getAttribute('country'))
+            .on("mouseenter",function(){
+                d3.select("#"+this.getAttribute('id')+"tooltip")
+                .style("display","block");
+            })
+            .on("mouseleave",function(){
+                d3.select("#"+this.getAttribute('id')+"tooltip")
+                .style("display","none");
+            });
+        } 
+    });
 }
 
 function yearChange(year){
@@ -181,9 +221,11 @@ function yearChange(year){
 }
 
 function update(year,playButton){
-    
-    document.getElementById('slider').value = year;
-    
+    d3.selectAll(".point")
+    .attr("cx",function(d){return xScale(d[1][year]);})
+    .attr("cy",function(d){return yScale(d[2][year]);})
+    .attr("r",function(d){return radiusScale(d[3][year]);});
+
     var t = d3.transition()
     .duration(1000)
     .ease(d3.easeQuadInOut)
@@ -196,14 +238,31 @@ function update(year,playButton){
         }
     });
 
-    label.text(year);
+    d3.selectAll(".point")
+    .select(function(d){
+        var boundingClientRect = this.getBoundingClientRect();
+        
+        d3.select("#"+d[0].replace(/ /g,'')+"tooltip")
+        .transition(t)
+        .style("top",boundingClientRect.bottom)
+        .style("left",boundingClientRect.right);
+    });
+
+    d3.selectAll(".point")
+    .attr("cx",function(d){return xScale(d[1][currentYear]);})
+    .attr("cy",function(d){return yScale(d[2][currentYear]);})
+    .attr("r",function(d){return radiusScale(d[3][currentYear]);});
+
     d3.selectAll(".point")
     .transition(t)
     .attr("cx",function(d){return xScale(d[1][year]);})
     .attr("cy",function(d){return yScale(d[2][year]);})
     .attr("r",function(d){return radiusScale(d[3][year]);});
 
-    //reorder();
+    document.getElementById('slider').value = year;
+    currentYear = document.getElementById('slider').value;
+
+    label.text(year);
 }
 
 function play(){
@@ -226,17 +285,21 @@ function checkboxChange(){
         d3.selectAll(".checkboxes").select(function(){
             if(this.checked){
                 d3.select("#"+this.getAttribute('country')).style("opacity","1");
+                d3.select("#"+this.getAttribute('country')+"tooltip").style("display","block");
             }
             else{
                 d3.select("#"+this.getAttribute('country')).style("opacity","0.6");
+                d3.select("#"+this.getAttribute('country')+"tooltip").style("display","none");
             }
         });
     }
     else{
         d3.selectAll(".checkboxes").select(function(){
             d3.select("#"+this.getAttribute('country')).style("opacity","1");
+            d3.select("#"+this.getAttribute('country')+"tooltip").style("display","none");
         });
     }
+    attachListeners();
 }
 
 window.onresize = makeChart;

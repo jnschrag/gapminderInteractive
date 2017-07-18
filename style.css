@@ -8,10 +8,10 @@
 }
 
 #graph{
-	width: 85%;
+	width: 70%;
 }
 #accordion{
-	width: 15%;
+	width: 25%;
 	position: absolute;
 	top: 0px;
 	right: 0px;
@@ -20,6 +20,10 @@
 circle{
 	stroke:black;
 	stroke-width:1px;
+}
+
+circle:hover{
+	cursor: pointer;
 }
 
 .axis path, .axis line {
@@ -51,4 +55,13 @@ svg{
 
 #slider{
 	width: 70%;
+}
+
+.tooltip{
+	padding:3px;
+	border: 2px solid black;
+	border-radius: 8%;
+	background: white;
+	display: none;
+	position: fixed;
 }
