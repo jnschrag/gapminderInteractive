@@ -288,7 +288,7 @@ function checkboxChange(){
                 d3.select("#"+this.getAttribute('country')+"tooltip").style("display","block");
             }
             else{
-                d3.select("#"+this.getAttribute('country')).style("opacity","0.6");
+                d3.select("#"+this.getAttribute('country')).style("opacity","0.3");
                 d3.select("#"+this.getAttribute('country')+"tooltip").style("display","none");
             }
         });
