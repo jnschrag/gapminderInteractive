@@ -1,6 +1,5 @@
 $( function() {
     $( "#accordion" ).accordion({
-        collapsible: true,
         heightStyle: "fill"
     });
   } );
@@ -38,6 +37,7 @@ var q = d3.queue()
     yScaleRange = getRange(results[2],parseFloat);
     wbCode = getCountryDataFunc(results[3]);
     makeChart();
+    makeBabyChart();
 });
 
 function getCountryDataFunc(data){
@@ -105,6 +105,39 @@ function findMax(arr){
         }
     }
     return max;
+}
+
+function makeBabyChart(){
+    d3.select("#circleLegendGraph")
+    .selectAll("circle")
+    .remove();
+
+    d3.selectAll(".circleLabel")
+    .remove();
+
+    var boundingClientRect = document.getElementById("circleLegendGraph").getBoundingClientRect();
+
+    d3.select("#circleLegendGraph")
+    .selectAll("circle")
+    .data([24520,380])
+    .enter()
+    .append("circle")
+    .attr("class","legendCircles")
+    .attr("cx",boundingClientRect.width/2)
+    .attr("cy",boundingClientRect.height/2)
+    .attr("r",function(d){return radiusScale(d);})
+    .style("fill","white");
+    
+    d3.selectAll(".legendCircles").select(function(d){
+        var boundingClientRect = this.getBoundingClientRect();
+        console.log(boundingClientRect);
+        d3.select("#circleLegendGraph")
+        .append("text")
+        .attr("x",parseFloat(this.getAttribute('cx'))+boundingClientRect.width/2)
+        .attr("y",parseFloat(this.getAttribute('cy'))+boundingClientRect.height/2)
+        .attr("class","circleLabel")
+        .text(d);
+    });
 }
 
 function makeChart(){
@@ -199,18 +232,89 @@ function attachListeners(){
     d3.selectAll(".checkboxes").select(function(){
         if(this.checked){
             d3.select("#"+this.getAttribute('country'))
-            .on("mouseenter",null)
-            .on("mouseleave",null);
+            .on("mouseenter",function(d){
+                d3.select("#legend"+d[4]).style("border","2px solid #E8336D");
+                d3.select(this).style("stroke","#E8336D");
+                d3.select(this).style("stroke-width","3px");
+
+                var boundingClientRect = document.getElementById("circleLegendGraph").getBoundingClientRect();
+                
+                d3.select("#circleLegendGraph")
+                .append("circle")
+                .attr("id","tempCirc")
+                .attr("cx",boundingClientRect.width/2)
+                .attr("cy",boundingClientRect.height/2)
+                .attr("r",this.getAttribute('r'))
+                .style("fill","white")
+                .style("stroke","#E8336D");
+            
+                var currentGNI = d[3][currentYear];
+
+                d3.select("#circleLegendGraph")
+                .append("text")
+                .attr("x",parseFloat(this.getAttribute('r'))/2+boundingClientRect.width/2)
+                .attr("y",parseFloat(this.getAttribute('r'))/2+boundingClientRect.height/2)
+                .attr("id","tempLabel")
+                .text(currentGNI);
+
+                d3.selectAll(".circleLabel")
+                .style("opacity",0.3);
+            })
+            .on("mouseleave",function(d){
+                d3.select("#legend"+d[4]).style("border",null);
+                d3.select(this).style("stroke","black");
+                d3.select(this).style("stroke-width","1px");
+                d3.select("#tempCirc").remove();
+                d3.select("#tempLabel").remove();
+                d3.selectAll(".circleLabel")
+                .style("opacity",1);
+            });
         }
         else{
             d3.select("#"+this.getAttribute('country'))
-            .on("mouseenter",function(){
+            .on("mouseenter",function(d){
                 d3.select("#"+this.getAttribute('id')+"tooltip")
                 .style("display","block");
+            
+                d3.select("#legend"+d[4]).style("border","2px solid #E8336D");
+                d3.select(this).style("stroke","#E8336D");
+                d3.select(this).style("stroke-width","3px");
+
+                var boundingClientRect = document.getElementById("circleLegendGraph").getBoundingClientRect();
+
+                d3.select("#circleLegendGraph")
+                .append("circle")
+                .attr("id","tempCirc")
+                .attr("cx",boundingClientRect.width/2)
+                .attr("cy",boundingClientRect.height/2)
+                .attr("r",this.getAttribute('r'))
+                .style("fill","white")
+                .style("stroke","#E8336D");
+
+                var currentGNI = d[3][currentYear];
+
+                d3.select("#circleLegendGraph")
+                .append("text")
+                .attr("x",parseFloat(this.getAttribute('r'))/2+boundingClientRect.width/2)
+                .attr("y",parseFloat(this.getAttribute('r'))/2+boundingClientRect.height/2)
+                .attr("id","tempLabel")
+                .text(currentGNI);
+
+                d3.selectAll(".circleLabel")
+                .style("opacity",0.3);
             })
-            .on("mouseleave",function(){
+            .on("mouseleave",function(d){
                 d3.select("#"+this.getAttribute('id')+"tooltip")
                 .style("display","none");
+
+                d3.select("#legend"+d[4]).style("border",null);
+                d3.select(this).style("stroke","black");
+                d3.select(this).style("stroke-width","1px");
+
+                d3.select("#tempCirc").remove();
+                d3.select("#tempLabel").remove();
+                d3.selectAll(".circleLabel")
+                .style("opacity",1);
             });
         } 
     });
@@ -302,7 +406,12 @@ function checkboxChange(){
     attachListeners();
 }
 
-window.onresize = makeChart;
+window.onresize = resizefunc;
+
+function resizefunc(){
+    makeChart();
+    makeBabyChart();
+};
 
 
 /*

@@ -10,11 +10,25 @@
 #graph{
 	width: 70%;
 }
-#accordion{
+
+#containerTopRight{
 	width: 25%;
 	position: absolute;
 	top: 0px;
 	right: 0px;
+	height: 100%;
+}
+
+.colorLegendElement{
+	display: inline-block;
+	text-align: center;
+}
+
+.colorLegendSquare{
+	
+	width: 20px;
+	height: 20px;
+	box-sizing: border-box;
 }
 
 circle{
@@ -64,4 +78,9 @@ svg{
 	background: white;
 	display: none;
 	position: fixed;
+}
+
+text{
+	font: 500 11px "Helvetica Neue";
+    fill: black;
 }
