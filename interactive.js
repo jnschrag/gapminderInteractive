@@ -130,7 +130,7 @@ function makeBabyChart(){
     
     d3.selectAll(".legendCircles").select(function(d){
         var boundingClientRect = this.getBoundingClientRect();
-        console.log(boundingClientRect);
+        
         d3.select("#circleLegendGraph")
         .append("text")
         .attr("x",parseFloat(this.getAttribute('cx'))+boundingClientRect.width/2)
@@ -197,7 +197,6 @@ function makeChart(){
     .attr("x", width)
     .text(1996);
 
-
     svg.append("g")
     .attr("id","points")
     .selectAll("circle")
@@ -211,8 +210,6 @@ function makeChart(){
     .attr("cx",function(d){return xScale(d[1]["1996"]);})
     .attr("cy",function(d){return yScale(d[2]["1996"]);})
     .attr("r",function(d){return radiusScale(d[3]["1996"])});
-
-    reorder();
     
     d3.selectAll(".point").select(function(d){
         var boundingClientRect = this.getBoundingClientRect();
@@ -225,7 +222,7 @@ function makeChart(){
         .text(d[0]);
     });
 
-    attachListeners();
+    reorder();
 }
 
 function attachListeners(){
@@ -233,6 +230,9 @@ function attachListeners(){
         if(this.checked){
             d3.select("#"+this.getAttribute('country'))
             .on("mouseenter",function(d){
+                d3.select("#tempCirc").remove();
+                d3.select("#tempLabel").remove();
+
                 d3.select("#legend"+d[4]).style("border","2px solid #E8336D");
                 d3.select(this).style("stroke","#E8336D");
                 d3.select(this).style("stroke-width","3px");
@@ -273,6 +273,9 @@ function attachListeners(){
         else{
             d3.select("#"+this.getAttribute('country'))
             .on("mouseenter",function(d){
+                d3.select("#tempCirc").remove();
+                d3.select("#tempLabel").remove();
+
                 d3.select("#"+this.getAttribute('id')+"tooltip")
                 .style("display","block");
             
@@ -335,6 +338,7 @@ function update(year,playButton){
     .ease(d3.easeQuadInOut)
     .on('end',function(){
         if(year<2015&&playButton){
+            attachListeners();
             update(year+1,playButton)
         }
         else{
@@ -413,24 +417,4 @@ function resizefunc(){
     makeBabyChart();
 };
 
-
-/*
-var margin = {top: 19.5, right: 19.5, bottom: 19.5, left: 39.5},
-width = 960 - margin.right,
-height = 500 - margin.top - margin.bottom;
-// Various scales. These domains make assumptions of data, naturally.
-var xScale = d3.scale.log().domain([300, 1e5]).range([0, width]),
-yScale = d3.scale.linear().domain([10, 85]).range([height, 0]),
-radiusScale = d3.scale.sqrt().domain([0, 5e8]).range([0, 40]),
-colorScale = d3.scale.category10();
-// The x & y axes.
-var xAxis = d3.svg.axis().orient("bottom").scale(xScale).ticks(12, d3.format(",d")),
-yAxis = d3.svg.axis().scale(yScale).orient("left");
-// Create the SVG container and set the origin.
-var svg = d3.select("#chart").append("svg")
-.attr("width", width + margin.left + margin.right)
-.attr("height", height + margin.top + margin.bottom)
-.append("g")
-.attr("transform", "translate(" + margin.left + "," + margin.top + ")")
-.attr("class", "gRoot")
-*/
+//420 blaze it
