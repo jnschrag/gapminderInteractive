@@ -1,21 +1,26 @@
 #containerTop{
-	height: 500px;
+	
 }
 
 #graphicContainer{
 	display: flex;
-	flex-direction: row;
-	flex-wrap:wrap;
+	flex-direction: column;
+	height: 100%;
+	width: 100%;
+    flex-wrap: wrap;
 }
 
 #graph{
-	width: 60%;
+	width: 50%;
 	margin-right: 5%;
 }
 
 #containerTopRight{
-	width: 35%;
-	height: 70%;
+	width: 30%;	
+}
+
+#containerBottom{
+	width: 60%;	
 }
 
 .colorLegendElement{

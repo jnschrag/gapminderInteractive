@@ -12,6 +12,10 @@
       <div id="graphicContainer">
         <div id="graph">    
         </div>
+        <div id="containerBottom">
+            <input type="range" id="slider" min="1996" max="2015" value="1996" step="1" onchange="yearChange(this.value)">
+            <button onClick="play()">Play</button>
+        </div>
         <div id="containerTopRight">
             <span>Countries</span>
             <div id="accordion">
@@ -86,10 +90,7 @@
               <svg id="circleLegendGraph" height="100" width="100%"></svg>
             </div>
           </div>
-          <div id="containerBottom">
-            <input type="range" id="slider" min="1996" max="2015" value="1996" step="1" onchange="yearChange(this.value)">
-            <button onClick="play()">Play</button>
-          </div>
+          
         </div>
     <script src="interactive.js"></script>
     </body>
