@@ -84,3 +84,13 @@ text{
 	font: 500 11px "Helvetica Neue";
     fill: black;
 }
+
+span{
+	font-family: 'Source Sans Pro', sans-serif;
+	font-weight: 800;
+}
+
+.colorLegendElement{
+	font-family: 'Source Sans Pro', sans-serif;
+}
+
