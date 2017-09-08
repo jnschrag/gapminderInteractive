@@ -39,7 +39,9 @@ circle{
 circle:hover{
 	cursor: pointer;
 }
-
+.ui-accordion .ui-accordion-header{
+	padding: 0px;
+}
 .axis path, .axis line {
   fill: none;
   stroke: #000;
@@ -51,7 +53,7 @@ circle:hover{
   font-family: "Helvetica Neue";
 }
 .year.label {
-  font: 500 196px "Helvetica Neue";
+  font: 500 126px "Helvetica Neue";
   fill: #ddd;
 }
 
