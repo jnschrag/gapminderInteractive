@@ -1,5 +1,9 @@
-#containerTop{
-	
+*{
+	font-family: 'Source Sans Pro', sans-serif;
+}
+
+.tooltipdetail{
+	display: none;
 }
 
 #graphicContainer{
@@ -8,6 +12,15 @@
 	height: 100%;
 	width: 100%;
     flex-wrap: wrap;
+}
+
+.tooltip{
+	font-family: 'Source Sans Pro', sans-serif;
+}
+
+.tooltipcaption{
+	font-size: 16px;
+	font-weight: 700;
 }
 
 #graph{
@@ -53,11 +66,11 @@ circle:hover{
 }
 .label {
   fill: #777;
-  font-size: 10px;
-  font-family: "Helvetica Neue";
+  font-size: 100px;
+  font-family: 'Source Sans Pro', sans-serif;
 }
 .year.label {
-  font: 500 126px "Helvetica Neue";
+  font-family: 'Source Sans Pro', sans-serif;
   fill: #ddd;
 }
 
@@ -87,7 +100,8 @@ svg{
 }
 
 text{
-	font: 500 11px "Helvetica Neue";
+	font-family: 'Source Sans Pro', sans-serif;
+	font-size: 14px;
     fill: black;
 }
 
