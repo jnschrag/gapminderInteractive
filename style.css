@@ -29,11 +29,11 @@ label{
 
 #graph{
 	width: 65%;
-	margin-right: 2%;
+	margin-right: 10%;
 }
 
 #containerTopRight{
-	width: 30%;	
+	width: 20%;	
 }
 
 #containerBottom{
@@ -47,8 +47,8 @@ label{
 
 .colorLegendSquare{
 	
-	width: 20px;
-	height: 20px;
+	width: 15px;
+	height: 15px;
 	box-sizing: border-box;
 }
 

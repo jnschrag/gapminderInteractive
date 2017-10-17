@@ -184,7 +184,7 @@ function makeBabyChart(){
 
     d3.select("#circleLegendGraph")
     .selectAll("circle")
-    .data(getDomain(currentRadius))
+    .data([getDomain(currentRadius)[1],getDomain(currentRadius)[0]])
     .enter()
     .append("circle")
     .attr("class","legendCircles")
@@ -231,7 +231,7 @@ function makeChart(){
 
     d3.select("#theGraph").remove();
     d3.select("#tooltips").remove();
-    var margin = {top: 19.5, right: 19.5, bottom: 49.5, left: 25};
+    var margin = {top: 19.5, right: 19.5, bottom: 49.5, left: 60};
     width = document.getElementById('graph').clientWidth - margin.right;
     height = 500 - margin.top - margin.bottom;
 
@@ -331,14 +331,14 @@ function makeChart(){
     .call(yAxis);
 
     // Add an x-axis label.
-    labelRoot.append("text")
+    svgRoot.append("text")
     .attr("id", "xLabel")
     .attr("text-anchor", "end")
     .attr("x", width)
     .attr("y", height - 6)
     .text(currentX);
     // Add a y-axis label.
-    labelRoot.append("text")
+    svgRoot.append("text")
     .attr("id", "yLabel")
     .attr("text-anchor", "end")
     .attr("y", 6)
@@ -346,14 +346,12 @@ function makeChart(){
     .attr("transform", "rotate(-90)")
     .text(currentY);
     // Add the year label; the value is set on transition.
-    label = labelRoot.append("text")
+    label = svgRoot.append("text")
     .attr("class", "year label")
     .attr("text-anchor", "end")
     .attr("y", height - 24)
     .attr("x", width)
     .text(1995);
-
-
 
     reorder();
 }
@@ -428,14 +426,14 @@ function attachListeners(){
                 .style("fill","white")
                 .style("stroke","#E8336D");
 
-                var currentGNI = d[3][currentYear];
+                var tempRadLabel = getData(d,currentRadius,currentYear);
 
                 d3.select("#circleLegendGraph")
                 .append("text")
                 .attr("x",parseFloat(this.getAttribute('r'))/2+boundingClientRect.width/2)
-                .attr("y",parseFloat(this.getAttribute('r'))/2+boundingClientRect.height/2)
+                .attr("y",parseFloat(this.getAttribute('r'))/2+boundingClientRect.height/1.6)
                 .attr("id","tempLabel")
-                .text(currentGNI);
+                .text(tempRadLabel);
 
                 d3.selectAll(".circleLabel")
                 .style("opacity",0.3);
@@ -547,6 +545,7 @@ function update(year,playButton){
     document.getElementById('slider').value = parseInt(year);
     currentYear = parseInt(document.getElementById('slider').value);
     label.text(year);
+    makeBabyChart();
 }
 
 function play(){
