@@ -171,6 +171,8 @@ function findMax(arr){
 }
 
 function makeBabyChart(){
+    d3.select("#circleLegendLabel").text(currentRadius);
+
     d3.select("#circleLegendGraph")
     .selectAll("circle")
     .remove();
@@ -182,7 +184,7 @@ function makeBabyChart(){
 
     d3.select("#circleLegendGraph")
     .selectAll("circle")
-    .data([24520,380])
+    .data(getDomain(currentRadius))
     .enter()
     .append("circle")
     .attr("class","legendCircles")
@@ -246,44 +248,13 @@ function makeChart(){
     var svg = d3.select("#graph").append("svg")
     .attr("id","theGraph")
     .attr("width", width + margin.left+margin.right)
-    .attr("height", height + margin.top + margin.bottom)
-    .append("g")
+    .attr("height", height + margin.top + margin.bottom);
+
+    var svgRoot = svg.append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
     .attr("id", "gRoot");
 
-    svg.append("g")
-    .attr("id", "xAxis")
-    .attr("transform", "translate(0," + height + ")")
-    .call(xAxis);
-
-    svg.append("g")
-    .attr("id", "yAxis")
-    .call(yAxis);
-
-    // Add an x-axis label.
-    svg.append("text")
-    .attr("id", "xLabel")
-    .attr("text-anchor", "end")
-    .attr("x", width)
-    .attr("y", height - 6)
-    .text(currentX);
-    // Add a y-axis label.
-    svg.append("text")
-    .attr("id", "yLabel")
-    .attr("text-anchor", "end")
-    .attr("y", 6)
-    .attr("dy", ".75em")
-    .attr("transform", "rotate(-90)")
-    .text(currentY);
-    // Add the year label; the value is set on transition.
-    label = svg.append("text")
-    .attr("class", "year label")
-    .attr("text-anchor", "end")
-    .attr("y", height - 24)
-    .attr("x", width)
-    .text(1995);
-
-    svg.append("g")
+    svgRoot.append("g")
     .attr("id","points")
     .selectAll("circle")
     .data(countryList.map(function(d){
@@ -345,6 +316,44 @@ function makeChart(){
 
         //theTooltip.remove();
     });
+
+    var labelRoot = svg.append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+    .attr("id", "labelRoot");
+
+    labelRoot.append("g")
+    .attr("id", "xAxis")
+    .attr("transform", "translate(0," + height + ")")
+    .call(xAxis);
+
+    labelRoot.append("g")
+    .attr("id", "yAxis")
+    .call(yAxis);
+
+    // Add an x-axis label.
+    labelRoot.append("text")
+    .attr("id", "xLabel")
+    .attr("text-anchor", "end")
+    .attr("x", width)
+    .attr("y", height - 6)
+    .text(currentX);
+    // Add a y-axis label.
+    labelRoot.append("text")
+    .attr("id", "yLabel")
+    .attr("text-anchor", "end")
+    .attr("y", 6)
+    .attr("dy", ".75em")
+    .attr("transform", "rotate(-90)")
+    .text(currentY);
+    // Add the year label; the value is set on transition.
+    label = labelRoot.append("text")
+    .attr("class", "year label")
+    .attr("text-anchor", "end")
+    .attr("y", height - 24)
+    .attr("x", width)
+    .text(1995);
+
+
 
     reorder();
 }

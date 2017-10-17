@@ -16,8 +16,11 @@
         <div id="containerBottom">
             <input type="range" id="slider" min="1995" max="2015" value="1995" step="1" onchange="yearChange(this.value)">
             <button onClick="play()">Play</button>
+          <label for="dropdownX" id="dropdownXLabel">X-Axis Variable</label>
           <select id="dropdownX" onchange="changeXScale(this.value)"></select>
+          <label for="dropdownY" id="dropdownYLabel">Y-Axis Variable</label>
           <select id="dropdownY" onchange="changeYScale(this.value)"></select>
+          <label for="dropdownR" id="dropdownRLabel">Circle Radius Variable</label>         
           <select id="dropdownR" onchange="changeRadius(this.value)"></select> 
         </div>
         <div id="containerTopRight">
@@ -90,7 +93,7 @@
               </div>
             </div>
             <div id="circleLegend">
-              <span>GNI Per Capita</span>
+              <span id="circleLegendLabel"></span>
               <svg id="circleLegendGraph" height="100" width="100%"></svg>
             </div>
           </div>

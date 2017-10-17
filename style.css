@@ -6,6 +6,10 @@
 	display: none;
 }
 
+label{
+	display: block;
+}
+
 #graphicContainer{
 	display: flex;
 	flex-direction: column;
