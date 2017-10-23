@@ -1,0 +1,137 @@
+*{
+	font-family: 'Source Sans Pro', sans-serif;
+}
+
+.tooltipdetail{
+	display: none;
+}
+
+label{
+	display: block;
+}
+
+#graphicContainer{
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	width: 100%;
+    flex-wrap: wrap;
+}
+
+.tooltip{
+	font-family: 'Source Sans Pro', sans-serif;
+}
+
+.tooltipcaption{
+	font-size: 16px;
+	font-weight: 700;
+}
+
+#graph{
+	width: 65%;
+	margin-right: 10%;
+}
+
+#containerTopRight{
+	width: 20%;	
+}
+
+#containerBottom{
+	width: 60%;	
+}
+
+.colorLegendElement{
+	display: inline-block;
+	text-align: center;
+}
+
+.colorLegendSquare{
+	
+	width: 15px;
+	height: 15px;
+	box-sizing: border-box;
+}
+
+circle{
+	stroke:black;
+	stroke-width:1px;
+}
+
+circle:hover{
+	cursor: pointer;
+}
+.ui-accordion .ui-accordion-header{
+	padding: 0px;
+}
+.axis path, .axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+.label {
+  fill: #777;
+  font-size: 100px;
+  font-family: 'Source Sans Pro', sans-serif;
+}
+.year.label {
+  font-family: 'Source Sans Pro', sans-serif;
+  fill: #ddd;
+}
+
+.year.label.active {
+  fill: #aaa;
+}
+
+.ui-accordion .ui-accordion-content {
+	padding:5%;
+}
+svg{
+	shape-rendering: geometricPrecision;
+}
+/*Slider code*/
+
+#slider{
+	width: 70%;
+}
+
+.tooltip{
+	padding:3px;
+	border: 2px solid black;
+	border-radius: 3px;
+	background: white;
+	display: none;
+	position: fixed;
+}
+
+text{
+	font-family: 'Source Sans Pro', sans-serif;
+	font-size: 14px;
+    fill: black;
+}
+
+span{
+	font-family: 'Source Sans Pro', sans-serif;
+	font-weight: 800;
+}
+
+.colorLegendElement{
+	font-family: 'Source Sans Pro', sans-serif;
+}
+
+@media (min-width:0px) and (max-width:515px){
+	#graph{
+		width: 95%;
+		margin-right: 0%;
+
+	}
+	#containerTopRight{
+		order:3;
+		width: 100%;
+		height: 20%;
+	}
+	#containerBottom{
+		order:2;
+		width: 100%;	
+	}
+}
+
