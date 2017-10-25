@@ -245,6 +245,8 @@ function makeChart() {
   width = document.getElementById('graph').clientWidth - margin.right;
   height = 500 - margin.top - margin.bottom;
 
+  /* I anticipate a feature request to be the ability to switch from a linear to a log scale.
+  this would probably require some tweaking to the code immidiately below */
   xScale = d3.scaleLinear().domain(getDomain(currentX)).range([0, width]);
   yScale = d3.scaleLinear().domain(getDomain(currentY)).range([height, 0]);
   radiusScale = d3.scaleSqrt().domain(getDomain(currentRadius)).range([2, 40]);
@@ -355,11 +357,13 @@ function makeChart() {
 }
 
 function attachListeners() {
+  /* Attach hover events to the circles. Different behavior is attached
+  depending on whether or not the checkbox is selected */
   d3.selectAll('.checkboxes').select(function () {
     if (this.checked) {
       d3.select(`#${this.getAttribute('country')}`)
         .on('mouseenter', function (d) {
-          d3.select(`#legend${d[4]}`).style('border', '2px solid #E8336D');
+          d3.select(`#legend${d[4].Country}`).style('border', '2px solid #E8336D');
           d3.select(this).style('stroke', '#E8336D');
           d3.select(this).style('stroke-width', '3px');
 
@@ -515,17 +519,21 @@ function update(year, playButton) {
   document.getElementById('slider').value = parseInt(year);
   currentYear = parseInt(document.getElementById('slider').value);
   label.text(year);
-  makeBabyChart();
+  makeBabyChart(); // update the radius-legend chart
 }
 
+
 function play() {
+  // if the play button is triggered when current year is 2015, wrap around to 1995
   if (parseInt(document.getElementById('slider').value) == 2015) {
     update(1995, true);
   } else {
+    // else call update on the next year
     update(parseInt(document.getElementById('slider').value) + 1, true);
   }
 }
 
+// jquery accordion checkbox change
 function checkboxChange() {
   let anyCheckBoxOn = false;
   d3.selectAll('.checkboxes').select(function () {
