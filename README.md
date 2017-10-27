@@ -16,4 +16,5 @@ There are, however, some hard coded variables that you will need to change befor
 Most hard coded lines can be found in `interactive.js` and are followed by a `// hard coded` comment
 
 There is also one hard coded line in `index.html` which you may want to change
+
 `<input type="range" id="slider" min="1995" max="2015" value="1995" step="1" onchange="yearChange(this.value)">`   
