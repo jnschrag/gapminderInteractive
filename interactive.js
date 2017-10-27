@@ -23,10 +23,12 @@ let countryList = new Set();
 let label;
 
 // defaults
-let currentYear = 1995;
-let currentX = 'Perceived Rule Of Law';
-let currentY = 'Regulatory Quality';
-let currentRadius = 'GNI per Capita, PPP(ci$)';
+let minYear; // earliest year in the dataset
+let maxYear; // latest year in the dataset
+let currentYear; // The year which we are currently visualizing
+let currentX = 'Perceived Rule Of Law'; // hard coded
+let currentY = 'Regulatory Quality'; // hard coded
+let currentRadius = 'GNI per Capita, PPP(ci$)'; // hard coded
 
 let width;
 let height;
@@ -34,6 +36,11 @@ let height;
 // call for csv data, execute function on callback
 const q = d3.csv('data/GDF_iLab.csv', (result) => {
   
+  maxYear = result.map(d=>Math.max(d.Year)).reduce((a,b)=>Math.max(a,b));
+  minYear = result.map(d=>Math.max(d.Year)).reduce((a,b)=>Math.min(a,b));
+
+  currentYear = minYear;
+
   // creating a set of countries 
   for (let i = 0; i < result.length; i++) {
     countryList.add(result[i].Country);
@@ -44,7 +51,7 @@ const q = d3.csv('data/GDF_iLab.csv', (result) => {
   const categories = Object.keys(result[0]);
   for (let i = 0; i < categories.length; i++) {
     if (categories[i] != 'Country' && categories[i] != 'Year') {
-      if (categories[i] == 'Perceived Rule Of Law') {
+      if (categories[i] == 'Perceived Rule Of Law') { // hard coded
         d3.select('#dropdownX').append('option').html(categories[i]).attr('class', 'defaultoption');
       } else {
         d3.select('#dropdownX').append('option').html(categories[i]);
@@ -54,7 +61,7 @@ const q = d3.csv('data/GDF_iLab.csv', (result) => {
 
   for (let i = 0; i < categories.length; i++) {
     if (categories[i] != 'Country' && categories[i] != 'Year') {
-      if (categories[i] == 'Regulatory Quality') {
+      if (categories[i] == 'Regulatory Quality') { // hard coded
         d3.select('#dropdownY').append('option').html(categories[i]).attr('class', 'defaultoption');
       } else {
         d3.select('#dropdownY').append('option').html(categories[i]);
@@ -64,7 +71,7 @@ const q = d3.csv('data/GDF_iLab.csv', (result) => {
 
   for (let i = 0; i < categories.length; i++) {
     if (categories[i] != 'Country' && categories[i] != 'Year') {
-      if (categories[i] == 'GNI per Capita, PPP(ci$)') {
+      if (categories[i] == 'GNI per Capita, PPP(ci$)') { // hard coded
         d3.select('#dropdownR').append('option').html(categories[i]).attr('class', 'defaultoption');
       } else {
         d3.select('#dropdownR').append('option').html(categories[i]);
@@ -94,7 +101,7 @@ doesn't exist, looks for first known value */
 function getData(d, theScale, year) {
   if (d.filter(r => r.Year == year)[0][theScale] == '') {
     let yearIter = year - 1;
-    while (yearIter >= 1995) {
+    while (yearIter >= minYear) {
       if (d.filter(r => r.Year == yearIter)[0][theScale] != '') {
         // console.log(this);
         return d.filter(r => r.Year == yearIter)[0][theScale];
@@ -103,7 +110,7 @@ function getData(d, theScale, year) {
     }
 
     yearIter = year + 1;
-    while (yearIter <= 2015) {
+    while (yearIter <= maxYear) {
       if (d.filter(r => r.Year == yearIter)[0][theScale] != '') {
         return d.filter(r => r.Year == yearIter)[0][theScale];
       }
@@ -281,7 +288,7 @@ function makeChart() {
       if (isEmpty(d, currentX, currentYear) || isEmpty(d, currentY, currentYear) || isEmpty(d, currentRadius, currentYear)) {
         return 'red';
       }
-      return wbScale[d.filter(r => r.Year == currentYear)[0]['World Bank Classification']];
+      return wbScale[d.filter(r => r.Year == currentYear)[0]['World Bank Classification']]; // hard coded
     });
 
   d3.selectAll('.point').select(function (d) {
@@ -351,7 +358,7 @@ function makeChart() {
     .attr('text-anchor', 'end')
     .attr('y', height - 24)
     .attr('x', width)
-    .text(1995);
+    .text(minYear);
 
   reorder();
 }
@@ -465,7 +472,7 @@ function update(year, playButton) {
     .duration(1000)
     .ease(d3.easeQuadInOut)
     .on('end', () => {
-      if (year < 2015 && playButton) {
+      if (year < maxYear && playButton) {
         attachListeners();
         update(year + 1, playButton);
       } else {
@@ -496,7 +503,7 @@ function update(year, playButton) {
       if (isEmpty(d, currentX, year) || isEmpty(d, currentY, year) || isEmpty(d, currentRadius, year)) {
         return 'red';
       }
-      return wbScale[d.filter(r => r.Year == year)[0]['World Bank Classification']];
+      return wbScale[d.filter(r => r.Year == year)[0]['World Bank Classification']]; // hard coded
     });
 
   d3.selectAll('.point')
@@ -525,8 +532,8 @@ function update(year, playButton) {
 
 function play() {
   // if the play button is triggered when current year is 2015, wrap around to 1995
-  if (parseInt(document.getElementById('slider').value) == 2015) {
-    update(1995, true);
+  if (parseInt(document.getElementById('slider').value) == maxYear) {
+    update(minYear, true);
   } else {
     // else call update on the next year
     update(parseInt(document.getElementById('slider').value) + 1, true);
