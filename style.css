@@ -68,21 +68,11 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
 }
 
 /* line 1, sass/_base.scss */
-* {
+html {
   font-family: 'Source Sans Pro', sans-serif;
 }
 
 /* line 5, sass/_base.scss */
-.tooltipdetail {
-  display: none;
-}
-
-/* line 9, sass/_base.scss */
-label {
-  display: block;
-}
-
-/* line 13, sass/_base.scss */
 #graphicContainer {
   display: flex;
   flex-direction: column;
@@ -91,148 +81,242 @@ label {
   flex-wrap: wrap;
 }
 
-/* line 21, sass/_base.scss */
-.tooltip {
-  font-family: 'Source Sans Pro', sans-serif;
+/* line 13, sass/_base.scss */
+label {
+  display: block;
 }
 
-/* line 25, sass/_base.scss */
-.tooltipcaption {
-  font-size: 16px;
-  font-weight: 700;
-}
-
-/* line 30, sass/_base.scss */
-#graph {
-  width: 65%;
-  margin-right: 10%;
-}
-
-/* line 35, sass/_base.scss */
-#containerTopRight {
-  width: 20%;
-}
-
-/* line 39, sass/_base.scss */
-#containerBottom {
-  width: 60%;
-}
-
-/* line 43, sass/_base.scss */
-.colorLegendElement {
-  display: inline-block;
-  text-align: center;
-}
-
-/* line 48, sass/_base.scss */
-.colorLegendSquare {
-  width: 15px;
-  height: 15px;
-  box-sizing: border-box;
-}
-
-/* line 55, sass/_base.scss */
-circle {
-  stroke: black;
-  stroke-width: 1px;
-}
-
-/* line 60, sass/_base.scss */
-circle:hover {
-  cursor: pointer;
-}
-
-/* line 63, sass/_base.scss */
-.ui-accordion .ui-accordion-header {
-  padding: 0px;
-}
-
-/* line 66, sass/_base.scss */
-.axis path, .axis line {
-  fill: none;
-  stroke: #000;
-  shape-rendering: crispEdges;
-}
-
-/* line 71, sass/_base.scss */
-.label {
-  fill: #777;
-  font-size: 100px;
-  font-family: 'Source Sans Pro', sans-serif;
-}
-
-/* line 76, sass/_base.scss */
-.year.label {
-  font-family: 'Source Sans Pro', sans-serif;
-  fill: #ddd;
-}
-
-/* line 81, sass/_base.scss */
-.year.label.active {
-  fill: #aaa;
-}
-
-/* line 85, sass/_base.scss */
-.ui-accordion .ui-accordion-content {
-  padding: 5%;
-}
-
-/* line 88, sass/_base.scss */
-svg {
-  shape-rendering: geometricPrecision;
-}
-
-/*Slider code*/
-/* line 93, sass/_base.scss */
-#slider {
-  width: 70%;
-}
-
-/* line 97, sass/_base.scss */
-.tooltip {
-  padding: 3px;
-  border: 2px solid black;
-  border-radius: 3px;
-  background: white;
-  display: none;
-  position: fixed;
-}
-
-/* line 106, sass/_base.scss */
+/* line 17, sass/_base.scss */
 text {
   font-family: 'Source Sans Pro', sans-serif;
   font-size: 14px;
   fill: black;
 }
 
-/* line 112, sass/_base.scss */
-span {
-  font-family: 'Source Sans Pro', sans-serif;
-  font-weight: 800;
-}
-
-/* line 117, sass/_base.scss */
-.colorLegendElement {
-  font-family: 'Source Sans Pro', sans-serif;
-}
-
 @media (min-width: 0px) and (max-width: 515px) {
-  /* line 122, sass/_base.scss */
+  /* line 25, sass/_base.scss */
   #graph {
     width: 95%;
     margin-right: 0%;
   }
 
-  /* line 127, sass/_base.scss */
+  /* line 29, sass/_base.scss */
   #containerTopRight {
     order: 3;
     width: 100%;
     height: 20%;
   }
 
-  /* line 132, sass/_base.scss */
+  /* line 34, sass/_base.scss */
   #containerBottom {
     order: 2;
     width: 100%;
   }
+}
+/*Graph*/
+/* line 44, sass/_base.scss */
+#graph {
+  width: 65%;
+  margin-right: 10%;
+}
+/* line 49, sass/_base.scss */
+#graph #tooltips .tooltipdetail {
+  display: none;
+}
+/* line 53, sass/_base.scss */
+#graph #tooltips .tooltip {
+  padding: 10px;
+  border: 1px solid gray;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.9);
+  display: none;
+  position: fixed;
+}
+/* line 62, sass/_base.scss */
+#graph #tooltips .tooltipcaption {
+  font-size: 16px;
+  font-weight: 700;
+}
+/* line 68, sass/_base.scss */
+#graph svg {
+  shape-rendering: geometricPrecision;
+}
+/* line 73, sass/_base.scss */
+#graph #theGraph #xLabel,
+#graph #theGraph #yLabel {
+  font-size: 18px;
+}
+/* line 78, sass/_base.scss */
+#graph #theGraph .axis path,
+#graph #theGraph .axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+/* line 85, sass/_base.scss */
+#graph #theGraph .label {
+  fill: #777;
+  font-size: 100px;
+  font-family: 'Source Sans Pro', sans-serif;
+}
+/* line 90, sass/_base.scss */
+#graph #theGraph .year.label {
+  font-family: 'Source Sans Pro', sans-serif;
+  fill: #ddd;
+}
+/* line 95, sass/_base.scss */
+#graph #theGraph .year.label.active {
+  fill: #aaa;
+}
+/* line 99, sass/_base.scss */
+#graph #theGraph circle {
+  stroke: black;
+  stroke-width: 1px;
+}
+/* line 104, sass/_base.scss */
+#graph #theGraph circle:hover {
+  cursor: pointer;
+}
+
+/*Container Right*/
+/* line 113, sass/_base.scss */
+#containerTopRight {
+  width: 20%;
+}
+/* line 116, sass/_base.scss */
+#containerTopRight span.key-label {
+  display: block;
+  padding: 15px 0px 5px;
+  font-weight: bold;
+}
+/* line 122, sass/_base.scss */
+#containerTopRight .colorLegendElement {
+  font-family: 'Source Sans Pro', sans-serif;
+  display: inline-block;
+  text-align: center;
+}
+/* line 128, sass/_base.scss */
+#containerTopRight .colorLegendSquare {
+  width: 15px;
+  height: 15px;
+  box-sizing: border-box;
+}
+/* line 134, sass/_base.scss */
+#containerTopRight .ui-accordion .ui-accordion-header {
+  padding: 2%;
+}
+
+/*Container Bottom*/
+/* line 142, sass/_base.scss */
+#containerBottom {
+  width: calc(65% - 20px);
+  padding-left: 70px;
+}
+/* line 146, sass/_base.scss */
+#containerBottom .sliderdiv {
+  width: 40%;
+  min-width: 350px;
+  margin: 15px auto;
+  clear: both;
+  display: block;
+}
+/* line 153, sass/_base.scss */
+#containerBottom .sliderdiv #slider {
+  width: 80%;
+  display: block;
+  float: left;
+}
+/* line 159, sass/_base.scss */
+#containerBottom .sliderdiv .playbtn {
+  display: block;
+  float: left;
+}
+/* line 165, sass/_base.scss */
+#containerBottom .dropdowndiv {
+  clear: both;
+  display: block;
+  margin-top: 50px;
+  border: 1px solid red;
+}
+/* line 170, sass/_base.scss */
+#containerBottom .dropdowndiv label {
+  font-family: 'Source Sans Pro', sans-serif;
+}
+/* line 174, sass/_base.scss */
+#containerBottom .dropdowndiv select {
+  font-size: 16px;
+  width: 100%;
+}
+/* line 179, sass/_base.scss */
+#containerBottom .dropdowndiv .dropdownpair {
+  width: calc(33.3333% - 20px);
+  display: block;
+  float: left;
+  margin: 0 auto;
+  padding: 10px;
+}
+
+/*Container Bottom*/
+/* line 192, sass/_base.scss */
+#containerBottom {
+  width: calc(65% - 20px);
+  padding-left: 70px;
+}
+/* line 196, sass/_base.scss */
+#containerBottom .sliderdiv {
+  width: 60%;
+  min-width: 350px;
+  margin: 15px auto;
+  clear: both;
+  display: block;
+}
+/* line 203, sass/_base.scss */
+#containerBottom .sliderdiv #slider {
+  width: 80%;
+  display: block;
+  float: left;
+}
+/* line 209, sass/_base.scss */
+#containerBottom .sliderdiv #playbtn {
+  display: block;
+  float: left;
+  font-size: 90%;
+}
+/* line 214, sass/_base.scss */
+#containerBottom .sliderdiv label {
+  font-family: 'Source Sans Pro', sans-serif;
+  color: gray;
+  display: block;
+}
+/* line 222, sass/_base.scss */
+#containerBottom .ui-corner-all {
+  border-radius: 0;
+}
+/* line 225, sass/_base.scss */
+#containerBottom .dropdowndiv {
+  clear: both;
+  display: block;
+  margin-top: 25px;
+  border: 1px solid transparent;
+}
+/* line 230, sass/_base.scss */
+#containerBottom .dropdowndiv label {
+  font-family: 'Source Sans Pro', sans-serif;
+  padding-bottom: 10px;
+  color: gray;
+}
+/* line 236, sass/_base.scss */
+#containerBottom .dropdowndiv select,
+#containerBottom .dropdowndiv .ui-selectmenu-button.ui-button {
+  font-size: 16px;
+  width: auto;
+  display: block;
+}
+/* line 243, sass/_base.scss */
+#containerBottom .dropdowndiv .dropdownpair {
+  width: calc(33.3333% - 20px);
+  display: block;
+  float: left;
+  margin: 0 auto;
+  padding: 10px;
 }
