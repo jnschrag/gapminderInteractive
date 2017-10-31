@@ -1,4 +1,4 @@
-/*global d3,$*/
+
 
 // jquery accordion
 $(() => {
@@ -66,6 +66,7 @@ const q = d3.csv('data/GDF_iLab.csv', (result) => {
       } else {
         d3.select('#dropdownY').append('option').html(categories[i]);
       }
+
     }
   }
 
@@ -89,6 +90,7 @@ const q = d3.csv('data/GDF_iLab.csv', (result) => {
   makeChart(); // the main chart
   makeBabyChart(); // chart that shows min,max circle sizes
 });
+
 
 // find out if data exists
 function isEmpty(d, theScale, year) {
@@ -175,12 +177,14 @@ function findMax(arr) {
   for (let i = 0; i < arr.length; i++) {
     if (parseFloat(arr[i].getAttribute('r')) > parseFloat(arr[max].getAttribute('r'))) {
       max = i;
+
     }
   }
   return max;
 }
 
 function makeBabyChart() {
+
   d3.select('#circleLegendLabel').text(currentRadius);
 
   d3.select('#circleLegendGraph')
@@ -190,7 +194,9 @@ function makeBabyChart() {
   d3.selectAll('.circleLabel')
     .remove();
 
+
   const boundingClientRect = document.getElementById('circleLegendGraph').getBoundingClientRect();
+
 
   d3.select('#circleLegendGraph')
     .selectAll('circle')
@@ -519,6 +525,7 @@ function update(year, playButton) {
     d3.select(`#${d[0].Country.replace(/ /g, '')}tooltipY`)
       .text(`${currentY}: ${isEmpty(d, currentY, year) ? 'No Data' : getData(d, currentY, year)}`);
 
+
     d3.select(`#${d[0].Country.replace(/ /g, '')}tooltipRadius`)
       .text(`${currentRadius}: ${isEmpty(d, currentRadius, year) ? 'No Data' : getData(d, currentRadius, year)}`);
   });
@@ -528,6 +535,7 @@ function update(year, playButton) {
   label.text(year);
   makeBabyChart(); // update the radius-legend chart
 }
+
 
 
 function play() {
@@ -568,6 +576,8 @@ function checkboxChange() {
 window.onresize = resizefunc;
 
 function resizefunc() {
+
   makeChart();
   makeBabyChart();
 }
+

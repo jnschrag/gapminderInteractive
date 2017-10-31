@@ -1,0 +1,11 @@
+$color101: #163553;
+
+
+@mixin colorize-stroke($color) {
+    stroke: darken( $color, 50% );
+
+    &:hover {
+        background-color: $color + 50;
+    }
+}
+
