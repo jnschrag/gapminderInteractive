@@ -478,9 +478,11 @@ function update(year, playButton) {
     .duration(1000)
     .ease(d3.easeQuadInOut)
     .on('end', () => {
+        
       if (year < maxYear && playButton) {
         attachListeners();
         update(year + 1, playButton);
+
       } else {
         reorder();
       }
@@ -539,13 +541,24 @@ function update(year, playButton) {
 
 
 function play() {
-  // if the play button is triggered when current year is 2015, wrap around to 1995
+    
+     var $playBtn = $('#playbtn');
+     $playBtn.toggleClass('active');
+     if($playBtn.hasClass('active')){
+        console.log("playbutton activated");
+        $playBtn.text('pause'); 
+          // if the play button is triggered when current year is 2015, wrap around to 1995
   if (parseInt(document.getElementById('slider').value) == maxYear) {
     update(minYear, true);
   } else {
     // else call update on the next year
     update(parseInt(document.getElementById('slider').value) + 1, true);
-  }
+  }      
+    } else {
+        $playBtn.text('play');
+        update(parseInt(document.getElementById('slider').value) + 1, false);
+    }
+
 }
 
 // jquery accordion checkbox change
