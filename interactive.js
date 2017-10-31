@@ -1,641 +1,583 @@
-$(function() {
-    $("#accordion").accordion({
-        heightStyle: "fill"
-    });
+
+
+// jquery accordion
+$(() => {
+  $('#accordion').accordion({
+    heightStyle: 'fill',
+  });
 });
 
-var data;
+let data;
+let xScale;
+let yScale;
+let xAxis;
+let yAxis;
+let radiusScale;
 
-var xScale;
-var yScale;
-var xAxis;
-var yAxis;
-var radiusScale;
-var wbCode;
-var wbScale = { 1: "#deebf7", 2: "#c6dbef", 3: "#9ecae1", 4: "#6baed6", 5: "#3182bd", 6: "#08519c" }
-var countryList = new Set();
-var label;
-var currentYear = 1995;
-var currentX = "Perceived Rule Of Law";
-var currentY = "Regulatory Quality";
-var currentRadius = "GNI per Capita, PPP(ci$)";
-var width;
-var height;
+// wbScale will act as a color map
+const wbScale = {
+  1: '#deebf7', 2: '#c6dbef', 3: '#9ecae1', 4: '#6baed6', 5: '#3182bd', 6: '#08519c',
+};
 
-var q = d3.csv("data/GDF_iLab.csv", function(result) {
-    for (var i = 0; i < result.length; i++) {
-        countryList.add(result[i]["Country"]);
+let countryList = new Set();
+let label;
+
+// defaults
+let minYear; // earliest year in the dataset
+let maxYear; // latest year in the dataset
+let currentYear; // The year which we are currently visualizing
+let currentX = 'Perceived Rule Of Law'; // hard coded
+let currentY = 'Regulatory Quality'; // hard coded
+let currentRadius = 'GNI per Capita, PPP(ci$)'; // hard coded
+
+let width;
+let height;
+
+// call for csv data, execute function on callback
+const q = d3.csv('data/GDF_iLab.csv', (result) => {
+  
+  maxYear = result.map(d=>Math.max(d.Year)).reduce((a,b)=>Math.max(a,b));
+  minYear = result.map(d=>Math.max(d.Year)).reduce((a,b)=>Math.min(a,b));
+
+  currentYear = minYear;
+
+  // creating a set of countries 
+  for (let i = 0; i < result.length; i++) {
+    countryList.add(result[i].Country);
+  }
+  countryList = Array.from(countryList);
+
+  // loop over to get keys for all categories, will be appended to dropdown buttons in the UI
+  const categories = Object.keys(result[0]);
+  for (let i = 0; i < categories.length; i++) {
+    if (categories[i] != 'Country' && categories[i] != 'Year') {
+      if (categories[i] == 'Perceived Rule Of Law') { // hard coded
+        d3.select('#dropdownX').append('option').html(categories[i]).attr('class', 'defaultoption');
+      } else {
+        d3.select('#dropdownX').append('option').html(categories[i]);
+      }
     }
-    var categories = Object.keys(result[0]);
+  }
 
-    for (var i = 0; i < categories.length; i++) {
-        if (categories[i] != "Country" && categories[i] != "Year") {
-            if (categories[i] == "Perceived Rule Of Law") {
-                d3.select("#dropdownX").append("option").html(categories[i]).attr("class", "defaultoption");
-            } else {
-                d3.select("#dropdownX").append("option").html(categories[i]);
-            }
-        }
-    }
+  for (let i = 0; i < categories.length; i++) {
+    if (categories[i] != 'Country' && categories[i] != 'Year') {
+      if (categories[i] == 'Regulatory Quality') { // hard coded
+        d3.select('#dropdownY').append('option').html(categories[i]).attr('class', 'defaultoption');
+      } else {
+        d3.select('#dropdownY').append('option').html(categories[i]);
+      }
 
-    for (var i = 0; i < categories.length; i++) {
-        if (categories[i] != "Country" && categories[i] != "Year") {
-            if (categories[i] == "Regulatory Quality") {
-                d3.select("#dropdownY").append("option").html(categories[i]).attr("class", "defaultoption");
-            } else {
-                d3.select("#dropdownY").append("option").html(categories[i]);
-            }
-        }
     }
+  }
 
-    for (var i = 0; i < categories.length; i++) {
-        if (categories[i] != "Country" && categories[i] != "Year") {
-            if (categories[i] == "GNI per Capita, PPP(ci$)") {
-                d3.select("#dropdownR").append("option").html(categories[i]).attr("class", "defaultoption");
-            } else {
-                d3.select("#dropdownR").append("option").html(categories[i]);
-            }
-        }
+  for (let i = 0; i < categories.length; i++) {
+    if (categories[i] != 'Country' && categories[i] != 'Year') {
+      if (categories[i] == 'GNI per Capita, PPP(ci$)') { // hard coded
+        d3.select('#dropdownR').append('option').html(categories[i]).attr('class', 'defaultoption');
+      } else {
+        d3.select('#dropdownR').append('option').html(categories[i]);
+      }
     }
+  }
 
-    var defaultoptions = document.getElementsByClassName("defaultoption");
-    for (var i = 0; i < defaultoptions.length; i++) {
-        defaultoptions[i].selected = true;
-    }
-    countryList = Array.from(countryList)
-    data = result;
-    makeChart();
-    makeBabyChart();
+  const defaultoptions = document.getElementsByClassName('defaultoption');
+  for (let i = 0; i < defaultoptions.length; i++) {
+    defaultoptions[i].selected = true;
+  }
+
+  data = result;
+
+  makeChart(); // the main chart
+  makeBabyChart(); // chart that shows min,max circle sizes
 });
 
-/*
 
-*/
-
-
-
+// find out if data exists
 function isEmpty(d, theScale, year) {
-    return (d.filter(function(r) { return r["Year"] == year; })[0][theScale] == "");
+  return (d.filter(r => r.Year == year)[0][theScale] == '');
 }
 
+/* get data for a particular category 'theScale' in a particular year
+if data doesn't exist, looks for the last known value. If last known value
+doesn't exist, looks for first known value */
 function getData(d, theScale, year) {
-    if (d.filter(function(r) { return r["Year"] == year; })[0][theScale] == "") {
-        var yearIter = year - 1;
-        while (yearIter >= 1995) {
-            if (d.filter(function(r) { return r["Year"] == yearIter; })[0][theScale] != "") {
-                //console.log(this);
-                return d.filter(function(r) { return r["Year"] == yearIter; })[0][theScale];
-            }
-            yearIter = yearIter - 1;
-        }
-
-        yearIter = year + 1;
-        while (yearIter <= 2015) {
-            if (d.filter(function(r) { return r["Year"] == yearIter; })[0][theScale] != "") {
-
-                return d.filter(function(r) { return r["Year"] == yearIter; })[0][theScale];
-            }
-            yearIter = yearIter + 1;
-        }
-
-        return getDomain(theScale)[0];
+  if (d.filter(r => r.Year == year)[0][theScale] == '') {
+    let yearIter = year - 1;
+    while (yearIter >= minYear) {
+      if (d.filter(r => r.Year == yearIter)[0][theScale] != '') {
+        // console.log(this);
+        return d.filter(r => r.Year == yearIter)[0][theScale];
+      }
+      yearIter -= 1;
     }
 
-    return d.filter(function(r) {
-        return r["Year"] == year;
-    })[0][theScale];
-}
+    yearIter = year + 1;
+    while (yearIter <= maxYear) {
+      if (d.filter(r => r.Year == yearIter)[0][theScale] != '') {
+        return d.filter(r => r.Year == yearIter)[0][theScale];
+      }
+      yearIter += 1;
+    }
 
-function getYear(year, object) {
-    return parseInt(object[year]);
+    // all else fails (unlikely), just return the lower bound of domain
+    return getDomain(theScale)[0];
+  }
+  return d.filter(r => r.Year == year)[0][theScale];
 }
 
 function getDomain(string) {
-    return domainCalc(data.map(function(d) {
-        return d[string];
-    }))
+  return domainCalc(data.map(d => d[string]));
 }
 
 function domainCalc(data) {
-    var max;
-    var min;
-    for (var i = 0; i < data.length; i++) {
-        var parsedNumber = parseFloat(data[i]);
-        if (!isNaN(parsedNumber)) {
-            if (max === undefined) {
-                max = parsedNumber;
-                min = parsedNumber;
-            }
-            if (min > parsedNumber) {
-                min = parsedNumber;
-            }
-            if (max < parsedNumber) {
-                max = parsedNumber;
-            }
-        }
+  let max;
+  let min;
+  for (let i = 0; i < data.length; i++) {
+    const parsedNumber = parseFloat(data[i]);
+    if (!isNaN(parsedNumber)) {
+      if (max === undefined) {
+        max = parsedNumber;
+        min = parsedNumber;
+      }
+      if (min > parsedNumber) {
+        min = parsedNumber;
+      }
+      if (max < parsedNumber) {
+        max = parsedNumber;
+      }
     }
-    return [min, max];
+  }
+  return [min, max];
 }
 
-function reorder() {
-    var allPoints = document.getElementsByClassName("point");
-    var pointsNode = document.getElementById("points");
-    var new_pointsNode = pointsNode.cloneNode(false);
+/* this is a function that ensures all circles with a smaller radius
+are placed on top of circles with a bigger radius */
 
-    var z = document.getElementsByClassName("point").length;
-    while (z > 0) {
-        var maxIndex = findMax(allPoints);
-        var theNode = allPoints[maxIndex].cloneNode(true);
-        new_pointsNode.append(theNode);
-        d3.select(theNode).data(d3.select(allPoints[maxIndex]).data());
-        allPoints[maxIndex].remove();
-        z--;
-    }
-    document.getElementById('gRoot').appendChild(new_pointsNode);
-    pointsNode.remove();
-    attachListeners();
+function reorder() {
+  const allPoints = document.getElementsByClassName('point');
+  const pointsNode = document.getElementById('points');
+  const new_pointsNode = pointsNode.cloneNode(false);
+
+  let z = document.getElementsByClassName('point').length;
+  while (z > 0) {
+    const maxIndex = findMax(allPoints);
+    const theNode = allPoints[maxIndex].cloneNode(true);
+    new_pointsNode.append(theNode);
+    d3.select(theNode).data(d3.select(allPoints[maxIndex]).data());
+    allPoints[maxIndex].remove();
+    z--;
+  }
+  document.getElementById('gRoot').appendChild(new_pointsNode);
+  pointsNode.remove();
+  attachListeners();
 }
 
 function findMax(arr) {
-    var max = 0;
-    for (var i = 0; i < arr.length; i++) {
-        if (parseFloat(arr[i].getAttribute('r')) > parseFloat(arr[max].getAttribute('r'))) {
-            max = i;
-        }
+  let max = 0;
+  for (let i = 0; i < arr.length; i++) {
+    if (parseFloat(arr[i].getAttribute('r')) > parseFloat(arr[max].getAttribute('r'))) {
+      max = i;
+
     }
-    return max;
+  }
+  return max;
 }
 
 function makeBabyChart() {
-    d3.select("#circleLegendLabel").text(currentRadius);
 
-    d3.select("#circleLegendGraph")
-        .selectAll("circle")
-        .remove();
+  d3.select('#circleLegendLabel').text(currentRadius);
 
-    d3.selectAll(".circleLabel")
-        .remove();
+  d3.select('#circleLegendGraph')
+    .selectAll('circle')
+    .remove();
 
-    var boundingClientRect = document.getElementById("circleLegendGraph").getBoundingClientRect();
+  d3.selectAll('.circleLabel')
+    .remove();
 
-    d3.select("#circleLegendGraph")
-        .selectAll("circle")
-        .data([getDomain(currentRadius)[1], getDomain(currentRadius)[0]])
-        .enter()
-        .append("circle")
-        .attr("class", "legendCircles")
-        .attr("cx", boundingClientRect.width / 2)
-        .attr("cy", boundingClientRect.height / 2)
-        .attr("r", function(d) { return radiusScale(d); })
-        .style("fill", "white");
 
-    d3.selectAll(".legendCircles").select(function(d) {
-        var boundingClientRect = this.getBoundingClientRect();
+  const boundingClientRect = document.getElementById('circleLegendGraph').getBoundingClientRect();
 
-        d3.select("#circleLegendGraph")
-            .append("text")
-            .attr("x", parseFloat(this.getAttribute('cx')) + boundingClientRect.width / 2)
-            .attr("y", parseFloat(this.getAttribute('cy')) + boundingClientRect.height / 2)
-            .attr("class", "circleLabel")
-            .text(d);
-    });
+
+  d3.select('#circleLegendGraph')
+    .selectAll('circle')
+    .data([getDomain(currentRadius)[1], getDomain(currentRadius)[0]])
+    .enter()
+    .append('circle')
+    .attr('class', 'legendCircles')
+    .attr('cx', boundingClientRect.width / 2)
+    .attr('cy', boundingClientRect.height / 2)
+    .attr('r', d => radiusScale(d))
+    .style('fill', 'white');
+
+  d3.selectAll('.legendCircles').select(function (d) {
+    const boundingClientRect = this.getBoundingClientRect();
+
+    d3.select('#circleLegendGraph')
+      .append('text')
+      .attr('x', parseFloat(this.getAttribute('cx')) + boundingClientRect.width / 2)
+      .attr('y', parseFloat(this.getAttribute('cy')) + boundingClientRect.height / 2)
+      .attr('class', 'circleLabel')
+      .text(d);
+  });
 }
 
+// triggered when x-dimension is changed
 function changeXScale(newData) {
-    currentX = newData;
-    d3.select("#xLabel").text(newData);
-    xScale.domain(getDomain(newData)).range([0, width]);
-    d3.select("#xAxis").transition().duration(1500).ease(d3.easeQuadInOut).call(xAxis);
-    update(currentYear, false);
+  currentX = newData;
+  d3.select('#xLabel').text(newData);
+  xScale.domain(getDomain(newData)).range([0, width]);
+  d3.select('#xAxis').transition().duration(1500).ease(d3.easeQuadInOut)
+    .call(xAxis);
+  update(currentYear, false);
 }
 
+// triggered when y-dimension is changed
 function changeYScale(newData) {
-    currentY = newData;
-    d3.select("#yLabel").text(newData);
-    yScale.domain(getDomain(newData)).range([height, 0]);
-    d3.select("#yAxis").transition().duration(1500).ease(d3.easeQuadInOut).call(yAxis);
-    update(currentYear, false);
+  currentY = newData;
+  d3.select('#yLabel').text(newData);
+  yScale.domain(getDomain(newData)).range([height, 0]);
+  d3.select('#yAxis').transition().duration(1500).ease(d3.easeQuadInOut)
+    .call(yAxis);
+  update(currentYear, false);
 }
 
+// triggered when radius-dimension is changed
 function changeRadius(newData) {
-    currentRadius = newData;
-    radiusScale.domain(getDomain(newData)).range([2, 40]);
-    update(currentYear, false);
+  currentRadius = newData;
+  radiusScale.domain(getDomain(newData)).range([2, 40]);
+  update(currentYear, false);
 }
 
 function makeChart() {
+  d3.select('#theGraph').remove();
+  d3.select('#tooltips').remove();
 
-    d3.select("#theGraph").remove();
-    d3.select("#tooltips").remove();
-    var margin = { top: 25, right: 19.5, bottom: 60, left: 70 };
-    width = document.getElementById('graph').clientWidth - margin.right;
-    height = 500 - margin.top - margin.bottom;
+  const margin = {
+    top: 19.5, right: 19.5, bottom: 49.5, left: 60,
+  };
+  width = document.getElementById('graph').clientWidth - margin.right;
+  height = 500 - margin.top - margin.bottom;
 
-    xScale = d3.scaleLinear().domain(getDomain(currentX)).range([0, width]),
-        yScale = d3.scaleLinear().domain(getDomain(currentY)).range([height, 0]),
-        radiusScale = d3.scaleSqrt().domain(getDomain(currentRadius)).range([2, 40]);
-    // The x & y axes.
-    xAxis = d3.axisBottom(xScale).ticks(12, d3.format(",d")).tickSizeOuter(0);
-    yAxis = d3.axisLeft(yScale).tickSizeOuter(0);
-    // Create the SVG container and set the origin.
+  /* I anticipate a feature request to be the ability to switch from a linear to a log scale.
+  this would probably require some tweaking to the code immidiately below */
+  xScale = d3.scaleLinear().domain(getDomain(currentX)).range([0, width]);
+  yScale = d3.scaleLinear().domain(getDomain(currentY)).range([height, 0]);
+  radiusScale = d3.scaleSqrt().domain(getDomain(currentRadius)).range([2, 40]);
 
-    var tooltips = d3.select("#graph").append("div").attr("id", "tooltips");
+  xAxis = d3.axisBottom(xScale).ticks(12, d3.format(',d')).tickSizeOuter(0);
+  yAxis = d3.axisLeft(yScale).tickSizeOuter(0);
 
-    var svg = d3.select("#graph").append("svg")
-        .attr("id", "theGraph")
-        .attr("width", width + margin.left + margin.right)
-        .attr("height", height + margin.top + margin.bottom);
+  const tooltips = d3.select('#graph').append('div').attr('id', 'tooltips');
 
-    var svgRoot = svg.append("g")
-        .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
-        .attr("id", "gRoot");
+  const svg = d3.select('#graph').append('svg')
+    .attr('id', 'theGraph')
+    .attr('width', width + margin.left + margin.right)
+    .attr('height', height + margin.top + margin.bottom);
 
-    svgRoot.append("g")
-        .attr("id", "points")
-        .selectAll("circle")
-        .data(countryList.map(function(d) {
-            return data.filter(function(r) {
-                return r["Country"] === d;
-            })
-        }))
-        .enter()
-        .append("circle")
-        .attr("id", function(d) { return d[0]["Country"].replace(/ /g, ''); })
-        .attr("class", "point")
-        .attr("cx", function(d) {
-            return xScale(getData(d, currentX, currentYear));
-        })
-        .attr("cy", function(d) {
-            return yScale(getData(d, currentY, currentYear));
-        })
-        .attr("r", function(d) {
-            return radiusScale(getData(d, currentRadius, currentYear));
-        })
-        .style("fill", function(d) {
-            if (isEmpty(d, currentX, currentYear) || isEmpty(d, currentY, currentYear) || isEmpty(d, currentRadius, currentYear)) {
-                return "red";
-            } else {
-                return wbScale[d.filter(function(r) { return r["Year"] == currentYear; })[0]["World Bank Classification"]];
-            }
-        });
+  const svgRoot = svg.append('g')
+    .attr('transform', `translate(${margin.left},${margin.top})`)
+    .attr('id', 'gRoot');
 
-    d3.selectAll(".point").select(function(d) {
-        var boundingClientRect = this.getBoundingClientRect();
-        var theTooltip = d3.select("#tooltips")
-            .append("div")
-            .attr("class", "tooltip")
-            .attr("id", d[0]["Country"].replace(/ /g, '') + "tooltip")
-            .style("top", boundingClientRect.top + boundingClientRect.height)
-            .style("left", boundingClientRect.left + boundingClientRect.width);
-
-
-        theTooltip.append('div')
-            .attr("id", d[0]["Country"].replace(/ /g, '') + "tooltipcaption")
-            .attr("class", "tooltipcaption")
-            .text(d[0]["Country"]);
-
-        theTooltip.append('div')
-            .attr("class", "tooltipdetail")
-            .attr("id", d[0]["Country"].replace(/ /g, '') + "tooltipX")
-            .text(currentX + ": " + (isEmpty(d, currentX, currentYear) ? "No Data" : getData(d, currentX, currentYear)));
-
-        theTooltip.append('div')
-            .attr("class", "tooltipdetail")
-            .attr("id", d[0]["Country"].replace(/ /g, '') + "tooltipY")
-            .text(currentY + ": " + getData(d, currentY, currentYear));
-
-        theTooltip.append('div')
-            .attr("class", "tooltipdetail")
-            .attr("id", d[0]["Country"].replace(/ /g, '') + "tooltipRadius")
-            .text(currentRadius + ": " + getData(d, currentRadius, currentYear));
-
-        //theTooltip.remove();
+  svgRoot.append('g')
+    .attr('id', 'points')
+    .selectAll('circle')
+    .data(countryList.map(d => data.filter(r => r.Country === d)))
+    .enter()
+    .append('circle')
+    .attr('id', d => d[0].Country.replace(/ /g, ''))
+    .attr('class', 'point')
+    .attr('cx', d => xScale(getData(d, currentX, currentYear)))
+    .attr('cy', d => yScale(getData(d, currentY, currentYear)))
+    .attr('r', d => radiusScale(getData(d, currentRadius, currentYear)))
+    .style('fill', (d) => {
+    // if any data is missing return red or else return the correct world-bank classification code
+      if (isEmpty(d, currentX, currentYear) || isEmpty(d, currentY, currentYear) || isEmpty(d, currentRadius, currentYear)) {
+        return 'red';
+      }
+      return wbScale[d.filter(r => r.Year == currentYear)[0]['World Bank Classification']]; // hard coded
     });
 
-    var labelRoot = svg.append("g")
-        .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
-        .attr("id", "labelRoot");
+  d3.selectAll('.point').select(function (d) {
+    const boundingClientRect = this.getBoundingClientRect();
+    const theTooltip = d3.select('#tooltips')
+      .append('div')
+      .attr('class', 'tooltip')
+      .attr('id', `${d[0].Country.replace(/ /g, '')}tooltip`)
+      .style('top', boundingClientRect.top + boundingClientRect.height)
+      .style('left', boundingClientRect.left + boundingClientRect.width);
 
-    labelRoot.append("g")
-        .attr("id", "xAxis")
-        .attr("transform", "translate(0," + height + ")")
-        .call(xAxis);
 
-    labelRoot.append("g")
-        .attr("id", "yAxis")
-        .call(yAxis);
+    theTooltip.append('div')
+      .attr('id', `${d[0].Country.replace(/ /g, '')}tooltipcaption`)
+      .attr('class', 'tooltipcaption')
+      .text(d[0].Country);
 
-    // Add an x-axis label.
-    svgRoot.append("text")
-        .attr("id", "xLabel")
-        .attr("text-anchor", "middle")
-        .attr("x", width / 2)
-        .attr("y", height + 50)
-        .text(currentX);
-    // Add a y-axis label.
-    svgRoot.append("text")
-        .attr("id", "yLabel")
-        .attr("text-anchor", "middle")
-        .attr("y", -50)
-        .attr("x", -250)
-        .attr("dy", ".75em")
-        .attr("transform", "rotate(-90)")
-        .text(currentY);
-    // Add the year label; the value is set on transition.
-    label = svgRoot.append("text")
-        .attr("class", "year label")
-        .attr("text-anchor", "end")
-        .attr("y", height - 24)
-        .attr("x", width)
-        .text(1995);
+    theTooltip.append('div')
+      .attr('class', 'tooltipdetail')
+      .attr('id', `${d[0].Country.replace(/ /g, '')}tooltipX`)
+      .text(`${currentX}: ${isEmpty(d, currentX, currentYear) ? 'No Data' : getData(d, currentX, currentYear)}`);
 
-    reorder();
+    theTooltip.append('div')
+      .attr('class', 'tooltipdetail')
+      .attr('id', `${d[0].Country.replace(/ /g, '')}tooltipY`)
+      .text(`${currentY}: ${getData(d, currentY, currentYear)}`);
+
+    theTooltip.append('div')
+      .attr('class', 'tooltipdetail')
+      .attr('id', `${d[0].Country.replace(/ /g, '')}tooltipRadius`)
+      .text(`${currentRadius}: ${getData(d, currentRadius, currentYear)}`);
+  });
+
+  const labelRoot = svg.append('g')
+    .attr('transform', `translate(${margin.left},${margin.top})`)
+    .attr('id', 'labelRoot');
+
+  labelRoot.append('g')
+    .attr('id', 'xAxis')
+    .attr('transform', `translate(0,${height})`)
+    .call(xAxis);
+
+  labelRoot.append('g')
+    .attr('id', 'yAxis')
+    .call(yAxis);
+
+  // Add an x-axis label.
+  svgRoot.append('text')
+    .attr('id', 'xLabel')
+    .attr('text-anchor', 'end')
+    .attr('x', width)
+    .attr('y', height - 6)
+    .text(currentX);
+
+  // Add a y-axis label.
+  svgRoot.append('text')
+    .attr('id', 'yLabel')
+    .attr('text-anchor', 'end')
+    .attr('y', 6)
+    .attr('dy', '.75em')
+    .attr('transform', 'rotate(-90)')
+    .text(currentY);
+
+  // Add the year label; the value is set on transition.
+  label = svgRoot.append('text')
+    .attr('class', 'year label')
+    .attr('text-anchor', 'end')
+    .attr('y', height - 24)
+    .attr('x', width)
+    .text(minYear);
+
+  reorder();
 }
 
 function attachListeners() {
-    d3.selectAll(".checkboxes").select(function() {
-        if (this.checked) {
-            d3.select("#" + this.getAttribute('country'))
-                .on("mouseenter", function(d) {
+  /* Attach hover events to the circles. Different behavior is attached
+  depending on whether or not the checkbox is selected */
+  d3.selectAll('.checkboxes').select(function () {
+    if (this.checked) {
+      d3.select(`#${this.getAttribute('country')}`)
+        .on('mouseenter', function (d) {
+          d3.select(`#legend${d[4].Country}`).style('border', '2px solid #E8336D');
+          d3.select(this).style('stroke', '#E8336D');
+          d3.select(this).style('stroke-width', '3px');
 
+          const boundingClientRect = document.getElementById('circleLegendGraph').getBoundingClientRect();
 
-                    d3.select("#legend" + d[4]).style("border", "2px solid #E8336D");
-                    d3.select(this).style("stroke", "#E8336D");
-                    d3.select(this).style("stroke-width", "3px");
+          d3.select('#circleLegendGraph')
+            .append('circle')
+            .attr('id', 'tempCirc')
+            .attr('cx', boundingClientRect.width / 2)
+            .attr('cy', boundingClientRect.height / 2)
+            .attr('r', this.getAttribute('r'))
+            .style('fill', 'white')
+            .style('stroke', '#E8336D');
 
-                    var boundingClientRect = document.getElementById("circleLegendGraph").getBoundingClientRect();
+          const currentGNI = d[3][currentYear];
 
-                    d3.select("#circleLegendGraph")
-                        .append("circle")
-                        .attr("id", "tempCirc")
-                        .attr("cx", boundingClientRect.width / 2)
-                        .attr("cy", boundingClientRect.height / 2)
-                        .attr("r", this.getAttribute('r'))
-                        .style("fill", "white")
-                        .style("stroke", "#E8336D");
+          d3.select('#circleLegendGraph')
+            .append('text')
+            .attr('x', parseFloat(this.getAttribute('r')) / 2 + boundingClientRect.width / 2)
+            .attr('y', parseFloat(this.getAttribute('r')) / 2 + boundingClientRect.height / 2)
+            .attr('id', 'tempLabel')
+            .text(currentGNI);
 
-                    var currentGNI = d[3][currentYear];
+          d3.selectAll('.circleLabel')
+            .style('opacity', 0.3);
+        })
+        .on('mouseleave', function (d) {
+          d3.select(this).style('stroke', 'black');
+          d3.select(this).style('stroke-width', '1px');
+          d3.select('#tempCirc').remove();
+          d3.select('#tempLabel').remove();
+          d3.selectAll('.circleLabel')
+            .style('opacity', 1);
+        });
+    } else {
+      d3.select(`#${this.getAttribute('country')}`)
+        .on('mouseenter', function (d) {
+          d3.select(`#${this.id}tooltipX`).style('display', 'block');
+          d3.select(`#${this.id}tooltipY`).style('display', 'block');
+          d3.select(`#${this.id}tooltipRadius`).style('display', 'block');
 
-                    d3.select("#circleLegendGraph")
-                        .append("text")
-                        .attr("x", parseFloat(this.getAttribute('r')) / 2 + boundingClientRect.width / 2)
-                        .attr("y", parseFloat(this.getAttribute('r')) / 2 + boundingClientRect.height / 2)
-                        .attr("id", "tempLabel")
-                        .text(currentGNI);
+          d3.select(`#${this.id}tooltip`)
+            .style('display', 'block');
 
-                    d3.selectAll(".circleLabel")
-                        .style("opacity", 0.3);
-                })
-                .on("mouseleave", function(d) {
+          d3.select(`#legend${d[0].Country}`).style('border', '2px solid #E8336D');
+          d3.select(this).style('stroke', '#E8336D');
+          d3.select(this).style('stroke-width', '3px');
 
-                    d3.select(this).style("stroke", "black");
-                    d3.select(this).style("stroke-width", "1px");
-                    d3.select("#tempCirc").remove();
-                    d3.select("#tempLabel").remove();
-                    d3.selectAll(".circleLabel")
-                        .style("opacity", 1);
-                });
-        } else {
+          const boundingClientRect = document.getElementById('circleLegendGraph').getBoundingClientRect();
 
-            d3.select("#" + this.getAttribute('country'))
-                .on("mouseenter", function(d) {
-                    d3.select("#" + this.id + "tooltipX").style("display", "block");
-                    d3.select("#" + this.id + "tooltipY").style("display", "block");
-                    d3.select("#" + this.id + "tooltipRadius").style("display", "block");
+          d3.select('#circleLegendGraph')
+            .append('circle')
+            .attr('id', 'tempCirc')
+            .attr('cx', boundingClientRect.width / 2)
+            .attr('cy', boundingClientRect.height / 2)
+            .attr('r', this.getAttribute('r'))
+            .style('fill', 'white')
+            .style('stroke', '#E8336D');
 
-                    d3.select("#" + this.id + "tooltip")
-                        .style("display", "block");
+          const tempRadLabel = getData(d, currentRadius, currentYear);
 
-                    d3.select("#legend" + d[0]["Country"]).style("border", "2px solid #E8336D");
-                    d3.select(this).style("stroke", "#E8336D");
-                    d3.select(this).style("stroke-width", "3px");
+          d3.select('#circleLegendGraph')
+            .append('text')
+            .attr('x', parseFloat(this.getAttribute('r')) / 2 + boundingClientRect.width / 2)
+            .attr('y', parseFloat(this.getAttribute('r')) / 2 + boundingClientRect.height / 1.6)
+            .attr('id', 'tempLabel')
+            .text(tempRadLabel);
 
-                    var boundingClientRect = document.getElementById("circleLegendGraph").getBoundingClientRect();
+          d3.selectAll('.circleLabel')
+            .style('opacity', 0.3);
+        })
+        .on('mouseleave', function (d) {
+          d3.select(`#${this.id}tooltipX`).style('display', 'none');
+          d3.select(`#${this.id}tooltipY`).style('display', 'none');
+          d3.select(`#${this.id}tooltipRadius`).style('display', 'none');
 
-                    d3.select("#circleLegendGraph")
-                        .append("circle")
-                        .attr("id", "tempCirc")
-                        .attr("cx", boundingClientRect.width / 2)
-                        .attr("cy", boundingClientRect.height / 2)
-                        .attr("r", this.getAttribute('r'))
-                        .style("fill", "white")
-                        .style("stroke", "#E8336D");
+          d3.select(`#${this.getAttribute('id')}tooltip`)
+            .style('display', 'none');
 
-                    var tempRadLabel = getData(d, currentRadius, currentYear);
+          d3.select(`#legend${d[0].Country}`).style('border', null);
+          d3.select(this).style('stroke', 'black');
+          d3.select(this).style('stroke-width', '1px');
 
-                    d3.select("#circleLegendGraph")
-                        .append("text")
-                        .attr("x", parseFloat(this.getAttribute('r')) / 2 + boundingClientRect.width / 2)
-                        .attr("y", parseFloat(this.getAttribute('r')) / 2 + boundingClientRect.height / 1.6)
-                        .attr("id", "tempLabel")
-                        .text(tempRadLabel);
-
-                    d3.selectAll(".circleLabel")
-                        .style("opacity", 0.3);
-                })
-                .on("mouseleave", function(d) {
-                    d3.select("#" + this.id + "tooltipX").style("display", "none");
-                    d3.select("#" + this.id + "tooltipY").style("display", "none");
-                    d3.select("#" + this.id + "tooltipRadius").style("display", "none");
-
-                    d3.select("#" + this.getAttribute('id') + "tooltip")
-                        .style("display", "none");
-
-                    d3.select("#legend" + d[0]["Country"]).style("border", null);
-                    d3.select(this).style("stroke", "black");
-                    d3.select(this).style("stroke-width", "1px");
-
-                    d3.select("#tempCirc").remove();
-                    d3.select("#tempLabel").remove();
-                    d3.selectAll(".circleLabel")
-                        .style("opacity", 1);
-                });
-        }
-    });
+          d3.select('#tempCirc').remove();
+          d3.select('#tempLabel').remove();
+          d3.selectAll('.circleLabel')
+            .style('opacity', 1);
+        });
+    }
+  });
 }
 
 function yearChange(year) {
-    update(parseInt(year), false);
-    //$("#year-output").html(year);
-    if ($(this).hasClass("play")) {
-        console.log("yes");
-    }
+  update(parseInt(year), false);
 }
-
-
 
 function update(year, playButton) {
-
-    var t = d3.transition()
-        .duration(1000)
-        .ease(d3.easeQuadInOut)
-        .on('end', function() {
-            if (year < 2015 && playButton) {
-                attachListeners();
-                update(year + 1, playButton)
-                
-            } else {
-                reorder();
-            }
-        });
-
-    d3.selectAll(".point")
-        .attr("cx", function(d) {
-            return xScale(getData(d, currentX, year));
-        })
-        .attr("cy", function(d) {
-            return yScale(getData(d, currentY, year));
-        })
-        .attr("r", function(d) {
-            return radiusScale(getData(d, currentRadius, year));
-        });
-
-    d3.selectAll(".point")
-        .select(function(d) {
-            var boundingClientRect = this.getBoundingClientRect();
-
-            d3.select("#" + d[0]["Country"].replace(/ /g, '') + "tooltip")
-                .transition(t)
-                .style("top", boundingClientRect.bottom)
-                .style("left", boundingClientRect.right);
-
-        });
-
-    d3.selectAll(".point")
-        .attr("cx", function(d) {
-            return xScale(getData(d, currentX, currentYear));
-        })
-        .attr("cy", function(d) {
-            return yScale(getData(d, currentY, currentYear));
-        })
-        .attr("r", function(d) {
-            return radiusScale(getData(d, currentRadius, currentYear));
-        })
-        .style("fill", function(d) {
-            if (isEmpty(d, currentX, year) || isEmpty(d, currentY, year) || isEmpty(d, currentRadius, year)) {
-                
-                return "darkgray";
-            } else {
-
-                return wbScale[d.filter(function(r) { return r["Year"] == year; })[0]["World Bank Classification"]];
-            
-            }
-        })
-        .style("stroke", function(d) {
-            if (isEmpty(d, currentX, year) || isEmpty(d, currentY, year) || isEmpty(d, currentRadius, year)) {
-                
-                return "gray";
-            } else {
-                var blue = wbScale[d.filter(function(r) { return r["Year"] == year; })[0]["World Bank Classification"]];
-                var shaded = shadeColor2(blue, -0.2);
-                return shaded;
-            }
-        });
-
-        function shadeColor2(color, percent) {   
-    var f=parseInt(color.slice(1),16),t=percent<0?0:255,p=percent<0?percent*-1:percent,R=f>>16,G=f>>8&0x00FF,B=f&0x0000FF;
-    return "#"+(0x1000000+(Math.round((t-R)*p)+R)*0x10000+(Math.round((t-G)*p)+G)*0x100+(Math.round((t-B)*p)+B)).toString(16).slice(1);
-}
-
-    d3.selectAll(".point")
-        .transition(t)
-        .attr("cx", function(d) {
-            return xScale(getData(d, currentX, year));
-        })
-        .attr("cy", function(d) {
-            return yScale(getData(d, currentY, year));
-        })
-        .attr("r", function(d) {
-            return radiusScale(getData(d, currentRadius, year));
-        });
-
-    d3.selectAll(".point").select(function(d) {
-        d3.select("#" + d[0]["Country"].replace(/ /g, '') + "tooltipX")
-            .text(currentX + ": " + (isEmpty(d, currentX, year) ? "No Data" : getData(d, currentX, year)));
-
-        d3.select("#" + d[0]["Country"].replace(/ /g, '') + "tooltipY")
-            .text(currentY + ": " + (isEmpty(d, currentY, year) ? "No Data" : getData(d, currentY, year)));
-
-        d3.select("#" + d[0]["Country"].replace(/ /g, '') + "tooltipRadius")
-            .text(currentRadius + ": " + (isEmpty(d, currentRadius, year) ? "No Data" : getData(d, currentRadius, year)));
+  const t = d3.transition()
+    .duration(1000)
+    .ease(d3.easeQuadInOut)
+    .on('end', () => {
+      if (year < maxYear && playButton) {
+        attachListeners();
+        update(year + 1, playButton);
+      } else {
+        reorder();
+      }
     });
 
-    document.getElementById('slider').value = parseInt(year);
-    currentYear = parseInt(document.getElementById('slider').value);
-    label.text(year);
-    makeBabyChart();
+  d3.selectAll('.point')
+    .attr('cx', d => xScale(getData(d, currentX, year)))
+    .attr('cy', d => yScale(getData(d, currentY, year)))
+    .attr('r', d => radiusScale(getData(d, currentRadius, year)));
+
+  d3.selectAll('.point')
+    .select(function (d) {
+      const boundingClientRect = this.getBoundingClientRect();
+
+      d3.select(`#${d[0].Country.replace(/ /g, '')}tooltip`)
+        .transition(t)
+        .style('top', boundingClientRect.bottom)
+        .style('left', boundingClientRect.right);
+    });
+
+  d3.selectAll('.point')
+    .attr('cx', d => xScale(getData(d, currentX, currentYear)))
+    .attr('cy', d => yScale(getData(d, currentY, currentYear)))
+    .attr('r', d => radiusScale(getData(d, currentRadius, currentYear)))
+    .style('fill', (d) => {
+      if (isEmpty(d, currentX, year) || isEmpty(d, currentY, year) || isEmpty(d, currentRadius, year)) {
+        return 'red';
+      }
+      return wbScale[d.filter(r => r.Year == year)[0]['World Bank Classification']]; // hard coded
+    });
+
+  d3.selectAll('.point')
+    .transition(t)
+    .attr('cx', d => xScale(getData(d, currentX, year)))
+    .attr('cy', d => yScale(getData(d, currentY, year)))
+    .attr('r', d => radiusScale(getData(d, currentRadius, year)));
+
+  d3.selectAll('.point').select((d) => {
+    d3.select(`#${d[0].Country.replace(/ /g, '')}tooltipX`)
+      .text(`${currentX}: ${isEmpty(d, currentX, year) ? 'No Data' : getData(d, currentX, year)}`);
+
+    d3.select(`#${d[0].Country.replace(/ /g, '')}tooltipY`)
+      .text(`${currentY}: ${isEmpty(d, currentY, year) ? 'No Data' : getData(d, currentY, year)}`);
+
+
+    d3.select(`#${d[0].Country.replace(/ /g, '')}tooltipRadius`)
+      .text(`${currentRadius}: ${isEmpty(d, currentRadius, year) ? 'No Data' : getData(d, currentRadius, year)}`);
+  });
+
+  document.getElementById('slider').value = parseInt(year);
+  currentYear = parseInt(document.getElementById('slider').value);
+  label.text(year);
+  makeBabyChart(); // update the radius-legend chart
 }
+
+
 
 function play() {
-    if (parseInt(document.getElementById('slider').value) == 2015) {
-        update(1995, true);
-    } else {
-        update(parseInt(document.getElementById('slider').value) + 1, true);
-    }
+  // if the play button is triggered when current year is 2015, wrap around to 1995
+  if (parseInt(document.getElementById('slider').value) == maxYear) {
+    update(minYear, true);
+  } else {
+    // else call update on the next year
+    update(parseInt(document.getElementById('slider').value) + 1, true);
+  }
 }
 
+// jquery accordion checkbox change
 function checkboxChange() {
-    var anyCheckBoxOn = false;
-    d3.selectAll(".checkboxes").select(function() {
-        if (this.checked) { anyCheckBoxOn = true; }
+  let anyCheckBoxOn = false;
+  d3.selectAll('.checkboxes').select(function () {
+    if (this.checked) { anyCheckBoxOn = true; }
+  });
+  if (anyCheckBoxOn) {
+    d3.selectAll('.checkboxes').select(function () {
+      if (this.checked) {
+        d3.select(`#${this.getAttribute('country')}`).style('opacity', '1');
+        d3.select(`#${this.getAttribute('country')}tooltip`).style('display', 'block');
+      } else {
+        d3.select(`#${this.getAttribute('country')}`).style('opacity', '0.3');
+        d3.select(`#${this.getAttribute('country')}tooltip`).style('display', 'none');
+      }
     });
-    if (anyCheckBoxOn) {
-
-        d3.selectAll(".checkboxes").select(function() {
-            if (this.checked) {
-                d3.select("#" + this.getAttribute('country')).style("opacity", "1");
-                d3.select("#" + this.getAttribute('country') + "tooltip").style("display", "block");
-            } else {
-                d3.select("#" + this.getAttribute('country')).style("opacity", "0.3");
-                d3.select("#" + this.getAttribute('country') + "tooltip").style("display", "none");
-            }
-        });
-    } else {
-        d3.selectAll(".checkboxes").select(function() {
-            d3.select("#" + this.getAttribute('country')).style("opacity", "1");
-            d3.select("#" + this.getAttribute('country') + "tooltip").style("display", "none");
-        });
-    }
-    attachListeners();
+  } else {
+    d3.selectAll('.checkboxes').select(function () {
+      d3.select(`#${this.getAttribute('country')}`).style('opacity', '1');
+      d3.select(`#${this.getAttribute('country')}tooltip`).style('display', 'none');
+    });
+  }
+  attachListeners();
 }
 
 window.onresize = resizefunc;
 
 function resizefunc() {
-    makeChart();
-    makeBabyChart();
-};
 
-/*
-for(let country of mySet.values()){
-    console.log(country);
-    for(let y of year.values()){
-        let theRecord = data.filter(function(d){return d["Country"]==country&&d["Year"]==y});
-        console.log(","+theRecord["%ofWomenFormallyEmployed"]);
-    }
-    console.log("\n");
+  makeChart();
+  makeBabyChart();
 }
-*/
 
-$("#dropdownX").selectmenu({
-    change: function(event, data) {
-        changeYScale(data.item.value);
-    }
-});
-
-$("#dropdownY").selectmenu({
-    change: function(event, data) {
-        changeYScale(data.item.value);
-    }
-});
-$("#dropdownR").selectmenu({
-    change: function(event, data) {
-        changeYScale(data.item.value);
-    }
-});
-
-$("#slider").on('input', function() {
-    $('#year-output').html( $(this).val() );
-})
-
-//420 blaze it
