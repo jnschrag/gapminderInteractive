@@ -1,30 +1,40 @@
 <html>
- <meta charset="UTF-8"> 
+<meta charset="UTF-8">
+
 <head>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700" rel="stylesheet">
-</head>
-<script src="https://d3js.org/d3.v4.min.js"></script>
-<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700" rel="stylesheet">
-<link rel="stylesheet" type="text/css" href="style.css" />
+    <link rel="stylesheet" type="text/css" href="style.css" />
 </head>
 
 <body>
     <div id="graphicContainer">
+        <div id="containerTop">
+            <h1>GapMinder Data</h1>
+            <label>Year in view:
+                <span id="year-output">1995</span></label>
+            <div class="sliderdiv">
+                <div class="btnblock">
+                    <button id="playbtn" class="play" onClick="play()"><span class="ui-icon ui-icon-play"></span></button>
+                </div>
+                <div id="slideBlock">
+
+                    <div id="slider"></div>
+                    <div class="clearfix"></div>
+                    <div id="dates">
+                        <div>1995</div>
+                        <div>2005</div>
+                        <div>2015</div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div id="graph">
         </div>
         <div id="containerBottom">
-
-            <div class="sliderdiv">
-              <label>Year in view:
-              <span id="year-output" style="border:0; color:#f6931f; font-weight:bold;">1995</span></label>
-                <input type="range" id="slider" min="1995" max="2015" value="1995" step="1" onchange="yearChange(this.value)">
-                <button id="playbtn" class="ui-button ui-widget ui-corner-all play" onClick="play()" ><span class="ui-icon ui-icon-play"></span>PLAY</button>
-            </div>
-
-
             <div class="dropdowndiv">
                 <div class="dropdownpair">
                     <label for="dropdownX" id="dropdownXLabel">X-Axis Variable</label>

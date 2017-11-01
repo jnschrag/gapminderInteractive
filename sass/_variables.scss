@@ -1,5 +1,5 @@
 $color101: #163553;
-
+$accent: #007fff;
 
 @mixin colorize-stroke($color) {
     stroke: darken( $color, 50% );
