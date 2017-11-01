@@ -93,37 +93,100 @@ text {
   fill: black;
 }
 
-@media (min-width: 0px) and (max-width: 515px) {
-  /* line 25, sass/_base.scss */
-  #graph {
-    width: 95%;
-    margin-right: 0%;
-  }
-
-  /* line 29, sass/_base.scss */
-  #containerTopRight {
-    order: 3;
-    width: 100%;
-    height: 20%;
-  }
-
-  /* line 34, sass/_base.scss */
-  #containerBottom {
-    order: 2;
-    width: 100%;
-  }
+/* line 23, sass/_base.scss */
+h1 {
+  font-size: 30px;
+  margin: 20px;
+  display: block;
+  text-align: center;
 }
+
+/* line 31, sass/_base.scss */
+.clearfix {
+  clear: both;
+}
+
+/* line 35, sass/_base.scss */
+.sliderdiv {
+  width: 100%;
+  min-width: 350px;
+  margin: 15px auto;
+  clear: both;
+  display: block;
+  text-align: center;
+}
+/* line 45, sass/_base.scss */
+.sliderdiv #slideBlock {
+  width: 90%;
+  display: block;
+  float: left;
+}
+/* line 51, sass/_base.scss */
+.sliderdiv #slider {
+  width: 100%;
+  display: block;
+  position: relative;
+  float: left;
+  height: 20px;
+}
+/* line 58, sass/_base.scss */
+.sliderdiv #dates {
+  width: 80%;
+}
+/* line 60, sass/_base.scss */
+.sliderdiv #dates div {
+  width: 33.3333%;
+  display: inline-block;
+  float: left;
+}
+/* line 65, sass/_base.scss */
+.sliderdiv #dates div:first-of-type {
+  text-align: left;
+}
+/* line 68, sass/_base.scss */
+.sliderdiv #dates div:last-of-type {
+  text-align: right;
+}
+/* line 74, sass/_base.scss */
+.sliderdiv .btnblock {
+  width: 10%;
+  display: block;
+  float: left;
+}
+/* line 80, sass/_base.scss */
+.sliderdiv #year-output {
+  text-align: center;
+  font-size: 20px;
+  color: #007fff;
+}
+/* line 86, sass/_base.scss */
+.sliderdiv #playbtn {
+  display: block;
+  background: #007fff;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  font-size: 90%;
+  margin: 0 auto;
+}
+/* line 95, sass/_base.scss */
+.sliderdiv label {
+  font-family: 'Source Sans Pro', sans-serif;
+  color: gray;
+  display: block;
+}
+
 /*Graph*/
-/* line 44, sass/_base.scss */
+/* line 106, sass/_base.scss */
 #graph {
   width: 65%;
   margin-right: 10%;
 }
-/* line 49, sass/_base.scss */
+/* line 111, sass/_base.scss */
 #graph #tooltips .tooltipdetail {
   display: none;
 }
-/* line 53, sass/_base.scss */
+/* line 115, sass/_base.scss */
 #graph #tooltips .tooltip {
   padding: 10px;
   border: 1px solid gray;
@@ -132,191 +195,182 @@ text {
   display: none;
   position: fixed;
 }
-/* line 62, sass/_base.scss */
+/* line 124, sass/_base.scss */
 #graph #tooltips .tooltipcaption {
   font-size: 16px;
   font-weight: 700;
 }
-/* line 68, sass/_base.scss */
+/* line 130, sass/_base.scss */
 #graph svg {
   shape-rendering: geometricPrecision;
 }
-/* line 73, sass/_base.scss */
+/* line 135, sass/_base.scss */
 #graph #theGraph #xLabel,
 #graph #theGraph #yLabel {
   font-size: 18px;
 }
-/* line 78, sass/_base.scss */
+/* line 140, sass/_base.scss */
 #graph #theGraph .axis path,
 #graph #theGraph .axis line {
   fill: none;
   stroke: #000;
   shape-rendering: crispEdges;
 }
-/* line 85, sass/_base.scss */
+/* line 147, sass/_base.scss */
 #graph #theGraph .label {
   fill: #777;
   font-size: 100px;
   font-family: 'Source Sans Pro', sans-serif;
 }
-/* line 90, sass/_base.scss */
+/* line 152, sass/_base.scss */
 #graph #theGraph .year.label {
   font-family: 'Source Sans Pro', sans-serif;
   fill: #ddd;
 }
-/* line 95, sass/_base.scss */
+/* line 157, sass/_base.scss */
 #graph #theGraph .year.label.active {
   fill: #aaa;
 }
-/* line 99, sass/_base.scss */
+/* line 161, sass/_base.scss */
 #graph #theGraph circle {
-  stroke: black;
   stroke-width: 1px;
 }
-/* line 104, sass/_base.scss */
+/* line 166, sass/_base.scss */
 #graph #theGraph circle:hover {
   cursor: pointer;
 }
 
 /*Container Right*/
-/* line 113, sass/_base.scss */
+/* line 176, sass/_base.scss */
 #containerTopRight {
   width: 20%;
 }
-/* line 116, sass/_base.scss */
+/* line 179, sass/_base.scss */
 #containerTopRight span.key-label {
   display: block;
   padding: 15px 0px 5px;
   font-weight: bold;
 }
-/* line 122, sass/_base.scss */
+/* line 185, sass/_base.scss */
 #containerTopRight .colorLegendElement {
   font-family: 'Source Sans Pro', sans-serif;
   display: inline-block;
   text-align: center;
 }
-/* line 128, sass/_base.scss */
+/* line 191, sass/_base.scss */
 #containerTopRight .colorLegendSquare {
   width: 15px;
   height: 15px;
   box-sizing: border-box;
 }
-/* line 134, sass/_base.scss */
+/* line 197, sass/_base.scss */
 #containerTopRight .ui-accordion .ui-accordion-header {
   padding: 2%;
 }
-
-/*Container Bottom*/
-/* line 142, sass/_base.scss */
-#containerBottom {
-  width: calc(65% - 20px);
-  padding-left: 70px;
-}
-/* line 146, sass/_base.scss */
-#containerBottom .sliderdiv {
-  width: 40%;
-  min-width: 350px;
-  margin: 15px auto;
-  clear: both;
-  display: block;
-}
-/* line 153, sass/_base.scss */
-#containerBottom .sliderdiv #slider {
-  width: 80%;
-  display: block;
-  float: left;
-}
-/* line 159, sass/_base.scss */
-#containerBottom .sliderdiv .playbtn {
-  display: block;
-  float: left;
-}
-/* line 165, sass/_base.scss */
-#containerBottom .dropdowndiv {
-  clear: both;
-  display: block;
-  margin-top: 50px;
-  border: 1px solid red;
-}
-/* line 170, sass/_base.scss */
-#containerBottom .dropdowndiv label {
-  font-family: 'Source Sans Pro', sans-serif;
-}
-/* line 174, sass/_base.scss */
-#containerBottom .dropdowndiv select {
-  font-size: 16px;
-  width: 100%;
-}
-/* line 179, sass/_base.scss */
-#containerBottom .dropdowndiv .dropdownpair {
-  width: calc(33.3333% - 20px);
-  display: block;
-  float: left;
-  margin: 0 auto;
-  padding: 10px;
+/* line 201, sass/_base.scss */
+#containerTopRight #circleLegendGraph {
+  background-color: #f6f6f6;
+  border: 1px solid #c5c5c5;
 }
 
-/*Container Bottom*/
-/* line 192, sass/_base.scss */
-#containerBottom {
-  width: calc(65% - 20px);
-  padding-left: 70px;
-}
-/* line 196, sass/_base.scss */
-#containerBottom .sliderdiv {
-  width: 60%;
-  min-width: 350px;
-  margin: 15px auto;
-  clear: both;
-  display: block;
-}
-/* line 203, sass/_base.scss */
-#containerBottom .sliderdiv #slider {
-  width: 80%;
-  display: block;
-  float: left;
-}
 /* line 209, sass/_base.scss */
-#containerBottom .sliderdiv #playbtn {
+.sliderdiv {
+  width: 70%;
+  min-width: 350px;
+  margin: 15px auto;
+  clear: both;
+  display: block;
+}
+/* line 216, sass/_base.scss */
+.sliderdiv #slider {
+  width: 80%;
   display: block;
   float: left;
-  font-size: 90%;
-}
-/* line 214, sass/_base.scss */
-#containerBottom .sliderdiv label {
-  font-family: 'Source Sans Pro', sans-serif;
-  color: gray;
-  display: block;
 }
 /* line 222, sass/_base.scss */
+.sliderdiv .playbtn {
+  display: block;
+  float: left;
+}
+/* line 227, sass/_base.scss */
+.sliderdiv #sliderhide {
+  display: hidden;
+}
+
+/*Container Top*/
+/* line 236, sass/_base.scss */
+#containerTop {
+  margin-left: 100px;
+}
+
+/*Container Bottom*/
+/* line 243, sass/_base.scss */
+#containerBottom {
+  width: 65%;
+  padding-left: 100px;
+}
+/* line 249, sass/_base.scss */
 #containerBottom .ui-corner-all {
   border-radius: 0;
 }
-/* line 225, sass/_base.scss */
+/* line 252, sass/_base.scss */
 #containerBottom .dropdowndiv {
   clear: both;
   display: block;
+  width: 100%;
   margin-top: 25px;
   border: 1px solid transparent;
+  position: relative;
 }
-/* line 230, sass/_base.scss */
+/* line 260, sass/_base.scss */
 #containerBottom .dropdowndiv label {
   font-family: 'Source Sans Pro', sans-serif;
   padding-bottom: 10px;
   color: gray;
 }
-/* line 236, sass/_base.scss */
+/* line 266, sass/_base.scss */
 #containerBottom .dropdowndiv select,
-#containerBottom .dropdowndiv .ui-selectmenu-button.ui-button {
+#containerBottom .dropdowndiv select span {
   font-size: 16px;
-  width: auto;
-  display: block;
+  width: 100%;
 }
-/* line 243, sass/_base.scss */
+/* line 274, sass/_base.scss */
 #containerBottom .dropdowndiv .dropdownpair {
+  position: relative;
   width: calc(33.3333% - 20px);
   display: block;
   float: left;
   margin: 0 auto;
   padding: 10px;
+}
+
+/* line 287, sass/_base.scss */
+.ui-selectmenu-menu .ui-menu {
+  height: 300px;
+}
+
+/* line 291, sass/_base.scss */
+.ui-selectmenu-button.ui-button {
+  width: 85%;
+}
+
+@media (min-width: 0px) and (max-width: 515px) {
+  /* line 296, sass/_base.scss */
+  #graph,
+  #containerBottom {
+    width: 95%;
+    margin-right: 0%;
+  }
+
+  /* line 301, sass/_base.scss */
+  #containerTopRight {
+    order: 3;
+    width: 100%;
+    height: 20%;
+  }
+
+  /* line 306, sass/_base.scss */
+  #containerBottom {
+    order: 2;
+  }
 }
