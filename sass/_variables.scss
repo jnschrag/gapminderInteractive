@@ -1,5 +1,8 @@
 $color101: #163553;
 $accent: #007fff;
+$button: #607889;
+$ltgray: rgb(246, 246, 246);
+$dkgray: rgb(197, 197, 197);
 
 @mixin colorize-stroke($color) {
     stroke: darken( $color, 50% );

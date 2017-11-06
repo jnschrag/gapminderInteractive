@@ -14,27 +14,6 @@
     <div id="graphicContainer">
         <div id="containerTop">
             <h1>GapMinder Data</h1>
-            <label>Year in view:
-                <span id="year-output">1995</span></label>
-            <div class="sliderdiv">
-                <div class="btnblock">
-                    <button id="playbtn" class="play" onClick="play()"><span class="ui-icon ui-icon-play"></span></button>
-                </div>
-                <div id="slideBlock">
-
-                    <div id="slider"></div>
-                    <div class="clearfix"></div>
-                    <div id="dates">
-                        <div>1995</div>
-                        <div>2005</div>
-                        <div>2015</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div id="graph">
-        </div>
-        <div id="containerBottom">
             <div class="dropdowndiv">
                 <div class="dropdownpair">
                     <label for="dropdownX" id="dropdownXLabel">X-Axis Variable</label>
@@ -44,141 +23,36 @@
                     <label for="dropdownY" id="dropdownYLabel">Y-Axis Variable</label>
                     <select id="dropdownY" onchange="changeYScale(this.value)"></select>
                 </div>
-                <div class="dropdownpair">
-                    <label for="dropdownR" id="dropdownRLabel">Circle Radius Variable</label>
-                    <select id="dropdownR" onchange="changeRadius(this.value)"></select>
+            </div>
+        </div>
+        <div id="graph">
+        </div>
+        <div id="containerBottom">
+            <div class="sliderdiv">
+               <div class="btnblock">
+                    <button id="playbtn" class="play ui-button ui-corner-all" onClick="playpause()"><span class="play-icon"></span>PLAY</button>
                 </div>
+                <div id="slideBlock">
+                    <div id="slider"></div>
+                    <div class="clearfix"></div>
+                    <div id="dateline">
+                    </div>
+                    <div id="dates">
+                        <div class="yearDiv yearL">
+                            <div class="endcap">1995</div>
+                            <div>2000</div>
+                        </div>
+                        <div class="yearDiv"><div>2005</div></div>
+                        <div class="yearDiv yearR">
+                            <div>2010</div>
+                            <div class="endcap">2015</div>
+                        </div>
+                    </div>
+                </div>
+               
             </div>
         </div>
         <div id="containerTopRight">
-            <span class="key-label">Countries</span>
-            <div id="accordion">
-                <h3>Africa</h3>
-                <div>
-                    <div>
-                        <input class="checkboxes" onchange="checkboxChange()" type="checkbox" country="Burundi">Burundi</input>
-                    </div>
-                    <div>
-                        <input class="checkboxes" onchange="checkboxChange()" type="checkbox" country="CentralAfricanRepublic">Central African Republic</input>
-                    </div>
-                    <div>
-                        <input class="checkboxes" onchange="checkboxChange()" type="checkbox" country="Congo">Democratic Republic of Congo</input>
-                    </div>
-                    <div>
-                        <input class="checkboxes" onchange="checkboxChange()" type="checkbox" country="Ghana">Ghana</input>
-                    </div>
-                    <div>
-                        <input class="checkboxes" onchange="checkboxChange()" type="checkbox" country="Kenya">Kenya</input>
-                    </div>
-                    <div>
-                        <input class="checkboxes" onchange="checkboxChange()" type="checkbox" country="Mali">Mali</input>
-                    </div>
-                    <div>
-                        <input class="checkboxes" onchange="checkboxChange()" type="checkbox" country="Rwanda">Rwanda</div>
-                    <div>
-                        <input class="checkboxes" onchange="checkboxChange()" type="checkbox" country="Senegal">Senegal</input>
-                    </div>
-                    <div>
-                        <input class="checkboxes" onchange="checkboxChange()" type="checkbox" country="SouthAfrica">South Africa</input>
-                    </div>
-                    <div>
-                        <input class="checkboxes" onchange="checkboxChange()" type="checkbox" country="Tunisia">Tunisia</input>
-                    </div>
-                </div>
-                <h3>Asia</h3>
-                <div>
-                    <div>
-                        <input class="checkboxes" onchange="checkboxChange()" type="checkbox" country="Bangladesh">Bangladesh</input>
-                    </div>
-                    <div>
-                        <input class="checkboxes" onchange="checkboxChange()" type="checkbox" country="China">China</input>
-                    </div>
-                    <div>
-                        <input class="checkboxes" onchange="checkboxChange()" type="checkbox" country="India">India</input>
-                    </div>
-                    <div>
-                        <input class="checkboxes" onchange="checkboxChange()" type="checkbox" country="Indonesia">Indonesia</input>
-                    </div>
-                    <div>
-                        <input class="checkboxes" onchange="checkboxChange()" type="checkbox" country="Jordan">Jordan</input>
-                    </div>
-                    <div>
-                        <input class="checkboxes" onchange="checkboxChange()" type="checkbox" country="Kazakhstan">Kazakhstan</input>
-                    </div>
-                    <div>
-                        <input class="checkboxes" onchange="checkboxChange()" type="checkbox" country="Lebanon">Lebanon</input>
-                    </div>
-                    <div>
-                        <input class="checkboxes" onchange="checkboxChange()" type="checkbox" country="Mongolia">Mongolia</input>
-                    </div>
-                    <div>
-                        <input class="checkboxes" onchange="checkboxChange()" type="checkbox" country="Pakistan">Pakistan</input>
-                    </div>
-                    <div>
-                        <input class="checkboxes" onchange="checkboxChange()" type="checkbox" country="Philippines">Philippines</input>
-                    </div>
-                    <div>
-                        <input class="checkboxes" onchange="checkboxChange()" type="checkbox" country="Russia">Russia</input>
-                    </div>
-                    <div>
-                        <input class="checkboxes" onchange="checkboxChange()" type="checkbox" country="SriLanka">Sri Lanka</input>
-                    </div>
-                    <div>
-                        <input class="checkboxes" onchange="checkboxChange()" type="checkbox" country="Vietnam">Vietnam</input>
-                    </div>
-                </div>
-                <h3>Australia and Oceania</h3>
-                <div>
-                    <div>
-                        <input class="checkboxes" onchange="checkboxChange()" type="checkbox" country="PapuaNewGuinea">Papua New Guinea</input>
-                    </div>
-                </div>
-                <h3>Europe</h3>
-                <div>
-                    <div>
-                        <input class="checkboxes" onchange="checkboxChange()" type="checkbox" country="Albania">Albania</input>
-                    </div>
-                    <div>
-                        <input class="checkboxes" onchange="checkboxChange()" type="checkbox" country="Georgia">Georgia</input>
-                    </div>
-                </div>
-                <h3>North America</h3>
-                <div>
-                    <div>
-                        <input class="checkboxes" onchange="checkboxChange()" type="checkbox" country="Haiti">Haiti</input>
-                    </div>
-                    <div>
-                        <input class="checkboxes" onchange="checkboxChange()" type="checkbox" country="Honduras">Honduras</input>
-                    </div>
-                    <div>
-                        <input class="checkboxes" onchange="checkboxChange()" type="checkbox" country="Mexico">Mexico</input>
-                    </div>
-                    <div>
-                        <input class="checkboxes" onchange="checkboxChange()" type="checkbox" country="Panama">Panama</input>
-                    </div>
-                </div>
-                <h3>South America</h3>
-                <div>
-                    <div>
-                        <input class="checkboxes" onchange="checkboxChange()" type="checkbox" country="Brazil">Brazil</input>
-                    </div>
-                    <div>
-                        <input class="checkboxes" onchange="checkboxChange()" type="checkbox" country="Bolivia">Bolivia</input>
-                    </div>
-                    <div>
-                        <input class="checkboxes" onchange="checkboxChange()" type="checkbox" country="Colombia">Colombia</input>
-                    </div>
-                    <div>
-                        <input class="checkboxes" onchange="checkboxChange()" type="checkbox" country="Ecuador">Ecuador</input>
-                    </div>
-                    <div>
-                        <input class="checkboxes" onchange="checkboxChange()" type="checkbox" country="Peru">Peru</input>
-                    </div>
-                    <div>
-                        <input class="checkboxes" onchange="checkboxChange()" type="checkbox" country="Venezuela">Venezuela</input>
-                    </div>
-                </div>
-            </div>
             <div id="colorLegend">
                 <span class="key-label">World Bank Classification Codes</span>
                 <div id="colorLegendElements">
@@ -194,10 +68,143 @@
                         <div class="colorLegendSquare" id="legend5" style="background: #3182bd;"></div>5</div>
                     <div class="colorLegendElement">
                         <div class="colorLegendSquare" id="legend6" style="background: #08519c;"></div>6</div>
+                    <div class="colorLegendElement nodata">
+                        <div class="colorLegendSquare" id="nodatasquare" style="background: rgb(211, 211, 211);"></div>No Data</div>
                 </div>
             </div>
             <div id="circleLegend">
-                <span id="circleLegendLabel" class="key-label"></span>
+                <span class="key-label">Countries</span>
+                <div id="accordion">
+                    <h3>Africa</h3>
+                    <div>
+                        <div>
+                            <input class="checkboxes" onchange="checkboxChange()" type="checkbox" country="Burundi">Burundi</input>
+                        </div>
+                        <div>
+                            <input class="checkboxes" onchange="checkboxChange()" type="checkbox" country="CentralAfricanRepublic">Central African Republic</input>
+                        </div>
+                        <div>
+                            <input class="checkboxes" onchange="checkboxChange()" type="checkbox" country="Congo">Democratic Republic of Congo</input>
+                        </div>
+                        <div>
+                            <input class="checkboxes" onchange="checkboxChange()" type="checkbox" country="Ghana">Ghana</input>
+                        </div>
+                        <div>
+                            <input class="checkboxes" onchange="checkboxChange()" type="checkbox" country="Kenya">Kenya</input>
+                        </div>
+                        <div>
+                            <input class="checkboxes" onchange="checkboxChange()" type="checkbox" country="Mali">Mali</input>
+                        </div>
+                        <div>
+                            <input class="checkboxes" onchange="checkboxChange()" type="checkbox" country="Rwanda">Rwanda</div>
+                        <div>
+                            <input class="checkboxes" onchange="checkboxChange()" type="checkbox" country="Senegal">Senegal</input>
+                        </div>
+                        <div>
+                            <input class="checkboxes" onchange="checkboxChange()" type="checkbox" country="SouthAfrica">South Africa</input>
+                        </div>
+                        <div>
+                            <input class="checkboxes" onchange="checkboxChange()" type="checkbox" country="Tunisia">Tunisia</input>
+                        </div>
+                    </div>
+                    <h3>Asia</h3>
+                    <div>
+                        <div>
+                            <input class="checkboxes" onchange="checkboxChange()" type="checkbox" country="Bangladesh">Bangladesh</input>
+                        </div>
+                        <div>
+                            <input class="checkboxes" onchange="checkboxChange()" type="checkbox" country="China">China</input>
+                        </div>
+                        <div>
+                            <input class="checkboxes" onchange="checkboxChange()" type="checkbox" country="India">India</input>
+                        </div>
+                        <div>
+                            <input class="checkboxes" onchange="checkboxChange()" type="checkbox" country="Indonesia">Indonesia</input>
+                        </div>
+                        <div>
+                            <input class="checkboxes" onchange="checkboxChange()" type="checkbox" country="Jordan">Jordan</input>
+                        </div>
+                        <div>
+                            <input class="checkboxes" onchange="checkboxChange()" type="checkbox" country="Kazakhstan">Kazakhstan</input>
+                        </div>
+                        <div>
+                            <input class="checkboxes" onchange="checkboxChange()" type="checkbox" country="Lebanon">Lebanon</input>
+                        </div>
+                        <div>
+                            <input class="checkboxes" onchange="checkboxChange()" type="checkbox" country="Mongolia">Mongolia</input>
+                        </div>
+                        <div>
+                            <input class="checkboxes" onchange="checkboxChange()" type="checkbox" country="Pakistan">Pakistan</input>
+                        </div>
+                        <div>
+                            <input class="checkboxes" onchange="checkboxChange()" type="checkbox" country="Philippines">Philippines</input>
+                        </div>
+                        <div>
+                            <input class="checkboxes" onchange="checkboxChange()" type="checkbox" country="Russia">Russia</input>
+                        </div>
+                        <div>
+                            <input class="checkboxes" onchange="checkboxChange()" type="checkbox" country="SriLanka">Sri Lanka</input>
+                        </div>
+                        <div>
+                            <input class="checkboxes" onchange="checkboxChange()" type="checkbox" country="Vietnam">Vietnam</input>
+                        </div>
+                    </div>
+                    <h3>Australia and Oceania</h3>
+                    <div>
+                        <div>
+                            <input class="checkboxes" onchange="checkboxChange()" type="checkbox" country="PapuaNewGuinea">Papua New Guinea</input>
+                        </div>
+                    </div>
+                    <h3>Europe</h3>
+                    <div>
+                        <div>
+                            <input class="checkboxes" onchange="checkboxChange()" type="checkbox" country="Albania">Albania</input>
+                        </div>
+                        <div>
+                            <input class="checkboxes" onchange="checkboxChange()" type="checkbox" country="Georgia">Georgia</input>
+                        </div>
+                    </div>
+                    <h3>North America</h3>
+                    <div>
+                        <div>
+                            <input class="checkboxes" onchange="checkboxChange()" type="checkbox" country="Haiti">Haiti</input>
+                        </div>
+                        <div>
+                            <input class="checkboxes" onchange="checkboxChange()" type="checkbox" country="Honduras">Honduras</input>
+                        </div>
+                        <div>
+                            <input class="checkboxes" onchange="checkboxChange()" type="checkbox" country="Mexico">Mexico</input>
+                        </div>
+                        <div>
+                            <input class="checkboxes" onchange="checkboxChange()" type="checkbox" country="Panama">Panama</input>
+                        </div>
+                    </div>
+                    <h3>South America</h3>
+                    <div>
+                        <div>
+                            <input class="checkboxes" onchange="checkboxChange()" type="checkbox" country="Brazil">Brazil</input>
+                        </div>
+                        <div>
+                            <input class="checkboxes" onchange="checkboxChange()" type="checkbox" country="Bolivia">Bolivia</input>
+                        </div>
+                        <div>
+                            <input class="checkboxes" onchange="checkboxChange()" type="checkbox" country="Colombia">Colombia</input>
+                        </div>
+                        <div>
+                            <input class="checkboxes" onchange="checkboxChange()" type="checkbox" country="Ecuador">Ecuador</input>
+                        </div>
+                        <div>
+                            <input class="checkboxes" onchange="checkboxChange()" type="checkbox" country="Peru">Peru</input>
+                        </div>
+                        <div>
+                            <input class="checkboxes" onchange="checkboxChange()" type="checkbox" country="Venezuela">Venezuela</input>
+                        </div>
+                    </div>
+                </div>
+                <span class="key-label">Circle Radius Variable</span>
+                <div class="circleLegenddropdown">
+                    <select id="dropdownR" onchange="changeRadius(this.value)"></select>
+                </div>
                 <svg id="circleLegendGraph" height="100" width="100%"></svg>
             </div>
         </div>
