@@ -5,39 +5,58 @@ $(() => {
     });
 });
 
-function shadeColor(color, percent) {   
-    var f=parseInt(color.slice(1),16),t=percent<0?0:255,p=percent<0?percent*-1:percent,R=f>>16,G=f>>8&0x00FF,B=f&0x0000FF;
-    return "#"+(0x1000000+(Math.round((t-R)*p)+R)*0x10000+(Math.round((t-G)*p)+G)*0x100+(Math.round((t-B)*p)+B)).toString(16).slice(1);
+function shadeColor(color, percent) {
+    var f = parseInt(color.slice(1), 16),
+        t = percent < 0 ? 0 : 255,
+        p = percent < 0 ? percent * -1 : percent,
+        R = f >> 16,
+        G = f >> 8 & 0x00FF,
+        B = f & 0x0000FF;
+    return "#" + (0x1000000 + (Math.round((t - R) * p) + R) * 0x10000 + (Math.round((t - G) * p) + G) * 0x100 + (Math.round((t - B) * p) + B)).toString(16).slice(1);
 };
 
-$("#dropdownY").selectmenu(
-{
-    change: function( event, ui ) {
+
+$("#playbtn").button();
+
+$("#dropdownY").selectmenu({
+    change: function(event, ui) {
         changeYScale(this.value)
-}}).addClass( "overflow" );
+    }
+}).addClass("overflow");
 
 $("#dropdownX").selectmenu({
-    change: function( event, ui ) {
+    change: function(event, ui) {
         changeXScale(this.value)
 
-}});
+    }
+});
 $("#dropdownR").selectmenu({
-    change: function( event, ui ) {
+    change: function(event, ui) {
         changeRadius(this.value)
-}});
+    }
+});
 
 
 
-$( "#slider" ).slider({
-      min: 1995,
-      max: 2015,
-      slide: function( event, ui ) {
-        $( "#year-output" ).text( ui.value );
-},
-      change: function( event, ui ) {
- yearChange(ui.value)
+$("#slider").slider({
+    min: 1995,
+    max: 2015,
+    create: function(event, ui) {
 
-      }
+    },
+    slide: function(event, ui) {
+        $(".year.label").text(ui.value);
+        pause(ui.value);
+        var tooltip = '<div class="date-tooltip">' + ui.value + '</div>';
+        $('.ui-slider-handle').html(tooltip); //attach tooltip to the slider handle
+    },
+    change: function(event, ui) {
+        yearChange(ui.value);
+        $('.ui-slider-handle').html(); //attach tooltip to the slider handle
+    },
+    stop: function(event, ui) {
+        $('.ui-slider-handle').html('<div class="date-tooltip"></div>');
+    }
 });
 
 
@@ -59,6 +78,10 @@ const wbScale = {
 };
 
 var noColor = '#d3d3d3';
+var marginTop = 19.5;
+var marginRight = 19.5;
+var marginBottom = 70;
+var marginLeft = 100;
 
 let countryList = new Set();
 let label;
@@ -93,35 +116,44 @@ const q = d3.csv('data/GDF_iLab.csv', (result) => {
     for (let i = 0; i < categories.length; i++) {
         if (categories[i] != 'Country' && categories[i] != 'Year') {
             if (categories[i] == 'Perceived Rule Of Law') { // hard coded
-                d3.select('#dropdownX').append('option').html(categories[i]).attr('selected', 'selected');
+                d3.select('#dropdownX').append('option').html(categories[i]);
+
             } else {
                 d3.select('#dropdownX').append('option').html(categories[i]);
             }
+
         }
     }
+
+    $('#dropdownX').val('Perceived Rule Of Law');
+    $('#dropdownX').selectmenu("refresh");
 
     for (let i = 0; i < categories.length; i++) {
         if (categories[i] != 'Country' && categories[i] != 'Year') {
             if (categories[i] == 'Regulatory Quality') { // hard coded
                 d3.select('#dropdownY').append('option').html(categories[i]).attr('selected', 'selected');
-                
+
             } else {
                 d3.select('#dropdownY').append('option').html(categories[i]);
             }
 
         }
     }
+    $('#dropdownY').val('Regulatory Quality');
+    $('#dropdownY').selectmenu("refresh");
 
     for (let i = 0; i < categories.length; i++) {
         if (categories[i] != 'Country' && categories[i] != 'Year') {
             if (categories[i] == 'GNI per Capita, PPP(ci$)') { // hard coded
                 d3.select('#dropdownR').append('option').html(categories[i]).attr('selected', 'selected');
-                
+
             } else {
                 d3.select('#dropdownR').append('option').html(categories[i]);
             }
         }
     }
+    $('#dropdownR').val('GNI per Capita, PPP(ci$)');
+    $('#dropdownR').selectmenu("refresh");
 
     const defaultoptions = document.getElementsByClassName('defaultoption');
     for (let i = 0; i < defaultoptions.length; i++) {
@@ -320,10 +352,10 @@ function makeChart() {
     d3.select('#tooltips').remove();
 
     const margin = {
-        top: 19.5,
-        right: 19.5,
-        bottom: 70,
-        left: 100,
+        top: marginTop,
+        right: marginRight,
+        bottom: marginBottom,
+        left: marginLeft,
     };
     width = document.getElementById('graph').clientWidth - margin.right;
     height = 500 - margin.top - margin.bottom;
@@ -335,7 +367,9 @@ function makeChart() {
     radiusScale = d3.scaleSqrt().domain(getDomain(currentRadius)).range([2, 40]);
 
     xAxis = d3.axisBottom(xScale).ticks(12, d3.format(',d')).tickSizeOuter(0);
-    yAxis = d3.axisLeft(yScale).tickSizeOuter(0);
+    yAxis = d3.axisLeft(yScale).tickSizeOuter(0).tickSizeInner(-width);
+
+
 
     const tooltips = d3.select('#graph').append('div').attr('id', 'tooltips');
 
@@ -379,6 +413,8 @@ function makeChart() {
 
 
 
+
+
     d3.selectAll('.point').select(function(d) {
         const boundingClientRect = this.getBoundingClientRect();
         const theTooltip = d3.select('#tooltips')
@@ -397,7 +433,7 @@ function makeChart() {
         theTooltip.append('div')
             .attr('class', 'tooltipdetail')
             .attr('id', `${d[0].Country.replace(/ /g, '')}tooltipX`)
-            .text(`${currentX}: ${isEmpty(d, currentX, currentYear) ? 'No Data' : getData(d, currentX, currentYear)}`);
+            .html(`${currentX}: ${isEmpty(d, currentX, currentYear) ? '<span class="no-data">No Data</span>' : getData(d, currentX, currentYear)}`);
 
         theTooltip.append('div')
             .attr('class', 'tooltipdetail')
@@ -417,10 +453,13 @@ function makeChart() {
     labelRoot.append('g')
         .attr('id', 'xAxis')
         .attr('transform', `translate(0,${height})`)
+
         .call(xAxis);
 
     labelRoot.append('g')
         .attr('id', 'yAxis')
+        .attr('class', 'gridtick')
+
         .call(yAxis);
 
     // Add an x-axis label.
@@ -445,23 +484,167 @@ function makeChart() {
     label = svgRoot.append('text')
         .attr('class', 'year label')
         .attr('text-anchor', 'end')
-        .attr('y', height - 24)
+        .attr('y', height - 30)
         .attr('x', width)
         .text(minYear);
 
+
+svgRoot.append('text')
+    .attr('id', '#circleLegendLabel')
+
+            .attr('text-anchor', 'end')
+        .attr('y', height - 10)
+        .attr('x', width)
+    .text(currentRadius);
+
+
+
+
+           labelRoot.append('rect')
+        .attr('id', 'y-container')
+        .style('fill', 'white')
+        .style('opacity', '.8')
+        .style('display', 'none')
+
+                   labelRoot.append('rect')
+        .attr('id', 'x-container')
+        .style('fill', 'white')
+        .style('opacity', '.8')
+        .style('display', 'none')
+
+
+
+
+   labelRoot.append('text')
+        .attr('id', 'y-data')
+        .style('font-size', '125%')
+        .style('display', 'none');
+
+   labelRoot.append('text')
+        .attr('id', 'x-data')
+        .style('font-size', '125%')
+
+        .style('display', 'none');
+
     reorder();
+
+        labelRoot.append('line')
+        .attr('id', 'hover-line-x')
+        .attr('x1', 0)
+        .attr('x2', 0)
+        .attr('y1', 0)
+        .attr('y2', 0)
+        .style('stroke', 'black')
+        .style('display', 'none');
+
+    labelRoot.append('line')
+        .attr('id', 'hover-line-y')
+        .attr('x1', 0)
+        .attr('x2', 0)
+        .attr('y1', 0)
+        .attr('y2', 0)
+        .style('stroke', 'black')
+        .style('display', 'none');
+
 }
+
+
 
 function attachListeners() {
     /* Attach hover events to the circles. Different behavior is attached
     depending on whether or not the checkbox is selected */
     d3.selectAll('.checkboxes').select(function() {
-        
+
         if (this.checked) {
             var strokeColor = d3.select(`#${this.getAttribute('country')}`).style('stroke');
+
+
             //console.log(strokeColor);
             d3.select(`#${this.getAttribute('country')}`)
+
+
+                .on('mouseover', function(d) {
+                    const boundingClient = document.getElementById('points').getBoundingClientRect();
+
+                    var abc2 = d3.select(this).attr('cx');
+                    var xyz = d3.select(this).attr('cy');
+                    var abc = abc2 + marginLeft;
+
+                 
+                    d3.select('#hover-line-x')
+                        .attr('x1', abc)
+                        .attr('x2', 0)
+                        .attr('y1', xyz)
+                        .attr('y2', xyz)
+                        .style("stroke-dasharray", ("4, 4"))
+                        .style('display', 'block');
+
+
+                    d3.select('#hover-line-y')
+
+                        .attr('x1', abc)
+                        .attr('x2', abc)
+                        .attr('y1', xyz)
+                        .attr('y2', height)
+                        .style("stroke-dasharray", ("4, 4"))
+                        .style('display', 'block')
+
+
+
+                    d3.select('#x-data')
+                        .attr("x", abc)
+                        .attr('class', 'data-hover')
+                        .attr("y", height + 25)
+                        .style('display', 'block')
+                        .attr('text-anchor', 'middle')
+                        .text(`${isEmpty(d, currentX, currentYear) ? 'No Data' : getData(d, currentX, currentYear)}`);
+                    
+if (isEmpty(d, currentY, currentYear) == true) {
+    console.log('empty')
+}
+
+
+                    d3.select('#y-data')
+                        .attr("x", 0 - 10)
+                        .attr('class', 'data-hover')
+                        .attr("y", xyz)
+                        .style('display', 'block')
+                        .attr('text-anchor', 'end')
+                        .text(`${isEmpty(d, currentY, currentYear) ? 'No Data' : getData(d, currentY, currentYear)}`);
+
+
+                    var widthy = d3.select('#y-data').node().getBBox().width;
+                    var heighty = d3.select('#y-data').node().getBBox().height;
+                    var xy = d3.select('#y-data').node().getBBox().x;
+                    var yy = d3.select('#y-data').node().getBBox().y;
+
+      d3.select('#y-container')
+         .style('display', 'block')
+         .attr("x", xy - 5)
+         .attr("y", yy)
+         .attr("height", heighty + 5)
+         .attr("width", widthy + 10);
+
+                          var widthx = d3.select('#x-data').node().getBBox().width;
+                          var heightx = d3.select('#x-data').node().getBBox().height;
+                     var xx = d3.select('#x-data').node().getBBox().x;
+                    var xy = d3.select('#x-data').node().getBBox().y;
+
+      d3.select('#x-container')
+         .style('display', 'block')
+         .attr("x", xx - 5)
+         .attr("y", xy )
+         .attr("height", heightx + 5)
+         .attr("width", widthx + 10);
+
+
+
+                })
+
+
+
                 .on('mouseenter', function(d) {
+
                     d3.select(`#legend${d[4].Country}`).style('border', '2px solid #E8336D');
                     d3.select(this).style('stroke', '#E8336D');
                     d3.select(this).style('stroke-width', '3px');
@@ -496,6 +679,24 @@ function attachListeners() {
                     d3.select('#tempLabel').remove();
                     d3.selectAll('.circleLabel')
                         .style('opacity', 1);
+
+
+                    d3.select('#hover-line-x')
+                        .style('display', 'none');
+                    d3.select('#hover-line-y')
+                        .style('display', 'none');
+
+                    d3.select('#x-data')
+                        .style('display', 'none')
+
+                    d3.select('#y-data')
+                        .style('display', 'none');
+
+                    d3.select('#x-container')
+                    .style('display', 'none');
+
+                    d3.select('#y-container')
+                    .style('display', 'none');
                 });
         } else {
             var strokeColor = d3.select(`#${this.getAttribute('country')}`).style('stroke');
@@ -535,6 +736,8 @@ function attachListeners() {
                         .attr('id', 'tempLabel')
                         .text(tempRadLabel);
 
+                    //alert(tempRadLabel);
+
                     d3.selectAll('.circleLabel')
                         .style('opacity', 0.3);
                 })
@@ -562,7 +765,7 @@ function attachListeners() {
 
 function yearChange(year) {
     update(parseInt(year), false);
-console.log(year);
+    //console.log(year);
 }
 
 function update(year, playButton) {
@@ -576,11 +779,18 @@ function update(year, playButton) {
             if (year < maxYear && playButton) {
                 attachListeners();
                 var newdate = year + 1;
-                $( "#slider" ).slider( "option", "value", newdate );
+                $("#slider").slider("option", "value", newdate);
                 update(year + 1, playButton);
                 $('#year-output').html(year + 1);
-            } else {
+            } else if (year == maxYear && playButton) {
+
+                pause(year);
                 reorder();
+
+            } else {
+
+                reorder();
+
 
             }
         });
@@ -623,6 +833,8 @@ function update(year, playButton) {
 
         });
 
+
+
     d3.selectAll('.point')
         .transition(t)
         .attr('cx', d => xScale(getData(d, currentX, year)))
@@ -648,32 +860,45 @@ function update(year, playButton) {
 }
 
 
+function playpause() {
+    var updated = parseInt($(".year.label").text());
+    $playBtn = $('#playbtn');
 
-function play() {
-
-    var $playBtn = $('#playbtn');
-    $playBtn.toggleClass('active');
     if ($playBtn.hasClass('active')) {
-        //console.log("playbutton activated");
-        $playBtn.html('<span class="ui-icon ui-icon-pause"></span>');
-        // if the play button is triggered when current year is 2015, wrap around to 1995
-        if (parseInt(updated) == maxYear) {
-            update(minYear, true);
-            $('#year-output').html(minYear);
-        } else {
-            // else call update on the next year
-            var updated = $( "#year-output" ).text();
+        pause(updated);
 
-            update(parseInt(updated), true);
 
-        }
     } else {
-        var updated = $( "#year-output" ).text();
-        $playBtn.html('<span class="ui-icon ui-icon-play"></span>');
-        update(parseInt(updated), false);
-        $('#year-output').html(parseInt(updated));
+        play(updated);
+
+
 
     }
+
+}
+
+
+function play(year) {
+
+    $playBtn = $('#playbtn');
+
+    $playBtn.addClass('active');
+    $playBtn.html('<span class="pause-icon"></span>PAUSE');
+    update(year, true);
+    $(".year.label").text(year);
+
+    if (year == maxYear) {
+        //console.log("start over");
+        play(minYear);
+    }
+
+}
+
+function pause(year) {
+    $playBtn = $('#playbtn');
+    $playBtn.removeClass('active');
+    $playBtn.html('<span class="play-icon"></span>PLAY');
+    update(year, false);
 
 }
 

@@ -32,6 +32,10 @@ h1 {
     clear: both;
 }
 
+
+
+
+
 .sliderdiv {
     width: 100%;
     min-width: 350px;
@@ -40,12 +44,22 @@ h1 {
     display: block;
     text-align: center;
 
-    #slideBlock {}
+    .date-tooltip {
+        position: absolute;
+        display: block;
+        top: -1.5em;
+        width: 50px;
+        left: calc(-25px + .5em);
+        text-align: center;
+        color: $button;
+        font-size: 90%;
+    }
 
     #slideBlock {
-        width: 90%;
+        width: calc(85% - 20px);
         display: block;
         float: left;
+        padding: 10px;
     }
 
     #slider {
@@ -53,28 +67,74 @@ h1 {
         display: block;
         position: relative;
         float: left;
-        height: 20px;
+        height: 3px;
+        background-color: black;
+        border: transparent;
     }
     #dates {
-        width: 80%;
-        div {
-            width: 33.3333%;
-            display: inline-block;
-            float: left;
+        width: 100%;
+        margin-top: 10px;
+.yearDiv {
+     width: 33.3333%;
+     float: left;
+     color: gray;
 
-            &:first-of-type {
-                text-align: left;
-            }
-            &:last-of-type {
-                text-align: right;
-            }
-        }
+     &.yearR div, &.yearL div {
+        width: 50%;
+        float: left;
+
+
+     }
+
+     &.yearL .endcap {
+        text-align: left;
+     }
+     &.yearR .endcap {
+        text-align: right;
+     }
+}
     }
 
     .btnblock {
-        width: 10%;
+        width: calc(15% - 10px);
         display: block;
         float: left;
+        margin-right: 10px;
+        button {
+     
+        }
+       
+        .play-icon {
+            display: inline-block;
+            width: 0;
+            height: 0;
+            border-top: .4em solid transparent;
+            border-left: .6em solid $button;
+            border-bottom: .4em solid transparent;
+            margin-right: 5px;
+        }
+        #playbtn {
+            width: 100%;
+            display: block;
+
+         
+            margin: 0 auto;
+            float: left;
+
+
+            &.active {
+                 background: $accent;
+                 color: white;
+                  .pause-icon {
+            display: inline-block;
+            width: .3em;
+            height: .8em; //border-top: .4em solid transparent;
+            border-left: .2em solid white;
+            border-right: .2em solid white;
+            margin-right: 5px;
+        }
+            }
+        }
     }
 
     #year-output {
@@ -83,14 +143,24 @@ h1 {
         color: $accent;
     }
 
-    #playbtn {
-        display: block;
+
+
+
+
+    .ui-slider-horizontal .ui-slider-handle {
+        top: -.4em;
+        height: 1em;
+        width: 1em;
+        border: transparent;
+    }
+    .ui-slider {
+        height: 3px;
+        border-radius: 0;
+    }
+    .ui-state-default,
+    .ui-widget-content .ui-state-default {
         background: $accent;
-        width: 30px;
-        height: 30px;
         border-radius: 50%;
-        font-size: 90%;
-        margin: 0 auto;
     }
     label {
         font-family: 'Source Sans Pro', sans-serif;
@@ -101,11 +171,15 @@ h1 {
 }
 
 
+
+
 /*Graph*/
 
 #graph {
-    width: 65%;
+    width: calc(65%);
     margin-right: 10%;
+    display: block;
+    float: left;
 
     #tooltips {
         .tooltipdetail {
@@ -113,7 +187,7 @@ h1 {
         }
 
         .tooltip {
-            padding: 10px;
+            padding: 10px 10px 12px;
             border: 1px solid gray;
             border-radius: 3px;
             background: rgba(255, 255, 255, .9);
@@ -122,8 +196,18 @@ h1 {
         }
 
         .tooltipcaption {
+
             font-size: 16px;
             font-weight: 700;
+        }
+
+        .tooltipdetail {
+            padding-top: 10px;
+            font-size: 14px;
+            line-height: .7;
+            span {
+                font-weight: 700;
+            }
         }
     }
 
@@ -139,10 +223,17 @@ h1 {
 
         .axis path,
         .axis line {
-            fill: none;
+            fill: black;
             stroke: #000;
             shape-rendering: crispEdges;
         }
+        .gridtick line {
+
+            stroke: $dkgray;
+        }
+
+
+
 
         .label {
             fill: #777;
@@ -171,6 +262,8 @@ h1 {
 
 
 
+
+
 /*Container Right*/
 
 #containerTopRight {
@@ -178,15 +271,27 @@ h1 {
 
     span.key-label {
         display: block;
-        padding: 15px 0px 5px;
-        font-weight: bold;
+        padding: 20px 0px 3px;
+        font-size: 1.1em;
+        font-weight: normal;
+        border-bottom: 2px solid $button;
+        margin-bottom: 5px;
+        color: $button;
     }
 
     .colorLegendElement {
         font-family: 'Source Sans Pro', sans-serif;
         display: inline-block;
         text-align: center;
+
+        &.nodata {
+            margin-left: 10px;
+        }
+
+
     }
+
+
 
     .colorLegendSquare {
         width: 15px;
@@ -205,28 +310,25 @@ h1 {
 }
 
 
+.data-hover {
 
-.sliderdiv {
-    width: 70%;
-    min-width: 350px;
-    margin: 15px auto;
-    clear: both;
+    fill: $accent;
     display: block;
+    background-color: blue;
+}
 
-    #slider {
-        width: 80%;
-        display: block;
-        float: left;
-    }
+#y-container{
+    //stroke: blue;
+    //stroke-width:5px;
+}
 
-    .playbtn {
-        display: block;
-        float: left;
-    }
+.grid .tick {
+    stroke: lightgrey;
+    opacity: 0.7;
+}
 
-    #sliderhide {
-        display: hidden;
-    }
+.grid path {
+    stroke-width: 0;
 }
 
 
@@ -238,50 +340,53 @@ h1 {
 }
 
 
+
+
 /*Container Bottom*/
 
 #containerBottom {
     width: 65%;
     padding-left: 100px;
+}
 
 
+.ui-corner-all {
+    border-radius: 0;
+}
 
-    .ui-corner-all {
-        border-radius: 0;
+.dropdowndiv {
+    clear: both;
+    display: block;
+    width: 100%;
+    margin-top: 25px;
+    border: 1px solid transparent;
+    position: relative;
+
+    label {
+        font-family: 'Source Sans Pro', sans-serif;
+        padding-bottom: 10px;
+        color: gray;
     }
-    .dropdowndiv {
-        clear: both;
-        display: block;
+
+    select,
+    select span {
+        font-size: 16px;
         width: 100%;
-        margin-top: 25px;
-        border: 1px solid transparent;
+    }
+
+
+
+    .dropdownpair {
         position: relative;
+        width: calc(33.3333% - 20px);
+        display: block;
+        float: left;
+        margin: 0 auto;
 
-        label {
-            font-family: 'Source Sans Pro', sans-serif;
-            padding-bottom: 10px;
-            color: gray;
-        }
-
-        select,
-        select span {
-            font-size: 16px;
-            width: 100%;
-        }
-
-
-
-        .dropdownpair {
-            position: relative;
-            width: calc(33.3333% - 20px);
-            display: block;
-            float: left;
-            margin: 0 auto;
-
-            padding: 10px;
-        }
+        padding: 10px;
     }
 }
+
 
 
 .ui-selectmenu-menu .ui-menu {
@@ -291,6 +396,15 @@ h1 {
 .ui-selectmenu-button.ui-button {
     width: 85%;
 }
+
+
+.no-data {
+    
+    color: gray;
+    font-weight: normal;
+}
+
+
 
 @media (min-width:0px) and (max-width:515px) {
     #graph,
@@ -305,5 +419,8 @@ h1 {
     }
     #containerBottom {
         order: 2; // width: 100%;
+    }
+    .dropdownpair {
+        width: 100%;
     }
 }
