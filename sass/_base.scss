@@ -56,7 +56,7 @@ h1 {
     }
 
     #slideBlock {
-        width: calc(85% - 20px);
+        width: calc(100% - 90px);
         display: block;
         float: left;
         padding: 10px;
@@ -71,110 +71,166 @@ h1 {
         background-color: black;
         border: transparent;
     }
+
+    .ui-slider-handle.ui-corner-all.ui-state-default {
+        background-color: $accent;
+        border-color: $accent;
+        border-radius: 50%;
+    }
     #dates {
         width: 100%;
         margin-top: 10px;
-.yearDiv {
-     width: 33.3333%;
-     float: left;
-     color: gray;
-
-     &.yearR div, &.yearL div {
-        width: 50%;
-        float: left;
-
-
-     }
-
-     &.yearL .endcap {
-        text-align: left;
-     }
-     &.yearR .endcap {
-        text-align: right;
-     }
-}
-    }
-
-    .btnblock {
-        width: calc(15% - 10px);
-        display: block;
-        float: left;
-        margin-right: 10px;
-        button {
-     
-        }
-       
-        .play-icon {
-            display: inline-block;
-            width: 0;
-            height: 0;
-            border-top: .4em solid transparent;
-            border-left: .6em solid $button;
-            border-bottom: .4em solid transparent;
-            margin-right: 5px;
-        }
-        #playbtn {
-            width: 100%;
-            display: block;
-
-         
-            margin: 0 auto;
+        .yearDiv {
+            width: 33.3333%;
             float: left;
+            color: gray;
+            position: relative;
 
+            div {
+                &:before {
+                    content: "";
+                    display: block;
+                    height: 20px;
+                    width: 2px;
+                    background-color: $dkgray;
+                    position: absolute;
+                    top: -20px;
+                    left: 50%;
+                }
+            }
 
-            &.active {
-                 background: $accent;
-                 color: white;
-                  .pause-icon {
-            display: inline-block;
-            width: .3em;
-            height: .8em; //border-top: .4em solid transparent;
-            border-left: .2em solid white;
-            border-right: .2em solid white;
-            margin-right: 5px;
-        }
+            &.yearR div,
+            &.yearL div {
+                width: 50%;
+                float: left;
+                position: relative;
+            }
+
+            &.yearL .endcap {
+                text-align: left;
+
+                &:before {
+                    left: 0%;
+                }
+            }
+            &.yearR .endcap {
+                text-align: right;
+
+                &:before {
+                    left: 100%;
+                }
             }
         }
     }
 
-    #year-output {
-        text-align: center;
-        font-size: 20px;
-        color: $accent;
-    }
-
-
-
-
-
-    .ui-slider-horizontal .ui-slider-handle {
-        top: -.4em;
-        height: 1em;
-        width: 1em;
-        border: transparent;
-    }
-    .ui-slider {
-        height: 3px;
-        border-radius: 0;
-    }
-    .ui-state-default,
-    .ui-widget-content .ui-state-default {
-        background: $accent;
-        border-radius: 50%;
-    }
-    label {
-        font-family: 'Source Sans Pro', sans-serif;
-
-        color: gray;
+    .btnblock {
         display: block;
+        margin-right: 20px;
+        float: left;
     }
+
+    .play-icon {
+        display: inline-block;
+        width: 0;
+        height: 0;
+        border-top: .4em solid transparent;
+        border-left: .6em solid $button;
+        border-bottom: .4em solid transparent;
+        margin: 0 auto;
+        margin: 5px;
+    }
+    #playbtn {
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+        display: block;
+        margin: 0 auto;
+        float: left;
+        background-color: $ltgray;
+        border: 1px solid $dkgray;
+        padding: 10px;
+
+
+        &.active {
+            background: $accent;
+            color: white;
+            .pause-icon {
+                display: inline-block;
+                width: .3em;
+                height: .8em; //border-top: .4em solid transparent;
+                border-left: .2em solid white;
+                border-right: .2em solid white;
+                margin: 5px;
+            }
+        }
+    }
+}
+
+#year-output {
+    text-align: center;
+    font-size: 20px;
+    color: $accent;
+}
+
+
+
+
+
+.ui-slider-horizontal .ui-slider-handle {
+    top: -.4em;
+    height: 1em;
+    width: 1em;
+    border: transparent;
+}
+
+.ui-slider {
+    height: 3px;
+    border-radius: 0;
+}
+
+//.ui-state-default,
+//.ui-widget-content .ui-state-default {
+//    background: $accent;
+//    border-radius: 50%;
+//
+label {
+    font-family: 'Source Sans Pro', sans-serif;
+    color: gray;
+    display: block;
+}
+
+
+
+
+
+#dropdownR-button,
+#dropdownX-button,
+#dropdownY-button {
+    padding-left: 0px;
+    padding-right: 0px;
+    width: 100%;
+    background: transparent;
+    border: 0px solid transparent;
+}
+
+.dropdownR,
+.dropdownX,
+.dropdownY {
+    font-size: 10px;
+    display: block;
+    float: right;
+    line-height: 1.5em;
+    color: $accent;
+}
+
+#dropdownR-button .ui-selectmenu-text {
+    margin-right: 40px;
 }
 
 
 
 
 /*Graph*/
-
 #graph {
     width: calc(65%);
     margin-right: 10%;
@@ -187,8 +243,8 @@ h1 {
         }
 
         .tooltip {
-            padding: 10px 10px 12px;
-            border: 1px solid gray;
+            padding: 10px 12px 12px;
+            border: 1px solid $dkgray;
             border-radius: 3px;
             background: rgba(255, 255, 255, .9);
             display: none;
@@ -205,8 +261,9 @@ h1 {
             padding-top: 10px;
             font-size: 14px;
             line-height: .7;
-            span {
-                font-weight: 700;
+            span.no-data {
+                font-weight: normal;
+                font-style: italic;
             }
         }
     }
@@ -218,7 +275,9 @@ h1 {
     #theGraph {
         #xLabel,
         #yLabel {
-            font-size: 18px;
+            font-size: 16px;
+            text-transform: uppercase;
+            font-weight: bold;
         }
 
         .axis path,
@@ -264,40 +323,14 @@ h1 {
 
 
 
-/*Container Right*/
 
+
+
+/*Container Right*/
 #containerTopRight {
     width: 20%;
 
-    span.key-label {
-        display: block;
-        padding: 20px 0px 3px;
-        font-size: 1.1em;
-        font-weight: normal;
-        border-bottom: 2px solid $button;
-        margin-bottom: 5px;
-        color: $button;
-    }
-
-    .colorLegendElement {
-        font-family: 'Source Sans Pro', sans-serif;
-        display: inline-block;
-        text-align: center;
-
-        &.nodata {
-            margin-left: 10px;
-        }
-
-
-    }
-
-
-
-    .colorLegendSquare {
-        width: 15px;
-        height: 15px;
-        box-sizing: border-box;
-    }
+    margin-top: 50px;
 
     .ui-accordion .ui-accordion-header {
         padding: 2%;
@@ -310,6 +343,42 @@ h1 {
 }
 
 
+
+.colorLegendElement {
+    font-family: 'Source Sans Pro', sans-serif;
+    display: inline-block;
+    text-align: center;
+
+    &.nodata {
+        margin-left: 10px;
+    }
+}
+
+.dropdownpair {
+    margin-bottom: 20px;
+    border-bottom: 1px solid $dkgray;
+}
+
+.key-label {
+    text-transform: uppercase;
+    color: gray;
+    font-size: 14px; //padding: 5px 0px;
+}
+
+.colorLegendSquare {
+    width: 15px;
+    height: 15px;
+    box-sizing: border-box;
+}
+
+#circleLegend {
+    margin-top: 30px;
+
+    #accordion{
+         margin-top: 5px;
+    }
+}
+
 .data-hover {
 
     fill: $accent;
@@ -317,7 +386,7 @@ h1 {
     background-color: blue;
 }
 
-#y-container{
+#y-container {
     //stroke: blue;
     //stroke-width:5px;
 }
@@ -333,8 +402,10 @@ h1 {
 
 
 
-/*Container Top*/
 
+
+
+/*Container Top*/
 #containerTop {
     margin-left: 100px;
 }
@@ -342,8 +413,10 @@ h1 {
 
 
 
-/*Container Bottom*/
 
+
+
+/*Container Bottom*/
 #containerBottom {
     width: 65%;
     padding-left: 100px;
@@ -362,32 +435,21 @@ h1 {
     border: 1px solid transparent;
     position: relative;
 
-    label {
-        font-family: 'Source Sans Pro', sans-serif;
-        padding-bottom: 10px;
-        color: gray;
-    }
-
     select,
     select span {
         font-size: 16px;
         width: 100%;
     }
-
-
-
-    .dropdownpair {
-        position: relative;
-        width: calc(33.3333% - 20px);
-        display: block;
-        float: left;
-        margin: 0 auto;
-
-        padding: 10px;
-    }
 }
 
+.ui-accordion .ui-accordion-content {
+    padding: 1em 1em;
+}
 
+.ui-state-active {
+    background: $accent;
+    border: $accent;
+}
 
 .ui-selectmenu-menu .ui-menu {
     height: 300px;
@@ -399,7 +461,7 @@ h1 {
 
 
 .no-data {
-    
+
     color: gray;
     font-weight: normal;
 }
@@ -412,15 +474,14 @@ h1 {
         width: 95%;
         margin-right: 0%;
     }
+
     #containerTopRight {
         order: 3;
         width: 100%;
         height: 20%;
     }
+
     #containerBottom {
         order: 2; // width: 100%;
-    }
-    .dropdownpair {
-        width: 100%;
     }
 }

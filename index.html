@@ -14,14 +14,23 @@
     <div id="graphicContainer">
         <div id="containerTop">
             <h1>GapMinder Data</h1>
-            <div class="dropdowndiv">
-                <div class="dropdownpair">
-                    <label for="dropdownX" id="dropdownXLabel">X-Axis Variable</label>
-                    <select id="dropdownX" onchange="changeXScale(this.value)"></select>
-                </div>
-                <div class="dropdownpair">
-                    <label for="dropdownY" id="dropdownYLabel">Y-Axis Variable</label>
-                    <select id="dropdownY" onchange="changeYScale(this.value)"></select>
+                        <div id="colorLegend">
+                <span class="key-label">World Bank Classification Codes</span>
+                <div id="colorLegendElements">
+                    <div class="colorLegendElement">
+                        <div class="colorLegendSquare" id="legend1" style="background: #deebf7;"></div>1</div>
+                    <div class="colorLegendElement">
+                        <div class="colorLegendSquare" id="legend2" style="background: #c6dbef;"></div>2</div>
+                    <div class="colorLegendElement">
+                        <div class="colorLegendSquare" id="legend3" style="background: #9ecae1;"></div>3</div>
+                    <div class="colorLegendElement">
+                        <div class="colorLegendSquare" id="legend4" style="background: #6baed6;"></div>4</div>
+                    <div class="colorLegendElement">
+                        <div class="colorLegendSquare" id="legend5" style="background: #3182bd;"></div>5</div>
+                    <div class="colorLegendElement">
+                        <div class="colorLegendSquare" id="legend6" style="background: #08519c;"></div>6</div>
+                    <div class="colorLegendElement nodata">
+                        <div class="colorLegendSquare" id="nodatasquare" style="background: rgb(211, 211, 211);"></div>No Data</div>
                 </div>
             </div>
         </div>
@@ -30,7 +39,7 @@
         <div id="containerBottom">
             <div class="sliderdiv">
                <div class="btnblock">
-                    <button id="playbtn" class="play ui-button ui-corner-all" onClick="playpause()"><span class="play-icon"></span>PLAY</button>
+                    <div id="playbtn" class="play" onClick="playpause()"><span class="play-icon"></span></div>
                 </div>
                 <div id="slideBlock">
                     <div id="slider"></div>
@@ -53,27 +62,24 @@
             </div>
         </div>
         <div id="containerTopRight">
-            <div id="colorLegend">
-                <span class="key-label">World Bank Classification Codes</span>
-                <div id="colorLegendElements">
-                    <div class="colorLegendElement">
-                        <div class="colorLegendSquare" id="legend1" style="background: #deebf7;"></div>1</div>
-                    <div class="colorLegendElement">
-                        <div class="colorLegendSquare" id="legend2" style="background: #c6dbef;"></div>2</div>
-                    <div class="colorLegendElement">
-                        <div class="colorLegendSquare" id="legend3" style="background: #9ecae1;"></div>3</div>
-                    <div class="colorLegendElement">
-                        <div class="colorLegendSquare" id="legend4" style="background: #6baed6;"></div>4</div>
-                    <div class="colorLegendElement">
-                        <div class="colorLegendSquare" id="legend5" style="background: #3182bd;"></div>5</div>
-                    <div class="colorLegendElement">
-                        <div class="colorLegendSquare" id="legend6" style="background: #08519c;"></div>6</div>
-                    <div class="colorLegendElement nodata">
-                        <div class="colorLegendSquare" id="nodatasquare" style="background: rgb(211, 211, 211);"></div>No Data</div>
+
+                <div class="dropdownpair">
+                    <label for="dropdownX" id="dropdownXLabel" class="key-label">X-Axis Variable</label>
+                    <select id="dropdownX" onchange="changeXScale(this.value)"></select>
                 </div>
-            </div>
+                <div class="dropdownpair">
+                    <label for="dropdownY" id="dropdownYLabel" class="key-label">Y-Axis Variable</label>
+                    <select id="dropdownY" onchange="changeYScale(this.value)"></select>
+                </div>
+
+                <span class="key-label">Circle Radius Variable</span>
+                <div class="circleLegenddropdown">
+                    <select id="dropdownR" onchange="changeRadius(this.value)"></select>
+                </div>
+                <svg id="circleLegendGraph" height="100" width="100%"></svg>
+
             <div id="circleLegend">
-                <span class="key-label">Countries</span>
+                <span class="key-label">FILTER Countries</span>
                 <div id="accordion">
                     <h3>Africa</h3>
                     <div>
@@ -201,11 +207,7 @@
                         </div>
                     </div>
                 </div>
-                <span class="key-label">Circle Radius Variable</span>
-                <div class="circleLegenddropdown">
-                    <select id="dropdownR" onchange="changeRadius(this.value)"></select>
-                </div>
-                <svg id="circleLegendGraph" height="100" width="100%"></svg>
+                
             </div>
         </div>
     </div>
