@@ -16,7 +16,6 @@ function shadeColor(color, percent) {
 };
 
 
-$("#playbtn").button();
 
 $("#dropdownY").selectmenu({
     change: function(event, ui) {
@@ -433,7 +432,7 @@ function makeChart() {
         theTooltip.append('div')
             .attr('class', 'tooltipdetail')
             .attr('id', `${d[0].Country.replace(/ /g, '')}tooltipX`)
-            .html(`${currentX}: ${isEmpty(d, currentX, currentYear) ? '<span class="no-data">No Data</span>' : getData(d, currentX, currentYear)}`);
+            .html('<span class="no-data">' + `${currentX}: ${isEmpty(d, currentX, currentYear) ? 'No Data</span>' : getData(d, currentX, currentYear)}`);
 
         theTooltip.append('div')
             .attr('class', 'tooltipdetail')
@@ -883,7 +882,7 @@ function play(year) {
     $playBtn = $('#playbtn');
 
     $playBtn.addClass('active');
-    $playBtn.html('<span class="pause-icon"></span>PAUSE');
+    $playBtn.html('<span class="pause-icon"></span>');
     update(year, true);
     $(".year.label").text(year);
 
@@ -897,7 +896,7 @@ function play(year) {
 function pause(year) {
     $playBtn = $('#playbtn');
     $playBtn.removeClass('active');
-    $playBtn.html('<span class="play-icon"></span>PLAY');
+    $playBtn.html('<span class="play-icon"></span>');
     update(year, false);
 
 }
@@ -936,6 +935,11 @@ function resizefunc() {
 }
 
 
+$('#dropdownR-button .ui-selectmenu-icon').removeClass('ui-icon').removeClass('ui-icon-triangle-1-s').addClass('dropdownR').html("CHANGE");
+
+$('#dropdownX-button .ui-selectmenu-icon').removeClass('ui-icon').removeClass('ui-icon-triangle-1-s').addClass('dropdownX').html("CHANGE");
+
+$('#dropdownY-button .ui-selectmenu-icon').removeClass('ui-icon').removeClass('ui-icon-triangle-1-s').addClass('dropdownY').html("CHANGE");
 
 //$("#slider").on('input', function() {
 //$('#year-output').html($(this).val());
