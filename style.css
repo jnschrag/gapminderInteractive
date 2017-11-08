@@ -72,7 +72,7 @@ html {
   font-family: 'Source Sans Pro', sans-serif;
 }
 
-/* line 5, sass/_base.scss */
+/* line 6, sass/_base.scss */
 #graphicContainer {
   display: flex;
   flex-direction: column;
@@ -81,19 +81,19 @@ html {
   flex-wrap: wrap;
 }
 
-/* line 13, sass/_base.scss */
+/* line 14, sass/_base.scss */
 label {
   display: block;
 }
 
-/* line 17, sass/_base.scss */
+/* line 18, sass/_base.scss */
 text {
   font-family: 'Source Sans Pro', sans-serif;
   font-size: 14px;
   fill: black;
 }
 
-/* line 23, sass/_base.scss */
+/* line 24, sass/_base.scss */
 h1 {
   font-size: 30px;
   margin: 20px;
@@ -101,21 +101,39 @@ h1 {
   text-align: center;
 }
 
-/* line 31, sass/_base.scss */
+/* line 32, sass/_base.scss */
 .clearfix {
   clear: both;
 }
 
-/* line 39, sass/_base.scss */
+/* line 37, sass/_base.scss */
+#circleLegendGraph {
+  background-color: #f6f6f6;
+  border: 1px solid #c5c5c5;
+}
+
+/* line 43, sass/_base.scss */
+#containerBottom-right {
+  width: 25%;
+  float: right;
+}
+
+/* line 48, sass/_base.scss */
+#containerBottom-left {
+  width: 70%;
+  float: left;
+  display: block;
+}
+
+/* line 55, sass/_base.scss */
 .sliderdiv {
   width: 100%;
   min-width: 350px;
-  margin: 15px auto;
   clear: both;
   display: block;
   text-align: center;
 }
-/* line 47, sass/_base.scss */
+/* line 64, sass/_base.scss */
 .sliderdiv .date-tooltip {
   position: absolute;
   display: block;
@@ -126,14 +144,14 @@ h1 {
   color: #607889;
   font-size: 90%;
 }
-/* line 58, sass/_base.scss */
+/* line 75, sass/_base.scss */
 .sliderdiv #slideBlock {
   width: calc(100% - 90px);
   display: block;
   float: left;
   padding: 10px;
 }
-/* line 65, sass/_base.scss */
+/* line 82, sass/_base.scss */
 .sliderdiv #slider {
   width: 100%;
   display: block;
@@ -143,64 +161,64 @@ h1 {
   background-color: black;
   border: transparent;
 }
-/* line 75, sass/_base.scss */
+/* line 92, sass/_base.scss */
 .sliderdiv .ui-slider-handle.ui-corner-all.ui-state-default {
   background-color: #0099e1;
   border-color: #0099e1;
   border-radius: 50%;
 }
-/* line 80, sass/_base.scss */
+/* line 97, sass/_base.scss */
 .sliderdiv #dates {
   width: 100%;
   margin-top: 10px;
 }
-/* line 83, sass/_base.scss */
+/* line 100, sass/_base.scss */
 .sliderdiv #dates .yearDiv {
   width: 33.3333%;
   float: left;
   color: gray;
   position: relative;
 }
-/* line 90, sass/_base.scss */
+/* line 107, sass/_base.scss */
 .sliderdiv #dates .yearDiv div:before {
   content: "";
   display: block;
-  height: 20px;
-  width: 2px;
-  background-color: #c5c5c5;
+  height: 15px;
+  width: 1px;
+  background-color: black;
   position: absolute;
-  top: -20px;
+  top: -18px;
   left: 50%;
 }
-/* line 102, sass/_base.scss */
+/* line 119, sass/_base.scss */
 .sliderdiv #dates .yearDiv.yearR div, .sliderdiv #dates .yearDiv.yearL div {
   width: 50%;
   float: left;
   position: relative;
 }
-/* line 109, sass/_base.scss */
+/* line 126, sass/_base.scss */
 .sliderdiv #dates .yearDiv.yearL .endcap {
   text-align: left;
 }
-/* line 112, sass/_base.scss */
+/* line 129, sass/_base.scss */
 .sliderdiv #dates .yearDiv.yearL .endcap:before {
   left: 0%;
 }
-/* line 116, sass/_base.scss */
+/* line 133, sass/_base.scss */
 .sliderdiv #dates .yearDiv.yearR .endcap {
   text-align: right;
 }
-/* line 119, sass/_base.scss */
+/* line 136, sass/_base.scss */
 .sliderdiv #dates .yearDiv.yearR .endcap:before {
   left: 100%;
 }
-/* line 126, sass/_base.scss */
+/* line 143, sass/_base.scss */
 .sliderdiv .btnblock {
   display: block;
   margin-right: 20px;
   float: left;
 }
-/* line 132, sass/_base.scss */
+/* line 149, sass/_base.scss */
 .sliderdiv .play-icon {
   display: inline-block;
   width: 0;
@@ -211,7 +229,7 @@ h1 {
   margin: 0 auto;
   margin: 5px;
 }
-/* line 142, sass/_base.scss */
+/* line 159, sass/_base.scss */
 .sliderdiv #playbtn {
   width: 25px;
   height: 25px;
@@ -223,12 +241,12 @@ h1 {
   border: 1px solid #c5c5c5;
   padding: 10px;
 }
-/* line 154, sass/_base.scss */
+/* line 171, sass/_base.scss */
 .sliderdiv #playbtn.active {
   background: #0099e1;
   color: white;
 }
-/* line 157, sass/_base.scss */
+/* line 174, sass/_base.scss */
 .sliderdiv #playbtn.active .pause-icon {
   display: inline-block;
   width: .3em;
@@ -238,14 +256,14 @@ h1 {
   margin: 5px;
 }
 
-/* line 169, sass/_base.scss */
+/* line 186, sass/_base.scss */
 #year-output {
   text-align: center;
   font-size: 20px;
   color: #0099e1;
 }
 
-/* line 179, sass/_base.scss */
+/* line 196, sass/_base.scss */
 .ui-slider-horizontal .ui-slider-handle {
   top: -.4em;
   height: 1em;
@@ -253,20 +271,38 @@ h1 {
   border: transparent;
 }
 
-/* line 186, sass/_base.scss */
+/* line 203, sass/_base.scss */
 .ui-slider {
   height: 3px;
   border-radius: 0;
 }
 
-/* line 196, sass/_base.scss */
+/* line 213, sass/_base.scss */
 label {
   font-family: 'Source Sans Pro', sans-serif;
   color: gray;
   display: block;
 }
 
-/* line 206, sass/_base.scss */
+/* line 220, sass/_base.scss */
+.directions {
+  font-size: 14px;
+  color: gray;
+  opacity: .9;
+  margin-top: 5px;
+  line-height: 1.2;
+}
+
+/* line 229, sass/_base.scss */
+.key-label {
+  text-transform: uppercase;
+  color: gray;
+  font-size: 14px;
+  padding-bottom: 10px;
+  display: block;
+}
+
+/* line 238, sass/_base.scss */
 #dropdownR-button,
 #dropdownX-button,
 #dropdownY-button {
@@ -277,7 +313,7 @@ label {
   border: 0px solid transparent;
 }
 
-/* line 216, sass/_base.scss */
+/* line 248, sass/_base.scss */
 .dropdownR,
 .dropdownX,
 .dropdownY {
@@ -288,24 +324,32 @@ label {
   color: #0099e1;
 }
 
-/* line 226, sass/_base.scss */
+/* line 260, sass/_base.scss */
 #dropdownR-button .ui-selectmenu-text {
   margin-right: 40px;
 }
 
+/* line 263, sass/_base.scss */
+#xLabel,
+#yLabel, #circleLegendLabel {
+  font-size: 16px;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
 /*Graph*/
-/* line 234, sass/_base.scss */
+/* line 273, sass/_base.scss */
 #graph {
   width: calc(65%);
   margin-right: 10%;
   display: block;
   float: left;
 }
-/* line 241, sass/_base.scss */
+/* line 280, sass/_base.scss */
 #graph #tooltips .tooltipdetail {
   display: none;
 }
-/* line 245, sass/_base.scss */
+/* line 284, sass/_base.scss */
 #graph #tooltips .tooltip {
   padding: 10px 12px 12px;
   border: 1px solid #c5c5c5;
@@ -314,161 +358,148 @@ label {
   display: none;
   position: fixed;
 }
-/* line 254, sass/_base.scss */
+/* line 293, sass/_base.scss */
 #graph #tooltips .tooltipcaption {
   font-size: 16px;
   font-weight: 700;
 }
-/* line 260, sass/_base.scss */
+/* line 299, sass/_base.scss */
 #graph #tooltips .tooltipdetail {
   padding-top: 10px;
   font-size: 14px;
   line-height: .7;
 }
-/* line 264, sass/_base.scss */
+/* line 303, sass/_base.scss */
 #graph #tooltips .tooltipdetail span.no-data {
   font-weight: normal;
   font-style: italic;
 }
-/* line 271, sass/_base.scss */
+/* line 310, sass/_base.scss */
 #graph svg {
   shape-rendering: geometricPrecision;
 }
-/* line 276, sass/_base.scss */
-#graph #theGraph #xLabel,
-#graph #theGraph #yLabel {
-  font-size: 16px;
-  text-transform: uppercase;
-  font-weight: bold;
-}
-/* line 283, sass/_base.scss */
+/* line 317, sass/_base.scss */
 #graph #theGraph .axis path,
 #graph #theGraph .axis line {
   fill: black;
   stroke: #000;
   shape-rendering: crispEdges;
 }
-/* line 289, sass/_base.scss */
+/* line 323, sass/_base.scss */
 #graph #theGraph .gridtick line {
   stroke: #c5c5c5;
 }
-/* line 297, sass/_base.scss */
+/* line 331, sass/_base.scss */
 #graph #theGraph .label {
   fill: #777;
   font-size: 100px;
   font-family: 'Source Sans Pro', sans-serif;
 }
-/* line 302, sass/_base.scss */
+/* line 336, sass/_base.scss */
 #graph #theGraph .year.label {
   font-family: 'Source Sans Pro', sans-serif;
   fill: #ddd;
 }
-/* line 307, sass/_base.scss */
+/* line 341, sass/_base.scss */
 #graph #theGraph .year.label.active {
   fill: #aaa;
 }
-/* line 311, sass/_base.scss */
+/* line 345, sass/_base.scss */
 #graph #theGraph circle {
   stroke-width: 1px;
 }
-/* line 316, sass/_base.scss */
+/* line 350, sass/_base.scss */
 #graph #theGraph circle:hover {
   cursor: pointer;
 }
 
 /*Container Right*/
-/* line 330, sass/_base.scss */
+/* line 362, sass/_base.scss */
 #containerTopRight {
   width: 20%;
   margin-top: 50px;
 }
-/* line 335, sass/_base.scss */
+/* line 367, sass/_base.scss */
 #containerTopRight .ui-accordion .ui-accordion-header {
   padding: 2%;
 }
-/* line 339, sass/_base.scss */
-#containerTopRight #circleLegendGraph {
-  background-color: #f6f6f6;
-  border: 1px solid #c5c5c5;
-}
 
-/* line 347, sass/_base.scss */
+/* line 376, sass/_base.scss */
 .colorLegendElement {
   font-family: 'Source Sans Pro', sans-serif;
   display: inline-block;
   text-align: center;
 }
-/* line 352, sass/_base.scss */
+/* line 381, sass/_base.scss */
 .colorLegendElement.nodata {
   margin-left: 10px;
 }
 
-/* line 357, sass/_base.scss */
+/* line 386, sass/_base.scss */
 .dropdownpair {
   margin-bottom: 20px;
   border-bottom: 1px solid #c5c5c5;
 }
 
-/* line 362, sass/_base.scss */
-.key-label {
-  text-transform: uppercase;
-  color: gray;
-  font-size: 14px;
+/* line 393, sass/_base.scss */
+.dropdownpair .key-label, #containerTopRight .key-label {
+  padding-bottom: 0px;
 }
 
-/* line 368, sass/_base.scss */
+/* line 398, sass/_base.scss */
 .colorLegendSquare {
   width: 15px;
   height: 15px;
   box-sizing: border-box;
 }
 
-/* line 374, sass/_base.scss */
+/* line 404, sass/_base.scss */
 #circleLegend {
   margin-top: 30px;
 }
-/* line 377, sass/_base.scss */
+/* line 407, sass/_base.scss */
 #circleLegend #accordion {
   margin-top: 5px;
 }
 
-/* line 382, sass/_base.scss */
+/* line 412, sass/_base.scss */
 .data-hover {
   fill: #0099e1;
   display: block;
   background-color: blue;
 }
 
-/* line 394, sass/_base.scss */
+/* line 424, sass/_base.scss */
 .grid .tick {
   stroke: lightgrey;
   opacity: 0.7;
 }
 
-/* line 399, sass/_base.scss */
+/* line 429, sass/_base.scss */
 .grid path {
   stroke-width: 0;
 }
 
 /*Container Top*/
-/* line 409, sass/_base.scss */
+/* line 439, sass/_base.scss */
 #containerTop {
   margin-left: 100px;
 }
 
 /*Container Bottom*/
-/* line 420, sass/_base.scss */
+/* line 450, sass/_base.scss */
 #containerBottom {
   width: 65%;
   padding-left: 100px;
+  margin-top: 40px;
 }
 
-/* line 426, sass/_base.scss */
+/* line 457, sass/_base.scss */
 .ui-corner-all {
   border-radius: 0;
 }
 
-/* line 430, sass/_base.scss */
+/* line 461, sass/_base.scss */
 .dropdowndiv {
   clear: both;
   display: block;
@@ -477,57 +508,63 @@ label {
   border: 1px solid transparent;
   position: relative;
 }
-/* line 438, sass/_base.scss */
+/* line 469, sass/_base.scss */
 .dropdowndiv select,
 .dropdowndiv select span {
   font-size: 16px;
   width: 100%;
 }
 
-/* line 445, sass/_base.scss */
+/* line 476, sass/_base.scss */
 .ui-accordion .ui-accordion-content {
   padding: 1em 1em;
 }
 
-/* line 449, sass/_base.scss */
+/* line 480, sass/_base.scss */
 .ui-state-active {
   background: #0099e1;
   border: #0099e1;
 }
 
-/* line 454, sass/_base.scss */
+/* line 485, sass/_base.scss */
 .ui-selectmenu-menu .ui-menu {
   height: 300px;
 }
 
-/* line 458, sass/_base.scss */
+/* line 489, sass/_base.scss */
 .ui-selectmenu-button.ui-button {
   width: 85%;
 }
 
-/* line 463, sass/_base.scss */
+/* line 494, sass/_base.scss */
 .no-data {
   color: gray;
   font-weight: normal;
 }
 
 @media (min-width: 0px) and (max-width: 515px) {
-  /* line 472, sass/_base.scss */
+  /* line 503, sass/_base.scss */
   #graph,
   #containerBottom {
     width: 95%;
     margin-right: 0%;
   }
 
-  /* line 478, sass/_base.scss */
+  /* line 508, sass/_base.scss */
+  #containerTop {
+    margin-left: 10px;
+  }
+
+  /* line 512, sass/_base.scss */
   #containerTopRight {
     order: 3;
     width: 100%;
     height: 20%;
   }
 
-  /* line 484, sass/_base.scss */
+  /* line 518, sass/_base.scss */
   #containerBottom {
     order: 2;
+    padding-left: 10px;
   }
 }

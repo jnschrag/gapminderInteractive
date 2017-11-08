@@ -78,9 +78,34 @@ const wbScale = {
 
 var noColor = '#d3d3d3';
 var marginTop = 19.5;
-var marginRight = 19.5;
+var marginRight = 0;
 var marginBottom = 70;
 var marginLeft = 100;
+
+
+/*
+ var screenwidth = $(window).width();
+    if (screenwidth <= 900) {
+        var marginLeft = 10;
+        
+    } else {
+        var marginLeft = 100;
+    }
+
+$(window).resize(function() {
+     screenwidth = $(window).width();
+    if (screenwidth <= 900) {
+        var marginLeft = 10;
+        makeChart(); 
+    } else {
+        var marginLeft = 100;
+        makeChart(); 
+    }
+});*/
+
+
+   
+
 
 let countryList = new Set();
 let label;
@@ -488,24 +513,24 @@ function makeChart() {
         .text(minYear);
 
 
-svgRoot.append('text')
-    .attr('id', '#circleLegendLabel')
+    svgRoot.append('text')
+        .attr('id', '#circleLegendLabel')
 
-            .attr('text-anchor', 'end')
+        .attr('text-anchor', 'end')
         .attr('y', height - 10)
         .attr('x', width)
-    .text(currentRadius);
+        .text(currentRadius);
 
 
 
 
-           labelRoot.append('rect')
+    labelRoot.append('rect')
         .attr('id', 'y-container')
         .style('fill', 'white')
         .style('opacity', '.8')
         .style('display', 'none')
 
-                   labelRoot.append('rect')
+    labelRoot.append('rect')
         .attr('id', 'x-container')
         .style('fill', 'white')
         .style('opacity', '.8')
@@ -514,12 +539,12 @@ svgRoot.append('text')
 
 
 
-   labelRoot.append('text')
+    labelRoot.append('text')
         .attr('id', 'y-data')
         .style('font-size', '125%')
         .style('display', 'none');
 
-   labelRoot.append('text')
+    labelRoot.append('text')
         .attr('id', 'x-data')
         .style('font-size', '125%')
 
@@ -527,7 +552,7 @@ svgRoot.append('text')
 
     reorder();
 
-        labelRoot.append('line')
+    labelRoot.append('line')
         .attr('id', 'hover-line-x')
         .attr('x1', 0)
         .attr('x2', 0)
@@ -562,84 +587,6 @@ function attachListeners() {
             d3.select(`#${this.getAttribute('country')}`)
 
 
-                .on('mouseover', function(d) {
-                    const boundingClient = document.getElementById('points').getBoundingClientRect();
-
-                    var abc2 = d3.select(this).attr('cx');
-                    var xyz = d3.select(this).attr('cy');
-                    var abc = abc2 + marginLeft;
-
-                 
-                    d3.select('#hover-line-x')
-                        .attr('x1', abc)
-                        .attr('x2', 0)
-                        .attr('y1', xyz)
-                        .attr('y2', xyz)
-                        .style("stroke-dasharray", ("4, 4"))
-                        .style('display', 'block');
-
-
-                    d3.select('#hover-line-y')
-
-                        .attr('x1', abc)
-                        .attr('x2', abc)
-                        .attr('y1', xyz)
-                        .attr('y2', height)
-                        .style("stroke-dasharray", ("4, 4"))
-                        .style('display', 'block')
-
-
-
-                    d3.select('#x-data')
-                        .attr("x", abc)
-                        .attr('class', 'data-hover')
-                        .attr("y", height + 25)
-                        .style('display', 'block')
-                        .attr('text-anchor', 'middle')
-                        .text(`${isEmpty(d, currentX, currentYear) ? 'No Data' : getData(d, currentX, currentYear)}`);
-                    
-if (isEmpty(d, currentY, currentYear) == true) {
-    console.log('empty')
-}
-
-
-                    d3.select('#y-data')
-                        .attr("x", 0 - 10)
-                        .attr('class', 'data-hover')
-                        .attr("y", xyz)
-                        .style('display', 'block')
-                        .attr('text-anchor', 'end')
-                        .text(`${isEmpty(d, currentY, currentYear) ? 'No Data' : getData(d, currentY, currentYear)}`);
-
-
-                    var widthy = d3.select('#y-data').node().getBBox().width;
-                    var heighty = d3.select('#y-data').node().getBBox().height;
-                    var xy = d3.select('#y-data').node().getBBox().x;
-                    var yy = d3.select('#y-data').node().getBBox().y;
-
-      d3.select('#y-container')
-         .style('display', 'block')
-         .attr("x", xy - 5)
-         .attr("y", yy)
-         .attr("height", heighty + 5)
-         .attr("width", widthy + 10);
-
-                          var widthx = d3.select('#x-data').node().getBBox().width;
-                          var heightx = d3.select('#x-data').node().getBBox().height;
-                     var xx = d3.select('#x-data').node().getBBox().x;
-                    var xy = d3.select('#x-data').node().getBBox().y;
-
-      d3.select('#x-container')
-         .style('display', 'block')
-         .attr("x", xx - 5)
-         .attr("y", xy )
-         .attr("height", heightx + 5)
-         .attr("width", widthx + 10);
-
-
-
-                })
-
 
 
                 .on('mouseenter', function(d) {
@@ -670,6 +617,77 @@ if (isEmpty(d, currentY, currentYear) == true) {
 
                     d3.selectAll('.circleLabel')
                         .style('opacity', 0.3);
+
+                    var abc2 = d3.select(this).attr('cx');
+                    var xyz = d3.select(this).attr('cy');
+                    var abc = abc2 + marginLeft;
+
+
+                    d3.select('#hover-line-x')
+                        .attr('x1', abc)
+                        .attr('x2', 0)
+                        .attr('y1', xyz)
+                        .attr('y2', xyz)
+                        .style("stroke-dasharray", ("4, 4"))
+                        .style('display', 'block');
+
+
+                    d3.select('#hover-line-y')
+
+                        .attr('x1', abc)
+                        .attr('x2', abc)
+                        .attr('y1', xyz)
+                        .attr('y2', height)
+                        .style("stroke-dasharray", ("4, 4"))
+                        .style('display', 'block')
+
+
+
+                    d3.select('#x-data')
+                        .attr("x", abc)
+                        .attr('class', 'data-hover')
+                        .attr("y", height + 25)
+                        .style('display', 'block')
+                        .attr('text-anchor', 'middle')
+                        .text(`${isEmpty(d, currentX, currentYear) ? 'N/A' : getData(d, currentX, currentYear)}`);
+
+                    if (isEmpty(d, currentY, currentYear) == true) {
+                        console.log('empty')
+                    }
+
+
+                    d3.select('#y-data')
+                        .attr("x", 0 - 10)
+                        .attr('class', 'data-hover')
+                        .attr("y", xyz)
+                        .style('display', 'block')
+                        .attr('text-anchor', 'end')
+                        .text(`${isEmpty(d, currentY, currentYear) ? 'N/A' : getData(d, currentY, currentYear)}`);
+
+
+                    var widthy = d3.select('#y-data').node().getBBox().width;
+                    var heighty = d3.select('#y-data').node().getBBox().height;
+                    var xy = d3.select('#y-data').node().getBBox().x;
+                    var yy = d3.select('#y-data').node().getBBox().y;
+
+                    d3.select('#y-container')
+                        .style('display', 'block')
+                        .attr("x", xy - 5)
+                        .attr("y", yy)
+                        .attr("height", heighty + 5)
+                        .attr("width", widthy + 10);
+
+                    var widthx = d3.select('#x-data').node().getBBox().width;
+                    var heightx = d3.select('#x-data').node().getBBox().height;
+                    var xx = d3.select('#x-data').node().getBBox().x;
+                    var xy = d3.select('#x-data').node().getBBox().y;
+
+                    d3.select('#x-container')
+                        .style('display', 'block')
+                        .attr("x", xx - 5)
+                        .attr("y", xy)
+                        .attr("height", heightx + 5)
+                        .attr("width", widthx + 10);
                 })
                 .on('mouseleave', function(d) {
                     d3.select(this).style('stroke', strokeColor);
@@ -692,10 +710,10 @@ if (isEmpty(d, currentY, currentYear) == true) {
                         .style('display', 'none');
 
                     d3.select('#x-container')
-                    .style('display', 'none');
+                        .style('display', 'none');
 
                     d3.select('#y-container')
-                    .style('display', 'none');
+                        .style('display', 'none');
                 });
         } else {
             var strokeColor = d3.select(`#${this.getAttribute('country')}`).style('stroke');
