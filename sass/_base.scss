@@ -225,6 +225,13 @@ label {
     line-height: 1.2;
 }
 
+#clearCheckboxes {
+    display: block;
+    color: $accent;
+    padding: 10px 0px;
+    text-align: right;
+    cursor: pointer;
+}
 
 .key-label {
     text-transform: uppercase;

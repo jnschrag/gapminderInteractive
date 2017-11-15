@@ -83,28 +83,37 @@ var marginBottom = 70;
 var marginLeft = 100;
 
 
-/*
+
  var screenwidth = $(window).width();
     if (screenwidth <= 900) {
-        var marginLeft = 10;
+      
         
     } else {
-        var marginLeft = 100;
+        
+
     }
 
 $(window).resize(function() {
      screenwidth = $(window).width();
     if (screenwidth <= 900) {
-        var marginLeft = 10;
-        makeChart(); 
+       
+        
     } else {
-        var marginLeft = 100;
-        makeChart(); 
+     
+     
     }
-});*/
+    resizefunc();
+});
 
 
-   
+
+function resizefunc() {
+
+    makeChart();
+    makeBabyChart();
+}
+
+
 
 
 let countryList = new Set();
@@ -406,6 +415,7 @@ function makeChart() {
         .attr('transform', `translate(${margin.left},${margin.top})`)
         .attr('id', 'gRoot');
 
+
     svgRoot.append('g')
         .attr('id', 'points')
         .selectAll('circle')
@@ -436,6 +446,37 @@ function makeChart() {
         });
 
 
+    d3.selectAll('circle').select(function(d) {
+
+        var array = [];
+
+        for (i = 0; i < 21; i++) {
+            var year = minYear + i;
+            var group = {};
+            group[0] = xScale(getData(d, currentX, year));
+            group[1] = yScale(getData(d, currentY, year));
+            array.push(group);
+        }
+
+        var countryName = d[0].Country;
+        console.log(array);
+
+
+        var lineFunction = d3.line()
+            .x(function(d) { return d[0]; })
+            .y(function(d) { return d[1]; })
+            .curve(d3.curveMonotoneX);
+
+        svgRoot.append("path")
+            .attr('id', countryName + "-line")
+            .attr("d", lineFunction(array))
+            .attr("stroke", "blue")
+            .attr("stroke-width", 2)
+            .attr("fill", "none")
+            .attr("display", "none");
+
+
+    });
 
 
 
@@ -572,213 +613,272 @@ function makeChart() {
 
 }
 
-
-
 function attachListeners() {
     /* Attach hover events to the circles. Different behavior is attached
     depending on whether or not the checkbox is selected */
+
+    d3.selectAll('circle.point').select(function() {
+        d3.select(`#${this.getAttribute('id')}`)
+            .on('click', click);
+    });
+
+
+
+
     d3.selectAll('.checkboxes').select(function() {
 
+        var countryID = d3.select(`#${this.getAttribute('country')}`).attr('id');
+
         if (this.checked) {
-            var strokeColor = d3.select(`#${this.getAttribute('country')}`).style('stroke');
 
-
+            ifChecked(countryID)
             //console.log(strokeColor);
-            d3.select(`#${this.getAttribute('country')}`)
 
-
-
-
-                .on('mouseenter', function(d) {
-
-                    d3.select(`#legend${d[4].Country}`).style('border', '2px solid #E8336D');
-                    d3.select(this).style('stroke', '#E8336D');
-                    d3.select(this).style('stroke-width', '3px');
-
-                    const boundingClientRect = document.getElementById('circleLegendGraph').getBoundingClientRect();
-
-                    d3.select('#circleLegendGraph')
-                        .append('circle')
-                        .attr('id', 'tempCirc')
-                        .attr('cx', boundingClientRect.width / 2)
-                        .attr('cy', boundingClientRect.height / 2)
-                        .attr('r', this.getAttribute('r'))
-                        .style('fill', 'white')
-                        .style('stroke', '#E8336D');
-
-                    const currentGNI = d[3][currentYear];
-
-                    d3.select('#circleLegendGraph')
-                        .append('text')
-                        .attr('x', parseFloat(this.getAttribute('r')) / 2 + boundingClientRect.width / 2)
-                        .attr('y', parseFloat(this.getAttribute('r')) / 2 + boundingClientRect.height / 2)
-                        .attr('id', 'tempLabel')
-                        .text(currentGNI);
-
-                    d3.selectAll('.circleLabel')
-                        .style('opacity', 0.3);
-
-                    var abc2 = d3.select(this).attr('cx');
-                    var xyz = d3.select(this).attr('cy');
-                    var abc = abc2 + marginLeft;
-
-
-                    d3.select('#hover-line-x')
-                        .attr('x1', abc)
-                        .attr('x2', 0)
-                        .attr('y1', xyz)
-                        .attr('y2', xyz)
-                        .style("stroke-dasharray", ("4, 4"))
-                        .style('display', 'block');
-
-
-                    d3.select('#hover-line-y')
-
-                        .attr('x1', abc)
-                        .attr('x2', abc)
-                        .attr('y1', xyz)
-                        .attr('y2', height)
-                        .style("stroke-dasharray", ("4, 4"))
-                        .style('display', 'block')
-
-
-
-                    d3.select('#x-data')
-                        .attr("x", abc)
-                        .attr('class', 'data-hover')
-                        .attr("y", height + 25)
-                        .style('display', 'block')
-                        .attr('text-anchor', 'middle')
-                        .text(`${isEmpty(d, currentX, currentYear) ? 'N/A' : getData(d, currentX, currentYear)}`);
-
-                    if (isEmpty(d, currentY, currentYear) == true) {
-                        console.log('empty')
-                    }
-
-
-                    d3.select('#y-data')
-                        .attr("x", 0 - 10)
-                        .attr('class', 'data-hover')
-                        .attr("y", xyz)
-                        .style('display', 'block')
-                        .attr('text-anchor', 'end')
-                        .text(`${isEmpty(d, currentY, currentYear) ? 'N/A' : getData(d, currentY, currentYear)}`);
-
-
-                    var widthy = d3.select('#y-data').node().getBBox().width;
-                    var heighty = d3.select('#y-data').node().getBBox().height;
-                    var xy = d3.select('#y-data').node().getBBox().x;
-                    var yy = d3.select('#y-data').node().getBBox().y;
-
-                    d3.select('#y-container')
-                        .style('display', 'block')
-                        .attr("x", xy - 5)
-                        .attr("y", yy)
-                        .attr("height", heighty + 5)
-                        .attr("width", widthy + 10);
-
-                    var widthx = d3.select('#x-data').node().getBBox().width;
-                    var heightx = d3.select('#x-data').node().getBBox().height;
-                    var xx = d3.select('#x-data').node().getBBox().x;
-                    var xy = d3.select('#x-data').node().getBBox().y;
-
-                    d3.select('#x-container')
-                        .style('display', 'block')
-                        .attr("x", xx - 5)
-                        .attr("y", xy)
-                        .attr("height", heightx + 5)
-                        .attr("width", widthx + 10);
-                })
-                .on('mouseleave', function(d) {
-                    d3.select(this).style('stroke', strokeColor);
-                    d3.select(this).style('stroke-width', '1px');
-                    d3.select('#tempCirc').remove();
-                    d3.select('#tempLabel').remove();
-                    d3.selectAll('.circleLabel')
-                        .style('opacity', 1);
-
-
-                    d3.select('#hover-line-x')
-                        .style('display', 'none');
-                    d3.select('#hover-line-y')
-                        .style('display', 'none');
-
-                    d3.select('#x-data')
-                        .style('display', 'none')
-
-                    d3.select('#y-data')
-                        .style('display', 'none');
-
-                    d3.select('#x-container')
-                        .style('display', 'none');
-
-                    d3.select('#y-container')
-                        .style('display', 'none');
-                });
         } else {
-            var strokeColor = d3.select(`#${this.getAttribute('country')}`).style('stroke');
-            //var country = d3.select(this).attr("country");
-            //console.log(strokeColor);
+            ifUnchecked(countryID)
 
-            d3.select(`#${this.getAttribute('country')}`)
-                .on('mouseenter', function(d) {
-                    d3.select(`#${this.id}tooltipX`).style('display', 'block');
-                    d3.select(`#${this.id}tooltipY`).style('display', 'block');
-                    d3.select(`#${this.id}tooltipRadius`).style('display', 'block');
 
-                    d3.select(`#${this.id}tooltip`)
-                        .style('display', 'block');
+        };
+    });
 
-                    d3.select(`#legend${d[0].Country}`).style('border', '2px solid #E8336D');
-                    d3.select(this).style('stroke', '#E8336D');
-                    d3.select(this).style('stroke-width', '3px');
+}
 
-                    const boundingClientRect = document.getElementById('circleLegendGraph').getBoundingClientRect();
 
-                    d3.select('#circleLegendGraph')
-                        .append('circle')
-                        .attr('id', 'tempCirc')
-                        .attr('cx', boundingClientRect.width / 2)
-                        .attr('cy', boundingClientRect.height / 2)
-                        .attr('r', this.getAttribute('r'))
-                        .style('fill', 'white')
-                        .style('stroke', '#E8336D');
+function click(d) {
+    var countryID = d3.select(this).attr("id");
+    //console.log(countryID + ": " + currentYear);
+    pause(currentYear);
 
-                    const tempRadLabel = getData(d, currentRadius, currentYear);
+    $("#accordion input[type=checkbox][country=" + countryID + "]").prop("checked", function(i, val) {
+        return !val;
+    });
 
-                    d3.select('#circleLegendGraph')
-                        .append('text')
-                        .attr('x', parseFloat(this.getAttribute('r')) / 2 + boundingClientRect.width / 2)
-                        .attr('y', parseFloat(this.getAttribute('r')) / 2 + boundingClientRect.height / 1.6)
-                        .attr('id', 'tempLabel')
-                        .text(tempRadLabel);
+    checkboxChange();
 
-                    //alert(tempRadLabel);
+    d3.selectAll('.checkboxes').select(function() {
 
-                    d3.selectAll('.circleLabel')
-                        .style('opacity', 0.3);
-                })
+        //if (this.checked) {
 
-                .on('mouseleave', function(d) {
-                    d3.select(`#${this.id}tooltipX`).style('display', 'none');
-                    d3.select(`#${this.id}tooltipY`).style('display', 'none');
-                    d3.select(`#${this.id}tooltipRadius`).style('display', 'none');
+        ifChecked(countryID)
+        //console.log(strokeColor);
 
-                    d3.select(`#${this.getAttribute('id')}tooltip`)
-                        .style('display', 'none');
 
-                    d3.select(`#legend${d[0].Country}`).style('border', null);
-                    d3.select(this).style('stroke', strokeColor);
-                    d3.select(this).style('stroke-width', '1px');
+        //} else {
+        //ifUnchecked(countryID)
 
-                    d3.select('#tempCirc').remove();
-                    d3.select('#tempLabel').remove();
-                    d3.selectAll('.circleLabel')
-                        .style('opacity', 1);
-                });
-        }
+
+        // };
+
     });
 }
+
+
+function ifChecked(countryID) {
+
+    var strokeColor = d3.select(`#${countryID}`).style('stroke');
+    d3.select(`#${countryID}tooltipX`).style('display', 'none');
+    d3.select(`#${countryID}tooltipY`).style('display', 'none');
+    d3.select(`#${countryID}tooltipRadius`).style('display', 'none');
+
+
+    d3.select(`#${countryID}`)
+
+        .on('mouseenter', function(d) {
+
+            d3.select(`#legend${countryID}`).style('border', '2px solid #E8336D');
+            d3.select(this).style('stroke', '#E8336D');
+            d3.select(this).style('stroke-width', '3px');
+
+            const boundingClientRect = document.getElementById('circleLegendGraph').getBoundingClientRect();
+
+            d3.select('#circleLegendGraph')
+                .append('circle')
+                .attr('id', 'tempCirc')
+                .attr('cx', boundingClientRect.width / 2)
+                .attr('cy', boundingClientRect.height / 2)
+                .attr('r', this.getAttribute('r'))
+                .style('fill', 'white')
+                .style('stroke', '#E8336D');
+
+            const currentGNI = d[3][currentYear];
+
+            d3.select('#circleLegendGraph')
+                .append('text')
+                .attr('x', parseFloat(this.getAttribute('r')) / 2 + boundingClientRect.width / 2)
+                .attr('y', parseFloat(this.getAttribute('r')) / 2 + boundingClientRect.height / 2)
+                .attr('id', 'tempLabel')
+                .text(currentGNI);
+
+            d3.selectAll('.circleLabel')
+                .style('opacity', 0.3);
+
+            var abc2 = d3.select(this).attr('cx');
+            var xyz = d3.select(this).attr('cy');
+            var abc = abc2 + marginLeft;
+
+
+            d3.select('#hover-line-x')
+                .attr('x1', abc)
+                .attr('x2', 0)
+                .attr('y1', xyz)
+                .attr('y2', xyz)
+                .style("stroke-dasharray", ("4, 4"))
+                .style('display', 'block');
+
+
+            d3.select('#hover-line-y')
+
+                .attr('x1', abc)
+                .attr('x2', abc)
+                .attr('y1', xyz)
+                .attr('y2', height)
+                .style("stroke-dasharray", ("4, 4"))
+                .style('display', 'block')
+
+
+
+            d3.select('#x-data')
+                .attr("x", abc)
+                .attr('class', 'data-hover')
+                .attr("y", height + 25)
+                .style('display', 'block')
+                .attr('text-anchor', 'middle')
+                .text(`${isEmpty(d, currentX, currentYear) ? 'N/A' : getData(d, currentX, currentYear)}`);
+
+            //if (isEmpty(d, currentY, currentYear) == true) {
+            //    console.log('empty')
+            //}
+
+
+            d3.select('#y-data')
+                .attr("x", 0 - 10)
+                .attr('class', 'data-hover')
+                .attr("y", xyz)
+                .style('display', 'block')
+                .attr('text-anchor', 'end')
+                .text(`${isEmpty(d, currentY, currentYear) ? 'N/A' : getData(d, currentY, currentYear)}`);
+
+
+            var widthy = d3.select('#y-data').node().getBBox().width;
+            var heighty = d3.select('#y-data').node().getBBox().height;
+            var xy = d3.select('#y-data').node().getBBox().x;
+            var yy = d3.select('#y-data').node().getBBox().y;
+
+            d3.select('#y-container')
+                .style('display', 'block')
+                .attr("x", xy - 5)
+                .attr("y", yy)
+                .attr("height", heighty + 5)
+                .attr("width", widthy + 10);
+
+            var widthx = d3.select('#x-data').node().getBBox().width;
+            var heightx = d3.select('#x-data').node().getBBox().height;
+            var xx = d3.select('#x-data').node().getBBox().x;
+            var xy = d3.select('#x-data').node().getBBox().y;
+
+            d3.select('#x-container')
+                .style('display', 'block')
+                .attr("x", xx - 5)
+                .attr("y", xy)
+                .attr("height", heightx + 5)
+                .attr("width", widthx + 10);
+        })
+        .on('mouseleave', function(d) {
+            d3.select(this).style('stroke', strokeColor);
+            d3.select(this).style('stroke-width', '1px');
+            d3.select('#tempCirc').remove();
+            d3.select('#tempLabel').remove();
+            d3.selectAll('.circleLabel')
+                .style('opacity', 1);
+
+
+            d3.select('#hover-line-x')
+                .style('display', 'none');
+            d3.select('#hover-line-y')
+                .style('display', 'none');
+
+            d3.select('#x-data')
+                .style('display', 'none')
+
+            d3.select('#y-data')
+                .style('display', 'none');
+
+            d3.select('#x-container')
+                .style('display', 'none');
+
+            d3.select('#y-container')
+                .style('display', 'none');
+        });
+}
+
+function ifUnchecked(countryID) {
+    var strokeColor = d3.select(`#${countryID}`).style('stroke');
+    //var country = d3.select(this).attr("country");
+    //console.log(strokeColor);
+
+    d3.select(`#${countryID}`)
+        .on('mouseenter', function(d) {
+            d3.select(`#${countryID}tooltipX`).style('display', 'block');
+            d3.select(`#${countryID}tooltipY`).style('display', 'block');
+            d3.select(`#${countryID}tooltipRadius`).style('display', 'block');
+
+            d3.select(`#${countryID}tooltip`)
+                .style('display', 'block');
+
+            d3.select(`#legend${countryID}`).style('border', '2px solid #E8336D');
+            d3.select(this).style('stroke', '#E8336D');
+            d3.select(this).style('stroke-width', '3px');
+
+            const boundingClientRect = document.getElementById('circleLegendGraph').getBoundingClientRect();
+
+            d3.select('#circleLegendGraph')
+                .append('circle')
+                .attr('id', 'tempCirc')
+                .attr('cx', boundingClientRect.width / 2)
+                .attr('cy', boundingClientRect.height / 2)
+                .attr('r', this.getAttribute('r'))
+                .style('fill', 'white')
+                .style('stroke', '#E8336D');
+
+            const tempRadLabel = getData(d, currentRadius, currentYear);
+
+            d3.select('#circleLegendGraph')
+                .append('text')
+                .attr('x', parseFloat(this.getAttribute('r')) / 2 + boundingClientRect.width / 2)
+                .attr('y', parseFloat(this.getAttribute('r')) / 2 + boundingClientRect.height / 1.6)
+                .attr('id', 'tempLabel')
+                .text(tempRadLabel);
+
+            //alert(tempRadLabel);
+
+            d3.selectAll('.circleLabel')
+                .style('opacity', 0.3);
+        })
+
+        .on('mouseleave', function(d) {
+            d3.select(`#${countryID}tooltipX`).style('display', 'none');
+            d3.select(`#${countryID}tooltipY`).style('display', 'none');
+            d3.select(`#${countryID}tooltipRadius`).style('display', 'none');
+
+            d3.select(`#${countryID}tooltip`)
+                .style('display', 'none');
+
+            d3.select(`#legend${d[0].Country}`).style('border', null);
+            d3.select(this).style('stroke', strokeColor);
+            d3.select(this).style('stroke-width', '1px');
+
+            d3.select('#tempCirc').remove();
+            d3.select('#tempLabel').remove();
+            d3.selectAll('.circleLabel')
+                .style('opacity', 1);
+        });
+
+
+
+};
+
+
+
 
 function yearChange(year) {
     update(parseInt(year), false);
@@ -791,6 +891,9 @@ function update(year, playButton) {
 
         .duration(1000)
         .ease(d3.easeQuadInOut)
+        .on('start', () => {
+            console.log("start")
+        })
         .on('end', () => {
 
             if (year < maxYear && playButton) {
@@ -930,27 +1033,32 @@ function checkboxChange() {
             if (this.checked) {
                 d3.select(`#${this.getAttribute('country')}`).style('opacity', '1');
                 d3.select(`#${this.getAttribute('country')}tooltip`).style('display', 'block');
+                d3.select(`#${this.getAttribute('country')}-line`).style('display', 'block');
             } else {
                 d3.select(`#${this.getAttribute('country')}`).style('opacity', '0.3');
                 d3.select(`#${this.getAttribute('country')}tooltip`).style('display', 'none');
+                d3.select(`#${this.getAttribute('country')}-line`).style('display', 'none');
             }
         });
     } else {
         d3.selectAll('.checkboxes').select(function() {
             d3.select(`#${this.getAttribute('country')}`).style('opacity', '1');
             d3.select(`#${this.getAttribute('country')}tooltip`).style('display', 'none');
+            d3.select(`#${this.getAttribute('country')}-line`).style('display', 'none');
         });
     }
     attachListeners();
 }
 
-window.onresize = resizefunc;
 
-function resizefunc() {
+function checkboxRemove() {
 
-    makeChart();
-    makeBabyChart();
-}
+    $('#accordion').find('input[type=checkbox]:checked').removeAttr('checked');
+    checkboxChange();
+
+};
+
+
 
 
 $('#dropdownR-button .ui-selectmenu-icon').removeClass('ui-icon').removeClass('ui-icon-triangle-1-s').addClass('dropdownR').html("CHANGE");
