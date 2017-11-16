@@ -12,8 +12,11 @@
 
 <body>
     <div id="graphicContainer">
+      <header>
+         <h1>GapMinder Data</h1></header>
+         <div class="clearfix"></div>
         <div id="containerTop">
-            <h1>GapMinder Data</h1>
+           
             <div id="colorLegend">
                 <span class="key-label">World Bank Classification Codes</span>
                 <div id="colorLegendElements">
@@ -72,6 +75,11 @@
             </div>
         </div>
         <div id="containerTopRight">
+          <div id="menu-container">
+    <div class="hamburger">
+      <span class="bars"></span><span class="optionsText">OPTIONS</span>
+    </div>
+            <div id="innerOptions">
             <div class="dropdownpair">
                 <label for="dropdownX" id="dropdownXLabel" class="key-label">X-Axis Variable</label>
                 <select id="dropdownX" onchange="changeXScale(this.value)"></select>
@@ -218,6 +226,8 @@
                 </div>
             </div>
         </div>
+      </div>
+      </div>
     </div>
     <script src="interactive.js"></script>
 </body>
