@@ -5,6 +5,24 @@ $(() => {
     });
 });
 
+
+
+$(".hamburger").click(function() {
+    $("#containerTopRight").toggleClass("active");
+
+    if ($('#containerTopRight').hasClass("active")) {
+        $('.optionsText').html("CLOSE");
+
+    } else {
+        $('.optionsText').html("OPTIONS");
+    }
+});
+
+
+
+
+
+
 function shadeColor(color, percent) {
     var f = parseInt(color.slice(1), 16),
         t = percent < 0 ? 0 : 255,
@@ -84,40 +102,16 @@ var marginLeft = 100;
 
 
 
- var screenwidth = $(window).width();
-    if (screenwidth <= 900) {
-      
-        
-    } else {
-        
-
-    }
-
-$(window).resize(function() {
-     screenwidth = $(window).width();
-    if (screenwidth <= 900) {
-       
-        
-    } else {
-     
-     
-    }
-    resizefunc();
-});
-
-
-
-function resizefunc() {
-
-    makeChart();
-    makeBabyChart();
-}
 
 
 
 
 let countryList = new Set();
 let label;
+
+
+let lineColor = "blue";
+let lineHover = "red";
 
 // defaults
 let minYear; // earliest year in the dataset
@@ -129,6 +123,34 @@ let currentRadius = 'GNI per Capita, PPP(ci$)'; // hard coded
 
 let width;
 let height;
+
+let screenwidth = $(window).width();
+
+
+
+if (screenwidth <= 768) {
+
+
+} else {
+
+}
+
+$(window).resize(function() {
+
+    if (screenwidth <= 768) {
+
+    } else {
+
+    }
+
+});
+
+function resizefunc() {
+    makeChart();
+    makeBabyChart();
+}
+
+
 
 // call for csv data, execute function on callback
 const q = d3.csv('data/GDF_iLab.csv', (result) => {
@@ -371,6 +393,9 @@ function changeYScale(newData) {
         fontSize: "18",
         opacity: '1'
     }, 200);
+
+
+
 }
 
 // triggered when radius-dimension is changed
@@ -384,14 +409,34 @@ function makeChart() {
     d3.select('#theGraph').remove();
     d3.select('#tooltips').remove();
 
-    const margin = {
-        top: marginTop,
-        right: marginRight,
-        bottom: marginBottom,
-        left: marginLeft,
+
+
+
+    if (screenwidth <= 768) {
+        var margin = {
+            top: marginTop * 2,
+            right: marginRight,
+            bottom: marginBottom,
+            left: 20,
+        };
+
+
+        width = document.getElementById('graph').clientWidth - margin.right;
+        height = 500 - margin.top - margin.bottom;
+
+    } else {
+
+        var margin = {
+            top: marginTop,
+            right: marginRight,
+            bottom: marginBottom,
+            left: marginLeft,
+        };
+        width = document.getElementById('graph').clientWidth - margin.right - margin.left;
+        height = 500 - margin.top - margin.bottom;
+
+
     };
-    width = document.getElementById('graph').clientWidth - margin.right;
-    height = 500 - margin.top - margin.bottom;
 
     /* I anticipate a feature request to be the ability to switch from a linear to a log scale.
     this would probably require some tweaking to the code immidiately below */
@@ -446,87 +491,89 @@ function makeChart() {
         });
 
 
-    d3.selectAll('circle').select(function(d) {
+    d3.select('#gRoot').append('g')
+        .attr('id', "countryLines");
 
-        var array = [];
-
-        for (i = 0; i < 21; i++) {
-            var year = minYear + i;
-            var group = {};
-            group[0] = xScale(getData(d, currentX, year));
-            group[1] = yScale(getData(d, currentY, year));
-            array.push(group);
-        }
-
-        var countryName = d[0].Country;
-        console.log(array);
-
-
-        var lineFunction = d3.line()
-            .x(function(d) { return d[0]; })
-            .y(function(d) { return d[1]; })
-            .curve(d3.curveMonotoneX);
-
-        svgRoot.append("path")
-            .attr('id', countryName + "-line")
-            .attr("d", lineFunction(array))
-            .attr("stroke", "blue")
-            .attr("stroke-width", 2)
-            .attr("fill", "none")
-            .attr("display", "none");
-
-
-    });
-
+    makeLines();
 
 
     d3.selectAll('.point').select(function(d) {
-        const boundingClientRect = this.getBoundingClientRect();
-        const theTooltip = d3.select('#tooltips')
-            .append('div')
-            .attr('class', 'tooltip')
-            .attr('id', `${d[0].Country.replace(/ /g, '')}tooltip`)
-            .style('top', boundingClientRect.top + boundingClientRect.height)
-            .style('left', boundingClientRect.left + boundingClientRect.width);
+            const boundingClientRect = this.getBoundingClientRect();
+            var element = d3.select('#graph').node();
+var boxY = element.getBoundingClientRect().y;
+var boxH = element.getBoundingClientRect().height;
+
+            // Add a y-axis label.
+            if (screenwidth <= 768) {
+                var theTooltip = d3.select('#tooltips')
+                    .append('div')
+                    .attr('class', 'tooltip')
+                    .attr('id', `${d[0].Country.replace(/ /g, '')}tooltip`)
+                    .style('top', boxY + boxH)
+                    .style('left', 0 + margin.left);
+                    
+            } else {
+                var theTooltip = d3.select('#tooltips')
+                    .append('div')
+                    .attr('class', 'tooltip')
+                    .attr('id', `${d[0].Country.replace(/ /g, '')}tooltip`)
+                    .style('top', boundingClientRect.top + boundingClientRect.height)
+                    .style('left', boundingClientRect.left + boundingClientRect.width);
+            };
+     
+
+
+
 
 
         theTooltip.append('div')
-            .attr('id', `${d[0].Country.replace(/ /g, '')}tooltipcaption`)
-            .attr('class', 'tooltipcaption')
-            .text(d[0].Country);
+        .attr('id', `${d[0].Country.replace(/ /g, '')}tooltipcaption`)
+        .attr('class', 'tooltipcaption')
+        .text(d[0].Country);
 
         theTooltip.append('div')
-            .attr('class', 'tooltipdetail')
-            .attr('id', `${d[0].Country.replace(/ /g, '')}tooltipX`)
-            .html('<span class="no-data">' + `${currentX}: ${isEmpty(d, currentX, currentYear) ? 'No Data</span>' : getData(d, currentX, currentYear)}`);
+        .attr('class', 'tooltipdetail')
+        .attr('id', `${d[0].Country.replace(/ /g, '')}tooltipX`)
+        .html('<span class="no-data">' + `${currentX}: ${isEmpty(d, currentX, currentYear) ? 'No Data</span>' : getData(d, currentX, currentYear)}`);
 
         theTooltip.append('div')
-            .attr('class', 'tooltipdetail')
-            .attr('id', `${d[0].Country.replace(/ /g, '')}tooltipY`)
-            .text(`${currentY}: ${getData(d, currentY, currentYear)}`);
+        .attr('class', 'tooltipdetail')
+        .attr('id', `${d[0].Country.replace(/ /g, '')}tooltipY`)
+        .text(`${currentY}: ${getData(d, currentY, currentYear)}`);
 
         theTooltip.append('div')
-            .attr('class', 'tooltipdetail')
-            .attr('id', `${d[0].Country.replace(/ /g, '')}tooltipRadius`)
-            .text(`${currentRadius}: ${getData(d, currentRadius, currentYear)}`);
+        .attr('class', 'tooltipdetail')
+        .attr('id', `${d[0].Country.replace(/ /g, '')}tooltipRadius`)
+        .text(`${currentRadius}: ${getData(d, currentRadius, currentYear)}`);
     });
 
-    const labelRoot = svg.append('g')
-        .attr('transform', `translate(${margin.left},${margin.top})`)
-        .attr('id', 'labelRoot');
+const labelRoot = svg.append('g')
+    .attr('transform', `translate(${margin.left},${margin.top})`)
+    .attr('id', 'labelRoot');
 
-    labelRoot.append('g')
-        .attr('id', 'xAxis')
-        .attr('transform', `translate(0,${height})`)
+labelRoot.append('g')
+    .attr('id', 'xAxis')
+    .attr('transform', `translate(0,${height})`)
 
-        .call(xAxis);
+    .call(xAxis);
 
-    labelRoot.append('g')
-        .attr('id', 'yAxis')
-        .attr('class', 'gridtick')
+labelRoot.append('g')
+    .attr('id', 'yAxis')
+    .attr('class', 'gridtick')
 
-        .call(yAxis);
+    .call(yAxis);
 
+
+// Add a y-axis label.
+if (screenwidth <= 768) {
+    // Add a y-axis label.
+    labelRoot.append('text')
+        .attr('id', 'xLabel')
+        .attr('text-anchor', 'middle')
+        .attr('x', width / 2)
+        .attr('y', height + margin.top * 1.25)
+        .text("X AXIS: " + currentX);
+} else {
     // Add an x-axis label.
     labelRoot.append('text')
         .attr('id', 'xLabel')
@@ -534,8 +581,21 @@ function makeChart() {
         .attr('x', width / 2)
         .attr('y', height + margin.top * 3)
         .text(currentX);
+};
 
+// Add a y-axis label.
+if (screenwidth <= 768) {
     // Add a y-axis label.
+    labelRoot.append('text')
+        .attr('id', 'yLabel')
+        .attr('text-anchor', 'start')
+        .attr('y', -30)
+        .attr('x', 0)
+        .attr('dy', 20)
+        .attr('transform', 'rotate(0)')
+        .text("Y AXIS: " + currentY);
+} else {
+
     labelRoot.append('text')
         .attr('id', 'yLabel')
         .attr('text-anchor', 'middle')
@@ -544,73 +604,109 @@ function makeChart() {
         .attr('dy', 20)
         .attr('transform', 'rotate(-90)')
         .text(currentY);
-
-    // Add the year label; the value is set on transition.
-    label = svgRoot.append('text')
-        .attr('class', 'year label')
-        .attr('text-anchor', 'end')
-        .attr('y', height - 30)
-        .attr('x', width)
-        .text(minYear);
-
-
-    svgRoot.append('text')
-        .attr('id', '#circleLegendLabel')
-
-        .attr('text-anchor', 'end')
-        .attr('y', height - 10)
-        .attr('x', width)
-        .text(currentRadius);
+}
 
 
 
 
-    labelRoot.append('rect')
-        .attr('id', 'y-container')
-        .style('fill', 'white')
-        .style('opacity', '.8')
-        .style('display', 'none')
-
-    labelRoot.append('rect')
-        .attr('id', 'x-container')
-        .style('fill', 'white')
-        .style('opacity', '.8')
-        .style('display', 'none')
+// Add the year label; the value is set on transition.
+label = svgRoot.append('text')
+    .attr('class', 'year label')
+    .attr('text-anchor', 'end')
+    .attr('y', height - 30)
+    .attr('x', width)
+    .text(minYear);
 
 
+svgRoot.append('text')
+    .attr('id', '#circleLegendLabel')
+
+    .attr('text-anchor', 'end')
+    .attr('y', height - 10)
+    .attr('x', width)
+    .text(currentRadius);
 
 
-    labelRoot.append('text')
-        .attr('id', 'y-data')
-        .style('font-size', '125%')
-        .style('display', 'none');
 
-    labelRoot.append('text')
-        .attr('id', 'x-data')
-        .style('font-size', '125%')
 
-        .style('display', 'none');
+labelRoot.append('rect')
+    .attr('id', 'y-container')
+    .style('fill', 'white')
+    .style('opacity', '.8')
+    .style('display', 'none')
 
-    reorder();
+labelRoot.append('rect')
+    .attr('id', 'x-container')
+    .style('fill', 'white')
+    .style('opacity', '.8')
+    .style('display', 'none')
 
-    labelRoot.append('line')
-        .attr('id', 'hover-line-x')
-        .attr('x1', 0)
-        .attr('x2', 0)
-        .attr('y1', 0)
-        .attr('y2', 0)
-        .style('stroke', 'black')
-        .style('display', 'none');
 
-    labelRoot.append('line')
-        .attr('id', 'hover-line-y')
-        .attr('x1', 0)
-        .attr('x2', 0)
-        .attr('y1', 0)
-        .attr('y2', 0)
-        .style('stroke', 'black')
-        .style('display', 'none');
 
+
+labelRoot.append('text')
+    .attr('id', 'y-data')
+    .style('font-size', '125%')
+    .style('display', 'none');
+
+labelRoot.append('text')
+    .attr('id', 'x-data')
+    .style('font-size', '125%')
+
+    .style('display', 'none');
+
+reorder();
+
+labelRoot.append('line')
+    .attr('id', 'hover-line-x')
+    .attr('x1', 0)
+    .attr('x2', 0)
+    .attr('y1', 0)
+    .attr('y2', 0)
+    .style('stroke', 'black')
+    .style('display', 'none');
+
+labelRoot.append('line')
+    .attr('id', 'hover-line-y')
+    .attr('x1', 0)
+    .attr('x2', 0)
+    .attr('y1', 0)
+    .attr('y2', 0)
+    .style('stroke', 'black')
+    .style('display', 'none');
+
+}
+
+function makeLines() {
+
+    d3.select('#gRoot').append('g')
+        .attr('id', "countryLines");
+
+    d3.selectAll('circle').select(function(d) {
+        var array = [];
+
+        var year = minYear;
+        var group = {};
+        group[0] = xScale(getData(d, currentX, year));
+        group[1] = yScale(getData(d, currentY, year));
+        array.push(group);
+
+        var countryName = d[0].Country;
+
+        var lineFunction = d3.line()
+            .x(function(d) { return d[0]; })
+            .y(function(d) { return d[1]; })
+            .curve(d3.curveLinear);
+
+        d3.select('#countryLines').append("path")
+            .attr('id', countryName + "-line")
+            .attr("d", lineFunction(array))
+            .attr("stroke", lineColor)
+            .attr("stroke-width", 2)
+            .attr("fill", "none")
+            .attr("display", "block");
+
+    });
 }
 
 function attachListeners() {
@@ -676,6 +772,8 @@ function click(d) {
 function ifChecked(countryID) {
 
     var strokeColor = d3.select(`#${countryID}`).style('stroke');
+
+
     d3.select(`#${countryID}tooltipX`).style('display', 'none');
     d3.select(`#${countryID}tooltipY`).style('display', 'none');
     d3.select(`#${countryID}tooltipRadius`).style('display', 'none');
@@ -782,7 +880,13 @@ function ifChecked(countryID) {
                 .attr("y", xy)
                 .attr("height", heightx + 5)
                 .attr("width", widthx + 10);
+
+            d3.select(`#${countryID}-line`)
+                .style("stroke", lineHover);
         })
+
+
+
         .on('mouseleave', function(d) {
             d3.select(this).style('stroke', strokeColor);
             d3.select(this).style('stroke-width', '1px');
@@ -808,6 +912,8 @@ function ifChecked(countryID) {
 
             d3.select('#y-container')
                 .style('display', 'none');
+            d3.select(`#${countryID}-line`)
+                .style("stroke", lineColor);
         });
 }
 
@@ -882,7 +988,8 @@ function ifUnchecked(countryID) {
 
 function yearChange(year) {
     update(parseInt(year), false);
-    //console.log(year);
+    updateLine(parseInt(year));
+
 }
 
 function update(year, playButton) {
@@ -892,7 +999,7 @@ function update(year, playButton) {
         .duration(1000)
         .ease(d3.easeQuadInOut)
         .on('start', () => {
-            console.log("start")
+
         })
         .on('end', () => {
 
@@ -914,6 +1021,7 @@ function update(year, playButton) {
 
             }
         });
+
 
     d3.selectAll('.point')
         .attr('cx', d => xScale(getData(d, currentX, year)))
@@ -977,8 +1085,49 @@ function update(year, playButton) {
     currentYear = parseInt(document.getElementById('slider').value);
     label.text(year);
     makeBabyChart(); // update the radius-legend chart
+
+
+
 }
 
+
+function updateLine(year, t) {
+
+    d3.selectAll('.point').select(function(d) {
+
+        var count = maxYear - minYear;
+        var countY = year - minYear;
+        var countryName = d[0].Country;
+        var array = [];
+
+        for (i = 0; i < countY; i++) {
+            var thisYear = minYear + i;
+            var group = {};
+            group[0] = xScale(getData(d, currentX, thisYear));
+            group[1] = yScale(getData(d, currentY, thisYear));
+
+            array.push(group);
+        }
+
+
+        var lineFunction = d3.line()
+            .x(function(array) { return array[0]; })
+            .y(function(array) { return array[1]; })
+            .curve(d3.curveLinear);
+
+
+        d3.select(`#${countryName}-line`)
+            .transition(t)
+            .attr("d", lineFunction(array))
+            .attr("stroke", lineColor)
+            .attr("stroke-width", 2)
+            .attr("fill", "none")
+            .attr("display", "none");
+
+
+
+    });
+}
 
 function playpause() {
     var updated = parseInt($(".year.label").text());
@@ -1034,10 +1183,12 @@ function checkboxChange() {
                 d3.select(`#${this.getAttribute('country')}`).style('opacity', '1');
                 d3.select(`#${this.getAttribute('country')}tooltip`).style('display', 'block');
                 d3.select(`#${this.getAttribute('country')}-line`).style('display', 'block');
+                d3.select(`#${this.getAttribute('country')}tooltip`).classed("selected", true)
             } else {
                 d3.select(`#${this.getAttribute('country')}`).style('opacity', '0.3');
                 d3.select(`#${this.getAttribute('country')}tooltip`).style('display', 'none');
                 d3.select(`#${this.getAttribute('country')}-line`).style('display', 'none');
+                d3.select(`#${this.getAttribute('country')}tooltip`).classed("selected", false);
             }
         });
     } else {
@@ -1045,6 +1196,7 @@ function checkboxChange() {
             d3.select(`#${this.getAttribute('country')}`).style('opacity', '1');
             d3.select(`#${this.getAttribute('country')}tooltip`).style('display', 'none');
             d3.select(`#${this.getAttribute('country')}-line`).style('display', 'none');
+            d3.select(`#${this.getAttribute('country')}tooltip`).classed("selected", false);
         });
     }
     attachListeners();
