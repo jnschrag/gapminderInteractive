@@ -109,9 +109,9 @@
   let minYear; // earliest year in the dataset
   let maxYear; // latest year in the dataset
   let currentYear; // The year which we are currently visualizing
-  let currentX = 'Perceived Rule Of Law'; // hard coded
-  let currentY = 'Regulatory Quality'; // hard coded
-  let currentRadius = 'GNI per Capita, PPP(ci$)'; // hard coded
+  let currentX = 'Life Expectancy'; // hard coded
+  let currentY = 'GNI per capita'; // hard coded
+  let currentRadius = 'Gross Domestic Product (PPP)'; // hard coded
 
   let width;
   let height;
@@ -145,7 +145,7 @@
 
 
   // call for csv data, execute function on callback
-  const q = d3.csv('data/GDF_iLab.csv', (result) => {
+  const q = d3.csv('data/cpp-lifeExpectancy20171115.csv', (result) => {
 
       maxYear = result.map(d => Math.max(d.Year)).reduce((a, b) => Math.max(a, b));
       minYear = result.map(d => Math.max(d.Year)).reduce((a, b) => Math.min(a, b));
@@ -162,7 +162,7 @@
       const categories = Object.keys(result[0]);
       for (let i = 0; i < categories.length; i++) {
           if (categories[i] != 'Country' && categories[i] != 'Year') {
-              if (categories[i] == 'Perceived Rule Of Law') { // hard coded
+              if (categories[i] == currentX) { // hard coded
                   d3.select('#dropdownX').append('option').html(categories[i]);
 
               } else {
@@ -172,12 +172,12 @@
           }
       }
 
-      $('#dropdownX').val('Perceived Rule Of Law');
+      $('#dropdownX').val(currentX);
       $('#dropdownX').selectmenu("refresh");
 
       for (let i = 0; i < categories.length; i++) {
           if (categories[i] != 'Country' && categories[i] != 'Year') {
-              if (categories[i] == 'Regulatory Quality') { // hard coded
+              if (categories[i] == currentY) { // hard coded
                   d3.select('#dropdownY').append('option').html(categories[i]).attr('selected', 'selected');
 
               } else {
@@ -186,12 +186,12 @@
 
           }
       }
-      $('#dropdownY').val('Regulatory Quality');
+      $('#dropdownY').val(currentY);
       $('#dropdownY').selectmenu("refresh");
 
       for (let i = 0; i < categories.length; i++) {
           if (categories[i] != 'Country' && categories[i] != 'Year') {
-              if (categories[i] == 'GNI per Capita, PPP(ci$)') { // hard coded
+              if (categories[i] == currentRadius) { // hard coded
                   d3.select('#dropdownR').append('option').html(categories[i]).attr('selected', 'selected');
 
               } else {
@@ -199,7 +199,7 @@
               }
           }
       }
-      $('#dropdownR').val('GNI per Capita, PPP(ci$)');
+      $('#dropdownR').val(currentRadius);
       $('#dropdownR').selectmenu("refresh");
 
       const defaultoptions = document.getElementsByClassName('defaultoption');
@@ -208,6 +208,8 @@
       }
 
       data = result;
+
+      console.log(data)
 
       makeChart(); // the main chart
       makeBabyChart(); // chart that shows min,max circle sizes

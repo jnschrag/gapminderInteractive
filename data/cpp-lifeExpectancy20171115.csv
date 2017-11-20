@@ -1,4 +1,4 @@
-Country,Year,Life expectancy,GNI per capita,World Bank Classification,Gross Domestic Product (PPP),,,,,,,Country Code
+Country,Year,Life Expectancy,GNI per capita,World Bank Classification,Gross Domestic Product (PPP),,,,,,,ISO
 Afghanistan,1990,49.86105,,1,,,,,,,,AFG
 Albania,1990,71.95732,6.80E+02,2,8.94E+09,,,,,,,ALB
 Algeria,1990,66.69459,2.36E+03,2,1.71E+11,,,,,,,DZA
