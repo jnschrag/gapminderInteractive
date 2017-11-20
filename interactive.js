@@ -5,8 +5,6 @@
       });
   });
 
-
-
   $(".hamburger").click(function() {
       $("#containerTopRight").toggleClass("active");
 
@@ -17,11 +15,6 @@
           $('.optionsText').html("OPTIONS");
       }
   });
-
-
-
-
-
 
   function shadeColor(color, percent) {
       var f = parseInt(color.slice(1), 16),
@@ -1046,8 +1039,6 @@
           });
 
 
-
-
       d3.selectAll('.point')
           .select(function(d) {
               const boundingClientRect = this.getBoundingClientRect();
@@ -1063,7 +1054,17 @@
           .attr('cx', d => xScale(getData(d, currentX, currentYear)))
           .attr('cy', d => yScale(getData(d, currentY, currentYear)))
           .attr('r', d => radiusScale(getData(d, currentRadius, currentYear)))
-          .style('fill', "red")
+          .style('fill', (d) => {
+              if (isEmpty(d, currentX, currentYear) || isEmpty(d, currentY, currentYear) || isEmpty(d, currentRadius, currentYear)) {
+                  var dark = shadeColor(noColor, -0.3);
+                  return dark;
+              }
+              var blue = wbScale[d.filter(r => r.Year == currentYear)[0]['World Bank Classification']];
+
+              var darkblue = shadeColor(blue, -0.3);
+              //console.log(darkblue);
+              return darkblue;
+          })
           .style('stroke', (d) => {
               if (isEmpty(d, currentX, currentYear) || isEmpty(d, currentY, currentYear) || isEmpty(d, currentRadius, currentYear)) {
                   var dark = shadeColor(noColor, -0.3);
@@ -1076,6 +1077,8 @@
               return darkblue;
 
           });
+
+
 
 
       d3.selectAll('.point').select((d) => {
@@ -1234,10 +1237,7 @@
   function tooltipYear(year, countryID, X, Y) {
 
 
-
-
       d3.selectAll(`#${countryID}-trails .tooltipYear`).select(function(d) {
-
 
           var boundingClientRect = d3.selectAll(`#${countryID}-trails circle[data-country='${countryID}']`).getBoundingClientRect();
 
