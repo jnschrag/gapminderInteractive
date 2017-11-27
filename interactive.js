@@ -507,12 +507,11 @@
       /* I anticipate a feature request to be the ability to switch from a linear to a log scale.
       this would probably require some tweaking to the code immidiately below */
       xScale = d3.scaleLinear().domain(getDomain(currentX)).range([0, width]);
-      yScale = d3.scaleLinear().domain(getDomain(currentY)).range([height, 0]);
+      yScale = d3.scaleLog().domain(getDomain(currentY)).range([height, 0]);
       radiusScale = d3.scaleSqrt().domain(getDomain(currentRadius)).range([2, 40]);
 
       xAxis = d3.axisBottom(xScale).ticks(12, d3.format(',d')).tickSizeOuter(0);
-      yAxis = d3.axisLeft(yScale).tickSizeOuter(0).tickSizeInner(-width);
-
+      yAxis = d3.axisLeft(yScale).tickSizeOuter(0).tickSizeInner(-width).ticks(3).tickFormat(d3.format(".1s"));
 
 
       const tooltips = d3.select('#graph').append('div').attr('id', 'tooltips');
