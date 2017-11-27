@@ -560,26 +560,36 @@ label {
   }
 
   /* line 556, sass/_base.scss */
+  #graphicContainer {
+    flex-wrap: unset;
+  }
+
+  /* line 560, sass/_base.scss */
   #graph {
     width: 95%;
     margin: 0 auto;
   }
+  /* line 564, sass/_base.scss */
+  #graph #tooltips .tooltip {
+    position: static;
+    margin-top: 1rem;
+  }
 
-  /* line 561, sass/_base.scss */
+  /* line 570, sass/_base.scss */
   #containerBottom {
     width: 95%;
   }
 
-  /* line 564, sass/_base.scss */
+  /* line 573, sass/_base.scss */
   #containerTop {
     margin-left: 10px;
   }
 
-  /* line 568, sass/_base.scss */
+  /* line 577, sass/_base.scss */
   #containerTopRight {
     margin-top: 0px;
   }
-  /* line 571, sass/_base.scss */
+  /* line 580, sass/_base.scss */
   #containerTopRight #menu-container {
     position: fixed;
     right: -500px;
@@ -590,7 +600,7 @@ label {
     z-index: 30;
     margin-top: 0;
   }
-  /* line 582, sass/_base.scss */
+  /* line 591, sass/_base.scss */
   #containerTopRight.active {
     display: block;
     height: 100vh;
@@ -602,7 +612,7 @@ label {
     position: fixed;
     background-color: rgba(0, 0, 0, 0.1);
   }
-  /* line 593, sass/_base.scss */
+  /* line 602, sass/_base.scss */
   #containerTopRight.active #menu-container {
     position: fixed;
     right: 0px;
@@ -624,7 +634,7 @@ label {
     -ms-transition: all 0.2s ease;
     transition: all 0.2s ease;
   }
-  /* line 610, sass/_base.scss */
+  /* line 619, sass/_base.scss */
   #containerTopRight.active #menu-container .hamburger .bars {
     background-color: transparent;
     -webkit-transition: all 0.2s ease;
@@ -632,7 +642,7 @@ label {
     -ms-transition: all 0.2s ease;
     transition: all 0.2s ease;
   }
-  /* line 614, sass/_base.scss */
+  /* line 623, sass/_base.scss */
   #containerTopRight.active #menu-container .hamburger .bars::before {
     top: 0;
     -webkit-transform: rotate(-45deg);
@@ -640,7 +650,7 @@ label {
     -ms-transform: rotate(-45deg);
     transform: rotate(-45deg);
   }
-  /* line 618, sass/_base.scss */
+  /* line 627, sass/_base.scss */
   #containerTopRight.active #menu-container .hamburger .bars::after {
     bottom: 0;
     -webkit-transform: rotate(45deg);
@@ -648,7 +658,7 @@ label {
     -ms-transform: rotate(45deg);
     transform: rotate(45deg);
   }
-  /* line 625, sass/_base.scss */
+  /* line 634, sass/_base.scss */
   #containerTopRight .hamburger {
     display: block;
     position: fixed;
@@ -658,11 +668,11 @@ label {
     z-index: 1000;
     padding: 10px 15px 5px;
   }
-  /* line 635, sass/_base.scss */
+  /* line 644, sass/_base.scss */
   #containerTopRight .hamburger span {
     vertical-align: middle;
   }
-  /* line 638, sass/_base.scss */
+  /* line 647, sass/_base.scss */
   #containerTopRight .hamburger .bars {
     display: block;
     position: relative;
@@ -677,7 +687,7 @@ label {
     -ms-transition: all 0.2s ease;
     transition: all 0.2s ease;
   }
-  /* line 649, sass/_base.scss */
+  /* line 658, sass/_base.scss */
   #containerTopRight .hamburger .bars:before, #containerTopRight .hamburger .bars:after {
     position: absolute;
     content: " ";
@@ -689,34 +699,34 @@ label {
     -ms-transition: all 0.2s ease;
     transition: all 0.2s ease;
   }
-  /* line 658, sass/_base.scss */
+  /* line 667, sass/_base.scss */
   #containerTopRight .hamburger .bars:before {
     top: 5px;
   }
-  /* line 661, sass/_base.scss */
+  /* line 670, sass/_base.scss */
   #containerTopRight .hamburger .bars:after {
     bottom: 5px;
   }
-  /* line 665, sass/_base.scss */
+  /* line 674, sass/_base.scss */
   #containerTopRight .hamburger .optionsText {
     color: #0099e1;
   }
-  /* line 670, sass/_base.scss */
+  /* line 679, sass/_base.scss */
   #containerTopRight #innerOptions {
     margin-top: 45px;
   }
 
-  /* line 675, sass/_base.scss */
+  /* line 684, sass/_base.scss */
   .ui-accordion .ui-accordion-content {
     max-height: 200px;
   }
 
-  /* line 679, sass/_base.scss */
+  /* line 689, sass/_base.scss */
   #containerBottom {
     order: 2;
     padding-left: 10px;
   }
-  /* line 683, sass/_base.scss */
+  /* line 693, sass/_base.scss */
   #containerBottom #containerBottom-right {
     display: none;
   }

@@ -541,12 +541,12 @@
       yAxis = d3.axisLeft(yScale).tickSizeOuter(0).tickSizeInner(-width).ticks(3).tickFormat(d => formatAmount(d));
 
 
-      const tooltips = d3.select('#graph').append('div').attr('id', 'tooltips');
-
       const svg = d3.select('#graph').append('svg')
           .attr('id', 'theGraph')
           .attr('width', width + margin.left + margin.right)
           .attr('height', height + margin.top + margin.bottom);
+
+      const tooltips = d3.select('#graph').append('div').attr('id', 'tooltips');
 
       const labelRoot = svg.append('g')
           .attr('transform', `translate(${margin.left},${margin.top})`)
@@ -832,11 +832,13 @@
   }
 
   function showDetailedTooltip(d, i) {
+    console.log("show");
     d3.select('#' + d[0].ISO + 'tooltip').classed('isActive', true)
   }
 
   function hideDetailedTooltip(d) {
-    d3.select('#' + d[0].ISO + 'tooltip').classed('isActive', false)
+    console.log("hide")
+    d3.selectAll('.tooltip.isActive').classed('isActive', false)
   }
 
   function click(d, i) {

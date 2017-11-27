@@ -553,9 +553,18 @@ label {
         margin: 1rem 0.5rem;
     }
 
+    #graphicContainer {
+        flex-wrap: unset;
+    }
+
     #graph {
         width: 95%;
         margin: 0 auto;
+
+        #tooltips .tooltip {
+            position: static;
+            margin-top: 1rem;
+        }
     }
 
     #containerBottom {
@@ -675,6 +684,7 @@ label {
     .ui-accordion .ui-accordion-content {
         max-height: 200px;
     }
+
 
     #containerBottom {
         order: 2; // width: 100%;
