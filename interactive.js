@@ -82,6 +82,7 @@
 
   // wbScale will act as a color map
   const wbScale = {
+      0: '#f1f1f1',
       1: '#deebf7',
       2: '#c6dbef',
       3: '#9ecae1',
@@ -147,7 +148,7 @@
 
 
   // call for csv data, execute function on callback
-  const q = d3.csv('data/cpp-lifeexpectancy-20171127.csv', (result) => {
+  const q = d3.csv('data/cpp-lifeexpectancy-20171127-test.csv', (result) => {
 
       maxYear = result.map(d => Math.max(d.Year)).reduce((a, b) => Math.max(a, b));
       minYear = result.map(d => Math.max(d.Year)).reduce((a, b) => Math.min(a, b));
@@ -220,8 +221,6 @@
 
       data = result;
 
-      console.log(data)
-
       createAccordion(); // create accordion
       makeChart(); // the main chart
       makeBabyChart(); // chart that shows min,max circle sizes
@@ -252,19 +251,30 @@
     $("#accordion").accordion("refresh");
   }
 
+  // check if row exists for country & year
+  function countryYearExists(d, theScale, year) {
+    let dataYear = d.filter(r => r.Year == year)
+    if ( dataYear.length == 0 ) {
+      return false
+    }
+    return true
+  }
+
 
   // find out if data exists
   function isEmpty(d, theScale, year) {
-    if ( d[0].ISO == 'USA' ) {
-      console.log("USA test")
-    }
+    if (countryYearExists(d, theScale, year)) {
       return (d.filter(r => r.Year == year)[0][theScale] == '');
+    }
   }
 
   /* get data for a particular category 'theScale' in a particular year
   if data doesn't exist, looks for the last known value. If last known value
   doesn't exist, looks for first known value */
   function getData(d, theScale, year) {
+    if ( ! countryYearExists(d, theScale, year)) {
+      return getDomain(theScale)[0];
+    }
       if (d.filter(r => r.Year == year)[0][theScale] == '') {
           let yearIter = year - 1;
           while (yearIter >= minYear) {
@@ -534,20 +544,22 @@
           .attr('r', d => radiusScale(getData(d, currentRadius, currentYear)))
           .style('fill', (d) => {
               // if any data is missing return red or else return the correct world-bank classification code
-              if (isEmpty(d, currentX, currentYear) || isEmpty(d, currentY, currentYear) || isEmpty(d, currentRadius, currentYear)) {
+              if (isEmpty(d, currentX, currentYear) || isEmpty(d, currentY, currentYear) || isEmpty(d, currentRadius, currentYear) || ! countryYearExists(d, currentX, currentYear)) {
                   return noColor;
+              } else {
+                return wbScale[d.filter(r => r.Year == currentYear)[0]['World Bank Classification']]; // hard coded
               }
-              return wbScale[d.filter(r => r.Year == currentYear)[0]['World Bank Classification']]; // hard coded
           })
           .style('stroke', (d) => {
-              if (isEmpty(d, currentX, currentYear) || isEmpty(d, currentY, currentYear) || isEmpty(d, currentRadius, currentYear)) {
+              if (isEmpty(d, currentX, currentYear) || isEmpty(d, currentY, currentYear) || isEmpty(d, currentRadius, currentYear) || ! countryYearExists(d, currentX, currentYear)) {
                   var dark = shadeColor(noColor, -0.3);
                   return dark;
+              } else {
+                var blue = wbScale[d.filter(r => r.Year == currentYear)[0]['World Bank Classification']];
+                var darkblue = shadeColor(blue, -0.3);
+                //console.log(darkblue);
+                return darkblue;
               }
-              var blue = wbScale[d.filter(r => r.Year == currentYear)[0]['World Bank Classification']];
-              var darkblue = shadeColor(blue, -0.3);
-              //console.log(darkblue);
-              return darkblue;
           });
 
 
@@ -1097,26 +1109,28 @@
           .attr('cy', d => yScale(getData(d, currentY, currentYear)))
           .attr('r', d => radiusScale(getData(d, currentRadius, currentYear)))
           .style('fill', (d) => {
-              if (isEmpty(d, currentX, currentYear) || isEmpty(d, currentY, currentYear) || isEmpty(d, currentRadius, currentYear)) {
+              if (isEmpty(d, currentX, currentYear) || isEmpty(d, currentY, currentYear) || isEmpty(d, currentRadius, currentYear) || ! countryYearExists(d, currentX, currentYear)) {
                   var dark = shadeColor(noColor, -0.3);
                   return dark;
-              }
-              var blue = wbScale[d.filter(r => r.Year == currentYear)[0]['World Bank Classification']];
+              } else {
+                var blue = wbScale[d.filter(r => r.Year == currentYear)[0]['World Bank Classification']];
 
-              var darkblue = shadeColor(blue, -0.3);
-              //console.log(darkblue);
-              return darkblue;
+                var darkblue = shadeColor(blue, -0.3);
+                //console.log(darkblue);
+                return darkblue;
+              }
           })
           .style('stroke', (d) => {
-              if (isEmpty(d, currentX, currentYear) || isEmpty(d, currentY, currentYear) || isEmpty(d, currentRadius, currentYear)) {
+              if (isEmpty(d, currentX, currentYear) || isEmpty(d, currentY, currentYear) || isEmpty(d, currentRadius, currentYear) || ! countryYearExists(d, currentX, currentYear)) {
                   var dark = shadeColor(noColor, -0.3);
                   return dark;
-              }
-              var blue = wbScale[d.filter(r => r.Year == currentYear)[0]['World Bank Classification']];
+              } else {
+                var blue = wbScale[d.filter(r => r.Year == currentYear)[0]['World Bank Classification']];
 
-              var darkblue = shadeColor(blue, -0.3);
-              //console.log(darkblue);
-              return darkblue;
+                var darkblue = shadeColor(blue, -0.3);
+                //console.log(darkblue);
+                return darkblue;
+              }
 
           });
 

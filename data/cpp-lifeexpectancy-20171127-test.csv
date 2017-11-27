@@ -7,23 +7,23 @@ Andorra,1990,,16880,,,Europe,Southern Europe,AND
 Angola,1990,41.13834,550,2,34600000000,Africa,Middle Africa,AGO
 Antigua and Barbuda,1990,71.16295,5740,3,686000000,Americas,Caribbean,ATG
 Argentina,1990,71.54366,3170,2,229000000000,Americas,South America,ARG
-Armenia,1990,67.7478,,,8560000000,Asia,Western Asia,ARM
+Armenia,1990,67.7478,,0,8560000000,Asia,Western Asia,ARM
 Aruba,1990,73.38998,,4,,Americas,Caribbean,ABW
 Australia,1990,76.99463,17220,5,296000000000,Oceania,Australia and New Zealand,AUS
 Austria,1990,75.56829,20560,5,149000000000,Europe,Western Europe,AUT
-Azerbaijan,1990,64.74637,,,39400000000,Asia,Western Asia,AZE
+Azerbaijan,1990,64.74637,,0,39400000000,Asia,Western Asia,AZE
 "Bahamas, The",1990,70.63066,11900,4,4020000000,Americas,Caribbean,BHS
 Bahrain,1990,72.50724,7220,3,11300000000,Asia,Western Asia,BHR
 Bangladesh,1990,58.41756,310,1,88395044692,Asia,Southern Asia,BGD
 Barbados,1990,71.17195,7520,3,2240000000,Americas,Caribbean,BRB
-Belarus,1990,70.83659,,,53200000000,Europe,Eastern Europe,BLR
+Belarus,1990,70.83659,,0,53200000000,Europe,Eastern Europe,BLR
 Belgium,1990,76.05195,19400,5,187000000000,Europe,Western Europe,BEL
 Belize,1990,71.28373,2230,2,627000000,Americas,Central America,BLZ
 Benin,1990,53.42,360,1,4710000000,Africa,Western Africa,BEN
 Bermuda,1990,,27100,4,1550000000,Americas,Northern America,BMU
 Bhutan,1990,52.46232,580,1,807000000,Asia,Southern Asia,BTN
 Bolivia,1990,55.10729,720,2,16400000000,Americas,South America,BOL
-Bosnia and Herzegovina,1990,70.78322,,,,Europe,Southern Europe,BIH
+Bosnia and Herzegovina,1990,70.78322,,0,,Europe,Southern Europe,BIH
 Botswana,1990,62.55659,2540,2,7220000000,Africa,Southern Africa,BWA
 Brazil,1990,65.34032,2710,3,996000000000,Americas,South America,BRA
 British Virgin Islands,1990,,,,,Americas,Caribbean,VGB
@@ -47,11 +47,11 @@ Comoros,1990,56.65361,560,1,425629994,Africa,Eastern Africa,COM
 "Congo, Rep.",1990,55.02898,920,2,8110000000,Africa,Middle Africa,COG
 Costa Rica,1990,75.65868,2320,2,15600000000,Americas,Central America,CRI
 Cote d'Ivoire,1990,52.60693,760,2,25323486247,Africa,Western Africa,CIV
-Croatia,1990,72.17049,,,,Europe,Southern Europe,HRV
+Croatia,1990,72.17049,,0,,Europe,Southern Europe,HRV
 Cuba,1990,74.6438,2660,2,93700000000,Americas,Caribbean,CUB
 Curacao,1990,,,,,Americas,Caribbean,CUW
 Cyprus,1990,76.51395,9510,4,7640000000,Asia,Western Asia,CYP
-Czech Republic,1990,71.3839,,,130000000000,Europe,Eastern Europe,CZE
+Czech Republic,1990,71.3839,,0,130000000000,Europe,Eastern Europe,CZE
 Denmark,1990,74.80537,24500,5,93500000000,Europe,Northern Europe,DNK
 Djibouti,1990,56.66317,,2,1180000000,Africa,Eastern Africa,DJI
 Dominica,1990,,2300,2,308000000,Americas,Caribbean,DMA
@@ -60,8 +60,8 @@ Ecuador,1990,68.99537,1370,2,49300000000,Americas,South America,ECU
 "Egypt, Arab Rep.",1990,64.54907,750,1,219000000000,Africa,Northern Africa,EGY
 El Salvador,1990,63.988,900,2,15400000000,Americas,Central America,SLV
 Equatorial Guinea,1990,48.18954,290,1,275747982,Africa,Middle Africa,GNQ
-Eritrea,1990,48.23595,,,,Africa,Eastern Africa,ERI
-Estonia,1990,69.47561,,,,Europe,Northern Europe,EST
+Eritrea,1990,48.23595,,0,,Africa,Eastern Africa,ERI
+Estonia,1990,69.47561,,0,,Europe,Northern Europe,EST
 Ethiopia,1990,47.09956,260,1,20300000000,Africa,Eastern Africa,ETH
 Faroe Islands,1990,76.11463,,4,,Europe,Northern Europe,FRO
 Fiji,1990,65.57085,1790,2,2770000000,Oceania,Melanesia,FJI
@@ -70,7 +70,7 @@ France,1990,76.6,20700,5,1030000000000,Europe,Western Europe,FRA
 French Polynesia,1990,68.82861,15400,4,,Oceania,Polynesia,PYF
 Gabon,1990,61.24015,4810,3,12000000000,Africa,Middle Africa,GAB
 "Gambia, The",1990,52.214,320,1,899000000,Africa,Western Africa,GMB
-Georgia,1990,69.99961,,,24900000000,Asia,Western Asia,GEO
+Georgia,1990,69.99961,,0,24900000000,Asia,Western Asia,GEO
 Germany,1990,75.17737,21300,5,1540000000000,Europe,Western Europe,DEU
 Ghana,1990,56.75163,400,1,18100000000,Africa,Western Africa,GHA
 Gibraltar,1990,,,3,,Europe,Southern Europe,GIB
@@ -98,25 +98,25 @@ Italy,1990,76.97073,18600,5,1050000000000,Europe,Southern Europe,ITA
 Jamaica,1990,72.01598,1790,2,11416492149,Americas,Caribbean,JAM
 Japan,1990,78.83683,27600,5,2380000000000,Asia,Eastern Asia,JPN
 Jordan,1990,69.92085,1350,2,14500000000,Asia,Western Asia,JOR
-Kazakhstan,1990,68.33659,,,138000000000,Asia,Central Asia,KAZ
+Kazakhstan,1990,68.33659,,0,138000000000,Asia,Central Asia,KAZ
 Kenya,1990,58.80205,380,1,36000000000,Africa,Eastern Africa,KEN
 Kiribati,1990,60.35083,720,2,91800000,Oceania,Micronesia,KIR
 North Korea,1990,69.34432,,2,,Asia,Eastern Asia,PRK
 South Korea,1990,71.29976,6480,3,362000000000,Asia,Eastern Asia,KOR
-Kosovo,1990,67.74878,,,,Europe,Southern Europe,XKX
+Kosovo,1990,67.74878,,0,,Europe,Southern Europe,XKX
 Kuwait,1990,72.28156,,4,,Asia,Western Asia,KWT
-Kyrgyz Republic,1990,68.29756,,,9860000000,Asia,Central Asia,KGZ
+Kyrgyz Republic,1990,68.29756,,0,9860000000,Asia,Central Asia,KGZ
 Lao PDR,1990,53.55207,190,1,4440000000,Asia,South-eastern Asia,LAO
-Latvia,1990,69.27317,,,,Europe,Northern Europe,LVA
+Latvia,1990,69.27317,,0,,Europe,Northern Europe,LVA
 Lebanon,1990,70.22115,1360,2,13700000000,Asia,Western Asia,LBN
 Lesotho,1990,59.3311,580,1,1410000000,Africa,Southern Africa,LSO
 Liberia,1990,47.20244,,1,,Africa,Western Africa,LBR
 Libya,1990,68.6299,,3,,Africa,Northern Africa,LBY
 Liechtenstein,1990,,45500,,,Europe,Western Europe,LIE
-Lithuania,1990,71.16073,,,,Europe,Northern Europe,LTU
+Lithuania,1990,71.16073,,0,,Europe,Northern Europe,LTU
 Luxembourg,1990,75.01041,28600,5,11800000000,Europe,Western Europe,LUX
 Macao,1990,75.27698,8530,3,8000000000,Asia,Eastern Asia,MAC
-"Macedonia, FYR",1990,71.14763,,,10500000000,Europe,Southern Europe,MKD
+"Macedonia, FYR",1990,71.14763,,0,10500000000,Europe,Southern Europe,MKD
 Madagascar,1990,51.0081,240,1,12400000000,Africa,Eastern Africa,MDG
 Malawi,1990,43.76602,180,1,4540000000,Africa,Eastern Africa,MWI
 Malaysia,1990,70.75749,2370,2,123000000000,Asia,South-eastern Asia,MYS
@@ -127,11 +127,11 @@ Marshall Islands,1990,,,,88200000,Oceania,Micronesia,MHL
 Mauritania,1990,58.3588,490,1,3680000000,Africa,Western Africa,MRT
 Mauritius,1990,69.40488,2440,2,5050000000,Africa,Eastern Africa,MUS
 Mexico,1990,70.79573,2750,3,515000000000,Americas,Central America,MEX
-"Micronesia, Fed. Sts.",1990,66.19759,,,172000000,Oceania,Micronesia,FSM
-Moldova,1990,67.46566,,,,Europe,Eastern Europe,MDA
+"Micronesia, Fed. Sts.",1990,66.19759,,0,172000000,Oceania,Micronesia,FSM
+Moldova,1990,67.46566,,0,,Europe,Eastern Europe,MDA
 Monaco,1990,,79600,,,Europe,Western Europe,MCO
 Mongolia,1990,60.26776,1430,2,7230000000,Asia,Eastern Asia,MNG
-Montenegro,1990,74.44337,,,,Europe,Southern Europe,MNE
+Montenegro,1990,74.44337,,0,,Europe,Southern Europe,MNE
 Morocco,1990,64.68049,1150,2,63455192137,Africa,Northern Africa,MAR
 Mozambique,1990,43.1259,180,1,3240000000,Africa,Eastern Africa,MOZ
 Myanmar,1990,58.69417,,1,19500000000,Asia,South-eastern Asia,MMR
@@ -148,7 +148,7 @@ Northern Mariana Islands,1990,,,,,Oceania,Micronesia,MNP
 Norway,1990,76.53732,26510,5,78175913424,Europe,Northern Europe,NOR
 Oman,1990,67.26773,5710,3,41000000000,Asia,Western Asia,OMN
 Pakistan,1990,60.11122,420,1,213000000000,Asia,Southern Asia,PAK
-Palau,1990,69.06927,,,,Oceania,Micronesia,PLW
+Palau,1990,69.06927,,0,,Oceania,Micronesia,PLW
 Panama,1990,73.04624,2660,2,12500000000,Americas,Central America,PAN
 Papua New Guinea,1990,55.70934,820,2,4320000000,Oceania,Melanesia,PNG
 Paraguay,1990,68.01261,,2,16400000000,Americas,South America,PRY
@@ -159,7 +159,7 @@ Portugal,1990,73.96585,7140,3,117000000000,Europe,Southern Europe,PRT
 Puerto Rico,1990,74.16917,6150,3,57800000000,Americas,Caribbean,PRI
 Qatar,1990,75.11607,,4,,Asia,Western Asia,QAT
 Romania,1990,69.74122,,2,122000000000,Europe,Eastern Europe,ROU
-Russian Federation,1990,68.90244,,,1190000000000,Europe,Eastern Europe,RUS
+Russian Federation,1990,68.90244,,0,1190000000000,Europe,Eastern Europe,RUS
 Rwanda,1990,33.48512,350,1,3990000000,Africa,Eastern Africa,RWA
 Samoa,1990,65.04041,,2,384000000,Oceania,Polynesia,WSM
 San Marino,1990,,,,,Europe,Southern Europe,SMR
@@ -171,17 +171,17 @@ Seychelles,1990,,5000,3,639000000,Africa,Eastern Africa,SYC
 Sierra Leone,1990,37.35341,200,1,3490000000,Africa,Western Africa,SLE
 Singapore,1990,75.29512,11500,4,67500000000,Asia,South-eastern Asia,SGP
 Sint Maarten (Dutch part),1990,,,,,Americas,Caribbean,SXM
-Slovak Republic,1990,70.93268,,,,Europe,Eastern Europe,SVK
-Slovenia,1990,73.20488,,,,Europe,Southern Europe,SVN
+Slovak Republic,1990,70.93268,,0,,Europe,Eastern Europe,SVK
+Slovenia,1990,73.20488,,0,,Europe,Southern Europe,SVN
 Solomon Islands,1990,56.70476,,1,361000000,Oceania,Melanesia,SLB
 Somalia,1990,45.38934,,1,,Africa,Eastern Africa,SOM
 South Africa,1990,62.12007,3390,3,236000000000,Africa,Southern Africa,ZAF
-South Sudan,1990,43.51876,,,,Africa,Eastern Africa,SSD
+South Sudan,1990,43.51876,,0,,Africa,Eastern Africa,SSD
 Spain,1990,76.83756,12200,5,530000000000,Europe,Southern Europe,ESP
 Sri Lanka,1990,69.67949,470,1,40500000000,Asia,Southern Asia,LKA
 St. Kitts and Nevis,1990,,4940,3,378000000,Americas,Caribbean,KNA
 St. Lucia,1990,71.04944,2730,2,709000000,Americas,Caribbean,LCA
-St. Martin (French part),1990,74.52195,,,,Americas,Caribbean,MAF
+St. Martin (French part),1990,74.52195,,0,,Americas,Caribbean,MAF
 St. Vincent and the Grenadines,1990,70.07666,2110,2,387000000,Americas,Caribbean,VCT
 Sudan,1990,55.51446,530,1,29200000000,Africa,Northern Africa,SDN
 Suriname,1990,67.50188,1430,3,2790000000,Americas,South America,SUR
@@ -189,30 +189,30 @@ Swaziland,1990,59.3452,1230,2,3080000000,Africa,Southern Africa,SWZ
 Sweden,1990,77.53683,27760,5,172000000000,Europe,Northern Europe,SWE
 Switzerland,1990,77.24244,36900,5,185000000000,Europe,Western Europe,CHE
 Syrian Arab Republic,1990,70.10627,910,2,,Asia,Western Asia,SYR
-Tajikistan,1990,62.86478,,,12400000000,Asia,Central Asia,TJK
+Tajikistan,1990,62.86478,,0,12400000000,Asia,Central Asia,TJK
 Tanzania,1990,49.97756,200,1,23600000000,Africa,Eastern Africa,TZA
 Thailand,1990,70.23061,1490,2,243000000000,Asia,South-eastern Asia,THA
-Timor-Leste,1990,48.48473,,,,Asia,South-eastern Asia,TLS
+Timor-Leste,1990,48.48473,,0,,Asia,South-eastern Asia,TLS
 Togo,1990,55.84844,400,1,3300000000,Africa,Western Africa,TGO
 Tonga,1990,69.58232,1220,2,220000000,Oceania,Polynesia,TON
 Trinidad and Tobago,1990,68.0229,3710,3,9680000000,Americas,Caribbean,TTO
 Tunisia,1990,70.30732,1430,2,29900000000,Africa,Northern Africa,TUN
 Turkey,1990,64.28234,2300,2,331000000000,Asia,Western Asia,TUR
-Turkmenistan,1990,62.67415,,,19800000000,Asia,Central Asia,TKM
+Turkmenistan,1990,62.67415,,0,19800000000,Asia,Central Asia,TKM
 Turks and Caicos Islands,1990,,,,,Americas,Caribbean,TCA
 Tuvalu,1990,,,,13800000,Oceania,Polynesia,TUV
 Uganda,1990,45.05627,320,1,8800000000,Africa,Eastern Africa,UGA
-Ukraine,1990,70.13659,,,351000000000,Europe,Eastern Europe,UKR
+Ukraine,1990,70.13659,,0,351000000000,Europe,Eastern Europe,UKR
 United Arab Emirates,1990,71.72015,,4,134000000000,Asia,Western Asia,ARE
 United Kingdom,1990,75.88049,18300,5,958000000000,Europe,Northern Europe,GBR
 United States,1990,75.21463,24200,5,5980000000000,Americas,Northern America,USA
 Uruguay,1990,72.53954,2840,3,19800000000,Americas,South America,URY
-Uzbekistan,1990,66.68417,,,40700000000,Asia,Central Asia,UZB
+Uzbekistan,1990,66.68417,,0,40700000000,Asia,Central Asia,UZB
 Vanuatu,1990,63.19685,1200,2,242000000,Oceania,Melanesia,VUT
 "Venezuela, RB",1990,69.82861,2550,3,186000000000,Americas,South America,VEN
 Vietnam,1990,70.4182,130,1,64100000000,Asia,South-eastern Asia,VNM
 Virgin Islands (U.S.),1990,74.788,,4,,Americas,Caribbean,VIR
-West Bank and Gaza,1990,68.05288,,,,Asia,Western Asia,PSE
+West Bank and Gaza,1990,68.05288,,0,,Asia,Western Asia,PSE
 "Yemen, Rep.",1990,57.7642,,2,25900000000,Asia,Western Asia,YEM
 Zambia,1990,44.31246,430,1,12150601755,Africa,Eastern Africa,ZMB
 Zimbabwe,1990,59.58307,860,2,17118317122,Africa,Eastern Africa,ZWE
@@ -241,7 +241,7 @@ Benin,1991,53.93571,380,1,5070000000,Africa,Western Africa,BEN
 Bermuda,1991,74.02951,27400,4,1550000000,Americas,Northern America,BMU
 Bhutan,1991,53.25193,500,1,831000000,Asia,Southern Asia,BTN
 Bolivia,1991,55.65002,740,2,17869461061,Americas,South America,BOL
-Bosnia and Herzegovina,1991,70.5728,,,,Europe,Southern Europe,BIH
+Bosnia and Herzegovina,1991,70.5728,,0,,Europe,Southern Europe,BIH
 Botswana,1991,61.92451,2870,3,8020000000,Africa,Southern Africa,BWA
 Brazil,1991,65.74268,3250,3,1040000000000,Americas,South America,BRA
 British Virgin Islands,1991,,,,,Americas,Caribbean,VGB
@@ -265,11 +265,11 @@ Comoros,1991,57.14522,550,1,416000000,Africa,Eastern Africa,COM
 "Congo, Rep.",1991,54.52239,950,2,8580000000,Africa,Middle Africa,COG
 Costa Rica,1991,75.84193,2350,2,16515224044,Americas,Central America,CRI
 Cote d'Ivoire,1991,52.23273,740,2,26200000000,Africa,Western Africa,CIV
-Croatia,1991,72.18537,,,,Europe,Southern Europe,HRV
+Croatia,1991,72.18537,,0,,Europe,Southern Europe,HRV
 Cuba,1991,74.70056,2340,2,86400000000,Americas,Caribbean,CUB
 Curacao,1991,,,,,Americas,Caribbean,CUW
 Cyprus,1991,76.67139,9670,4,7950000000,Asia,Western Asia,CYP
-Czech Republic,1991,71.89829,,,119000000000,Europe,Eastern Europe,CZE
+Czech Republic,1991,71.89829,,0,119000000000,Europe,Eastern Europe,CZE
 Denmark,1991,75.1578,25700,5,97900000000,Europe,Northern Europe,DNK
 Djibouti,1991,56.81615,,2,1170000000,Africa,Eastern Africa,DJI
 Dominica,1991,,2390,2,321000000,Americas,Caribbean,DMA
@@ -278,7 +278,7 @@ Ecuador,1991,69.49327,1480,2,53200000000,Americas,South America,ECU
 "Egypt, Arab Rep.",1991,64.95534,730,1,229000000000,Africa,Northern Africa,EGY
 El Salvador,1991,64.83154,950,2,16500000000,Americas,Central America,SLV
 Equatorial Guinea,1991,48.60595,300,1,282000000,Africa,Middle Africa,GNQ
-Eritrea,1991,49.01849,,,,Africa,Eastern Africa,ERI
+Eritrea,1991,49.01849,,0,,Africa,Eastern Africa,ERI
 Estonia,1991,69.37317,,3,,Europe,Northern Europe,EST
 Ethiopia,1991,47.50537,250,1,19400000000,Africa,Eastern Africa,ETH
 Faroe Islands,1991,76.36341,,4,,Europe,Northern Europe,FRO
@@ -320,7 +320,7 @@ Kenya,1991,58.22898,350,1,37700000000,Africa,Eastern Africa,KEN
 Kiribati,1991,60.83459,960,2,94839970,Oceania,Micronesia,KIR
 North Korea,1991,69.32532,,2,,Asia,Eastern Asia,PRK
 South Korea,1991,71.73024,7550,3,413000000000,Asia,Eastern Asia,KOR
-Kosovo,1991,67.94878,,,,Europe,Southern Europe,XKX
+Kosovo,1991,67.94878,,0,,Europe,Southern Europe,XKX
 Kuwait,1991,72.42678,,4,,Asia,Western Asia,KWT
 Kyrgyz Republic,1991,68.55122,,2,9390000000,Asia,Central Asia,KGZ
 Lao PDR,1991,54.05271,210,1,4780000000,Asia,South-eastern Asia,LAO
@@ -333,7 +333,7 @@ Liechtenstein,1991,,47700,,,Europe,Western Europe,LIE
 Lithuania,1991,70.36415,,3,,Europe,Northern Europe,LTU
 Luxembourg,1991,75.46341,32100,5,13200000000,Europe,Western Europe,LUX
 Macao,1991,75.53078,9550,3,8570000000,Asia,Eastern Asia,MAC
-"Macedonia, FYR",1991,71.32566,,,10200000000,Europe,Southern Europe,MKD
+"Macedonia, FYR",1991,71.32566,,0,10200000000,Europe,Southern Europe,MKD
 Madagascar,1991,51.59824,220,1,12000000000,Africa,Eastern Africa,MDG
 Malawi,1991,43.58285,210,1,5100000000,Africa,Eastern Africa,MWI
 Malaysia,1991,70.98888,2530,2,139000000000,Asia,South-eastern Asia,MYS
@@ -348,7 +348,7 @@ Mexico,1991,71.19098,3200,3,555000000000,Americas,Central America,MEX
 Moldova,1991,67.39232,,2,,Europe,Eastern Europe,MDA
 Monaco,1991,,82500,,,Europe,Western Europe,MCO
 Mongolia,1991,60.48824,1200,2,6820000000,Asia,Eastern Asia,MNG
-Montenegro,1991,74.51041,,,,Europe,Southern Europe,MNE
+Montenegro,1991,74.51041,,0,,Europe,Southern Europe,MNE
 Morocco,1991,65.2031,1230,2,70300000000,Africa,Northern Africa,MAR
 Mozambique,1991,43.53732,200,1,3510000000,Africa,Eastern Africa,MOZ
 Myanmar,1991,59.04849,,1,20000000000,Asia,South-eastern Asia,MMR
@@ -383,22 +383,22 @@ San Marino,1991,,,4,,Europe,Southern Europe,SMR
 Sao Tome and Principe,1991,61.93454,,1,,Africa,Middle Africa,STP
 Saudi Arabia,1991,69.5922,8010,3,421000000000,Asia,Western Asia,SAU
 Senegal,1991,57.40949,710,2,9530000000,Africa,Western Africa,SEN
-Serbia,1991,71.4878,,,,Europe,Southern Europe,SRB
+Serbia,1991,71.4878,,0,,Europe,Southern Europe,SRB
 Seychelles,1991,,5180,3,678000000,Africa,Eastern Africa,SYC
 Sierra Leone,1991,36.74834,190,1,3690000000,Africa,Western Africa,SLE
 Singapore,1991,75.64634,13000,4,74500000000,Asia,South-eastern Asia,SGP
 Sint Maarten (Dutch part),1991,,,,,Americas,Caribbean,SXM
-Slovak Republic,1991,70.88293,,,,Europe,Eastern Europe,SVK
-Slovenia,1991,73.35366,,,,Europe,Southern Europe,SVN
+Slovak Republic,1991,70.88293,,0,,Europe,Eastern Europe,SVK
+Slovenia,1991,73.35366,,0,,Europe,Southern Europe,SVN
 Solomon Islands,1991,57.21385,,1,396000000,Oceania,Melanesia,SLB
 Somalia,1991,45.27088,,1,,Africa,Eastern Africa,SOM
 South Africa,1991,62.2948,3320,3,241000000000,Africa,Southern Africa,ZAF
-South Sudan,1991,44.22593,,,,Africa,Eastern Africa,SSD
+South Sudan,1991,44.22593,,0,,Africa,Eastern Africa,SSD
 Spain,1991,76.97122,13700,5,561000000000,Europe,Southern Europe,ESP
 Sri Lanka,1991,69.7802,500,1,43700000000,Asia,Southern Asia,LKA
 St. Kitts and Nevis,1991,,4940,3,382000000,Americas,Caribbean,KNA
 St. Lucia,1991,71.13817,2830,2,752000000,Americas,Caribbean,LCA
-St. Martin (French part),1991,75.92439,,,,Americas,Caribbean,MAF
+St. Martin (French part),1991,75.92439,,0,,Americas,Caribbean,MAF
 St. Vincent and the Grenadines,1991,70.23744,2230,2,405000000,Americas,Caribbean,VCT
 Sudan,1991,55.69085,440,1,32400000000,Africa,Northern Africa,SDN
 Suriname,1991,67.58049,1120,3,2970000000,Americas,South America,SUR
@@ -409,7 +409,7 @@ Syrian Arab Republic,1991,70.396,990,2,,Asia,Western Asia,SYR
 Tajikistan,1991,62.62754,,2,11900000000,Asia,Central Asia,TJK
 Tanzania,1991,49.62341,180,1,24800000000,Africa,Eastern Africa,TZA
 Thailand,1991,70.28724,1660,2,273000000000,Asia,South-eastern Asia,THA
-Timor-Leste,1991,49.34427,,,,Asia,South-eastern Asia,TLS
+Timor-Leste,1991,49.34427,,0,,Asia,South-eastern Asia,TLS
 Togo,1991,55.83502,400,1,3390000000,Africa,Western Africa,TGO
 Tonga,1991,69.69305,1350,2,242000000,Oceania,Polynesia,TON
 Trinidad and Tobago,1991,68.11059,3850,3,10300000000,Americas,Caribbean,TTO
@@ -429,7 +429,7 @@ Vanuatu,1991,63.64778,1090,2,257000000,Oceania,Melanesia,VUT
 "Venezuela, RB",1991,69.99441,2580,3,210000000000,Americas,South America,VEN
 Vietnam,1991,70.70807,110,1,70100000000,Asia,South-eastern Asia,VNM
 Virgin Islands (U.S.),1991,75.09902,,4,,Americas,Caribbean,VIR
-West Bank and Gaza,1991,68.39454,,,,Asia,Western Asia,PSE
+West Bank and Gaza,1991,68.39454,,0,,Asia,Western Asia,PSE
 "Yemen, Rep.",1991,58.1109,,1,28500000000,Asia,Western Asia,YEM
 Zambia,1991,43.60232,390,1,12550499563,Africa,Eastern Africa,ZMB
 Zimbabwe,1991,58.19717,850,1,18666569832,Africa,Eastern Africa,ZWE
@@ -537,7 +537,7 @@ Kenya,1992,57.47354,330,1,38290894122,Africa,Eastern Africa,KEN
 Kiribati,1992,61.29973,1030,2,97900000,Oceania,Micronesia,KIR
 North Korea,1992,68.95171,,2,,Asia,Eastern Asia,PRK
 South Korea,1992,72.20049,8290,3,447000000000,Asia,Eastern Asia,KOR
-Kosovo,1992,68.1,,,,Europe,Southern Europe,XKX
+Kosovo,1992,68.1,,0,,Europe,Southern Europe,XKX
 Kuwait,1992,72.55695,,4,58500000000,Asia,Western Asia,KWT
 Kyrgyz Republic,1992,68.10244,520,2,8270000000,Asia,Central Asia,KGZ
 Lao PDR,1992,54.55644,250,1,5160000000,Asia,South-eastern Asia,LAO
@@ -565,7 +565,7 @@ Mexico,1992,71.58583,3700,3,588000000000,Americas,Central America,MEX
 Moldova,1992,67.24541,,2,,Europe,Eastern Europe,MDA
 Monaco,1992,,91300,,,Europe,Western Europe,MCO
 Mongolia,1992,60.67237,810,2,6330000000,Asia,Eastern Asia,MNG
-Montenegro,1992,74.50066,,,,Europe,Southern Europe,MNE
+Montenegro,1992,74.50066,,0,,Europe,Southern Europe,MNE
 Morocco,1992,65.67232,1270,2,70400000000,Africa,Northern Africa,MAR
 Mozambique,1992,44.02856,180,1,3410000000,Africa,Eastern Africa,MOZ
 Myanmar,1992,59.39632,,1,22500000000,Asia,South-eastern Asia,MMR
@@ -610,12 +610,12 @@ Slovenia,1992,73.30488,,3,,Europe,Southern Europe,SVN
 Solomon Islands,1992,57.82112,800,2,456000000,Oceania,Melanesia,SLB
 Somalia,1992,45.37232,,1,,Africa,Eastern Africa,SOM
 South Africa,1992,62.32517,3320,3,241000000000,Africa,Southern Africa,ZAF
-South Sudan,1992,44.92515,,,,Africa,Eastern Africa,SSD
+South Sudan,1992,44.92515,,0,,Africa,Eastern Africa,SSD
 Spain,1992,77.41,15700,5,579000000000,Europe,Southern Europe,ESP
 Sri Lanka,1992,69.79641,560,1,46700000000,Asia,Southern Asia,LKA
 St. Kitts and Nevis,1992,67.95122,5340,3,408000000,Americas,Caribbean,KNA
 St. Lucia,1992,71.19451,3180,3,823000000,Americas,Caribbean,LCA
-St. Martin (French part),1992,75.42439,,,,Americas,Caribbean,MAF
+St. Martin (French part),1992,75.42439,,0,,Americas,Caribbean,MAF
 St. Vincent and the Grenadines,1992,70.36815,2540,2,441000000,Americas,Caribbean,VCT
 Sudan,1992,55.87959,340,1,35400000000,Africa,Northern Africa,SDN
 Suriname,1992,67.65107,1010,3,3030000000,Americas,South America,SUR
@@ -626,7 +626,7 @@ Syrian Arab Republic,1992,70.67441,1110,2,,Asia,Western Asia,SYR
 Tajikistan,1992,62.4332,370,1,8680000000,Asia,Central Asia,TJK
 Tanzania,1992,49.28015,180,1,25600000000,Africa,Eastern Africa,TZA
 Thailand,1992,70.27307,1880,2,302000000000,Asia,South-eastern Asia,THA
-Timor-Leste,1992,50.28027,,,,Asia,South-eastern Asia,TLS
+Timor-Leste,1992,50.28027,,0,,Asia,South-eastern Asia,TLS
 Togo,1992,55.69768,410,1,3330000000,Africa,Western Africa,TGO
 Tonga,1992,69.79722,1450,2,248000000,Oceania,Polynesia,TON
 Trinidad and Tobago,1992,68.19163,4030,3,10330235865,Americas,Caribbean,TTO
@@ -646,7 +646,7 @@ Vanuatu,1992,64.10341,1120,2,270182217,Oceania,Melanesia,VUT
 "Venezuela, RB",1992,70.18802,2740,3,228000000000,Americas,South America,VEN
 Vietnam,1992,70.99546,130,1,77900000000,Asia,South-eastern Asia,VNM
 Virgin Islands (U.S.),1992,75.40051,,4,,Americas,Caribbean,VIR
-West Bank and Gaza,1992,68.71707,,,,Asia,Western Asia,PSE
+West Bank and Gaza,1992,68.71707,,0,,Asia,Western Asia,PSE
 "Yemen, Rep.",1992,58.41863,500,1,31500000000,Asia,Western Asia,YEM
 Zambia,1992,43.00461,360,1,12614403105,Africa,Eastern Africa,ZMB
 Zimbabwe,1992,56.49198,690,1,17370823594,Africa,Eastern Africa,ZWE
@@ -754,7 +754,7 @@ Kenya,1993,56.5592,270,1,39300000000,Africa,Eastern Africa,KEN
 Kiribati,1993,61.73729,1020,2,101000000,Oceania,Micronesia,KIR
 North Korea,1993,68.23027,,2,,Asia,Eastern Asia,PRK
 South Korea,1993,72.68195,8980,3,488000000000,Asia,Eastern Asia,KOR
-Kosovo,1993,68.24878,,,,Europe,Southern Europe,XKX
+Kosovo,1993,68.24878,,0,,Europe,Southern Europe,XKX
 Kuwait,1993,72.67554,,4,80300000000,Asia,Western Asia,KWT
 Kyrgyz Republic,1993,67.19268,450,2,7160000000,Asia,Central Asia,KGZ
 Lao PDR,1993,55.06783,280,1,5600000000,Asia,South-eastern Asia,LAO
@@ -782,7 +782,7 @@ Mexico,1993,71.97783,4460,3,767000000000,Americas,Central America,MEX
 Moldova,1993,67.06705,,2,,Europe,Eastern Europe,MDA
 Monaco,1993,,89600,,,Europe,Western Europe,MCO
 Mongolia,1993,60.8432,510,1,6280000000,Asia,Eastern Asia,MNG
-Montenegro,1993,74.40861,,,,Europe,Southern Europe,MNE
+Montenegro,1993,74.40861,,0,,Europe,Southern Europe,MNE
 Morocco,1993,66.0938,1220,2,71500000000,Africa,Northern Africa,MAR
 Mozambique,1993,44.59768,180,1,3790000000,Africa,Eastern Africa,MOZ
 Myanmar,1993,59.73917,,1,24400000000,Asia,South-eastern Asia,MMR
@@ -827,12 +827,12 @@ Slovenia,1993,73.25366,,3,,Europe,Southern Europe,SVN
 Solomon Islands,1993,58.45459,750,2,486000000,Oceania,Melanesia,SLB
 Somalia,1993,45.73322,,1,,Africa,Eastern Africa,SOM
 South Africa,1993,62.19373,3500,3,250000000000,Africa,Southern Africa,ZAF
-South Sudan,1993,45.60288,,,,Africa,Eastern Africa,SSD
+South Sudan,1993,45.60288,,0,,Africa,Eastern Africa,SSD
 Spain,1993,77.54659,15100,5,587000000000,Europe,Southern Europe,ESP
 Sri Lanka,1993,69.71673,600,1,51100000000,Asia,Southern Asia,LKA
 St. Kitts and Nevis,1993,,5770,3,447000000,Americas,Caribbean,KNA
 St. Lucia,1993,71.21451,3270,3,865000000,Americas,Caribbean,LCA
-St. Martin (French part),1993,75.57317,,,,Americas,Caribbean,MAF
+St. Martin (French part),1993,75.57317,,0,,Americas,Caribbean,MAF
 St. Vincent and the Grenadines,1993,70.46661,2680,2,470000000,Americas,Caribbean,VCT
 Sudan,1993,56.08117,300,1,37900000000,Africa,Northern Africa,SDN
 Suriname,1993,67.71207,,2,2870000000,Americas,South America,SUR
@@ -843,7 +843,7 @@ Syrian Arab Republic,1993,70.94661,1070,2,,Asia,Western Asia,SYR
 Tajikistan,1993,62.31815,230,1,7430000000,Asia,Central Asia,TJK
 Tanzania,1993,48.98715,170,1,26500000000,Africa,Eastern Africa,TZA
 Thailand,1993,70.23744,2140,2,334000000000,Asia,South-eastern Asia,THA
-Timor-Leste,1993,51.31841,,,,Asia,South-eastern Asia,TLS
+Timor-Leste,1993,51.31841,,0,,Asia,South-eastern Asia,TLS
 Togo,1993,55.4502,330,1,2890000000,Africa,Western Africa,TGO
 Tonga,1993,69.90073,1530,2,263000000,Oceania,Polynesia,TON
 Trinidad and Tobago,1993,68.26412,3840,3,10400000000,Americas,Caribbean,TTO
@@ -863,7 +863,7 @@ Vanuatu,1993,64.55934,1210,2,279000000,Oceania,Melanesia,VUT
 "Venezuela, RB",1993,70.40944,2720,3,234000000000,Americas,South America,VEN
 Vietnam,1993,71.28241,170,1,86200000000,Asia,South-eastern Asia,VNM
 Virgin Islands (U.S.),1993,75.6949,,4,,Americas,Caribbean,VIR
-West Bank and Gaza,1993,69.02695,,,,Asia,Western Asia,PSE
+West Bank and Gaza,1993,69.02695,,0,,Asia,Western Asia,PSE
 "Yemen, Rep.",1993,58.70288,450,1,33600000000,Asia,Western Asia,YEM
 Zambia,1993,42.53312,370,1,13792368906,Africa,Eastern Africa,ZMB
 Zimbabwe,1993,54.53871,630,1,17971113561,Africa,Eastern Africa,ZWE
@@ -960,7 +960,7 @@ India,1994,59.95483,350,1,1310000000000,Asia,Southern Asia,IND
 Indonesia,1994,64.67385,850,2,782000000000,Asia,South-eastern Asia,IDN
 Iraq,1994,68.14763,,2,92700000000,Asia,Western Asia,IRQ
 Ireland,1994,75.43763,15500,5,61000000000,Europe,Northern Europe,IRL
-Isle of Man,1994,76.52927,,,,Europe,Northern Europe,IMN
+Isle of Man,1994,76.52927,,0,,Europe,Northern Europe,IMN
 Israel,1994,77.40244,13800,4,87100000000,Asia,Western Asia,ISR
 Italy,1994,77.92195,20800,5,1210000000000,Europe,Southern Europe,ITA
 Jamaica,1994,71.93537,1820,2,15000000000,Americas,Caribbean,JAM
@@ -971,7 +971,7 @@ Kenya,1994,55.53395,260,1,41200000000,Africa,Eastern Africa,KEN
 Kiribati,1994,62.13978,1050,2,105000000,Oceania,Micronesia,KIR
 North Korea,1994,67.22822,,2,,Asia,Eastern Asia,PRK
 South Korea,1994,73.04317,10000,3,540000000000,Asia,Eastern Asia,KOR
-Kosovo,1994,68.4,,,,Europe,Southern Europe,XKX
+Kosovo,1994,68.4,,0,,Europe,Southern Europe,XKX
 Kuwait,1994,72.78559,,4,88878809036,Asia,Western Asia,KWT
 Kyrgyz Republic,1994,66.03902,370,1,5840000000,Asia,Central Asia,KGZ
 Lao PDR,1994,55.58746,310,1,6186286789,Asia,South-eastern Asia,LAO
@@ -999,7 +999,7 @@ Mexico,1994,72.36385,5200,3,820000000000,Americas,Central America,MEX
 Moldova,1994,66.88334,,2,,Europe,Eastern Europe,MDA
 Monaco,1994,,92200,4,,Europe,Western Europe,MCO
 Mongolia,1994,61.01559,430,1,6550000000,Asia,Eastern Asia,MNG
-Montenegro,1994,74.24222,,,,Europe,Southern Europe,MNE
+Montenegro,1994,74.24222,,0,,Europe,Southern Europe,MNE
 Morocco,1994,66.47259,1340,2,80800000000,Africa,Northern Africa,MAR
 Mozambique,1994,45.23122,160,1,4110000000,Africa,Eastern Africa,MOZ
 Myanmar,1994,60.07705,,1,26800000000,Asia,South-eastern Asia,MMR
@@ -1044,12 +1044,12 @@ Slovenia,1994,73.40488,,3,,Europe,Southern Europe,SVN
 Solomon Islands,1994,59.08373,830,2,541000000,Oceania,Melanesia,SLB
 Somalia,1994,46.34805,,1,,Africa,Eastern Africa,SOM
 South Africa,1994,61.88798,3680,3,263000000000,Africa,Southern Africa,ZAF
-South Sudan,1994,46.24666,,,,Africa,Eastern Africa,SSD
+South Sudan,1994,46.24666,,0,,Africa,Eastern Africa,SSD
 Spain,1994,77.90146,14600,5,614000000000,Europe,Southern Europe,ESP
 Sri Lanka,1994,69.56598,640,1,55115801677,Asia,Southern Asia,LKA
 St. Kitts and Nevis,1994,,6210,3,480000000,Americas,Caribbean,KNA
 St. Lucia,1994,71.20515,3370,3,896000000,Americas,Caribbean,LCA
-St. Martin (French part),1994,75.82195,,,,Americas,Caribbean,MAF
+St. Martin (French part),1994,75.82195,,0,,Americas,Caribbean,MAF
 St. Vincent and the Grenadines,1994,70.53627,2640,2,474000000,Americas,Caribbean,VCT
 Sudan,1994,56.29866,310,1,39100000000,Africa,Northern Africa,SDN
 Suriname,1994,67.76398,1080,2,3030000000,Americas,South America,SUR
@@ -1060,7 +1060,7 @@ Syrian Arab Republic,1994,71.21561,970,2,,Asia,Western Asia,SYR
 Tajikistan,1994,62.30159,240,1,5970000000,Asia,Central Asia,TJK
 Tanzania,1994,48.77932,160,1,27475169324,Africa,Eastern Africa,TZA
 Thailand,1994,70.20702,2400,2,369000000000,Asia,South-eastern Asia,THA
-Timor-Leste,1994,52.46341,,,,Asia,South-eastern Asia,TLS
+Timor-Leste,1994,52.46341,,0,,Asia,South-eastern Asia,TLS
 Togo,1994,55.11344,300,1,3400000000,Africa,Western Africa,TGO
 Tonga,1994,70.00646,1820,2,282000000,Oceania,Polynesia,TON
 Trinidad and Tobago,1994,68.3281,3810,3,11000000000,Americas,Caribbean,TTO
@@ -1080,7 +1080,7 @@ Vanuatu,1994,65.01215,1170,2,310000000,Oceania,Melanesia,VUT
 "Venezuela, RB",1994,70.65622,2620,2,234000000000,Americas,South America,VEN
 Vietnam,1994,71.56849,200,1,95800000000,Asia,South-eastern Asia,VNM
 Virgin Islands (U.S.),1994,75.9822,,4,,Americas,Caribbean,VIR
-West Bank and Gaza,1994,69.32668,,,4600000000,Asia,Western Asia,PSE
+West Bank and Gaza,1994,69.32668,,0,4600000000,Asia,Western Asia,PSE
 "Yemen, Rep.",1994,58.97263,370,1,36575421873,Asia,Western Asia,YEM
 Zambia,1994,42.20722,350,1,12870918694,Africa,Eastern Africa,ZMB
 Zimbabwe,1994,52.42212,620,1,20048550732,Africa,Eastern Africa,ZWE
@@ -1188,7 +1188,7 @@ Kenya,1995,54.45773,270,1,44000000000,Africa,Eastern Africa,KEN
 Kiribati,1995,62.50566,1150,2,107000000,Oceania,Micronesia,KIR
 North Korea,1995,66.11729,,2,,Asia,Eastern Asia,PRK
 South Korea,1995,73.39439,11700,4,603000000000,Asia,Eastern Asia,KOR
-Kosovo,1995,68.55122,,,,Europe,Southern Europe,XKX
+Kosovo,1995,68.55122,,0,,Europe,Southern Europe,XKX
 Kuwait,1995,72.8881,20100,4,95100000000,Asia,Western Asia,KWT
 Kyrgyz Republic,1995,65.79024,360,1,5640000000,Asia,Central Asia,KGZ
 Lao PDR,1995,56.11729,350,1,6759358427,Asia,South-eastern Asia,LAO
@@ -1216,7 +1216,7 @@ Mexico,1995,72.73978,4570,3,753000000000,Americas,Central America,MEX
 Moldova,1995,66.72783,,2,6980000000,Europe,Eastern Europe,MDA
 Monaco,1995,,97000,4,,Europe,Western Europe,MCO
 Mongolia,1995,61.21059,460,1,7110000000,Asia,Eastern Asia,MNG
-Montenegro,1995,74.02222,,,,Europe,Southern Europe,MNE
+Montenegro,1995,74.02222,,0,,Europe,Southern Europe,MNE
 Morocco,1995,66.82068,1290,2,78000000000,Africa,Northern Africa,MAR
 Mozambique,1995,45.89876,160,1,4290000000,Africa,Eastern Africa,MOZ
 Myanmar,1995,60.41144,,1,29200000000,Asia,South-eastern Asia,MMR
@@ -1233,7 +1233,7 @@ Northern Mariana Islands,1995,,,4,,Oceania,Micronesia,MNP
 Norway,1995,77.73659,32700,5,106000000000,Europe,Northern Europe,NOR
 Oman,1995,69.98854,6310,3,61600000000,Asia,Western Asia,OMN
 Pakistan,1995,61.48529,490,1,301000000000,Asia,Southern Asia,PAK
-Palau,1995,71.84463,5770,,177000000,Oceania,Micronesia,PLW
+Palau,1995,71.84463,5770,0,177000000,Oceania,Micronesia,PLW
 Panama,1995,74.12151,3470,2,18398070714,Americas,Central America,PAN
 Papua New Guinea,1995,57.35195,1040,2,7360000000,Oceania,Melanesia,PNG
 Paraguay,1995,68.91522,1680,2,23000000000,Americas,South America,PRY
@@ -1261,12 +1261,12 @@ Slovenia,1995,73.95854,,3,27000000000,Europe,Southern Europe,SVN
 Solomon Islands,1995,59.69595,900,2,598000000,Oceania,Melanesia,SLB
 Somalia,1995,47.16183,,1,,Africa,Eastern Africa,SOM
 South Africa,1995,61.37002,3850,3,277000000000,Africa,Southern Africa,ZAF
-South Sudan,1995,46.84551,,,,Africa,Eastern Africa,SSD
+South Sudan,1995,46.84551,,0,,Africa,Eastern Africa,SSD
 Spain,1995,77.98073,15000,5,644000000000,Europe,Southern Europe,ESP
 Sri Lanka,1995,69.41861,700,1,59400000000,Asia,Southern Asia,LKA
 St. Kitts and Nevis,1995,,6800,3,519000000,Americas,Caribbean,KNA
 St. Lucia,1995,71.18095,3540,3,944000000,Americas,Caribbean,LCA
-St. Martin (French part),1995,75.97073,,,,Americas,Caribbean,MAF
+St. Martin (French part),1995,75.97073,,0,,Americas,Caribbean,MAF
 St. Vincent and the Grenadines,1995,70.57751,2890,2,522000000,Americas,Caribbean,VCT
 Sudan,1995,56.53307,390,1,42300000000,Africa,Northern Africa,SDN
 Suriname,1995,67.80573,1320,2,3130000000,Americas,South America,SUR
@@ -1277,7 +1277,7 @@ Syrian Arab Republic,1995,71.48144,900,2,,Asia,Western Asia,SYR
 Tajikistan,1995,62.38749,200,1,5340000000,Asia,Central Asia,TJK
 Tanzania,1995,48.69151,170,1,29000000000,Africa,Eastern Africa,TZA
 Thailand,1995,70.20061,2750,2,407000000000,Asia,South-eastern Asia,THA
-Timor-Leste,1995,53.68832,,,,Asia,South-eastern Asia,TLS
+Timor-Leste,1995,53.68832,,0,,Asia,South-eastern Asia,TLS
 Togo,1995,54.72488,300,1,3740000000,Africa,Western Africa,TGO
 Tonga,1995,70.11927,2010,2,299000000,Oceania,Polynesia,TON
 Trinidad and Tobago,1995,68.38376,3890,3,11700000000,Americas,Caribbean,TTO
@@ -1297,7 +1297,7 @@ Vanuatu,1995,65.45934,1270,2,320000000,Oceania,Melanesia,VUT
 "Venezuela, RB",1995,70.92693,2910,2,248000000000,Americas,South America,VEN
 Vietnam,1995,71.85222,260,1,107000000000,Asia,South-eastern Asia,VNM
 Virgin Islands (U.S.),1995,76.2629,,4,,Americas,Caribbean,VIR
-West Bank and Gaza,1995,69.61532,,,5030000000,Asia,Western Asia,PSE
+West Bank and Gaza,1995,69.61532,,0,5030000000,Asia,Western Asia,PSE
 "Yemen, Rep.",1995,59.23641,310,1,39500000000,Asia,Western Asia,YEM
 Zambia,1995,42.03829,370,1,13520099691,Africa,Eastern Africa,ZMB
 Zimbabwe,1995,50.239,600,1,20499041327,Africa,Eastern Africa,ZWE
@@ -1405,7 +1405,7 @@ Kenya,1996,53.4,340,1,46600000000,Africa,Eastern Africa,KEN
 Kiribati,1996,62.83732,1090,2,111000000,Oceania,Micronesia,KIR
 North Korea,1996,65.1242,,2,,Asia,Eastern Asia,PRK
 South Korea,1996,73.83122,13100,5,663000000000,Asia,Eastern Asia,KOR
-Kosovo,1996,68.7,,,,Europe,Southern Europe,XKX
+Kosovo,1996,68.7,,0,,Europe,Southern Europe,XKX
 Kuwait,1996,72.98507,20700,4,97500000000,Asia,Western Asia,KWT
 Kyrgyz Republic,1996,66.5439,390,1,6150250536,Asia,Central Asia,KGZ
 Lao PDR,1996,56.65683,380,1,7360000000,Asia,South-eastern Asia,LAO
@@ -1433,7 +1433,7 @@ Mexico,1996,73.0989,4320,3,803000000000,Americas,Central America,MEX
 Moldova,1996,66.6291,,1,6690000000,Europe,Eastern Europe,MDA
 Monaco,1996,,101000,4,,Europe,Western Europe,MCO
 Mongolia,1996,61.44805,550,1,7400000000,Asia,Eastern Asia,MNG
-Montenegro,1996,73.77878,,,,Europe,Southern Europe,MNE
+Montenegro,1996,73.77878,,0,,Europe,Southern Europe,MNE
 Morocco,1996,67.1491,1500,2,89300000000,Africa,Northern Africa,MAR
 Mozambique,1996,46.56341,200,1,5540000000,Africa,Eastern Africa,MOZ
 Myanmar,1996,60.7459,,1,31700000000,Asia,South-eastern Asia,MMR
@@ -1464,7 +1464,7 @@ Romania,1996,69.10488,1650,2,131000000000,Europe,Eastern Europe,ROU
 Russian Federation,1996,66.19415,2610,2,817000000000,Europe,Eastern Europe,RUS
 Rwanda,1996,35.6592,220,1,3300000000,Africa,Eastern Africa,RWA
 Samoa,1996,67.95427,,2,499028473,Oceania,Polynesia,WSM
-San Marino,1996,79.11951,,,,Europe,Southern Europe,SMR
+San Marino,1996,79.11951,,0,,Europe,Southern Europe,SMR
 Sao Tome and Principe,1996,62.71832,,1,,Africa,Middle Africa,STP
 Saudi Arabia,1996,71.44329,8020,3,511000000000,Asia,Western Asia,SAU
 Senegal,1996,57.31934,540,1,11700000000,Africa,Western Africa,SEN
@@ -1478,12 +1478,12 @@ Slovenia,1996,74.45854,,3,28400000000,Europe,Southern Europe,SVN
 Solomon Islands,1996,60.29659,890,2,619000000,Oceania,Melanesia,SLB
 Somalia,1996,48.07761,,1,,Africa,Eastern Africa,SOM
 South Africa,1996,60.60546,3870,3,294000000000,Africa,Southern Africa,ZAF
-South Sudan,1996,47.39395,,,,Africa,Eastern Africa,SSD
+South Sudan,1996,47.39395,,0,,Africa,Eastern Africa,SSD
 Spain,1996,78.12049,15700,5,675000000000,Europe,Southern Europe,ESP
 Sri Lanka,1996,69.37273,750,1,62700000000,Asia,Southern Asia,LKA
 St. Kitts and Nevis,1996,,7150,3,559000000,Americas,Caribbean,KNA
 St. Lucia,1996,71.15749,3720,3,1010000000,Americas,Caribbean,LCA
-St. Martin (French part),1996,76.17073,,,,Americas,Caribbean,MAF
+St. Martin (French part),1996,76.17073,,0,,Americas,Caribbean,MAF
 St. Vincent and the Grenadines,1996,70.59178,3000,2,538000000,Americas,Caribbean,VCT
 Sudan,1996,56.78595,380,1,45578490724,Africa,Northern Africa,SDN
 Suriname,1996,67.83434,1640,2,3230000000,Americas,South America,SUR
@@ -1494,7 +1494,7 @@ Syrian Arab Republic,1996,71.7421,860,2,,Asia,Western Asia,SYR
 Tajikistan,1996,62.5632,170,1,4530000000,Asia,Central Asia,TJK
 Tanzania,1996,48.74812,190,1,30900000000,Africa,Eastern Africa,TZA
 Thailand,1996,70.22788,2970,2,438000000000,Asia,South-eastern Asia,THA
-Timor-Leste,1996,54.94312,,,,Asia,South-eastern Asia,TLS
+Timor-Leste,1996,54.94312,,0,,Asia,South-eastern Asia,TLS
 Togo,1996,54.32961,310,1,4150000000,Africa,Western Africa,TGO
 Tonga,1996,70.23851,2280,2,304000000,Oceania,Polynesia,TON
 Trinidad and Tobago,1996,68.43083,4230,3,12800000000,Americas,Caribbean,TTO
@@ -1514,7 +1514,7 @@ Vanuatu,1996,65.89949,1280,2,334000000,Oceania,Melanesia,VUT
 "Venezuela, RB",1996,71.21571,2960,2,252000000000,Americas,South America,VEN
 Vietnam,1996,72.13156,310,1,119000000000,Asia,South-eastern Asia,VNM
 Virgin Islands (U.S.),1996,76.53656,,4,,Americas,Caribbean,VIR
-West Bank and Gaza,1996,69.88788,1520,,5500000000,Asia,Western Asia,PSE
+West Bank and Gaza,1996,69.88788,1520,0,5500000000,Asia,Western Asia,PSE
 "Yemen, Rep.",1996,59.4962,290,1,42000000000,Asia,Western Asia,YEM
 Zambia,1996,42.0248,400,1,14623018430,Africa,Eastern Africa,ZMB
 Zimbabwe,1996,48.08763,670,1,23035877684,Africa,Eastern Africa,ZWE
@@ -1623,7 +1623,7 @@ Kenya,1997,52.43754,390,1,47631244242,Africa,Eastern Africa,KEN
 Kiribati,1997,63.14461,1340,2,115000000,Oceania,Micronesia,KIR
 North Korea,1997,64.44195,,2,,Asia,Eastern Asia,PRK
 South Korea,1997,74.2478,13300,5,711000000000,Asia,Eastern Asia,KOR
-Kosovo,1997,68.85122,,,,Europe,Southern Europe,XKX
+Kosovo,1997,68.85122,,0,,Europe,Southern Europe,XKX
 Kuwait,1997,73.07502,21800,4,102000000000,Asia,Western Asia,KWT
 Kyrgyz Republic,1997,66.89268,390,1,6880000000,Asia,Central Asia,KGZ
 Lao PDR,1997,57.20344,370,1,8000000000,Asia,South-eastern Asia,LAO
@@ -1651,7 +1651,7 @@ Mexico,1997,73.43715,4310,3,874000000000,Americas,Central America,MEX
 Moldova,1997,66.5951,500,1,6920000000,Europe,Eastern Europe,MDA
 Monaco,1997,,99700,4,,Europe,Western Europe,MCO
 Mongolia,1997,61.73646,580,1,7820000000,Asia,Eastern Asia,MNG
-Montenegro,1997,73.54905,,,,Europe,Southern Europe,MNE
+Montenegro,1997,73.54905,,0,,Europe,Southern Europe,MNE
 Morocco,1997,67.4712,1450,2,89400000000,Africa,Northern Africa,MAR
 Mozambique,1997,47.19029,230,1,6250000000,Africa,Eastern Africa,MOZ
 Myanmar,1997,61.0799,,1,34000000000,Asia,South-eastern Asia,MMR
@@ -1682,11 +1682,11 @@ Romania,1997,69.00488,1600,2,126000000000,Europe,Eastern Europe,ROU
 Russian Federation,1997,66.95073,2650,2,843000000000,Europe,Eastern Europe,RUS
 Rwanda,1997,39.8048,260,1,3820000000,Africa,Eastern Africa,RWA
 Samoa,1997,68.37054,1520,2,511000000,Oceania,Polynesia,WSM
-San Marino,1997,79.47317,,,,Europe,Southern Europe,SMR
+San Marino,1997,79.47317,,0,,Europe,Southern Europe,SMR
 Sao Tome and Principe,1997,62.8599,,1,,Africa,Middle Africa,STP
 Saudi Arabia,1997,71.75429,8250,3,533000000000,Asia,Western Asia,SAU
 Senegal,1997,57.30337,540,1,12200000000,Africa,Western Africa,SEN
-Serbia,1997,72.03902,2850,,42300000000,Europe,Southern Europe,SRB
+Serbia,1997,72.03902,2850,0,42300000000,Europe,Southern Europe,SRB
 Seychelles,1997,71.41463,7330,3,1010000000,Africa,Eastern Africa,SYC
 Sierra Leone,1997,36.4262,220,1,2960000000,Africa,Western Africa,SLE
 Singapore,1997,76.89756,27750,4,139000000000,Asia,South-eastern Asia,SGP
@@ -1696,12 +1696,12 @@ Slovenia,1997,74.70732,11300,4,30300000000,Europe,Southern Europe,SVN
 Solomon Islands,1997,60.90861,1440,2,620000000,Oceania,Melanesia,SLB
 Somalia,1997,48.97644,,1,,Africa,Eastern Africa,SOM
 South Africa,1997,59.6132,3780,3,307000000000,Africa,Southern Africa,ZAF
-South Sudan,1997,47.89846,,,,Africa,Eastern Africa,SSD
+South Sudan,1997,47.89846,,0,,Africa,Eastern Africa,SSD
 Spain,1997,78.60415,16000,5,715000000000,Europe,Southern Europe,ESP
 Sri Lanka,1997,69.50466,800,2,67900000000,Asia,Southern Asia,LKA
 St. Kitts and Nevis,1997,70.03634,7520,3,608000000,Americas,Caribbean,KNA
 St. Lucia,1997,71.15529,3700,3,1040000000,Americas,Caribbean,LCA
-St. Martin (French part),1997,76.37073,,,,Americas,Caribbean,MAF
+St. Martin (French part),1997,76.37073,,0,,Americas,Caribbean,MAF
 St. Vincent and the Grenadines,1997,70.58766,3070,2,566453318,Americas,Caribbean,VCT
 Sudan,1997,57.05588,370,1,51300000000,Africa,Northern Africa,SDN
 Suriname,1997,67.85188,1850,2,3470000000,Americas,South America,SUR
@@ -1712,7 +1712,7 @@ Syrian Arab Republic,1997,71.99366,860,2,,Asia,Western Asia,SYR
 Tajikistan,1997,62.79734,170,1,4680000000,Asia,Central Asia,TJK
 Tanzania,1997,48.95249,210,1,32600000000,Africa,Eastern Africa,TZA
 Thailand,1997,70.28239,2690,2,433000000000,Asia,South-eastern Asia,THA
-Timor-Leste,1997,56.16551,,,,Asia,South-eastern Asia,TLS
+Timor-Leste,1997,56.16551,,0,,Asia,South-eastern Asia,TLS
 Togo,1997,53.97339,350,1,4820000000,Africa,Western Africa,TGO
 Tonga,1997,70.36368,2260,2,309000000,Oceania,Polynesia,TON
 Trinidad and Tobago,1997,68.47261,4500,3,14000000000,Americas,Caribbean,TTO
@@ -1732,7 +1732,7 @@ Vanuatu,1997,66.3301,1310,2,356000000,Oceania,Melanesia,VUT
 "Venezuela, RB",1997,71.51227,3350,3,273000000000,Americas,South America,VEN
 Vietnam,1997,72.40351,350,1,131000000000,Asia,South-eastern Asia,VNM
 Virgin Islands (U.S.),1997,76.80256,,4,,Americas,Caribbean,VIR
-West Bank and Gaza,1997,70.14039,1740,,6931016286,Asia,Western Asia,PSE
+West Bank and Gaza,1997,70.14039,1740,0,6931016286,Asia,Western Asia,PSE
 "Yemen, Rep.",1997,59.74798,320,1,45000000000,Asia,Western Asia,YEM
 Zambia,1997,42.1582,400,1,15440560404,Africa,Eastern Africa,ZMB
 Zimbabwe,1997,46.0659,670,1,24058204473,Africa,Eastern Africa,ZWE
@@ -1841,7 +1841,7 @@ Kenya,1998,51.64259,440,1,49700000000,Africa,Eastern Africa,KEN
 Kiribati,1998,63.4329,1470,2,123610563,Oceania,Micronesia,KIR
 North Korea,1998,64.19151,,1,,Asia,Eastern Asia,PRK
 South Korea,1998,74.68024,10120,3,680000000000,Asia,Eastern Asia,KOR
-Kosovo,1998,68.95122,,,,Europe,Southern Europe,XKX
+Kosovo,1998,68.95122,,0,,Europe,Southern Europe,XKX
 Kuwait,1998,73.15895,20400,4,106000000000,Asia,Western Asia,KWT
 Kyrgyz Republic,1998,67.05122,360,1,7100000000,Asia,Central Asia,KGZ
 Lao PDR,1998,57.75756,310,1,8410000000,Asia,South-eastern Asia,LAO
@@ -1869,7 +1869,7 @@ Mexico,1998,73.75141,4610,3,923000000000,Americas,Central America,MEX
 Moldova,1998,66.63032,460,1,6540000000,Europe,Eastern Europe,MDA
 Monaco,1998,,95000,4,,Europe,Western Europe,MCO
 Mongolia,1998,62.07954,520,1,8170000000,Asia,Eastern Asia,MNG
-Montenegro,1998,73.36385,,,,Europe,Southern Europe,MNE
+Montenegro,1998,73.36385,,0,,Europe,Southern Europe,MNE
 Morocco,1998,67.79893,1450,2,96900000000,Africa,Northern Africa,MAR
 Mozambique,1998,47.75693,260,1,7064822987,Africa,Eastern Africa,MOZ
 Myanmar,1998,61.41444,,1,36400000000,Asia,South-eastern Asia,MMR
@@ -1900,7 +1900,7 @@ Romania,1998,69.80732,1590,2,126000000000,Europe,Eastern Europe,ROU
 Russian Federation,1998,66.7839,2130,2,806000000000,Europe,Eastern Europe,RUS
 Rwanda,1998,43.4152,260,1,4200000000,Africa,Eastern Africa,RWA
 Samoa,1998,68.7648,1550,2,528000000,Oceania,Polynesia,WSM
-San Marino,1998,80.17317,,,,Europe,Southern Europe,SMR
+San Marino,1998,80.17317,,0,,Europe,Southern Europe,SMR
 Sao Tome and Principe,1998,62.99746,,1,,Africa,Middle Africa,STP
 Saudi Arabia,1998,72.04017,7870,3,554000000000,Asia,Western Asia,SAU
 Senegal,1998,57.35915,530,1,13100000000,Africa,Western Africa,SEN
@@ -1914,12 +1914,12 @@ Slovenia,1998,74.80732,11100,4,31800000000,Europe,Southern Europe,SVN
 Solomon Islands,1998,61.54363,1320,1,638000000,Oceania,Melanesia,SLB
 Somalia,1998,49.76383,,1,,Africa,Eastern Africa,SOM
 South Africa,1998,58.44302,3370,2,312000000000,Africa,Southern Africa,ZAF
-South Sudan,1998,48.36759,,,,Africa,Eastern Africa,SSD
+South Sudan,1998,48.36759,,0,,Africa,Eastern Africa,SSD
 Spain,1998,78.66585,15700,5,765000000000,Europe,Southern Europe,ESP
 Sri Lanka,1998,69.85066,820,2,71900000000,Asia,Southern Asia,LKA
 St. Kitts and Nevis,1998,,7240,3,611000000,Americas,Caribbean,KNA
 St. Lucia,1998,71.19137,3800,3,1110000000,Americas,Caribbean,LCA
-St. Martin (French part),1998,76.57073,,,,Americas,Caribbean,MAF
+St. Martin (French part),1998,76.57073,,0,,Americas,Caribbean,MAF
 St. Vincent and the Grenadines,1998,70.57632,3180,2,596000000,Americas,Caribbean,VCT
 Sudan,1998,57.34439,320,1,54000000000,Africa,Northern Africa,SDN
 Suriname,1998,67.86641,1940,2,3560000000,Americas,South America,SUR
@@ -1930,7 +1930,7 @@ Syrian Arab Republic,1998,72.23668,920,2,,Asia,Western Asia,SYR
 Tajikistan,1998,63.06568,180,1,4980000000,Asia,Central Asia,TJK
 Tanzania,1998,49.30451,250,1,34100000000,Africa,Eastern Africa,TZA
 Thailand,1998,70.36263,2090,2,404000000000,Asia,South-eastern Asia,THA
-Timor-Leste,1998,57.31088,,,,Asia,South-eastern Asia,TLS
+Timor-Leste,1998,57.31088,,0,,Asia,South-eastern Asia,TLS
 Togo,1998,53.69649,330,1,4764833768,Africa,Western Africa,TGO
 Tonga,1998,70.49285,2210,2,321000000,Oceania,Polynesia,TON
 Trinidad and Tobago,1998,68.51132,4620,3,15300000000,Americas,Caribbean,TTO
@@ -1950,7 +1950,7 @@ Vanuatu,1998,66.7512,1420,2,375000000,Oceania,Melanesia,VUT
 "Venezuela, RB",1998,71.80539,3340,3,276000000000,Americas,South America,VEN
 Vietnam,1998,72.66451,360,1,140000000000,Asia,South-eastern Asia,VNM
 Virgin Islands (U.S.),1998,77.05929,,4,,Americas,Caribbean,VIR
-West Bank and Gaza,1998,70.36941,1940,,8820000000,Asia,Western Asia,PSE
+West Bank and Gaza,1998,70.36941,1940,0,8820000000,Asia,Western Asia,PSE
 "Yemen, Rep.",1998,59.99127,370,1,48213898063,Asia,Western Asia,YEM
 Zambia,1998,42.4329,350,1,15547922271,Africa,Eastern Africa,ZMB
 Zimbabwe,1998,44.27259,590,1,25020960902,Africa,Eastern Africa,ZWE
@@ -2059,7 +2059,7 @@ Kenya,1999,51.07139,440,1,51700000000,Africa,Eastern Africa,KEN
 Kiribati,1999,63.70261,1300,2,124000000,Oceania,Micronesia,KIR
 North Korea,1999,64.39527,,1,,Asia,Eastern Asia,PRK
 South Korea,1999,75.37341,10200,3,766000000000,Asia,Eastern Asia,KOR
-Kosovo,1999,66.95122,,,,Europe,Southern Europe,XKX
+Kosovo,1999,66.95122,,0,,Europe,Southern Europe,XKX
 Kuwait,1999,73.23885,17800,4,106000000000,Asia,Western Asia,KWT
 Kyrgyz Republic,1999,68.6561,300,1,7470000000,Asia,Central Asia,KGZ
 Lao PDR,1999,58.31617,290,1,9160000000,Asia,South-eastern Asia,LAO
@@ -2087,7 +2087,7 @@ Mexico,1999,74.03924,5080,3,983000000000,Americas,Central America,MEX
 Moldova,1999,66.73478,400,1,6410000000,Europe,Eastern Europe,MDA
 Monaco,1999,,92500,4,,Europe,Western Europe,MCO
 Mongolia,1999,62.47576,480,1,8550000000,Asia,Eastern Asia,MNG
-Montenegro,1999,73.23863,,,,Europe,Southern Europe,MNE
+Montenegro,1999,73.23863,,0,,Europe,Southern Europe,MNE
 Morocco,1999,68.13924,1400,2,99400000000,Africa,Northern Africa,MAR
 Mozambique,1999,48.25485,280,1,7730000000,Africa,Eastern Africa,MOZ
 Myanmar,1999,61.74898,,1,41000000000,Asia,South-eastern Asia,MMR
@@ -2118,7 +2118,7 @@ Romania,1999,70.5122,1620,2,127000000000,Europe,Eastern Europe,ROU
 Russian Federation,1999,66.04366,1750,2,871000000000,Europe,Eastern Europe,RUS
 Rwanda,1999,46.22607,260,1,4590000000,Africa,Eastern Africa,RWA
 Samoa,1999,69.13705,1570,2,547000000,Oceania,Polynesia,WSM
-San Marino,1999,80.52439,,,,Europe,Southern Europe,SMR
+San Marino,1999,80.52439,,0,,Europe,Southern Europe,SMR
 Sao Tome and Principe,1999,63.13702,,1,,Africa,Middle Africa,STP
 Saudi Arabia,1999,72.29885,7570,3,559000000000,Asia,Western Asia,SAU
 Senegal,1999,57.50824,530,1,14200000000,Africa,Western Africa,SEN
@@ -2132,12 +2132,12 @@ Slovenia,1999,75.00976,11400,4,33800000000,Europe,Southern Europe,SVN
 Solomon Islands,1999,62.19088,1220,1,645000000,Oceania,Melanesia,SLB
 Somalia,1999,50.40127,,1,,Africa,Eastern Africa,SOM
 South Africa,1999,57.15668,3230,3,324000000000,Africa,Southern Africa,ZAF
-South Sudan,1999,48.80629,,,,Africa,Eastern Africa,SSD
+South Sudan,1999,48.80629,,0,,Africa,Eastern Africa,SSD
 Spain,1999,78.71707,15700,5,804000000000,Europe,Southern Europe,ESP
 Sri Lanka,1999,70.40185,840,2,76100000000,Asia,Southern Asia,LKA
 St. Kitts and Nevis,1999,,7660,3,641000000,Americas,Caribbean,KNA
 St. Lucia,1999,71.27617,4010,3,1160000000,Americas,Caribbean,LCA
-St. Martin (French part),1999,76.77073,,,,Americas,Caribbean,MAF
+St. Martin (French part),1999,76.77073,,0,,Americas,Caribbean,MAF
 St. Vincent and the Grenadines,1999,70.56939,3300,2,622000000,Americas,Caribbean,VCT
 Sudan,1999,57.65059,320,1,56600000000,Africa,Northern Africa,SDN
 Suriname,1999,67.88649,1780,2,3590000000,Americas,South America,SUR
@@ -2148,7 +2148,7 @@ Syrian Arab Republic,1999,72.47173,890,2,,Asia,Western Asia,SYR
 Tajikistan,1999,63.36363,180,1,5250000000,Asia,Central Asia,TJK
 Tanzania,1999,49.80663,280,1,36300000000,Africa,Eastern Africa,TZA
 Thailand,1999,70.47556,1990,2,429000000000,Asia,South-eastern Asia,THA
-Timor-Leste,1999,58.36576,,,,Asia,South-eastern Asia,TLS
+Timor-Leste,1999,58.36576,,0,,Asia,South-eastern Asia,TLS
 Togo,1999,53.52402,320,1,4960000000,Africa,Western Africa,TGO
 Tonga,1999,70.62507,2110,2,338000000,Oceania,Polynesia,TON
 Trinidad and Tobago,1999,68.55156,4880,3,16740996086,Americas,Caribbean,TTO
@@ -2168,7 +2168,7 @@ Vanuatu,1999,67.15983,1420,2,382234030,Oceania,Melanesia,VUT
 "Venezuela, RB",1999,72.08627,3530,3,264000000000,Americas,South America,VEN
 Vietnam,1999,72.91354,370,1,149000000000,Asia,South-eastern Asia,VNM
 Virgin Islands (U.S.),1999,77.30617,,4,,Americas,Caribbean,VIR
-West Bank and Gaza,1999,70.57493,1960,,10600000000,Asia,Western Asia,PSE
+West Bank and Gaza,1999,70.57493,1960,0,10600000000,Asia,Western Asia,PSE
 "Yemen, Rep.",1999,60.22756,370,1,50799913236,Asia,Western Asia,YEM
 Zambia,1999,42.85578,350,1,16519927770,Africa,Eastern Africa,ZMB
 Zimbabwe,1999,42.79149,540,1,25196104049,Africa,Eastern Africa,ZWE
@@ -2277,7 +2277,7 @@ Kenya,2000,50.78517,420,1,53100000000,Africa,Eastern Africa,KEN
 Kiribati,2000,63.95068,1330,2,134000000,Oceania,Micronesia,KIR
 North Korea,2000,64.98256,,1,,Asia,Eastern Asia,PRK
 South Korea,2000,75.83537,10800,3,850000000000,Asia,Eastern Asia,KOR
-Kosovo,2000,67.95122,,,6250000000,Europe,Southern Europe,XKX
+Kosovo,2000,67.95122,,0,6250000000,Europe,Southern Europe,XKX
 Kuwait,2000,73.31376,19100,4,114000000000,Asia,Western Asia,KWT
 Kyrgyz Republic,2000,68.55854,280,1,8050000000,Asia,Central Asia,KGZ
 Lao PDR,2000,58.87924,280,1,9910000000,Asia,South-eastern Asia,LAO
@@ -2305,7 +2305,7 @@ Mexico,2000,74.29973,5750,3,1060000000000,Americas,Central America,MEX
 Moldova,2000,66.89002,370,1,6700000000,Europe,Eastern Europe,MDA
 Monaco,2000,,90840,4,,Europe,Western Europe,MCO
 Mongolia,2000,62.91388,470,1,8850000000,Asia,Eastern Asia,MNG
-Montenegro,2000,73.18205,,,3630000000,Europe,Southern Europe,MNE
+Montenegro,2000,73.18205,,0,3630000000,Europe,Southern Europe,MNE
 Morocco,2000,68.49761,1380,2,104000000000,Africa,Northern Africa,MAR
 Mozambique,2000,48.68661,280,1,8040000000,Africa,Eastern Africa,MOZ
 Myanmar,2000,62.078,,1,47700000000,Asia,South-eastern Asia,MMR
@@ -2340,7 +2340,7 @@ San Marino,2000,80.61951,,4,,Europe,Southern Europe,SMR
 Sao Tome and Principe,2000,63.29254,,1,,Africa,Middle Africa,STP
 Saudi Arabia,2000,72.52622,7860,3,599000000000,Asia,Western Asia,SAU
 Senegal,2000,57.7658,510,1,14900000000,Africa,Western Africa,SEN
-Serbia,2000,71.58293,1530,,43006592182,Europe,Southern Europe,SRB
+Serbia,2000,71.58293,1530,0,43006592182,Europe,Southern Europe,SRB
 Seychelles,2000,,7290,3,1190000000,Africa,Eastern Africa,SYC
 Sierra Leone,2000,38.69015,160,1,3300000000,Africa,Western Africa,SLE
 Singapore,2000,77.95122,23700,4,165000000000,Asia,South-eastern Asia,SGP
@@ -2350,12 +2350,12 @@ Slovenia,2000,75.4122,11350,4,35873180670,Europe,Southern Europe,SVN
 Solomon Islands,2000,62.83673,1010,1,566000000,Oceania,Melanesia,SLB
 Somalia,2000,50.87827,,1,,Africa,Eastern Africa,SOM
 South Africa,2000,55.83688,3140,3,346000000000,Africa,Southern Africa,ZAF
-South Sudan,2000,49.21907,,,,Africa,Eastern Africa,SSD
+South Sudan,2000,49.21907,,0,,Africa,Eastern Africa,SSD
 Spain,2000,78.96585,15900,5,873000000000,Europe,Southern Europe,ESP
 Sri Lanka,2000,71.10639,880,2,82500000000,Asia,Southern Asia,LKA
 St. Kitts and Nevis,2000,,8300,3,688327881,Americas,Caribbean,KNA
 St. Lucia,2000,71.42305,4400,3,1240000000,Americas,Caribbean,LCA
-St. Martin (French part),2000,76.97073,,,,Americas,Caribbean,MAF
+St. Martin (French part),2000,76.97073,,0,,Americas,Caribbean,MAF
 St. Vincent and the Grenadines,2000,70.58212,3470,2,646000000,Americas,Caribbean,VCT
 Sudan,2000,57.97498,320,1,61500000000,Africa,Northern Africa,SDN
 Suriname,2000,67.92917,1870,2,3660000000,Americas,South America,SUR
@@ -2366,7 +2366,7 @@ Syrian Arab Republic,2000,72.72168,970,2,,Asia,Western Asia,SYR
 Tajikistan,2000,63.69529,170,1,5810000000,Asia,Central Asia,TJK
 Tanzania,2000,50.46534,300,1,39000000000,Africa,Eastern Africa,TZA
 Thailand,2000,70.63407,1990,2,459000000000,Asia,South-eastern Asia,THA
-Timor-Leste,2000,59.34698,,,961000000,Asia,South-eastern Asia,TLS
+Timor-Leste,2000,59.34698,,0,961000000,Asia,South-eastern Asia,TLS
 Togo,2000,53.46868,300,1,5030000000,Africa,Western Africa,TGO
 Tonga,2000,70.76044,2060,2,358000000,Oceania,Polynesia,TON
 Trinidad and Tobago,2000,68.59644,5420,3,18400000000,Americas,Caribbean,TTO
@@ -2386,7 +2386,7 @@ Vanuatu,2000,67.555,1430,2,414000000,Oceania,Melanesia,VUT
 "Venezuela, RB",2000,72.34612,4070,3,280000000000,Americas,South America,VEN
 Vietnam,2000,73.14859,400,1,163000000000,Asia,South-eastern Asia,VNM
 Virgin Islands (U.S.),2000,76.61951,,4,,Americas,Caribbean,VIR
-West Bank and Gaza,2000,70.7589,1580,,9730000000,Asia,Western Asia,PSE
+West Bank and Gaza,2000,70.7589,1580,0,9730000000,Asia,Western Asia,PSE
 "Yemen, Rep.",2000,60.45637,420,1,55200000000,Asia,Western Asia,YEM
 Zambia,2000,43.45668,330,1,17554327512,Africa,Eastern Africa,ZMB
 Zimbabwe,2000,41.68944,490,1,24981110156,Africa,Eastern Africa,ZWE
@@ -2495,7 +2495,7 @@ Kenya,2001,50.82415,410,1,56400000000,Africa,Eastern Africa,KEN
 Kiribati,2001,64.1721,1340,2,135000000,Oceania,Micronesia,KIR
 North Korea,2001,65.80366,,1,,Asia,Eastern Asia,PRK
 South Korea,2001,76.34195,11600,5,909000000000,Asia,Eastern Asia,KOR
-Kosovo,2001,67.99756,,,8110000000,Europe,Southern Europe,XKX
+Kosovo,2001,67.99756,,0,8110000000,Europe,Southern Europe,XKX
 Kuwait,2001,73.38568,19800,4,117000000000,Asia,Western Asia,KWT
 Kyrgyz Republic,2001,68.70732,280,1,8680000000,Asia,Central Asia,KGZ
 Lao PDR,2001,59.44829,310,1,10700000000,Asia,South-eastern Asia,LAO
@@ -2523,7 +2523,7 @@ Mexico,2001,74.53349,6240,3,1070000000000,Americas,Central America,MEX
 Moldova,2001,67.06607,400,1,7270000000,Europe,Eastern Europe,MDA
 Monaco,2001,,86400,4,,Europe,Western Europe,MCO
 Mongolia,2001,63.37637,480,1,9310000000,Asia,Eastern Asia,MNG
-Montenegro,2001,73.18793,,,4120000000,Europe,Southern Europe,MNE
+Montenegro,2001,73.18793,,0,4120000000,Europe,Southern Europe,MNE
 Morocco,2001,68.872,1390,2,114000000000,Africa,Northern Africa,MAR
 Mozambique,2001,49.07022,270,1,9270000000,Africa,Eastern Africa,MOZ
 Myanmar,2001,62.39895,,1,54400000000,Asia,South-eastern Asia,MMR
@@ -2558,7 +2558,7 @@ San Marino,2001,80.97317,26400,4,,Europe,Southern Europe,SMR
 Sao Tome and Principe,2001,63.47798,,1,232000000,Africa,Middle Africa,STP
 Saudi Arabia,2001,72.71663,8130,3,616000000000,Asia,Western Asia,SAU
 Senegal,2001,58.13556,490,1,15985300698,Africa,Western Africa,SEN
-Serbia,2001,72.23415,1450,,46200000000,Europe,Southern Europe,SRB
+Serbia,2001,72.23415,1450,0,46200000000,Europe,Southern Europe,SRB
 Seychelles,2001,,7310,3,1190000000,Africa,Eastern Africa,SYC
 Sierra Leone,2001,39.64549,170,1,3140000000,Africa,Western Africa,SLE
 Singapore,2001,78.25122,22000,4,167000000000,Asia,South-eastern Asia,SGP
@@ -2568,12 +2568,12 @@ Slovenia,2001,75.75854,11000,4,37800000000,Europe,Southern Europe,SVN
 Solomon Islands,2001,63.46561,930,1,532000000,Oceania,Melanesia,SLB
 Somalia,2001,51.2228,,1,,Africa,Eastern Africa,SOM
 South Africa,2001,54.5708,2900,2,363000000000,Africa,Southern Africa,ZAF
-South Sudan,2001,49.6119,,,,Africa,Eastern Africa,SSD
+South Sudan,2001,49.6119,,0,,Africa,Eastern Africa,SSD
 Spain,2001,79.36829,15600,5,938000000000,Europe,Southern Europe,ESP
 Sri Lanka,2001,71.87783,830,2,83079044368,Asia,Southern Asia,LKA
 St. Kitts and Nevis,2001,,8830,3,739000000,Americas,Caribbean,KNA
 St. Lucia,2001,71.6428,4300,3,1220000000,Americas,Caribbean,LCA
-St. Martin (French part),2001,77.17073,,,,Americas,Caribbean,MAF
+St. Martin (French part),2001,77.17073,,0,,Americas,Caribbean,MAF
 St. Vincent and the Grenadines,2001,70.62932,3650,2,672000000,Americas,Caribbean,VCT
 Sudan,2001,58.31663,330,1,67000000000,Africa,Northern Africa,SDN
 Suriname,2001,68.01198,1370,2,3920000000,Americas,South America,SUR
@@ -2604,7 +2604,7 @@ Vanuatu,2001,67.93471,1370,2,408745028,Oceania,Melanesia,VUT
 "Venezuela, RB",2001,72.57561,4540,3,296000000000,Americas,South America,VEN
 Vietnam,2001,73.36959,430,1,177000000000,Asia,South-eastern Asia,VNM
 Virgin Islands (U.S.),2001,77.87317,,4,,Americas,Caribbean,VIR
-West Bank and Gaza,2001,70.92227,1390,,9310000000,Asia,Western Asia,PSE
+West Bank and Gaza,2001,70.92227,1390,0,9310000000,Asia,Western Asia,PSE
 "Yemen, Rep.",2001,60.67668,470,1,58600000000,Asia,Western Asia,YEM
 Zambia,2001,44.27249,340,1,18908983620,Africa,Eastern Africa,ZMB
 Zimbabwe,2001,40.9968,510,1,25918232377,Africa,Eastern Africa,ZWE
@@ -2702,7 +2702,7 @@ Indonesia,2002,66.60824,720,1,1090000000000,Asia,South-eastern Asia,IDN
 Iran,2002,70.89844,1880,2,714000000000,Asia,Southern Asia,IRN
 Iraq,2002,68.94202,,2,225000000000,Asia,Western Asia,IRQ
 Ireland,2002,77.63415,24800,5,138000000000,Europe,Northern Europe,IRL
-Isle of Man,2002,77.96585,23300,,,Europe,Northern Europe,IMN
+Isle of Man,2002,77.96585,23300,0,,Europe,Northern Europe,IMN
 Israel,2002,79.45122,18300,4,166000000000,Asia,Western Asia,ISR
 Italy,2002,80.22927,20600,5,1630000000000,Europe,Southern Europe,ITA
 Jamaica,2002,72.67502,3330,2,17900000000,Americas,Caribbean,JAM
@@ -2713,7 +2713,7 @@ Kenya,2002,51.15966,390,1,57600000000,Africa,Eastern Africa,KEN
 Kiribati,2002,64.36441,1250,2,142604012,Oceania,Micronesia,KIR
 North Korea,2002,66.64829,,1,,Asia,Eastern Asia,PRK
 South Korea,2002,76.83902,12500,5,990000000000,Asia,Eastern Asia,KOR
-Kosovo,2002,67.9439,,,8180000000,Europe,Southern Europe,XKX
+Kosovo,2002,67.9439,,0,8180000000,Europe,Southern Europe,XKX
 Kuwait,2002,73.45312,19800,4,122000000000,Asia,Western Asia,KWT
 Kyrgyz Republic,2002,68.1561,290,1,8810000000,Asia,Central Asia,KGZ
 Lao PDR,2002,60.02183,320,1,11500000000,Asia,South-eastern Asia,LAO
@@ -2741,7 +2741,7 @@ Mexico,2002,74.74471,6580,3,1090000000000,Americas,Central America,MEX
 Moldova,2002,67.23639,460,1,7950000000,Europe,Eastern Europe,MDA
 Monaco,2002,,84100,4,,Europe,Western Europe,MCO
 Mongolia,2002,63.84183,530,1,9910000000,Asia,Eastern Asia,MNG
-Montenegro,2002,73.23905,1960,,4330000000,Europe,Southern Europe,MNE
+Montenegro,2002,73.23905,1960,0,4330000000,Europe,Southern Europe,MNE
 Morocco,2002,69.25641,1370,2,119000000000,Africa,Northern Africa,MAR
 Mozambique,2002,49.43607,240,1,10242864498,Africa,Eastern Africa,MOZ
 Myanmar,2002,62.70732,160,1,61800000000,Asia,South-eastern Asia,MMR
@@ -2776,7 +2776,7 @@ San Marino,2002,81.11951,26100,4,,Europe,Southern Europe,SMR
 Sao Tome and Principe,2002,63.70185,,1,241000000,Africa,Middle Africa,STP
 Saudi Arabia,2002,72.87146,8150,3,627000000000,Asia,Western Asia,SAU
 Senegal,2002,58.59617,470,1,16300000000,Africa,Western Africa,SEN
-Serbia,2002,72.28537,1430,,51000000000,Europe,Southern Europe,SRB
+Serbia,2002,72.28537,1430,0,51000000000,Europe,Southern Europe,SRB
 Seychelles,2002,72.95366,6850,3,1220000000,Africa,Eastern Africa,SYC
 Sierra Leone,2002,40.6429,230,1,4020000000,Africa,Western Africa,SLE
 Singapore,2002,78.55122,21800,4,177000000000,Asia,South-eastern Asia,SGP
@@ -2786,12 +2786,12 @@ Slovenia,2002,76.00732,11000,4,40500000000,Europe,Southern Europe,SVN
 Solomon Islands,2002,64.06237,840,1,525000000,Oceania,Melanesia,SLB
 Somalia,2002,51.50185,,1,,Africa,Eastern Africa,SOM
 South Africa,2002,53.4412,2710,2,382000000000,Africa,Southern Africa,ZAF
-South Sudan,2002,49.99324,,,,Africa,Eastern Africa,SSD
+South Sudan,2002,49.99324,,0,,Africa,Eastern Africa,SSD
 Spain,2002,79.56829,15600,5,1010000000000,Europe,Southern Europe,ESP
 Sri Lanka,2002,72.61015,850,2,87700000000,Asia,Southern Asia,LKA
 St. Kitts and Nevis,2002,71.33659,9030,3,764000000,Americas,Caribbean,KNA
 St. Lucia,2002,71.92485,4390,3,1240000000,Americas,Caribbean,LCA
-St. Martin (French part),2002,77.37073,,,,Americas,Caribbean,MAF
+St. Martin (French part),2002,77.37073,,0,,Americas,Caribbean,MAF
 St. Vincent and the Grenadines,2002,70.71815,3940,2,726000000,Americas,Caribbean,VCT
 Sudan,2002,58.67556,360,1,72400000000,Africa,Northern Africa,SDN
 Suriname,2002,68.14398,1720,2,4150000000,Americas,South America,SUR
@@ -2822,7 +2822,7 @@ Vanuatu,2002,68.29995,1230,2,394000000,Oceania,Melanesia,VUT
 "Venezuela, RB",2002,72.77527,3940,3,274000000000,Americas,South America,VEN
 Vietnam,2002,73.57656,460,1,191000000000,Asia,South-eastern Asia,VNM
 Virgin Islands (U.S.),2002,78.02439,,4,,Americas,Caribbean,VIR
-West Bank and Gaza,2002,71.06998,1300,,9320000000,Asia,Western Asia,PSE
+West Bank and Gaza,2002,71.06998,1300,0,9320000000,Asia,Western Asia,PSE
 "Yemen, Rep.",2002,60.888,510,1,61800000000,Asia,Western Asia,YEM
 Zambia,2002,45.30666,350,1,20064381503,Africa,Eastern Africa,ZMB
 Zimbabwe,2002,40.67915,460,1,23975548592,Africa,Eastern Africa,ZWE
@@ -2931,7 +2931,7 @@ Kenya,2003,51.74871,420,1,60500000000,Africa,Eastern Africa,KEN
 Kiribati,2003,64.52715,1310,2,148000000,Oceania,Micronesia,KIR
 North Korea,2003,67.35473,,1,,Asia,Eastern Asia,PRK
 South Korea,2003,77.25024,13400,5,1020000000000,Asia,Eastern Asia,KOR
-Kosovo,2003,68.19512,,,8840000000,Europe,Southern Europe,XKX
+Kosovo,2003,68.19512,,0,8840000000,Europe,Southern Europe,XKX
 Kuwait,2003,73.51807,23300,4,147000000000,Asia,Western Asia,KWT
 Kyrgyz Republic,2003,68.2561,340,1,9620000000,Asia,Central Asia,KGZ
 Lao PDR,2003,60.59639,340,1,12500000000,Asia,South-eastern Asia,LAO
@@ -2959,7 +2959,7 @@ Mexico,2003,74.93751,6860,3,1130000000000,Americas,Central America,MEX
 Moldova,2003,67.38739,570,1,8650000000,Europe,Eastern Europe,MDA
 Monaco,2003,,94100,4,,Europe,Western Europe,MCO
 Mongolia,2003,64.29627,610,1,10800000000,Asia,Eastern Asia,MNG
-Montenegro,2003,73.32117,2440,,4490000000,Europe,Southern Europe,MNE
+Montenegro,2003,73.32117,2440,0,4490000000,Europe,Southern Europe,MNE
 Morocco,2003,69.64537,1540,2,129000000000,Africa,Northern Africa,MAR
 Mozambique,2003,49.81159,270,1,11100000000,Africa,Eastern Africa,MOZ
 Myanmar,2003,63.00207,180,1,71800000000,Asia,South-eastern Asia,MMR
@@ -2994,7 +2994,7 @@ San Marino,2003,81.21951,30370,4,,Europe,Southern Europe,SMR
 Sao Tome and Principe,2003,63.96512,590,1,262000000,Africa,Middle Africa,STP
 Saudi Arabia,2003,72.99461,8870,3,688000000000,Asia,Western Asia,SAU
 Senegal,2003,59.12768,550,1,17800000000,Africa,Western Africa,SEN
-Serbia,2003,72.43659,2260,,53800000000,Europe,Southern Europe,SRB
+Serbia,2003,72.43659,2260,0,53800000000,Europe,Southern Europe,SRB
 Seychelles,2003,71.02927,7490,3,1170000000,Africa,Eastern Africa,SYC
 Sierra Leone,2003,41.64912,300,1,4490000000,Africa,Western Africa,SLE
 Singapore,2003,79.03902,23100,4,188000000000,Asia,South-eastern Asia,SGP
@@ -3004,12 +3004,12 @@ Slovenia,2003,76.85854,12700,4,42174601093,Europe,Southern Europe,SVN
 Solomon Islands,2003,64.6141,840,1,571000000,Oceania,Melanesia,SLB
 Somalia,2003,51.7719,,1,,Africa,Eastern Africa,SOM
 South Africa,2003,52.52376,2970,2,402000000000,Africa,Southern Africa,ZAF
-South Sudan,2003,50.3741,,,,Africa,Eastern Africa,SSD
+South Sudan,2003,50.3741,,0,,Africa,Eastern Africa,SSD
 Spain,2003,79.61951,18100,5,1060000000000,Europe,Southern Europe,ESP
 Sri Lanka,2003,73.22232,950,2,94800000000,Asia,Southern Asia,LKA
 St. Kitts and Nevis,2003,,8950,3,760000000,Americas,Caribbean,KNA
 St. Lucia,2003,72.25473,4660,3,1330000000,Americas,Caribbean,LCA
-St. Martin (French part),2003,77.57073,,,,Americas,Caribbean,MAF
+St. Martin (French part),2003,77.57073,,0,,Americas,Caribbean,MAF
 St. Vincent and the Grenadines,2003,70.84915,4380,3,797000000,Americas,Caribbean,VCT
 Sudan,2003,59.05024,400,1,79600000000,Africa,Northern Africa,SDN
 Suriname,2003,68.32963,1980,2,4490000000,Americas,South America,SUR
@@ -3040,7 +3040,7 @@ Vanuatu,2003,68.65171,1360,2,419000000,Oceania,Melanesia,VUT
 "Venezuela, RB",2003,72.94456,3450,3,258000000000,Americas,South America,VEN
 Vietnam,2003,73.77254,510,1,208000000000,Asia,South-eastern Asia,VNM
 Virgin Islands (U.S.),2003,78.17317,,4,,Americas,Caribbean,VIR
-West Bank and Gaza,2003,71.20754,1390,,10400000000,Asia,Western Asia,PSE
+West Bank and Gaza,2003,71.20754,1390,0,10400000000,Asia,Western Asia,PSE
 "Yemen, Rep.",2003,61.09183,530,1,65400000000,Asia,Western Asia,YEM
 Zambia,2003,46.53863,400,1,21885729110,Africa,Eastern Africa,ZMB
 Zimbabwe,2003,40.70249,410,1,20297721109,Africa,Eastern Africa,ZWE
@@ -3149,7 +3149,7 @@ Kenya,2004,52.55224,470,1,65300000000,Africa,Eastern Africa,KEN
 Kiribati,2004,64.66529,1530,2,149961527,Oceania,Micronesia,KIR
 North Korea,2004,67.85983,,1,,Asia,Eastern Asia,PRK
 South Korea,2004,77.84659,15700,5,1100000000000,Asia,Eastern Asia,KOR
-Kosovo,2004,68.44634,,,9320000000,Europe,Southern Europe,XKX
+Kosovo,2004,68.44634,,0,9320000000,Europe,Southern Europe,XKX
 Kuwait,2004,73.583,28600,4,167000000000,Asia,Western Asia,KWT
 Kyrgyz Republic,2004,68.15366,400,1,10600000000,Asia,Central Asia,KGZ
 Lao PDR,2004,61.16944,390,1,13600000000,Asia,South-eastern Asia,LAO
@@ -3177,7 +3177,7 @@ Mexico,2004,75.11549,7390,3,1210000000000,Americas,Central America,MEX
 Moldova,2004,67.52451,730,1,9540000000,Europe,Eastern Europe,MDA
 Monaco,2004,,113000,4,,Europe,Western Europe,MCO
 Mongolia,2004,64.73495,760,1,12300000000,Asia,Eastern Asia,MNG
-Montenegro,2004,73.43378,3100,,4810000000,Europe,Southern Europe,MNE
+Montenegro,2004,73.43378,3100,0,4810000000,Europe,Southern Europe,MNE
 Morocco,2004,70.03883,1840,2,139000000000,Africa,Northern Africa,MAR
 Mozambique,2004,50.20963,310,1,12300000000,Africa,Eastern Africa,MOZ
 Myanmar,2004,63.28322,220,1,83800000000,Asia,South-eastern Asia,MMR
@@ -3212,7 +3212,7 @@ San Marino,2004,81.72195,37000,4,,Europe,Southern Europe,SMR
 Sao Tome and Principe,2004,64.26129,670,1,279000000,Africa,Middle Africa,STP
 Saudi Arabia,2004,73.09346,10500,4,772000000000,Asia,Western Asia,SAU
 Senegal,2004,59.71851,670,1,19300000000,Africa,Western Africa,SEN
-Serbia,2004,72.68293,3070,,60200000000,Europe,Southern Europe,SRB
+Serbia,2004,72.68293,3070,0,60200000000,Europe,Southern Europe,SRB
 Seychelles,2004,72.60976,9280,3,1170000000,Africa,Eastern Africa,SYC
 Sierra Leone,2004,42.6392,310,1,4900000000,Africa,Western Africa,SLE
 Singapore,2004,79.49024,25650,4,212000000000,Asia,South-eastern Asia,SGP
@@ -3222,12 +3222,12 @@ Slovenia,2004,77.20732,15700,4,45500000000,Europe,Southern Europe,SVN
 Solomon Islands,2004,65.11288,860,1,615000000,Oceania,Melanesia,SLB
 Somalia,2004,52.0529,,1,,Africa,Eastern Africa,SOM
 South Africa,2004,51.87376,3780,3,431000000000,Africa,Southern Africa,ZAF
-South Sudan,2004,50.76241,,,,Africa,Eastern Africa,SSD
+South Sudan,2004,50.76241,,0,,Africa,Eastern Africa,SSD
 Spain,2004,79.87073,22100,5,1120000000000,Europe,Southern Europe,ESP
 Sri Lanka,2004,73.68029,1070,2,103000000000,Asia,Southern Asia,LKA
 St. Kitts and Nevis,2004,,9930,3,816000000,Americas,Caribbean,KNA
 St. Lucia,2004,72.61956,5210,3,1480000000,Americas,Caribbean,LCA
-St. Martin (French part),2004,77.72195,,,,Americas,Caribbean,MAF
+St. Martin (French part),2004,77.72195,,0,,Americas,Caribbean,MAF
 St. Vincent and the Grenadines,2004,71.02129,4730,3,852911767,Americas,Caribbean,VCT
 Sudan,2004,59.43815,470,1,85000000000,Africa,Northern Africa,SDN
 Suriname,2004,68.56598,2620,2,5040000000,Americas,South America,SUR
@@ -3258,7 +3258,7 @@ Vanuatu,2004,68.99,1590,2,448000000,Oceania,Melanesia,VUT
 "Venezuela, RB",2004,73.08644,4050,3,313000000000,Americas,South America,VEN
 Vietnam,2004,73.95902,590,1,230000000000,Asia,South-eastern Asia,VNM
 Virgin Islands (U.S.),2004,78.72439,,4,,Americas,Caribbean,VIR
-West Bank and Gaza,2004,71.33946,1480,,11628118997,Asia,Western Asia,PSE
+West Bank and Gaza,2004,71.33946,1480,0,11628118997,Asia,Western Asia,PSE
 "Yemen, Rep.",2004,61.29266,600,1,69900000000,Asia,Western Asia,YEM
 Zambia,2004,47.93239,460,1,24068937291,Africa,Eastern Africa,ZMB
 Zimbabwe,2004,41.05934,420,1,19644640257,Africa,Eastern Africa,ZWE
@@ -3367,7 +3367,7 @@ Kenya,2005,53.51983,530,1,71400000000,Africa,Eastern Africa,KEN
 Kiribati,2005,64.78237,1730,2,162000000,Oceania,Micronesia,KIR
 North Korea,2005,68.157,,1,,Asia,Eastern Asia,PRK
 South Korea,2005,78.43268,17800,5,1170000000000,Asia,Eastern Asia,KOR
-Kosovo,2005,68.69512,,,10200869013,Europe,Southern Europe,XKX
+Kosovo,2005,68.69512,,0,10200869013,Europe,Southern Europe,XKX
 Kuwait,2005,73.65141,34600,4,189000000000,Asia,Western Asia,KWT
 Kyrgyz Republic,2005,67.9561,450,1,10900000000,Asia,Central Asia,KGZ
 Lao PDR,2005,61.73451,460,1,15100000000,Asia,South-eastern Asia,LAO
@@ -3395,7 +3395,7 @@ Mexico,2005,75.2821,7720,3,1320000000000,Americas,Central America,MEX
 Moldova,2005,67.67807,890,2,10600000000,Europe,Eastern Europe,MDA
 Monaco,2005,,128000,4,,Europe,Western Europe,MCO
 Mongolia,2005,65.16693,900,1,13600000000,Asia,Eastern Asia,MNG
-Montenegro,2005,73.58429,3660,,5110000000,Europe,Southern Europe,MNE
+Montenegro,2005,73.58429,3660,0,5110000000,Europe,Southern Europe,MNE
 Morocco,2005,70.43983,2070,2,148000000000,Africa,Northern Africa,MAR
 Mozambique,2005,50.64161,350,1,13800000000,Africa,Eastern Africa,MOZ
 Myanmar,2005,63.55527,260,1,98200000000,Asia,South-eastern Asia,MMR
@@ -3430,7 +3430,7 @@ San Marino,2005,81.97561,41800,4,,Europe,Southern Europe,SMR
 Sao Tome and Principe,2005,64.5769,780,1,309000000,Africa,Middle Africa,STP
 Saudi Arabia,2005,73.177,12500,4,855000000000,Asia,Western Asia,SAU
 Senegal,2005,60.36193,770,1,21100000000,Africa,Western Africa,SEN
-Serbia,2005,72.83415,3630,,64800000000,Europe,Southern Europe,SRB
+Serbia,2005,72.83415,3630,0,64800000000,Europe,Southern Europe,SRB
 Seychelles,2005,72.13171,11100,3,1310000000,Africa,Eastern Africa,SYC
 Sierra Leone,2005,43.60307,320,1,5280000000,Africa,Western Africa,SLE
 Singapore,2005,79.99024,28400,4,235000000000,Asia,South-eastern Asia,SGP
@@ -3440,12 +3440,12 @@ Slovenia,2005,77.6122,18400,4,47900000000,Europe,Southern Europe,SVN
 Solomon Islands,2005,65.55349,900,1,669000000,Oceania,Melanesia,SLB
 Somalia,2005,52.35585,,1,,Africa,Eastern Africa,SOM
 South Africa,2005,51.55734,5050,3,469000000000,Africa,Southern Africa,ZAF
-South Sudan,2005,51.17163,,,,Africa,Eastern Africa,SSD
+South Sudan,2005,51.17163,,0,,Africa,Eastern Africa,SSD
 Spain,2005,80.17073,25900,5,1210000000000,Europe,Southern Europe,ESP
 Sri Lanka,2005,73.97356,1220,2,113000000000,Asia,Southern Asia,LKA
 St. Kitts and Nevis,2005,,11000,3,921000000,Americas,Caribbean,KNA
 St. Lucia,2005,72.99907,5360,3,1510000000,Americas,Caribbean,LCA
-St. Martin (French part),2005,77.87073,,,,Americas,Caribbean,MAF
+St. Martin (French part),2005,77.87073,,0,,Americas,Caribbean,MAF
 St. Vincent and the Grenadines,2005,71.2289,4950,3,902000000,Americas,Caribbean,VCT
 Sudan,2005,59.84083,560,1,94256168924,Africa,Northern Africa,SDN
 Suriname,2005,68.846,3240,2,5440000000,Americas,South America,SUR
@@ -3476,7 +3476,7 @@ Vanuatu,2005,69.31785,1780,2,486000000,Oceania,Melanesia,VUT
 "Venezuela, RB",2005,73.20332,4920,3,356000000000,Americas,South America,VEN
 Vietnam,2005,74.13812,680,1,256000000000,Asia,South-eastern Asia,VNM
 Virgin Islands (U.S.),2005,78.52439,,4,,Americas,Caribbean,VIR
-West Bank and Gaza,2005,71.47088,1660,,13300000000,Asia,Western Asia,PSE
+West Bank and Gaza,2005,71.47088,1660,0,13300000000,Asia,Western Asia,PSE
 "Yemen, Rep.",2005,61.49793,690,1,76200000000,Asia,Western Asia,YEM
 Zambia,2005,49.42939,550,1,26640956600,Africa,Eastern Africa,ZMB
 Zimbabwe,2005,41.75961,430,1,19118712455,Africa,Eastern Africa,ZWE
@@ -3531,7 +3531,7 @@ Costa Rica,2006,78.2078,5060,3,46100000000,Americas,Central America,CRI
 Cote d'Ivoire,2006,48.25876,950,1,45800000000,Africa,Western Africa,CIV
 Croatia,2006,75.83683,11000,3,75200000000,Europe,Southern Europe,HRV
 Cuba,2006,78.20595,4520,2,165000000000,Americas,Caribbean,CUB
-Curacao,2006,74.70976,,,,Americas,Caribbean,CUW
+Curacao,2006,74.70976,,0,,Americas,Caribbean,CUW
 Cyprus,2006,78.72288,26300,4,22900000000,Asia,Western Asia,CYP
 Czech Republic,2006,76.52439,13900,5,243000000000,Europe,Eastern Europe,CZE
 Denmark,2006,78.09512,53500,5,203000000000,Europe,Northern Europe,DNK
@@ -3585,7 +3585,7 @@ Kenya,2006,54.5911,600,1,78300000000,Africa,Eastern Africa,KEN
 Kiribati,2006,64.88534,1760,2,165000000,Oceania,Micronesia,KIR
 North Korea,2006,68.29276,,1,,Asia,Eastern Asia,PRK
 South Korea,2006,78.96927,20000,5,1250000000000,Asia,Eastern Asia,KOR
-Kosovo,2006,68.94634,2510,,11000000000,Europe,Southern Europe,XKX
+Kosovo,2006,68.94634,2510,0,11000000000,Europe,Southern Europe,XKX
 Kuwait,2006,73.72627,41100,4,210000000000,Asia,Western Asia,KWT
 Kyrgyz Republic,2006,67.69512,500,1,11600000000,Asia,Central Asia,KGZ
 Lao PDR,2006,62.28863,510,1,16900000000,Asia,South-eastern Asia,LAO
@@ -3658,12 +3658,12 @@ Slovenia,2006,78.08659,20000,4,51700000000,Europe,Southern Europe,SVN
 Solomon Islands,2006,65.93461,970,1,738000000,Oceania,Melanesia,SLB
 Somalia,2006,52.68278,,1,,Africa,Eastern Africa,SOM
 South Africa,2006,51.61371,5690,3,510000000000,Africa,Southern Africa,ZAF
-South Sudan,2006,51.61329,,,,Africa,Eastern Africa,SSD
+South Sudan,2006,51.61329,,0,,Africa,Eastern Africa,SSD
 Spain,2006,80.82195,28000,5,1370000000000,Europe,Southern Europe,ESP
 Sri Lanka,2006,74.12454,1370,2,125000000000,Asia,Southern Asia,LKA
 St. Kitts and Nevis,2006,,11900,3,1000000000,Americas,Caribbean,KNA
 St. Lucia,2006,73.36907,6030,3,1690000000,Americas,Caribbean,LCA
-St. Martin (French part),2006,78.07073,,,,Americas,Caribbean,MAF
+St. Martin (French part),2006,78.07073,,0,,Americas,Caribbean,MAF
 St. Vincent and the Grenadines,2006,71.46022,5460,3,1001229756,Americas,Caribbean,VCT
 Sudan,2006,60.26224,710,1,107000000000,Africa,Northern Africa,SDN
 Suriname,2006,69.15673,4060,2,5820000000,Americas,South America,SUR
@@ -3694,7 +3694,7 @@ Vanuatu,2006,69.63676,1990,2,544000000,Oceania,Melanesia,VUT
 "Venezuela, RB",2006,73.30105,6050,3,404000000000,Americas,South America,VEN
 Vietnam,2006,74.31237,760,1,282000000000,Asia,South-eastern Asia,VNM
 Virgin Islands (U.S.),2006,78.62439,,4,,Americas,Caribbean,VIR
-West Bank and Gaza,2006,71.60588,1570,,13100000000,Asia,Western Asia,PSE
+West Bank and Gaza,2006,71.60588,1570,0,13100000000,Asia,Western Asia,PSE
 "Yemen, Rep.",2006,61.71717,790,1,81000000000,Asia,Western Asia,YEM
 Zambia,2006,50.96661,710,1,29629747898,Africa,Eastern Africa,ZMB
 Zimbabwe,2006,42.81071,410,1,19023964937,Africa,Eastern Africa,ZWE
@@ -3749,7 +3749,7 @@ Costa Rica,2007,78.33032,5690,3,51200000000,Americas,Central America,CRI
 Cote d'Ivoire,2007,48.77883,980,1,47900000000,Africa,Western Africa,CIV
 Croatia,2007,75.70561,12350,3,83267221867,Europe,Southern Europe,HRV
 Cuba,2007,78.4492,4980,3,182000000000,Americas,Caribbean,CUB
-Curacao,2007,75.36341,,,,Americas,Caribbean,CUW
+Curacao,2007,75.36341,,0,,Americas,Caribbean,CUW
 Cyprus,2007,78.86851,29000,4,25300000000,Asia,Western Asia,CYP
 Czech Republic,2007,76.72439,15700,5,268000000000,Europe,Eastern Europe,CZE
 Denmark,2007,78.19512,55700,5,213000000000,Europe,Northern Europe,DNK
@@ -3803,7 +3803,7 @@ Kenya,2007,55.69929,730,1,85900000000,Africa,Eastern Africa,KEN
 Kiribati,2007,64.98076,1750,2,173000000,Oceania,Micronesia,KIR
 North Korea,2007,68.3762,,1,,Asia,Eastern Asia,PRK
 South Korea,2007,79.34951,22500,5,1350000000000,Asia,Eastern Asia,KOR
-Kosovo,2007,69.19756,2800,,12100000000,Europe,Southern Europe,XKX
+Kosovo,2007,69.19756,2800,0,12100000000,Europe,Southern Europe,XKX
 Kuwait,2007,73.81,46900,4,228000000000,Asia,Western Asia,KWT
 Kyrgyz Republic,2007,67.89512,610,1,12900000000,Asia,Central Asia,KGZ
 Lao PDR,2007,62.82727,620,1,18635633546,Asia,South-eastern Asia,LAO
@@ -3870,18 +3870,18 @@ Serbia,2007,73.63171,4580,3,77300000000,Europe,Southern Europe,SRB
 Seychelles,2007,73.19268,12300,3,1680000000,Africa,Eastern Africa,SYC
 Sierra Leone,2007,45.48837,400,1,6370000000,Africa,Western Africa,SLE
 Singapore,2007,80.44146,35700,4,295000000000,Asia,South-eastern Asia,SGP
-Sint Maarten (Dutch part),2007,74.5439,,,,Americas,Caribbean,SXM
+Sint Maarten (Dutch part),2007,74.5439,,0,,Americas,Caribbean,SXM
 Slovak Republic,2007,74.20732,14900,5,114000000000,Europe,Eastern Europe,SVK
 Slovenia,2007,78.56098,21900,4,55700000000,Europe,Southern Europe,SVN
 Solomon Islands,2007,66.2668,960,1,812846374,Oceania,Melanesia,SLB
 Somalia,2007,53.01866,,1,,Africa,Eastern Africa,SOM
 South Africa,2007,51.99651,5980,3,552000000000,Africa,Southern Africa,ZAF
-South Sudan,2007,52.08785,,,,Africa,Eastern Africa,SSD
+South Sudan,2007,52.08785,,0,,Africa,Eastern Africa,SSD
 Spain,2007,80.87317,29900,5,1470000000000,Europe,Southern Europe,ESP
 Sri Lanka,2007,74.19412,1570,2,137000000000,Asia,Southern Asia,LKA
 St. Kitts and Nevis,2007,,12200,3,1030000000,Americas,Caribbean,KNA
 St. Lucia,2007,73.71185,6170,3,1730000000,Americas,Caribbean,LCA
-St. Martin (French part),2007,78.22195,,,,Americas,Caribbean,MAF
+St. Martin (French part),2007,78.22195,,0,,Americas,Caribbean,MAF
 St. Vincent and the Grenadines,2007,71.69941,5830,3,1050000000,Americas,Caribbean,VCT
 Sudan,2007,60.70088,880,2,122000000000,Africa,Northern Africa,SDN
 Suriname,2007,69.47907,5110,3,6280000000,Americas,South America,SUR
@@ -3912,7 +3912,7 @@ Vanuatu,2007,69.94873,2130,2,587000000,Oceania,Melanesia,VUT
 "Venezuela, RB",2007,73.3889,7520,3,451000000000,Americas,South America,VEN
 Vietnam,2007,74.48385,850,1,310000000000,Asia,South-eastern Asia,VNM
 Virgin Islands (U.S.),2007,78.82439,,4,,Americas,Caribbean,VIR
-West Bank and Gaza,2007,71.74705,1600,,13211610164,Asia,Western Asia,PSE
+West Bank and Gaza,2007,71.74705,1600,0,13211610164,Asia,Western Asia,PSE
 "Yemen, Rep.",2007,61.9548,880,1,85914141363,Asia,Western Asia,YEM
 Zambia,2007,52.47715,880,1,32958963867,Africa,Eastern Africa,ZMB
 Zimbabwe,2007,44.17776,380,1,18816752492,Africa,Eastern Africa,ZWE
@@ -3967,7 +3967,7 @@ Costa Rica,2008,78.45773,6410,3,54600000000,Americas,Central America,CRI
 Cote d'Ivoire,2008,49.27978,1090,2,50100000000,Africa,Western Africa,CIV
 Croatia,2008,75.9122,14000,4,89800000000,Europe,Southern Europe,HRV
 Cuba,2008,78.65051,5430,3,193000000000,Americas,Caribbean,CUB
-Curacao,2008,75.30976,,,,Americas,Caribbean,CUW
+Curacao,2008,75.30976,,0,,Americas,Caribbean,CUW
 Cyprus,2008,79.02754,32090,4,27393345521,Asia,Western Asia,CYP
 Czech Republic,2008,76.97561,18300,5,289000000000,Europe,Eastern Europe,CZE
 Denmark,2008,78.44634,60300,5,226000000000,Europe,Northern Europe,DNK
@@ -4021,7 +4021,7 @@ Kenya,2008,56.78468,860,1,87800000000,Africa,Eastern Africa,KEN
 Kiribati,2008,65.07861,1880,2,173000000,Oceania,Micronesia,KIR
 North Korea,2008,68.49195,,1,,Asia,Eastern Asia,PRK
 South Korea,2008,79.83268,22900,5,1410000000000,Asia,Eastern Asia,KOR
-Kosovo,2008,69.39756,3100,,12700000000,Europe,Southern Europe,XKX
+Kosovo,2008,69.39756,3100,0,12700000000,Europe,Southern Europe,XKX
 Kuwait,2008,73.90315,50800,4,239000000000,Asia,Western Asia,KWT
 Kyrgyz Republic,2008,68.45122,760,1,14300000000,Asia,Central Asia,KGZ
 Lao PDR,2008,63.3489,750,1,20500000000,Asia,South-eastern Asia,LAO
@@ -4088,18 +4088,18 @@ Serbia,2008,73.88537,5650,3,87600000000,Europe,Southern Europe,SRB
 Seychelles,2008,73.16341,11130,3,1676063693,Africa,Eastern Africa,SYC
 Sierra Leone,2008,46.42763,470,1,6850000000,Africa,Western Africa,SLE
 Singapore,2008,80.79024,36700,4,307000000000,Asia,South-eastern Asia,SGP
-Sint Maarten (Dutch part),2008,74.53659,,,,Americas,Caribbean,SXM
+Sint Maarten (Dutch part),2008,74.53659,,0,,Americas,Caribbean,SXM
 Slovak Republic,2008,74.70488,17200,5,127000000000,Europe,Eastern Europe,SVK
 Slovenia,2008,78.76585,24700,4,59900000000,Europe,Southern Europe,SVN
 Solomon Islands,2008,66.56122,980,2,888000000,Oceania,Melanesia,SLB
 Somalia,2008,53.35451,,1,,Africa,Eastern Africa,SOM
 South Africa,2008,52.63602,6040,3,581000000000,Africa,Southern Africa,ZAF
-South Sudan,2008,52.59332,,,33100000000,Africa,Eastern Africa,SSD
+South Sudan,2008,52.59332,,0,33100000000,Africa,Eastern Africa,SSD
 Spain,2008,81.17561,32440,5,1540000000000,Europe,Southern Europe,ESP
 Sri Lanka,2008,74.23873,1810,2,148000000000,Asia,Southern Asia,LKA
 St. Kitts and Nevis,2008,,13730,3,1116268444,Americas,Caribbean,KNA
 St. Lucia,2008,74.01315,6580,3,1840000000,Americas,Caribbean,LCA
-St. Martin (French part),2008,78.37073,,,,Americas,Caribbean,MAF
+St. Martin (French part),2008,78.37073,,0,,Americas,Caribbean,MAF
 St. Vincent and the Grenadines,2008,71.93173,6210,3,1100000000,Americas,Caribbean,VCT
 Sudan,2008,61.15061,1080,2,135000000000,Africa,Northern Africa,SDN
 Suriname,2008,69.795,6460,3,6670000000,Americas,South America,SUR
@@ -4130,7 +4130,7 @@ Vanuatu,2008,70.25476,2530,2,637000000,Oceania,Melanesia,VUT
 "Venezuela, RB",2008,73.47624,9230,3,484000000000,Americas,South America,VEN
 Vietnam,2008,74.6531,1000,1,334000000000,Asia,South-eastern Asia,VNM
 Virgin Islands (U.S.),2008,78.92439,,4,,Americas,Caribbean,VIR
-West Bank and Gaza,2008,71.89495,1660,,12300000000,Asia,Western Asia,PSE
+West Bank and Gaza,2008,71.89495,1660,0,12300000000,Asia,Western Asia,PSE
 "Yemen, Rep.",2008,62.21137,990,1,90800000000,Asia,Western Asia,YEM
 Zambia,2008,53.90563,1160,1,36217946839,Africa,Eastern Africa,ZMB
 Zimbabwe,2008,45.80449,300,1,15795924132,Africa,Eastern Africa,ZWE
@@ -4185,7 +4185,7 @@ Costa Rica,2009,78.59261,6530,3,54500000000,Americas,Central America,CRI
 Cote d'Ivoire,2009,49.74049,1180,2,52100000000,Africa,Western Africa,CIV
 Croatia,2009,76.16829,13800,4,86200000000,Europe,Southern Europe,HRV
 Cuba,2009,78.81098,5490,3,197000000000,Americas,Caribbean,CUB
-Curacao,2009,76.1561,,,,Americas,Caribbean,CUW
+Curacao,2009,76.1561,,0,,Americas,Caribbean,CUW
 Cyprus,2009,79.19949,32600,4,27400000000,Asia,Western Asia,CYP
 Czech Republic,2009,77.07805,18700,5,288000000000,Europe,Eastern Europe,CZE
 Denmark,2009,78.59756,59800,5,222000000000,Europe,Northern Europe,DNK
@@ -4239,7 +4239,7 @@ Kenya,2009,57.80044,930,1,91400000000,Africa,Eastern Africa,KEN
 Kiribati,2009,65.18344,1880,2,174860148,Oceania,Micronesia,KIR
 North Korea,2009,68.66405,,1,,Asia,Eastern Asia,PRK
 South Korea,2009,80.29732,21100,5,1400000000000,Asia,Eastern Asia,KOR
-Kosovo,2009,69.64878,3280,,13200000000,Europe,Southern Europe,XKX
+Kosovo,2009,69.64878,3280,0,13200000000,Europe,Southern Europe,XKX
 Kuwait,2009,74.0062,45000,4,224000000000,Asia,Western Asia,KWT
 Kyrgyz Republic,2009,69.10244,860,1,14800000000,Asia,Central Asia,KGZ
 Lao PDR,2009,63.85105,890,1,22200000000,Asia,South-eastern Asia,LAO
@@ -4306,18 +4306,18 @@ Serbia,2009,73.98537,6040,3,86700000000,Europe,Southern Europe,SRB
 Seychelles,2009,73.03415,10200,3,1670000000,Africa,Eastern Africa,SYC
 Sierra Leone,2009,47.35022,490,1,7220000000,Africa,Western Africa,SLE
 Singapore,2009,81.24146,37100,4,307000000000,Asia,South-eastern Asia,SGP
-Sint Maarten (Dutch part),2009,75.5878,,,,Americas,Caribbean,SXM
+Sint Maarten (Dutch part),2009,75.5878,,0,,Americas,Caribbean,SXM
 Slovak Republic,2009,74.90976,17100,5,124000000000,Europe,Eastern Europe,SVK
 Slovenia,2009,78.97073,24400,4,56100000000,Europe,Southern Europe,SVN
 Solomon Islands,2009,66.82468,820,1,852000000,Oceania,Melanesia,SLB
 Somalia,2009,53.68934,,1,,Africa,Eastern Africa,SOM
 South Africa,2009,53.4671,5910,3,576000000000,Africa,Southern Africa,ZAF
-South Sudan,2009,53.12266,,,35000000000,Africa,Eastern Africa,SSD
+South Sudan,2009,53.12266,,0,35000000000,Africa,Eastern Africa,SSD
 Spain,2009,81.47561,32800,5,1500000000000,Europe,Southern Europe,ESP
 Sri Lanka,2009,74.28029,2020,2,154000000000,Asia,Southern Asia,LKA
 St. Kitts and Nevis,2009,,13500,3,1090000000,Americas,Caribbean,KNA
 St. Lucia,2009,74.26605,6700,3,1840000000,Americas,Caribbean,LCA
-St. Martin (French part),2009,78.57073,,,,Americas,Caribbean,MAF
+St. Martin (French part),2009,78.57073,,0,,Americas,Caribbean,MAF
 St. Vincent and the Grenadines,2009,72.15007,6270,3,1090000000,Americas,Caribbean,VCT
 Sudan,2009,61.60239,1130,2,140000000000,Africa,Northern Africa,SDN
 Suriname,2009,70.0929,7110,3,6920000000,Americas,South America,SUR
@@ -4348,7 +4348,7 @@ Vanuatu,2009,70.55583,2620,2,663000000,Oceania,Melanesia,VUT
 "Venezuela, RB",2009,73.568,10200,3,472000000000,Americas,South America,VEN
 Vietnam,2009,74.82261,1120,2,355000000000,Asia,South-eastern Asia,VNM
 Virgin Islands (U.S.),2009,79.07317,,4,,Americas,Caribbean,VIR
-West Bank and Gaza,2009,72.0511,2110,,15000000000,Asia,Western Asia,PSE
+West Bank and Gaza,2009,72.0511,2110,0,15000000000,Asia,Western Asia,PSE
 "Yemen, Rep.",2009,62.48534,1080,2,95000000000,Asia,Western Asia,YEM
 Zambia,2009,55.21417,1260,1,39857780140,Africa,Eastern Africa,ZMB
 Zimbabwe,2009,47.62466,400,1,16868352554,Africa,Eastern Africa,ZWE
@@ -4457,7 +4457,7 @@ Kenya,2010,58.71861,1000,1,100000000000,Africa,Eastern Africa,KEN
 Kiribati,2010,65.30278,1990,2,174000000,Oceania,Micronesia,KIR
 North Korea,2010,68.90002,,1,,Asia,Eastern Asia,PRK
 South Korea,2010,80.55122,21300,5,1510000000000,Asia,Eastern Asia,KOR
-Kosovo,2010,69.9,3420,,13800000000,Europe,Southern Europe,XKX
+Kosovo,2010,69.9,3420,0,13800000000,Europe,Southern Europe,XKX
 Kuwait,2010,74.11663,41200,4,221000000000,Asia,Western Asia,KWT
 Kyrgyz Republic,2010,69.3,850,1,14900000000,Asia,Central Asia,KGZ
 Lao PDR,2010,64.33363,1000,2,24400000000,Asia,South-eastern Asia,LAO
@@ -4530,7 +4530,7 @@ Slovenia,2010,79.42195,24600,5,56900000000,Europe,Southern Europe,SVN
 Solomon Islands,2010,67.06566,910,2,922000000,Oceania,Melanesia,SLB
 Somalia,2010,54.02366,,1,,Africa,Eastern Africa,SOM
 South Africa,2010,54.39076,6250,3,601000000000,Africa,Southern Africa,ZAF
-South Sudan,2010,53.6649,1060,,37400000000,Africa,Eastern Africa,SSD
+South Sudan,2010,53.6649,1060,0,37400000000,Africa,Eastern Africa,SSD
 Spain,2010,81.62683,32100,5,1490000000000,Europe,Southern Europe,ESP
 Sri Lanka,2010,74.33924,2430,2,169000000000,Asia,Southern Asia,LKA
 St. Kitts and Nevis,2010,,13100,3,1080000000,Americas,Caribbean,KNA
@@ -4566,7 +4566,7 @@ Vanuatu,2010,70.84995,2690,2,683000000,Oceania,Melanesia,VUT
 "Venezuela, RB",2010,73.67161,11500,3,471000000000,Americas,South America,VEN
 Vietnam,2010,74.99037,1270,2,382000000000,Asia,South-eastern Asia,VNM
 Virgin Islands (U.S.),2010,79.17317,,4,,Americas,Caribbean,VIR
-West Bank and Gaza,2010,72.21493,2310,,15500000000,Asia,Western Asia,PSE
+West Bank and Gaza,2010,72.21493,2310,0,15500000000,Asia,Western Asia,PSE
 "Yemen, Rep.",2010,62.76873,1180,2,104000000000,Asia,Western Asia,YEM
 Zambia,2010,56.38385,1310,2,44499351077,Africa,Eastern Africa,ZMB
 Zimbabwe,2010,49.57466,500,1,19016741422,Africa,Eastern Africa,ZWE
@@ -4675,7 +4675,7 @@ Kenya,2011,59.53422,1040,1,109000000000,Africa,Eastern Africa,KEN
 Kiribati,2011,65.44063,2010,2,179000000,Oceania,Micronesia,KIR
 North Korea,2011,69.1879,,1,,Asia,Eastern Asia,PRK
 South Korea,2011,80.96707,22600,5,1560000000000,Asia,Eastern Asia,KOR
-Kosovo,2011,70.14878,3640,,14700000000,Europe,Southern Europe,XKX
+Kosovo,2011,70.14878,3640,0,14700000000,Europe,Southern Europe,XKX
 Kuwait,2011,74.23351,42900,4,247000000000,Asia,Western Asia,KWT
 Kyrgyz Republic,2011,69.60244,880,1,16100000000,Asia,Central Asia,KGZ
 Lao PDR,2011,64.79812,1120,2,26900000000,Asia,South-eastern Asia,LAO
@@ -4784,7 +4784,7 @@ Vanuatu,2011,71.13456,2860,2,705000000,Oceania,Melanesia,VUT
 "Venezuela, RB",2011,73.79166,11790,3,500000000000,Americas,South America,VEN
 Vietnam,2011,75.1568,1390,2,414000000000,Asia,South-eastern Asia,VNM
 Virgin Islands (U.S.),2011,79.37317,,4,,Americas,Caribbean,VIR
-West Bank and Gaza,2011,72.38539,2560,,17107576502,Asia,Western Asia,PSE
+West Bank and Gaza,2011,72.38539,2560,0,17107576502,Asia,Western Asia,PSE
 "Yemen, Rep.",2011,63.05354,1060,2,92300000000,Asia,Western Asia,YEM
 Zambia,2011,57.4222,1390,2,47945443548,Africa,Eastern Africa,ZMB
 Zimbabwe,2011,51.60037,690,1,21720130515,Africa,Eastern Africa,ZWE
@@ -4893,7 +4893,7 @@ Kenya,2012,60.27278,1090,1,116000000000,Africa,Eastern Africa,KEN
 Kiribati,2012,65.59607,2450,2,191000000,Oceania,Micronesia,KIR
 North Korea,2012,69.4942,,1,,Asia,Eastern Asia,PRK
 South Korea,2012,81.21341,24600,5,1610000000000,Asia,Eastern Asia,KOR
-Kosovo,2012,70.49756,3780,,15400000000,Europe,Southern Europe,XKX
+Kosovo,2012,70.49756,3780,0,15400000000,Europe,Southern Europe,XKX
 Kuwait,2012,74.35185,49600,4,268000000000,Asia,Western Asia,KWT
 Kyrgyz Republic,2012,70.00244,1040,1,16400000000,Asia,Central Asia,KGZ
 Lao PDR,2012,65.24851,1290,2,29600000000,Asia,South-eastern Asia,LAO
@@ -5002,7 +5002,7 @@ Vanuatu,2012,71.40817,2950,2,731000000,Oceania,Melanesia,VUT
 "Venezuela, RB",2012,73.92573,12500,3,538000000000,Americas,South America,VEN
 Vietnam,2012,75.31939,1550,2,444000000000,Asia,South-eastern Asia,VNM
 Virgin Islands (U.S.),2012,79.47317,,4,,Americas,Caribbean,VIR
-West Bank and Gaza,2012,72.55885,3070,,20000000000,Asia,Western Asia,PSE
+West Bank and Gaza,2012,72.55885,3070,0,20000000000,Asia,Western Asia,PSE
 "Yemen, Rep.",2012,63.32729,1240,2,96234421058,Asia,Western Asia,YEM
 Zambia,2012,58.36332,1660,2,52538435072,Africa,Eastern Africa,ZMB
 Zimbabwe,2012,53.64307,770,1,24457273616,Africa,Eastern Africa,ZWE
@@ -5111,7 +5111,7 @@ Kenya,2013,60.95378,1180,1,124000000000,Africa,Eastern Africa,KEN
 Kiribati,2013,65.76659,2840,2,206000000,Oceania,Micronesia,KIR
 North Korea,2013,69.79195,,1,,Asia,Eastern Asia,PRK
 South Korea,2013,81.70512,25900,5,1650000000000,Asia,Eastern Asia,KOR
-Kosovo,2013,70.79756,3960,,16200000000,Europe,Southern Europe,XKX
+Kosovo,2013,70.79756,3960,0,16200000000,Europe,Southern Europe,XKX
 Kuwait,2013,74.46968,52100,4,276000000000,Asia,Western Asia,KWT
 Kyrgyz Republic,2013,70.20244,1220,2,18500000000,Asia,Central Asia,KGZ
 Lao PDR,2013,65.68724,1490,2,32600000000,Asia,South-eastern Asia,LAO
@@ -5220,7 +5220,7 @@ Vanuatu,2013,71.66924,3200,2,757000000,Oceania,Melanesia,VUT
 "Venezuela, RB",2013,74.07441,11780,3,554000000000,Americas,South America,VEN
 Vietnam,2013,75.477,1740,2,476000000000,Asia,South-eastern Asia,VNM
 Virgin Islands (U.S.),2013,79.62439,,4,,Americas,Caribbean,VIR
-West Bank and Gaza,2013,72.73224,3060,,19400000000,Asia,Western Asia,PSE
+West Bank and Gaza,2013,72.73224,3060,0,19400000000,Asia,Western Asia,PSE
 "Yemen, Rep.",2013,63.58351,1420,2,103000000000,Asia,Western Asia,YEM
 Zambia,2013,59.23737,1750,2,56087980477,Africa,Eastern Africa,ZMB
 Zimbabwe,2013,55.633,820,1,25966659317,Africa,Eastern Africa,ZWE
@@ -5329,7 +5329,7 @@ Kenya,2014,61.57637,1300,2,133000000000,Africa,Eastern Africa,KEN
 Kiribati,2014,65.95168,3250,2,214000000,Oceania,Micronesia,KIR
 North Korea,2014,70.07468,,1,,Asia,Eastern Asia,PRK
 South Korea,2014,82.15585,27000,5,1710000000000,Asia,Eastern Asia,KOR
-Kosovo,2014,71.09756,4010,,16700000000,Europe,Southern Europe,XKX
+Kosovo,2014,71.09756,4010,0,16700000000,Europe,Southern Europe,XKX
 Kuwait,2014,74.58502,49900,4,282000000000,Asia,Western Asia,KWT
 Kyrgyz Republic,2014,70.40244,1260,2,19600000000,Asia,Central Asia,KGZ
 Lao PDR,2014,66.11737,1640,2,35700000000,Asia,South-eastern Asia,LAO
@@ -5438,7 +5438,7 @@ Vanuatu,2014,71.91832,3170,2,789000000,Oceania,Melanesia,VUT
 "Venezuela, RB",2014,74.2362,,4,542000000000,Americas,South America,VEN
 Vietnam,2014,75.62912,1900,2,513000000000,Asia,South-eastern Asia,VNM
 Virgin Islands (U.S.),2014,79.77317,,4,,Americas,Caribbean,VIR
-West Bank and Gaza,2014,72.90402,3090,,19500000000,Asia,Western Asia,PSE
+West Bank and Gaza,2014,72.90402,3090,0,19500000000,Asia,Western Asia,PSE
 "Yemen, Rep.",2014,63.8182,1440,2,104000000000,Asia,Western Asia,YEM
 Zambia,2014,60.04705,1740,2,59773100930,Africa,Eastern Africa,ZMB
 Zimbabwe,2014,57.49832,840,1,27448716761,Africa,Eastern Africa,ZWE
