@@ -47,32 +47,6 @@
   });
 
 
-
-  $("#slider").slider({
-      min: 1995,
-      max: 2015,
-      create: function(event, ui) {
-
-      },
-      slide: function(event, ui) {
-          yearChange(ui.value);
-          $(".year.label").text(ui.value);
-          pause(ui.value);
-          var tooltip = '<div class="date-tooltip">' + ui.value + '</div>';
-          $('.ui-slider-handle').html(tooltip); //attach tooltip to the slider handle
-          removeOldTrail(ui.value);
-
-      },
-      change: function(event, ui) {
-          $('.ui-slider-handle').html(); //attach tooltip to the slider handle
-
-      },
-      stop: function(event, ui) {
-          $('.ui-slider-handle').html('<div class="date-tooltip"></div>');
-      }
-  });
-
-
   let data;
   let xScale;
   let yScale;
@@ -224,6 +198,7 @@
       data = result;
 
       createAccordion(); // create accordion
+      createTimeline(); // create the timeline
       makeChart(); // the main chart
       makeBabyChart(); // chart that shows min,max circle sizes
   });
@@ -251,6 +226,56 @@
     })
 
     $("#accordion").accordion("refresh");
+  }
+
+  function createTimeline() {
+    $("#slider").slider({
+      min: minYear,
+      max: maxYear,
+      create: function(event, ui) {
+
+      },
+      slide: function(event, ui) {
+          yearChange(ui.value);
+          $(".year.label").text(ui.value);
+          pause(ui.value);
+          var tooltip = '<div class="date-tooltip">' + ui.value + '</div>';
+          $('.ui-slider-handle').html(tooltip); //attach tooltip to the slider handle
+          removeOldTrail(ui.value);
+
+      },
+      change: function(event, ui) {
+          $('.ui-slider-handle').html(); //attach tooltip to the slider handle
+
+      },
+      stop: function(event, ui) {
+          $('.ui-slider-handle').html('<div class="date-tooltip"></div>');
+      }
+    })
+    .each(function() {
+      // Add labels to slider whose values 
+      // are specified by min, max
+
+      // Get the options for this slider (specified above)
+      var opt = $(this).data().uiSlider.options;
+
+      // Get the number of possible values
+      var vals = opt.max - opt.min;
+
+      // Position the labels
+      for (var i = 0; i <= vals; i++) {
+
+        if ( i % 5 === 0 ) {
+          // Create a new element and position it with percentages
+          var el = $('<div class="hash-mark"></div>').css('left', (i/vals*100) + '%');
+          var text =  $('<div class="date">' + (i + opt.min ) + '</div>').css('left', (i/vals*100) - 3.5 + '%');
+
+          // Add the element inside #slider
+          $("#slider").append(el).append(text);
+        }
+
+      }
+    });
   }
 
   // check if row exists for country & year

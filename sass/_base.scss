@@ -105,57 +105,25 @@ header {
         height: 3px;
         background-color: black;
         border: transparent;
+
+        .hash-mark {
+            position: absolute;
+            height: 15px;
+            width: 1px;
+            top: -6px;
+            background-color: black;
+        }
+
+        .date {
+            position: absolute;
+            top: 10px;
+        }
     }
 
     .ui-slider-handle.ui-corner-all.ui-state-default {
         background-color: $accent;
         border-color: $accent;
         border-radius: 50%;
-    }
-    #dates {
-        width: 100%;
-        margin-top: 10px;
-        .yearDiv {
-            width: 33.3333%;
-            float: left;
-            color: gray;
-            position: relative;
-
-            div {
-                &:before {
-                    content: "";
-                    display: block;
-                    height: 15px;
-                    width: 1px;
-                    background-color: black;
-                    position: absolute;
-                    top: -18px;
-                    left: 50%;
-                }
-            }
-
-            &.yearR div,
-            &.yearL div {
-                width: 50%;
-                float: left;
-                position: relative;
-            }
-
-            &.yearL .endcap {
-                text-align: left;
-
-                &:before {
-                    left: 0%;
-                }
-            }
-            &.yearR .endcap {
-                text-align: right;
-
-                &:before {
-                    left: 100%;
-                }
-            }
-        }
     }
 
     .btnblock {
@@ -536,6 +504,10 @@ label {
 
 .ui-accordion .ui-accordion-content {
     padding: 1em 1em;
+
+    label {
+        color: black;
+    }
 
     .checkboxes {
         float: left;
