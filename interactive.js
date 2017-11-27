@@ -220,6 +220,8 @@
 
       data = result;
 
+      console.log(data)
+
       createAccordion(); // create accordion
       makeChart(); // the main chart
       makeBabyChart(); // chart that shows min,max circle sizes
@@ -253,6 +255,9 @@
 
   // find out if data exists
   function isEmpty(d, theScale, year) {
+    if ( d[0].ISO == 'USA' ) {
+      console.log("USA test")
+    }
       return (d.filter(r => r.Year == year)[0][theScale] == '');
   }
 
