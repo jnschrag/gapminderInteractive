@@ -618,20 +618,22 @@
       labelRoot.append('g')
           .attr('id', 'xAxis')
           .attr('transform', `translate(0,${height})`)
-
           .call(xAxis);
 
       labelRoot.append('g')
           .attr('id', 'yAxis')
           .attr('class', 'gridtick')
-
           .call(yAxis);
 
+      // Add an x-axis label.
+      labelRoot.append('text')
+        .attr('id', 'xLabel')
+        .attr('text-anchor', 'middle')
+        .attr('x', width / 2)
+        .attr('y', height + margin.bottom)
+        .text(currentX);
 
       // Add a y-axis label.
-
-
-
       labelRoot.append('text')
           .attr('id', 'yLabel')
           .attr('text-anchor', 'middle')
