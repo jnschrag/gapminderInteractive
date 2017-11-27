@@ -597,6 +597,7 @@ label {
                 max-width: 400px;
                 background-color: white;
                 height: 20%;
+                overflow-y: scroll;
                 padding: 20px;
                 z-index: 30;
                 height: 100%;
@@ -669,6 +670,10 @@ label {
         #innerOptions {
             margin-top: 45px;
         }
+    }
+
+    .ui-accordion .ui-accordion-content {
+        max-height: 200px;
     }
 
     #containerBottom {
