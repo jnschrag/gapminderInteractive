@@ -321,6 +321,12 @@ label {
             background: rgba(255, 255, 255, .9);
             display: none;
             position: fixed;
+
+            &.selected,
+            &.isActive,
+            &.isActive .tooltipdetail {
+                display: block;
+            }
         }
 
         .tooltipcaption {

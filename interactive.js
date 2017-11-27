@@ -103,6 +103,8 @@
   let regionList = {};
   let label;
 
+  const formatAmount = d3.format('.1s')
+
 
   let lineColor = "blue";
   let lineHover = "red";
@@ -511,7 +513,7 @@
       radiusScale = d3.scaleSqrt().domain(getDomain(currentRadius)).range([2, 40]);
 
       xAxis = d3.axisBottom(xScale).ticks(12, d3.format(',d')).tickSizeOuter(0);
-      yAxis = d3.axisLeft(yScale).tickSizeOuter(0).tickSizeInner(-width).ticks(3).tickFormat(d3.format(".1s"));
+      yAxis = d3.axisLeft(yScale).tickSizeOuter(0).tickSizeInner(-width).ticks(3).tickFormat(d => formatAmount(d));
 
 
       const tooltips = d3.select('#graph').append('div').attr('id', 'tooltips');
@@ -609,7 +611,7 @@
           theTooltip.append('div')
               .attr('class', 'tooltipdetail')
               .attr('id', `${d[0].ISO}tooltipRadius`)
-              .text(`${currentRadius}: ${getData(d, currentRadius, currentYear)}`);
+              .text(`${currentRadius}: ${formatAmount(getData(d, currentRadius, currentYear))}`);
       });
 
 
@@ -765,7 +767,9 @@
 
       d3.selectAll('.point').select(function() {
           d3.select(`#${this.getAttribute('id')}`)
-              .on('click', click);
+              .on('click', click)
+              .on('mouseover', showDetailedTooltip)
+              .on('mouseout', hideDetailedTooltip);
       });
 
       // d3.selectAll('.checkboxes').select(function() {
@@ -802,6 +806,13 @@
 
   }
 
+  function showDetailedTooltip(d, i) {
+    d3.select('#' + d[0].ISO + 'tooltip').classed('isActive', true)
+  }
+
+  function hideDetailedTooltip(d) {
+    d3.select('#' + d[0].ISO + 'tooltip').classed('isActive', false)
+  }
 
   function click(d, i) {
       var countryID = d3.select(this).attr('id');
@@ -823,9 +834,9 @@
   function ifChecked(countryID) {
 
       var strokeColor = d3.select(`#${countryID}`).style('stroke');
-      d3.select(`#${countryID}tooltipX`).style('display', 'none');
-      d3.select(`#${countryID}tooltipY`).style('display', 'none');
-      d3.select(`#${countryID}tooltipRadius`).style('display', 'none');
+      // d3.select(`#${countryID}tooltipX`).style('display', 'none');
+      // d3.select(`#${countryID}tooltipY`).style('display', 'none');
+      // d3.select(`#${countryID}tooltipRadius`).style('display', 'none');
 
 
       d3.select(`#${countryID}`)
@@ -1410,13 +1421,11 @@
                   var countryID = d3.select(this).attr('data-country');
                   //console.log(countryID);
                   d3.select(`#${countryID}`).style('opacity', '1');
-                  d3.select(`#${countryID}tooltip`).style('display', 'block');
                   d3.select(`#${countryID}tooltip`).classed("selected", true)
                   makeTrail(countryID);
 
               } else {
                   d3.select(`#${countryID}`).style('opacity', '0.3');
-                  d3.select(`#${countryID}tooltip`).style('display', 'none');
                   d3.select(`#${countryID}tooltip`).classed("selected", false);
                   //d3.select(`#${countryID}Group .trails`).remove();
                   removeTrail(countryID);
@@ -1426,7 +1435,6 @@
           d3.selectAll('.checkboxes').select(function() {
               var countryID = d3.select(this).attr('data-country');
               d3.select(`#${countryID}`).style('opacity', '1');
-              d3.select(`#${countryID}tooltip`).style('display', 'none');
               d3.select(`#${countryID}tooltip`).classed("selected", false);
               //d3.select(`#${countryID}Group .trails`).remove();
               removeTrail(countryID);
