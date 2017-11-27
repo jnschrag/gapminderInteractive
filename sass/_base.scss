@@ -548,10 +548,18 @@ label {
 
 
 @media (min-width:0px) and (max-width:768px) {
-    #graph,
+    h1 {
+        text-align: left;
+        margin: 1rem 0.5rem;
+    }
+
+    #graph {
+        width: 95%;
+        margin: 0 auto;
+    }
+
     #containerBottom {
         width: 95%;
-        margin-right: 0%;
     }
     #containerTop {
 
@@ -666,5 +674,9 @@ label {
     #containerBottom {
         order: 2; // width: 100%;
         padding-left: 10px;
+
+        #containerBottom-right {
+            display: none;
+        }
     }
 }

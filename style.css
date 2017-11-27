@@ -554,22 +554,32 @@ label {
 
 @media (min-width: 0px) and (max-width: 768px) {
   /* line 551, sass/_base.scss */
-  #graph,
-  #containerBottom {
-    width: 95%;
-    margin-right: 0%;
+  h1 {
+    text-align: left;
+    margin: 1rem 0.5rem;
   }
 
   /* line 556, sass/_base.scss */
+  #graph {
+    width: 95%;
+    margin: 0 auto;
+  }
+
+  /* line 561, sass/_base.scss */
+  #containerBottom {
+    width: 95%;
+  }
+
+  /* line 564, sass/_base.scss */
   #containerTop {
     margin-left: 10px;
   }
 
-  /* line 560, sass/_base.scss */
+  /* line 568, sass/_base.scss */
   #containerTopRight {
     margin-top: 0px;
   }
-  /* line 563, sass/_base.scss */
+  /* line 571, sass/_base.scss */
   #containerTopRight #menu-container {
     position: fixed;
     right: -500px;
@@ -580,7 +590,7 @@ label {
     z-index: 30;
     margin-top: 0;
   }
-  /* line 574, sass/_base.scss */
+  /* line 582, sass/_base.scss */
   #containerTopRight.active {
     display: block;
     height: 100vh;
@@ -592,7 +602,7 @@ label {
     position: fixed;
     background-color: rgba(0, 0, 0, 0.1);
   }
-  /* line 585, sass/_base.scss */
+  /* line 593, sass/_base.scss */
   #containerTopRight.active #menu-container {
     position: fixed;
     right: 0px;
@@ -613,7 +623,7 @@ label {
     -ms-transition: all 0.2s ease;
     transition: all 0.2s ease;
   }
-  /* line 601, sass/_base.scss */
+  /* line 609, sass/_base.scss */
   #containerTopRight.active #menu-container .hamburger .bars {
     background-color: transparent;
     -webkit-transition: all 0.2s ease;
@@ -621,7 +631,7 @@ label {
     -ms-transition: all 0.2s ease;
     transition: all 0.2s ease;
   }
-  /* line 605, sass/_base.scss */
+  /* line 613, sass/_base.scss */
   #containerTopRight.active #menu-container .hamburger .bars::before {
     top: 0;
     -webkit-transform: rotate(-45deg);
@@ -629,7 +639,7 @@ label {
     -ms-transform: rotate(-45deg);
     transform: rotate(-45deg);
   }
-  /* line 609, sass/_base.scss */
+  /* line 617, sass/_base.scss */
   #containerTopRight.active #menu-container .hamburger .bars::after {
     bottom: 0;
     -webkit-transform: rotate(45deg);
@@ -637,7 +647,7 @@ label {
     -ms-transform: rotate(45deg);
     transform: rotate(45deg);
   }
-  /* line 616, sass/_base.scss */
+  /* line 624, sass/_base.scss */
   #containerTopRight .hamburger {
     display: block;
     position: fixed;
@@ -647,11 +657,11 @@ label {
     z-index: 1000;
     padding: 10px 15px 5px;
   }
-  /* line 626, sass/_base.scss */
+  /* line 634, sass/_base.scss */
   #containerTopRight .hamburger span {
     vertical-align: middle;
   }
-  /* line 629, sass/_base.scss */
+  /* line 637, sass/_base.scss */
   #containerTopRight .hamburger .bars {
     display: block;
     position: relative;
@@ -666,7 +676,7 @@ label {
     -ms-transition: all 0.2s ease;
     transition: all 0.2s ease;
   }
-  /* line 640, sass/_base.scss */
+  /* line 648, sass/_base.scss */
   #containerTopRight .hamburger .bars:before, #containerTopRight .hamburger .bars:after {
     position: absolute;
     content: " ";
@@ -678,26 +688,30 @@ label {
     -ms-transition: all 0.2s ease;
     transition: all 0.2s ease;
   }
-  /* line 649, sass/_base.scss */
+  /* line 657, sass/_base.scss */
   #containerTopRight .hamburger .bars:before {
     top: 5px;
   }
-  /* line 652, sass/_base.scss */
+  /* line 660, sass/_base.scss */
   #containerTopRight .hamburger .bars:after {
     bottom: 5px;
   }
-  /* line 656, sass/_base.scss */
+  /* line 664, sass/_base.scss */
   #containerTopRight .hamburger .optionsText {
     color: #0099e1;
   }
-  /* line 661, sass/_base.scss */
+  /* line 669, sass/_base.scss */
   #containerTopRight #innerOptions {
     margin-top: 45px;
   }
 
-  /* line 666, sass/_base.scss */
+  /* line 674, sass/_base.scss */
   #containerBottom {
     order: 2;
     padding-left: 10px;
+  }
+  /* line 678, sass/_base.scss */
+  #containerBottom #containerBottom-right {
+    display: none;
   }
 }

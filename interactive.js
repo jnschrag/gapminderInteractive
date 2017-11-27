@@ -508,13 +508,13 @@
 
       if (screenwidth <= 768) {
           var margin = {
-              top: marginTop * 2,
-              right: marginRight,
+              top: marginTop - 5,
+              right: 10,
               bottom: marginBottom,
-              left: 20,
+              left: 60,
           };
 
-          width = document.getElementById('graph').clientWidth - margin.right;
+          width = document.getElementById('graph').offsetWidth - margin.right - 50;
           height = 500 - margin.top - margin.bottom;
 
       } else {
