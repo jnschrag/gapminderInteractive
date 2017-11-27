@@ -552,7 +552,7 @@ label {
   display: none;
 }
 
-@media (min-width: 0px) and (max-width: 768px) {
+@media (max-width: 768px) {
   /* line 551, sass/_base.scss */
   h1 {
     text-align: left;
