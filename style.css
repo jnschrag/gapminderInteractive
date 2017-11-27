@@ -273,9 +273,10 @@ label {
   padding: 10px 0px;
   text-align: right;
   cursor: pointer;
+  margin-bottom: 2rem;
 }
 
-/* line 222, sass/_base.scss */
+/* line 223, sass/_base.scss */
 .key-label {
   text-transform: uppercase;
   color: gray;
@@ -284,7 +285,7 @@ label {
   display: block;
 }
 
-/* line 231, sass/_base.scss */
+/* line 232, sass/_base.scss */
 #dropdownR-button,
 #dropdownX-button,
 #dropdownY-button {
@@ -295,7 +296,7 @@ label {
   border: 0px solid transparent;
 }
 
-/* line 241, sass/_base.scss */
+/* line 242, sass/_base.scss */
 .dropdownR,
 .dropdownX,
 .dropdownY {
@@ -306,12 +307,12 @@ label {
   color: #0099e1;
 }
 
-/* line 251, sass/_base.scss */
+/* line 252, sass/_base.scss */
 #dropdownR-button .ui-selectmenu-text {
   margin-right: 40px;
 }
 
-/* line 255, sass/_base.scss */
+/* line 256, sass/_base.scss */
 #xLabel,
 #yLabel,
 #circleLegendLabel {
@@ -321,18 +322,18 @@ label {
 }
 
 /*Graph*/
-/* line 274, sass/_base.scss */
+/* line 275, sass/_base.scss */
 #graph {
   width: calc(65%);
   margin-right: 10%;
   display: block;
   float: left;
 }
-/* line 281, sass/_base.scss */
+/* line 282, sass/_base.scss */
 #graph #tooltips .tooltipdetail {
   display: none;
 }
-/* line 285, sass/_base.scss */
+/* line 286, sass/_base.scss */
 #graph #tooltips .tooltip {
   padding: 10px 12px 12px;
   border: 1px solid #c5c5c5;
@@ -341,153 +342,153 @@ label {
   display: none;
   position: fixed;
 }
-/* line 293, sass/_base.scss */
+/* line 294, sass/_base.scss */
 #graph #tooltips .tooltip.selected, #graph #tooltips .tooltip.isActive, #graph #tooltips .tooltip.isActive .tooltipdetail {
   display: block;
 }
-/* line 300, sass/_base.scss */
+/* line 301, sass/_base.scss */
 #graph #tooltips .tooltipcaption {
   font-size: 16px;
   font-weight: 700;
 }
-/* line 306, sass/_base.scss */
+/* line 307, sass/_base.scss */
 #graph #tooltips .tooltipdetail {
   padding-top: 10px;
   font-size: 14px;
   line-height: .7;
 }
-/* line 310, sass/_base.scss */
+/* line 311, sass/_base.scss */
 #graph #tooltips .tooltipdetail span.no-data {
   font-weight: normal;
   font-style: italic;
 }
-/* line 317, sass/_base.scss */
+/* line 318, sass/_base.scss */
 #graph svg {
   shape-rendering: geometricPrecision;
 }
-/* line 324, sass/_base.scss */
+/* line 325, sass/_base.scss */
 #graph #theGraph .axis path,
 #graph #theGraph .axis line {
   fill: black;
   stroke: #000;
   shape-rendering: crispEdges;
 }
-/* line 330, sass/_base.scss */
+/* line 331, sass/_base.scss */
 #graph #theGraph .gridtick line {
   stroke: #c5c5c5;
 }
-/* line 338, sass/_base.scss */
+/* line 339, sass/_base.scss */
 #graph #theGraph .label {
   fill: #777;
   font-size: 100px;
   font-family: 'Source Sans Pro', sans-serif;
 }
-/* line 343, sass/_base.scss */
+/* line 344, sass/_base.scss */
 #graph #theGraph .year.label {
   font-family: 'Source Sans Pro', sans-serif;
   fill: #ddd;
 }
-/* line 348, sass/_base.scss */
+/* line 349, sass/_base.scss */
 #graph #theGraph .year.label.active {
   fill: #aaa;
 }
-/* line 352, sass/_base.scss */
+/* line 353, sass/_base.scss */
 #graph #theGraph circle {
   stroke-width: 1px;
 }
-/* line 357, sass/_base.scss */
+/* line 358, sass/_base.scss */
 #graph #theGraph circle:hover {
   cursor: pointer;
 }
 
 /*Container Right*/
-/* line 377, sass/_base.scss */
+/* line 378, sass/_base.scss */
 #containerTopRight {
   width: 20%;
   margin-top: 50px;
 }
-/* line 382, sass/_base.scss */
+/* line 383, sass/_base.scss */
 #containerTopRight .ui-accordion .ui-accordion-header {
   padding: 2%;
 }
 
-/* line 389, sass/_base.scss */
+/* line 390, sass/_base.scss */
 .colorLegendElement {
   font-family: 'Source Sans Pro', sans-serif;
   display: inline-block;
   text-align: center;
 }
-/* line 394, sass/_base.scss */
+/* line 395, sass/_base.scss */
 .colorLegendElement.nodata {
   margin-left: 10px;
 }
 
-/* line 399, sass/_base.scss */
+/* line 400, sass/_base.scss */
 .dropdownpair {
   margin-bottom: 20px;
   border-bottom: 1px solid #c5c5c5;
 }
 
-/* line 406, sass/_base.scss */
+/* line 407, sass/_base.scss */
 .dropdownpair .key-label,
 #containerTopRight .key-label {
   padding-bottom: 0px;
 }
 
-/* line 411, sass/_base.scss */
+/* line 412, sass/_base.scss */
 .colorLegendSquare {
   width: 15px;
   height: 15px;
   box-sizing: border-box;
 }
 
-/* line 417, sass/_base.scss */
+/* line 418, sass/_base.scss */
 #circleLegend {
   margin-top: 30px;
 }
-/* line 420, sass/_base.scss */
+/* line 421, sass/_base.scss */
 #circleLegend #accordion {
   margin-top: 5px;
 }
 
-/* line 425, sass/_base.scss */
+/* line 426, sass/_base.scss */
 .data-hover {
   fill: #0099e1;
   display: block;
   background-color: blue;
 }
 
-/* line 437, sass/_base.scss */
+/* line 438, sass/_base.scss */
 .grid .tick {
   stroke: lightgrey;
   opacity: 0.7;
 }
 
-/* line 442, sass/_base.scss */
+/* line 443, sass/_base.scss */
 .grid path {
   stroke-width: 0;
 }
 
 /*Container Top*/
-/* line 460, sass/_base.scss */
+/* line 461, sass/_base.scss */
 #containerTop {
   margin-left: 100px;
 }
 
 /*Container Bottom*/
-/* line 479, sass/_base.scss */
+/* line 480, sass/_base.scss */
 #containerBottom {
   width: 65%;
   padding-left: 100px;
   margin-top: 40px;
 }
 
-/* line 486, sass/_base.scss */
+/* line 487, sass/_base.scss */
 .ui-corner-all {
   border-radius: 0;
 }
 
-/* line 490, sass/_base.scss */
+/* line 491, sass/_base.scss */
 .dropdowndiv {
   clear: both;
   display: block;
@@ -496,100 +497,101 @@ label {
   border: 1px solid transparent;
   position: relative;
 }
-/* line 498, sass/_base.scss */
+/* line 499, sass/_base.scss */
 .dropdowndiv select,
 .dropdowndiv select span {
   font-size: 16px;
   width: 100%;
 }
 
-/* line 505, sass/_base.scss */
+/* line 506, sass/_base.scss */
 .ui-accordion .ui-accordion-content {
   padding: 1em 1em;
 }
-/* line 508, sass/_base.scss */
+/* line 509, sass/_base.scss */
 .ui-accordion .ui-accordion-content label {
   color: black;
+  clear: left;
 }
-/* line 512, sass/_base.scss */
+/* line 514, sass/_base.scss */
 .ui-accordion .ui-accordion-content .checkboxes {
   float: left;
 }
 
-/* line 517, sass/_base.scss */
+/* line 519, sass/_base.scss */
 .ui-state-active {
   background: #0099e1;
   border: #0099e1;
 }
 
-/* line 522, sass/_base.scss */
+/* line 524, sass/_base.scss */
 .ui-selectmenu-menu .ui-menu {
   height: 300px;
 }
 
-/* line 526, sass/_base.scss */
+/* line 528, sass/_base.scss */
 .ui-selectmenu-button.ui-button {
   width: 85%;
 }
 
-/* line 530, sass/_base.scss */
+/* line 532, sass/_base.scss */
 #graph #tooltips .tooltip.selected {
   padding: 5px 5px 5px;
 }
-/* line 534, sass/_base.scss */
+/* line 536, sass/_base.scss */
 #graph #tooltips .tooltip.selected .tooltipcaption {
   font-size: 14px;
 }
 
-/* line 539, sass/_base.scss */
+/* line 541, sass/_base.scss */
 .no-data {
   color: gray;
   font-weight: normal;
 }
 
-/* line 545, sass/_base.scss */
+/* line 547, sass/_base.scss */
 .hamburger {
   display: none;
 }
 
 @media (max-width: 768px) {
-  /* line 551, sass/_base.scss */
+  /* line 553, sass/_base.scss */
   h1 {
     text-align: left;
     margin: 1rem 0.5rem;
   }
 
-  /* line 556, sass/_base.scss */
+  /* line 558, sass/_base.scss */
   #graphicContainer {
     flex-wrap: unset;
   }
 
-  /* line 560, sass/_base.scss */
+  /* line 562, sass/_base.scss */
   #graph {
     width: 95%;
     margin: 0 auto;
   }
-  /* line 564, sass/_base.scss */
+  /* line 566, sass/_base.scss */
   #graph #tooltips .tooltip {
     position: static;
     margin-top: 1rem;
   }
 
-  /* line 570, sass/_base.scss */
+  /* line 572, sass/_base.scss */
   #containerBottom {
     width: 95%;
   }
 
-  /* line 573, sass/_base.scss */
+  /* line 575, sass/_base.scss */
   #containerTop {
     margin-left: 10px;
   }
 
-  /* line 577, sass/_base.scss */
+  /* line 579, sass/_base.scss */
   #containerTopRight {
     margin-top: 0px;
   }
-  /* line 580, sass/_base.scss */
+  /* line 582, sass/_base.scss */
   #containerTopRight #menu-container {
     position: fixed;
     right: -500px;
@@ -600,7 +602,7 @@ label {
     z-index: 30;
     margin-top: 0;
   }
-  /* line 591, sass/_base.scss */
+  /* line 593, sass/_base.scss */
   #containerTopRight.active {
     display: block;
     height: 100vh;
@@ -612,7 +614,7 @@ label {
     position: fixed;
     background-color: rgba(0, 0, 0, 0.1);
   }
-  /* line 602, sass/_base.scss */
+  /* line 604, sass/_base.scss */
   #containerTopRight.active #menu-container {
     position: fixed;
     right: 0px;
@@ -634,7 +636,7 @@ label {
     -ms-transition: all 0.2s ease;
     transition: all 0.2s ease;
   }
-  /* line 619, sass/_base.scss */
+  /* line 621, sass/_base.scss */
   #containerTopRight.active #menu-container .hamburger .bars {
     background-color: transparent;
     -webkit-transition: all 0.2s ease;
@@ -642,7 +644,7 @@ label {
     -ms-transition: all 0.2s ease;
     transition: all 0.2s ease;
   }
-  /* line 623, sass/_base.scss */
+  /* line 625, sass/_base.scss */
   #containerTopRight.active #menu-container .hamburger .bars::before {
     top: 0;
     -webkit-transform: rotate(-45deg);
@@ -650,7 +652,7 @@ label {
     -ms-transform: rotate(-45deg);
     transform: rotate(-45deg);
   }
-  /* line 627, sass/_base.scss */
+  /* line 629, sass/_base.scss */
   #containerTopRight.active #menu-container .hamburger .bars::after {
     bottom: 0;
     -webkit-transform: rotate(45deg);
@@ -658,7 +660,7 @@ label {
     -ms-transform: rotate(45deg);
     transform: rotate(45deg);
   }
-  /* line 634, sass/_base.scss */
+  /* line 636, sass/_base.scss */
   #containerTopRight .hamburger {
     display: block;
     position: fixed;
@@ -668,11 +670,11 @@ label {
     z-index: 1000;
     padding: 10px 15px 5px;
   }
-  /* line 644, sass/_base.scss */
+  /* line 646, sass/_base.scss */
   #containerTopRight .hamburger span {
     vertical-align: middle;
   }
-  /* line 647, sass/_base.scss */
+  /* line 649, sass/_base.scss */
   #containerTopRight .hamburger .bars {
     display: block;
     position: relative;
@@ -687,7 +689,7 @@ label {
     -ms-transition: all 0.2s ease;
     transition: all 0.2s ease;
   }
-  /* line 658, sass/_base.scss */
+  /* line 660, sass/_base.scss */
   #containerTopRight .hamburger .bars:before, #containerTopRight .hamburger .bars:after {
     position: absolute;
     content: " ";
@@ -699,34 +701,34 @@ label {
     -ms-transition: all 0.2s ease;
     transition: all 0.2s ease;
   }
-  /* line 667, sass/_base.scss */
+  /* line 669, sass/_base.scss */
   #containerTopRight .hamburger .bars:before {
     top: 5px;
   }
-  /* line 670, sass/_base.scss */
+  /* line 672, sass/_base.scss */
   #containerTopRight .hamburger .bars:after {
     bottom: 5px;
   }
-  /* line 674, sass/_base.scss */
+  /* line 676, sass/_base.scss */
   #containerTopRight .hamburger .optionsText {
     color: #0099e1;
   }
-  /* line 679, sass/_base.scss */
+  /* line 681, sass/_base.scss */
   #containerTopRight #innerOptions {
     margin-top: 45px;
   }
 
-  /* line 684, sass/_base.scss */
+  /* line 686, sass/_base.scss */
   .ui-accordion .ui-accordion-content {
     max-height: 200px;
   }
 
-  /* line 689, sass/_base.scss */
+  /* line 691, sass/_base.scss */
   #containerBottom {
     order: 2;
     padding-left: 10px;
   }
-  /* line 693, sass/_base.scss */
+  /* line 695, sass/_base.scss */
   #containerBottom #containerBottom-right {
     display: none;
   }
