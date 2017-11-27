@@ -98,6 +98,8 @@
 
 
   let countryList = new Set();
+  let regions = new Set();
+  let regionList = {};
   let label;
 
 
@@ -145,18 +147,27 @@
 
 
   // call for csv data, execute function on callback
-  const q = d3.csv('data/cpp-lifeExpectancy20171115.csv', (result) => {
+  const q = d3.csv('data/cpp-lifeexpectancy-20171127.csv', (result) => {
 
       maxYear = result.map(d => Math.max(d.Year)).reduce((a, b) => Math.max(a, b));
       minYear = result.map(d => Math.max(d.Year)).reduce((a, b) => Math.min(a, b));
 
       currentYear = minYear;
 
-      // creating a set of countries 
+      // creating a set of countries & regions
       for (let i = 0; i < result.length; i++) {
-          countryList.add(result[i].Country);
+          let region = result[i].Region
+          let iso = result[i].ISO
+
+          countryList.add(iso);
+
+          regions.add(region);
+          regionList[region] = regionList[region] || []
+          regionList[region].indexOf(iso) === -1 ? regionList[region].push(iso) : ''
+
       }
       countryList = Array.from(countryList);
+      regions = Array.from(regions).sort();
 
       // loop over to get keys for all categories, will be appended to dropdown buttons in the UI
       const categories = Object.keys(result[0]);
@@ -209,11 +220,35 @@
 
       data = result;
 
-      console.log(data)
-
+      createAccordion(); // create accordion
       makeChart(); // the main chart
       makeBabyChart(); // chart that shows min,max circle sizes
   });
+
+  function createAccordion() {
+    const accordionCont = d3.select('#accordion')
+
+    regions.forEach(function(region) {
+      accordionCont.append('h3')
+        .text(region)
+      let regionCont = accordionCont.append('div')
+        .attr('class', 'region-containers')
+        .attr('id', 'region-' + region)
+
+      let options = regionCont.selectAll('.option').data(regionList[region])
+
+      options.enter().append('label')
+        .data(regionList[region].map(d => data.filter(r => r.ISO === d)))
+        .text(d => d[0].Country)
+        .append('input')
+          .attr('class', 'checkboxes')
+          .attr('type', 'checkbox')
+          .attr('data-country', d => d[0].ISO)
+          .attr('onchange', 'checkboxChange()')
+    })
+
+    $("#accordion").accordion("refresh");
+  }
 
 
   // find out if data exists
@@ -484,10 +519,10 @@
       svgRoot.append('g')
           .attr('id', 'points')
           .selectAll('circle')
-          .data(countryList.map(d => data.filter(r => r.Country === d)))
+          .data(countryList.map(d => data.filter(r => r.ISO === d)))
           .enter()
           .append('circle')
-          .attr('id', d => d[0].Country.replace(/ /g, ''))
+          .attr('id', d => d[0].ISO)
           .attr('class', 'point')
           .attr('cx', d => xScale(getData(d, currentX, currentYear)))
           .attr('cy', d => yScale(getData(d, currentY, currentYear)))
@@ -522,7 +557,7 @@
               var theTooltip = d3.select('#tooltips')
                   .append('div')
                   .attr('class', 'tooltip')
-                  .attr('id', `${d[0].Country.replace(/ /g, '')}tooltip`)
+                  .attr('id', `${d[0].ISO}tooltip`)
                   .style('top', boxY + boxH)
                   .style('left', 0 + margin.left);
 
@@ -530,7 +565,7 @@
               var theTooltip = d3.select('#tooltips')
                   .append('div')
                   .attr('class', 'tooltip')
-                  .attr('id', `${d[0].Country.replace(/ /g, '')}tooltip`)
+                  .attr('id', `${d[0].ISO}tooltip`)
                   .style('top', boundingClientRect.top + boundingClientRect.height)
                   .style('left', boundingClientRect.left + boundingClientRect.width);
           };
@@ -541,23 +576,23 @@
 
 
           theTooltip.append('div')
-              .attr('id', `${d[0].Country.replace(/ /g, '')}tooltipcaption`)
+              .attr('id', `${d[0].ISO}tooltipcaption`)
               .attr('class', 'tooltipcaption')
               .text(d[0].Country);
 
           theTooltip.append('div')
               .attr('class', 'tooltipdetail')
-              .attr('id', `${d[0].Country.replace(/ /g, '')}tooltipX`)
+              .attr('id', `${d[0].ISO}tooltipX`)
               .html('<span class="no-data">' + `${currentX}: ${isEmpty(d, currentX, currentYear) ? 'No Data</span>' : getData(d, currentX, currentYear)}`);
 
           theTooltip.append('div')
               .attr('class', 'tooltipdetail')
-              .attr('id', `${d[0].Country.replace(/ /g, '')}tooltipY`)
+              .attr('id', `${d[0].ISO}tooltipY`)
               .text(`${currentY}: ${getData(d, currentY, currentYear)}`);
 
           theTooltip.append('div')
               .attr('class', 'tooltipdetail')
-              .attr('id', `${d[0].Country.replace(/ /g, '')}tooltipRadius`)
+              .attr('id', `${d[0].ISO}tooltipRadius`)
               .text(`${currentRadius}: ${getData(d, currentRadius, currentYear)}`);
       });
 
@@ -715,15 +750,15 @@
               .on('click', click);
       });
 
-      d3.selectAll('.checkboxes').select(function() {
-          var countryID = d3.select(`#${this.getAttribute('country')}`).attr('id');
-          if (this.checked) {
-              ifChecked(countryID)
-              //console.log(strokeColor);
-          } else {
-              //ifUnchecked(countryID)
-          };
-      });
+      // d3.selectAll('.checkboxes').select(function() {
+      //     var countryID = d3.select(`#${this.getAttribute('data-country')}`).attr('id');
+      //     if (this.checked) {
+      //         ifChecked(countryID)
+      //         //console.log(strokeColor);
+      //     } else {
+      //         //ifUnchecked(countryID)
+      //     };
+      // });
 
       d3.selectAll('.tooltipYear').select(function() {
 
@@ -755,7 +790,7 @@
       //console.log(countryID + ": " + currentYear);
       pause(currentYear);
 
-      $("#accordion input[type=checkbox][country=" + countryID + "]").prop("checked", function(i, val) {
+      $("#accordion input[type=checkbox][data-country=" + countryID + "]").prop("checked", function(i, val) {
           return !val;
       });
 
@@ -1045,7 +1080,7 @@
           .select(function(d) {
               const boundingClientRect = this.getBoundingClientRect();
 
-              d3.select(`#${d[0].Country.replace(/ /g, '')}tooltip`)
+              d3.select(`#${d[0].ISO}tooltip`)
                   .transition(t)
                   .style('top', boundingClientRect.bottom)
                   .style('left', boundingClientRect.right);
@@ -1084,14 +1119,14 @@
 
 
       d3.selectAll('.point').select((d) => {
-          d3.select(`#${d[0].Country.replace(/ /g, '')}tooltipX`)
+          d3.select(`#${d[0].ISO}tooltipX`)
               .text(`${currentX}: ${isEmpty(d, currentX, year) ? 'No Data' : getData(d, currentX, year)}`);
 
-          d3.select(`#${d[0].Country.replace(/ /g, '')}tooltipY`)
+          d3.select(`#${d[0].ISO}tooltipY`)
               .text(`${currentY}: ${isEmpty(d, currentY, year) ? 'No Data' : getData(d, currentY, year)}`);
 
 
-          d3.select(`#${d[0].Country.replace(/ /g, '')}tooltipRadius`)
+          d3.select(`#${d[0].ISO}tooltipRadius`)
               .text(`${currentRadius}: ${isEmpty(d, currentRadius, year) ? 'No Data' : getData(d, currentRadius, year)}`);
       });
 
@@ -1350,9 +1385,9 @@
       });
       if (anyCheckBoxOn) {
           d3.selectAll('.checkboxes').select(function() {
-              var countryID = d3.select(this).attr('country');
+              var countryID = d3.select(this).attr('data-country');
               if (this.checked) {
-                  var countryID = d3.select(this).attr('country');
+                  var countryID = d3.select(this).attr('data-country');
                   //console.log(countryID);
                   d3.select(`#${countryID}`).style('opacity', '1');
                   d3.select(`#${countryID}tooltip`).style('display', 'block');
@@ -1369,7 +1404,7 @@
           });
       } else {
           d3.selectAll('.checkboxes').select(function() {
-              var countryID = d3.select(this).attr('country');
+              var countryID = d3.select(this).attr('data-country');
               d3.select(`#${countryID}`).style('opacity', '1');
               d3.select(`#${countryID}tooltip`).style('display', 'none');
               d3.select(`#${countryID}tooltip`).classed("selected", false);

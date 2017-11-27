@@ -530,6 +530,10 @@ label {
 
 .ui-accordion .ui-accordion-content {
     padding: 1em 1em;
+
+    .checkboxes {
+        float: left;
+    }    
 }
 
 .ui-state-active {
