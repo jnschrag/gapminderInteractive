@@ -1,0 +1,699 @@
+// mixins
+@mixin transition($value) {
+    -webkit-transition: $value;
+    -moz-transition: $value;
+    -ms-transition: $value;
+    transition: $value;
+}
+
+@mixin transform($value) {
+    -webkit-transform: $value;
+    -moz-transform: $value;
+    -ms-transform: $value;
+    transform: $value;
+}
+
+
+html {
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+#graphicContainer {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    flex-wrap: wrap;
+}
+
+label {
+    display: block;
+}
+
+text {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 14px;
+    fill: black;
+}
+
+h1 {
+    font-size: 30px;
+    margin: 20px;
+    display: block;
+    text-align: center;
+}
+
+header {
+
+    display: block;
+}
+
+.clearfix {
+    clear: both;
+}
+
+
+#circleLegendGraph {
+    background-color: rgb(246, 246, 246);
+    border: 1px solid rgb(197, 197, 197);
+}
+
+#containerBottom-right {
+    width: 25%;
+    float: right;
+}
+
+#containerBottom-left {
+    width: 70%;
+    float: left;
+    display: block;
+}
+
+
+.sliderdiv {
+    width: 100%;
+    min-width: 350px;
+
+    clear: both;
+    display: block;
+    text-align: center;
+
+
+    .date-tooltip {
+        position: absolute;
+        display: block;
+        top: -1.5em;
+        width: 50px;
+        left: calc(-25px + .5em);
+        text-align: center;
+        color: $button;
+        font-size: 90%;
+    }
+
+    #slideBlock {
+        width: calc(100% - 90px);
+        display: block;
+        float: left;
+        padding: 10px;
+    }
+
+    #slider {
+        width: 100%;
+        display: block;
+        position: relative;
+        float: left;
+        height: 3px;
+        background-color: black;
+        border: transparent;
+
+        .hash-mark {
+            position: absolute;
+            height: 15px;
+            width: 1px;
+            top: -6px;
+            background-color: black;
+        }
+
+        .date {
+            position: absolute;
+            top: 10px;
+        }
+    }
+
+    .ui-slider-handle.ui-corner-all.ui-state-default {
+        background-color: $accent;
+        border-color: $accent;
+        border-radius: 50%;
+    }
+
+    .btnblock {
+        display: block;
+        margin-right: 20px;
+        float: left;
+    }
+
+    .play-icon {
+        display: inline-block;
+        width: 0;
+        height: 0;
+        border-top: .4em solid transparent;
+        border-left: .6em solid $button;
+        border-bottom: .4em solid transparent;
+        margin: 0 auto;
+        margin: 5px;
+    }
+    #playbtn {
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+        display: block;
+        margin: 0 auto;
+        float: left;
+        background-color: $ltgray;
+        border: 1px solid $dkgray;
+        padding: 10px;
+
+
+        &.active {
+            background: $accent;
+            color: white;
+            .pause-icon {
+                display: inline-block;
+                width: .3em;
+                height: .8em; //border-top: .4em solid transparent;
+                border-left: .2em solid white;
+                border-right: .2em solid white;
+                margin: 5px;
+            }
+        }
+    }
+}
+
+#year-output {
+    text-align: center;
+    font-size: 20px;
+    color: $accent;
+}
+
+
+
+
+
+.ui-slider-horizontal .ui-slider-handle {
+    top: -.4em;
+    height: 1em;
+    width: 1em;
+    border: transparent;
+}
+
+.ui-slider {
+    height: 3px;
+    border-radius: 0;
+}
+
+//.ui-state-default,
+//.ui-widget-content .ui-state-default {
+//    background: $accent;
+//    border-radius: 50%;
+//
+label {
+    font-family: 'Source Sans Pro', sans-serif;
+    color: gray;
+    display: block;
+}
+
+
+.directions {
+    font-size: 14px;
+    color: gray;
+    opacity: .9;
+    margin-top: 5px;
+    line-height: 1.2;
+}
+
+#clearCheckboxes {
+    display: block;
+    color: $accent;
+    padding: 10px 0px;
+    text-align: right;
+    cursor: pointer;
+    margin-bottom: 2rem;
+}
+
+.key-label {
+    text-transform: uppercase;
+    color: gray;
+    font-size: 14px; //padding: 5px 0px;
+    padding-bottom: 10px;
+    display: block;
+}
+
+
+#dropdownR-button,
+#dropdownX-button,
+#dropdownY-button {
+    padding-left: 0px;
+    padding-right: 0px;
+    width: 100%;
+    background: transparent;
+    border: 0px solid transparent;
+}
+
+.dropdownR,
+.dropdownX,
+.dropdownY {
+    font-size: 10px;
+    display: block;
+    float: right;
+    line-height: 1.5em;
+    color: $accent;
+}
+
+#dropdownR-button .ui-selectmenu-text {
+    margin-right: 40px;
+}
+
+#xLabel,
+#yLabel,
+#circleLegendLabel {
+    font-size: 16px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+
+
+
+
+
+
+
+
+
+/*Graph*/
+
+#graph {
+    width: calc(65%);
+    margin-right: 10%;
+    display: block;
+    float: left;
+
+    #tooltips {
+        .tooltipdetail {
+            display: none;
+        }
+
+        .tooltip {
+            padding: 10px 12px 12px;
+            border: 1px solid $dkgray;
+            border-radius: 3px;
+            background: rgba(255, 255, 255, .9);
+            display: none;
+            position: fixed;
+
+            &.selected,
+            &.isActive,
+            &.isActive .tooltipdetail {
+                display: block;
+            }
+        }
+
+        .tooltipcaption {
+
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        .tooltipdetail {
+            padding-top: 10px;
+            font-size: 14px;
+            line-height: .7;
+            span.no-data {
+                font-weight: normal;
+                font-style: italic;
+            }
+        }
+    }
+
+    svg {
+        shape-rendering: geometricPrecision;
+    }
+
+    #theGraph {
+
+
+        .axis path,
+        .axis line {
+            fill: black;
+            stroke: #000;
+            shape-rendering: crispEdges;
+        }
+        .gridtick line {
+
+            stroke: $dkgray;
+        }
+
+
+
+
+        .label {
+            fill: #777;
+            font-size: 100px;
+            font-family: 'Source Sans Pro', sans-serif;
+        }
+        .year.label {
+            font-family: 'Source Sans Pro', sans-serif;
+            fill: #ddd;
+        }
+
+        .year.label.active {
+            fill: #aaa;
+        }
+
+        circle {
+            //stroke: black;
+            stroke-width: 1px;
+        }
+
+        circle:hover {
+            cursor: pointer;
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*Container Right*/
+
+#containerTopRight {
+    width: 20%;
+
+    margin-top: 50px;
+
+    .ui-accordion .ui-accordion-header {
+        padding: 2%;
+    }
+}
+
+
+
+.colorLegendElement {
+    font-family: 'Source Sans Pro', sans-serif;
+    display: inline-block;
+    text-align: center;
+
+    &.nodata {
+        margin-left: 10px;
+    }
+}
+
+.dropdownpair {
+    margin-bottom: 20px;
+    border-bottom: 1px solid $dkgray;
+}
+
+.dropdownpair,
+#containerTopRight {
+    .key-label {
+        padding-bottom: 0px;
+    }
+}
+
+.colorLegendSquare {
+    width: 15px;
+    height: 15px;
+    box-sizing: border-box;
+}
+
+#circleLegend {
+    margin-top: 30px;
+
+    #accordion {
+        margin-top: 5px;
+    }
+}
+
+.data-hover {
+
+    fill: $accent;
+    display: block;
+    background-color: blue;
+}
+
+#y-container {
+    //stroke: blue;
+    //stroke-width:5px;
+}
+
+.grid .tick {
+    stroke: lightgrey;
+    opacity: 0.7;
+}
+
+.grid path {
+    stroke-width: 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*Container Top*/
+
+#containerTop {
+    margin-left: 100px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*Container Bottom*/
+
+#containerBottom {
+    width: 65%;
+    padding-left: 100px;
+    margin-top: 40px;
+}
+
+
+.ui-corner-all {
+    border-radius: 0;
+}
+
+.dropdowndiv {
+    clear: both;
+    display: block;
+    width: 100%;
+    margin-top: 25px;
+    border: 1px solid transparent;
+    position: relative;
+
+    select,
+    select span {
+        font-size: 16px;
+        width: 100%;
+    }
+}
+
+.ui-accordion .ui-accordion-content {
+    padding: 1em 1em;
+
+    label {
+        color: black;
+        clear: left;
+    }
+
+    .checkboxes {
+        float: left;
+    }    
+}
+
+.ui-state-active {
+    background: $accent;
+    border: $accent;
+}
+
+.ui-selectmenu-menu .ui-menu {
+    height: 300px;
+}
+
+.ui-selectmenu-button.ui-button {
+    width: 85%;
+}
+
+#graph #tooltips .tooltip.selected {
+
+    padding: 5px 5px 5px;
+
+    .tooltipcaption {
+        font-size: 14px;
+    }
+}
+
+.no-data {
+
+    color: gray;
+    font-weight: normal;
+}
+
+.hamburger {
+    display: none;
+}
+
+
+@media ( max-width: 768px ) {
+    h1 {
+        text-align: left;
+        margin: 1rem 0.5rem;
+    }
+
+    #graphicContainer {
+        flex-wrap: unset;
+    }
+
+    #graph {
+        width: 95%;
+        margin: 0 auto;
+
+        #tooltips .tooltip {
+            position: static;
+            margin-top: 1rem;
+        }
+    }
+
+    #containerBottom {
+        width: 95%;
+    }
+    #containerTop {
+
+        margin-left: 10px;
+    }
+    #containerTopRight {
+        margin-top: 0px;
+
+        #menu-container {
+            position: fixed;
+            right: -500px;
+            width: 80%;
+            max-width: 400px;
+
+            top: 0;
+            padding: 20px;
+            z-index: 30;
+            margin-top: 0;
+        }
+        &.active {
+            display: block;
+            height: 100vh;
+            width: 100vw;
+            left: 0;
+            top: 0;
+            z-index: 9;
+
+            content: '';
+            position: fixed;
+            background-color: rgba(0, 0, 0, .1);
+            #menu-container {
+                position: fixed;
+                right: 0px;
+                width: 80%;
+                max-width: 400px;
+                background-color: white;
+                height: 20%;
+                overflow-y: scroll;
+                padding: 20px;
+                z-index: 30;
+                height: 100%;
+                box-shadow: 0 0 5px rgba(0, 0, 0, 0.7);
+                top: 0;
+                opacity: 1;
+                z-index: 999;
+                margin-top: 0;
+                @include transition($slowly);
+                .hamburger .bars {
+                    background-color: transparent;
+                    @include transition($slowly);
+
+                    &::before {
+                        top: 0;
+                        @include transform(rotate(-45deg));
+                    }
+                    &::after {
+                        bottom: 0;
+                        @include transform(rotate(45deg));
+                    }
+                }
+            }
+        } // slide menu styles start here
+        .hamburger {
+            display: block;
+            position: fixed;
+            top: 20px;
+            right: 0;
+            cursor: pointer;
+            z-index: 1000;
+            padding: 10px 15px 5px;
+
+
+            span {
+                vertical-align: middle;
+            }
+            .bars {
+                display: block;
+                position: relative;
+                width: 25px;
+                height: 2px;
+                top: 6px;
+                margin-right: 5px;
+                background-color: $accent;
+                float: left;
+                @include transition($slowly);
+
+                &:before,
+                &:after {
+                    position: absolute;
+                    content: " ";
+                    width: 100%;
+                    height: 2px;
+                    background-color: $accent;
+                    @include transition($slowly);
+                }
+                &:before {
+                    top: 5px;
+                }
+                &:after {
+                    bottom: 5px;
+                }
+            }
+            .optionsText {
+                color: $accent;
+            }
+        }
+        .active .optionsText {}
+        #innerOptions {
+            margin-top: 45px;
+        }
+    }
+
+    .ui-accordion .ui-accordion-content {
+        max-height: 200px;
+    }
+
+
+    #containerBottom {
+        order: 2; // width: 100%;
+        padding-left: 10px;
+
+        #containerBottom-right {
+            display: none;
+        }
+    }
+}

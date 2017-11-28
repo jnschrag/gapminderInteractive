@@ -1,0 +1,735 @@
+/* Welcome to Compass.
+ * In this file you should write your main styles. (or centralize your imports)
+ * Import this file using the following HTML or equivalent:
+ * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
+/* line 5, ../../../../../../usr/local/lib/ruby/gems/2.4.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  font-size: 100%;
+  vertical-align: baseline;
+}
+
+/* line 22, ../../../../../../usr/local/lib/ruby/gems/2.4.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+html {
+  line-height: 1;
+}
+
+/* line 24, ../../../../../../usr/local/lib/ruby/gems/2.4.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+ol, ul {
+  list-style: none;
+}
+
+/* line 26, ../../../../../../usr/local/lib/ruby/gems/2.4.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* line 28, ../../../../../../usr/local/lib/ruby/gems/2.4.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+caption, th, td {
+  text-align: left;
+  font-weight: normal;
+  vertical-align: middle;
+}
+
+/* line 30, ../../../../../../usr/local/lib/ruby/gems/2.4.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+q, blockquote {
+  quotes: none;
+}
+/* line 103, ../../../../../../usr/local/lib/ruby/gems/2.4.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+q:before, q:after, blockquote:before, blockquote:after {
+  content: "";
+  content: none;
+}
+
+/* line 32, ../../../../../../usr/local/lib/ruby/gems/2.4.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+a img {
+  border: none;
+}
+
+/* line 116, ../../../../../../usr/local/lib/ruby/gems/2.4.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {
+  display: block;
+}
+
+/* line 17, sass/_base.scss */
+html {
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+/* line 21, sass/_base.scss */
+#graphicContainer {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+/* line 29, sass/_base.scss */
+label {
+  display: block;
+}
+
+/* line 33, sass/_base.scss */
+text {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 14px;
+  fill: black;
+}
+
+/* line 39, sass/_base.scss */
+h1 {
+  font-size: 30px;
+  margin: 20px;
+  display: block;
+  text-align: center;
+}
+
+/* line 46, sass/_base.scss */
+header {
+  display: block;
+}
+
+/* line 51, sass/_base.scss */
+.clearfix {
+  clear: both;
+}
+
+/* line 56, sass/_base.scss */
+#circleLegendGraph {
+  background-color: #f6f6f6;
+  border: 1px solid #c5c5c5;
+}
+
+/* line 61, sass/_base.scss */
+#containerBottom-right {
+  width: 25%;
+  float: right;
+}
+
+/* line 66, sass/_base.scss */
+#containerBottom-left {
+  width: 70%;
+  float: left;
+  display: block;
+}
+
+/* line 73, sass/_base.scss */
+.sliderdiv {
+  width: 100%;
+  min-width: 350px;
+  clear: both;
+  display: block;
+  text-align: center;
+}
+/* line 82, sass/_base.scss */
+.sliderdiv .date-tooltip {
+  position: absolute;
+  display: block;
+  top: -1.5em;
+  width: 50px;
+  left: calc(-25px + .5em);
+  text-align: center;
+  color: #607889;
+  font-size: 90%;
+}
+/* line 93, sass/_base.scss */
+.sliderdiv #slideBlock {
+  width: calc(100% - 90px);
+  display: block;
+  float: left;
+  padding: 10px;
+}
+/* line 100, sass/_base.scss */
+.sliderdiv #slider {
+  width: 100%;
+  display: block;
+  position: relative;
+  float: left;
+  height: 3px;
+  background-color: black;
+  border: transparent;
+}
+/* line 109, sass/_base.scss */
+.sliderdiv #slider .hash-mark {
+  position: absolute;
+  height: 15px;
+  width: 1px;
+  top: -6px;
+  background-color: black;
+}
+/* line 117, sass/_base.scss */
+.sliderdiv #slider .date {
+  position: absolute;
+  top: 10px;
+}
+/* line 123, sass/_base.scss */
+.sliderdiv .ui-slider-handle.ui-corner-all.ui-state-default {
+  background-color: #0099e1;
+  border-color: #0099e1;
+  border-radius: 50%;
+}
+/* line 129, sass/_base.scss */
+.sliderdiv .btnblock {
+  display: block;
+  margin-right: 20px;
+  float: left;
+}
+/* line 135, sass/_base.scss */
+.sliderdiv .play-icon {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  border-top: .4em solid transparent;
+  border-left: 0.6em solid #607889;
+  border-bottom: .4em solid transparent;
+  margin: 0 auto;
+  margin: 5px;
+}
+/* line 145, sass/_base.scss */
+.sliderdiv #playbtn {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  display: block;
+  margin: 0 auto;
+  float: left;
+  background-color: #f6f6f6;
+  border: 1px solid #c5c5c5;
+  padding: 10px;
+}
+/* line 157, sass/_base.scss */
+.sliderdiv #playbtn.active {
+  background: #0099e1;
+  color: white;
+}
+/* line 160, sass/_base.scss */
+.sliderdiv #playbtn.active .pause-icon {
+  display: inline-block;
+  width: .3em;
+  height: .8em;
+  border-left: .2em solid white;
+  border-right: .2em solid white;
+  margin: 5px;
+}
+
+/* line 172, sass/_base.scss */
+#year-output {
+  text-align: center;
+  font-size: 20px;
+  color: #0099e1;
+}
+
+/* line 182, sass/_base.scss */
+.ui-slider-horizontal .ui-slider-handle {
+  top: -.4em;
+  height: 1em;
+  width: 1em;
+  border: transparent;
+}
+
+/* line 189, sass/_base.scss */
+.ui-slider {
+  height: 3px;
+  border-radius: 0;
+}
+
+/* line 199, sass/_base.scss */
+label {
+  font-family: 'Source Sans Pro', sans-serif;
+  color: gray;
+  display: block;
+}
+
+/* line 206, sass/_base.scss */
+.directions {
+  font-size: 14px;
+  color: gray;
+  opacity: .9;
+  margin-top: 5px;
+  line-height: 1.2;
+}
+
+/* line 214, sass/_base.scss */
+#clearCheckboxes {
+  display: block;
+  color: #0099e1;
+  padding: 10px 0px;
+  text-align: right;
+  cursor: pointer;
+  margin-bottom: 2rem;
+}
+
+/* line 223, sass/_base.scss */
+.key-label {
+  text-transform: uppercase;
+  color: gray;
+  font-size: 14px;
+  padding-bottom: 10px;
+  display: block;
+}
+
+/* line 232, sass/_base.scss */
+#dropdownR-button,
+#dropdownX-button,
+#dropdownY-button {
+  padding-left: 0px;
+  padding-right: 0px;
+  width: 100%;
+  background: transparent;
+  border: 0px solid transparent;
+}
+
+/* line 242, sass/_base.scss */
+.dropdownR,
+.dropdownX,
+.dropdownY {
+  font-size: 10px;
+  display: block;
+  float: right;
+  line-height: 1.5em;
+  color: #0099e1;
+}
+
+/* line 252, sass/_base.scss */
+#dropdownR-button .ui-selectmenu-text {
+  margin-right: 40px;
+}
+
+/* line 256, sass/_base.scss */
+#xLabel,
+#yLabel,
+#circleLegendLabel {
+  font-size: 16px;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+/*Graph*/
+/* line 275, sass/_base.scss */
+#graph {
+  width: calc(65%);
+  margin-right: 10%;
+  display: block;
+  float: left;
+}
+/* line 282, sass/_base.scss */
+#graph #tooltips .tooltipdetail {
+  display: none;
+}
+/* line 286, sass/_base.scss */
+#graph #tooltips .tooltip {
+  padding: 10px 12px 12px;
+  border: 1px solid #c5c5c5;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.9);
+  display: none;
+  position: fixed;
+}
+/* line 294, sass/_base.scss */
+#graph #tooltips .tooltip.selected, #graph #tooltips .tooltip.isActive, #graph #tooltips .tooltip.isActive .tooltipdetail {
+  display: block;
+}
+/* line 301, sass/_base.scss */
+#graph #tooltips .tooltipcaption {
+  font-size: 16px;
+  font-weight: 700;
+}
+/* line 307, sass/_base.scss */
+#graph #tooltips .tooltipdetail {
+  padding-top: 10px;
+  font-size: 14px;
+  line-height: .7;
+}
+/* line 311, sass/_base.scss */
+#graph #tooltips .tooltipdetail span.no-data {
+  font-weight: normal;
+  font-style: italic;
+}
+/* line 318, sass/_base.scss */
+#graph svg {
+  shape-rendering: geometricPrecision;
+}
+/* line 325, sass/_base.scss */
+#graph #theGraph .axis path,
+#graph #theGraph .axis line {
+  fill: black;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+/* line 331, sass/_base.scss */
+#graph #theGraph .gridtick line {
+  stroke: #c5c5c5;
+}
+/* line 339, sass/_base.scss */
+#graph #theGraph .label {
+  fill: #777;
+  font-size: 100px;
+  font-family: 'Source Sans Pro', sans-serif;
+}
+/* line 344, sass/_base.scss */
+#graph #theGraph .year.label {
+  font-family: 'Source Sans Pro', sans-serif;
+  fill: #ddd;
+}
+/* line 349, sass/_base.scss */
+#graph #theGraph .year.label.active {
+  fill: #aaa;
+}
+/* line 353, sass/_base.scss */
+#graph #theGraph circle {
+  stroke-width: 1px;
+}
+/* line 358, sass/_base.scss */
+#graph #theGraph circle:hover {
+  cursor: pointer;
+}
+
+/*Container Right*/
+/* line 378, sass/_base.scss */
+#containerTopRight {
+  width: 20%;
+  margin-top: 50px;
+}
+/* line 383, sass/_base.scss */
+#containerTopRight .ui-accordion .ui-accordion-header {
+  padding: 2%;
+}
+
+/* line 390, sass/_base.scss */
+.colorLegendElement {
+  font-family: 'Source Sans Pro', sans-serif;
+  display: inline-block;
+  text-align: center;
+}
+/* line 395, sass/_base.scss */
+.colorLegendElement.nodata {
+  margin-left: 10px;
+}
+
+/* line 400, sass/_base.scss */
+.dropdownpair {
+  margin-bottom: 20px;
+  border-bottom: 1px solid #c5c5c5;
+}
+
+/* line 407, sass/_base.scss */
+.dropdownpair .key-label,
+#containerTopRight .key-label {
+  padding-bottom: 0px;
+}
+
+/* line 412, sass/_base.scss */
+.colorLegendSquare {
+  width: 15px;
+  height: 15px;
+  box-sizing: border-box;
+}
+
+/* line 418, sass/_base.scss */
+#circleLegend {
+  margin-top: 30px;
+}
+/* line 421, sass/_base.scss */
+#circleLegend #accordion {
+  margin-top: 5px;
+}
+
+/* line 426, sass/_base.scss */
+.data-hover {
+  fill: #0099e1;
+  display: block;
+  background-color: blue;
+}
+
+/* line 438, sass/_base.scss */
+.grid .tick {
+  stroke: lightgrey;
+  opacity: 0.7;
+}
+
+/* line 443, sass/_base.scss */
+.grid path {
+  stroke-width: 0;
+}
+
+/*Container Top*/
+/* line 461, sass/_base.scss */
+#containerTop {
+  margin-left: 100px;
+}
+
+/*Container Bottom*/
+/* line 480, sass/_base.scss */
+#containerBottom {
+  width: 65%;
+  padding-left: 100px;
+  margin-top: 40px;
+}
+
+/* line 487, sass/_base.scss */
+.ui-corner-all {
+  border-radius: 0;
+}
+
+/* line 491, sass/_base.scss */
+.dropdowndiv {
+  clear: both;
+  display: block;
+  width: 100%;
+  margin-top: 25px;
+  border: 1px solid transparent;
+  position: relative;
+}
+/* line 499, sass/_base.scss */
+.dropdowndiv select,
+.dropdowndiv select span {
+  font-size: 16px;
+  width: 100%;
+}
+
+/* line 506, sass/_base.scss */
+.ui-accordion .ui-accordion-content {
+  padding: 1em 1em;
+}
+/* line 509, sass/_base.scss */
+.ui-accordion .ui-accordion-content label {
+  color: black;
+  clear: left;
+}
+/* line 514, sass/_base.scss */
+.ui-accordion .ui-accordion-content .checkboxes {
+  float: left;
+}
+
+/* line 519, sass/_base.scss */
+.ui-state-active {
+  background: #0099e1;
+  border: #0099e1;
+}
+
+/* line 524, sass/_base.scss */
+.ui-selectmenu-menu .ui-menu {
+  height: 300px;
+}
+
+/* line 528, sass/_base.scss */
+.ui-selectmenu-button.ui-button {
+  width: 85%;
+}
+
+/* line 532, sass/_base.scss */
+#graph #tooltips .tooltip.selected {
+  padding: 5px 5px 5px;
+}
+/* line 536, sass/_base.scss */
+#graph #tooltips .tooltip.selected .tooltipcaption {
+  font-size: 14px;
+}
+
+/* line 541, sass/_base.scss */
+.no-data {
+  color: gray;
+  font-weight: normal;
+}
+
+/* line 547, sass/_base.scss */
+.hamburger {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  /* line 553, sass/_base.scss */
+  h1 {
+    text-align: left;
+    margin: 1rem 0.5rem;
+  }
+
+  /* line 558, sass/_base.scss */
+  #graphicContainer {
+    flex-wrap: unset;
+  }
+
+  /* line 562, sass/_base.scss */
+  #graph {
+    width: 95%;
+    margin: 0 auto;
+  }
+  /* line 566, sass/_base.scss */
+  #graph #tooltips .tooltip {
+    position: static;
+    margin-top: 1rem;
+  }
+
+  /* line 572, sass/_base.scss */
+  #containerBottom {
+    width: 95%;
+  }
+
+  /* line 575, sass/_base.scss */
+  #containerTop {
+    margin-left: 10px;
+  }
+
+  /* line 579, sass/_base.scss */
+  #containerTopRight {
+    margin-top: 0px;
+  }
+  /* line 582, sass/_base.scss */
+  #containerTopRight #menu-container {
+    position: fixed;
+    right: -500px;
+    width: 80%;
+    max-width: 400px;
+    top: 0;
+    padding: 20px;
+    z-index: 30;
+    margin-top: 0;
+  }
+  /* line 593, sass/_base.scss */
+  #containerTopRight.active {
+    display: block;
+    height: 100vh;
+    width: 100vw;
+    left: 0;
+    top: 0;
+    z-index: 9;
+    content: '';
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+  /* line 604, sass/_base.scss */
+  #containerTopRight.active #menu-container {
+    position: fixed;
+    right: 0px;
+    width: 80%;
+    max-width: 400px;
+    background-color: white;
+    height: 20%;
+    overflow-y: scroll;
+    padding: 20px;
+    z-index: 30;
+    height: 100%;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.7);
+    top: 0;
+    opacity: 1;
+    z-index: 999;
+    margin-top: 0;
+    -webkit-transition: all 0.2s ease;
+    -moz-transition: all 0.2s ease;
+    -ms-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+  }
+  /* line 621, sass/_base.scss */
+  #containerTopRight.active #menu-container .hamburger .bars {
+    background-color: transparent;
+    -webkit-transition: all 0.2s ease;
+    -moz-transition: all 0.2s ease;
+    -ms-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+  }
+  /* line 625, sass/_base.scss */
+  #containerTopRight.active #menu-container .hamburger .bars::before {
+    top: 0;
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+  }
+  /* line 629, sass/_base.scss */
+  #containerTopRight.active #menu-container .hamburger .bars::after {
+    bottom: 0;
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+  }
+  /* line 636, sass/_base.scss */
+  #containerTopRight .hamburger {
+    display: block;
+    position: fixed;
+    top: 20px;
+    right: 0;
+    cursor: pointer;
+    z-index: 1000;
+    padding: 10px 15px 5px;
+  }
+  /* line 646, sass/_base.scss */
+  #containerTopRight .hamburger span {
+    vertical-align: middle;
+  }
+  /* line 649, sass/_base.scss */
+  #containerTopRight .hamburger .bars {
+    display: block;
+    position: relative;
+    width: 25px;
+    height: 2px;
+    top: 6px;
+    margin-right: 5px;
+    background-color: #0099e1;
+    float: left;
+    -webkit-transition: all 0.2s ease;
+    -moz-transition: all 0.2s ease;
+    -ms-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+  }
+  /* line 660, sass/_base.scss */
+  #containerTopRight .hamburger .bars:before, #containerTopRight .hamburger .bars:after {
+    position: absolute;
+    content: " ";
+    width: 100%;
+    height: 2px;
+    background-color: #0099e1;
+    -webkit-transition: all 0.2s ease;
+    -moz-transition: all 0.2s ease;
+    -ms-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+  }
+  /* line 669, sass/_base.scss */
+  #containerTopRight .hamburger .bars:before {
+    top: 5px;
+  }
+  /* line 672, sass/_base.scss */
+  #containerTopRight .hamburger .bars:after {
+    bottom: 5px;
+  }
+  /* line 676, sass/_base.scss */
+  #containerTopRight .hamburger .optionsText {
+    color: #0099e1;
+  }
+  /* line 681, sass/_base.scss */
+  #containerTopRight #innerOptions {
+    margin-top: 45px;
+  }
+
+  /* line 686, sass/_base.scss */
+  .ui-accordion .ui-accordion-content {
+    max-height: 200px;
+  }
+
+  /* line 691, sass/_base.scss */
+  #containerBottom {
+    order: 2;
+    padding-left: 10px;
+  }
+  /* line 695, sass/_base.scss */
+  #containerBottom #containerBottom-right {
+    display: none;
+  }
+}

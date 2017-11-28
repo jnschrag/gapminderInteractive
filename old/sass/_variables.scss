@@ -1,0 +1,17 @@
+$color101: #163553;
+$accent: #0099e1;
+$button: #607889;
+$ltgray: rgb(246, 246, 246);
+$dkgray: rgb(197, 197, 197);
+
+@mixin colorize-stroke($color) {
+    stroke: darken( $color, 50% );
+
+    &:hover {
+        background-color: $color + 50;
+    }
+}
+
+$slowly: all .2s ease;
+
+
