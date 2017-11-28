@@ -107,13 +107,7 @@
   }
 
   $(window).resize(function() {
-
-      if (screenwidth <= 768) {
-
-      } else {
-
-      }
-
+      resizefunc();
   });
 
   function resizefunc() {
@@ -793,8 +787,8 @@
       d3.selectAll('.point').select(function() {
           d3.select(`#${this.getAttribute('id')}`)
               .on('click', click)
-              .on('mouseover', showDetailedTooltip)
-              .on('mouseout', hideDetailedTooltip);
+              .on('mouseover', pointMouseover)
+              .on('mouseout', pointMouseoff);
       });
 
       // d3.selectAll('.checkboxes').select(function() {
@@ -831,13 +825,18 @@
 
   }
 
-  function showDetailedTooltip(d, i) {
-    console.log("show");
+  function pointMouseover(d, i) {
+    const elem = d3.select(this)
+
+    // Hover Effects
+    const strokeColor = elem.style('stroke')
+    elem.style('stroke-width', 3)
+
     d3.select('#' + d[0].ISO + 'tooltip').classed('isActive', true)
   }
 
-  function hideDetailedTooltip(d) {
-    console.log("hide")
+  function pointMouseoff(d) {
+    d3.selectAll('.point').style('stroke-width', null)
     d3.selectAll('.tooltip.isActive').classed('isActive', false)
   }
 
