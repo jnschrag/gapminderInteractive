@@ -19,28 +19,15 @@
         <div class="content-wrapper">
             <div class="filter-options-primary">
                 <h2 class="subtitle">All Recipients</h2>
-                <div class="filter-country">
-                    <label for="country" class="filter-label country-search-label">Search</label>
-                    <input type='text' class='country-search' name="country">
-                    <div class="search-warning filter-desc"></div>
-                </div>
-                <div class="hideable-info">
-                    <div class="filter-region"></div>
-                    <div class="legends">
-                        <span class="regional-entity"></span> <span class="other-desktop">Other <span class="info" title="Aggregated cases of either regional or multiple recipient(s)."></span></span><span class="other-mobile">Aggregated cases of either regional or multiple recipient(s).</span><br />
-                        <span class="legend-cross"></span> Amount Unknown<br />
-                    </div>
-                </div>
+                <div class="filter-axis-x"></div>
+                <div class="filter-axis-y"></div>
+                <div class="filter-radius"></div>
+                <div class="filter-region"></div>
             </div>
             <div class="chart-container">
+                <div id="playbtn" class="play"><span class="play-icon"></span>Play</div>
+                <div id="year-range"></div>
                 <div class="chart chart-primary"></div>
-                <div class='chart chart-secondary'>
-                    <div class="close"></div>
-                    <h2 class="subtitle"></h2>
-                    <p class="secondary-info"><span class="secondary-events"></span> <span class="secondary-projects-lang no-underline"></span> <span class="secondary-years no-underline"></span></p>
-                    <div id="year-range"></div>
-                    <div class="secondary-warning">No data available</div>
-                </div>
             </div>
             <div class="tooltip"></div>
         </div>

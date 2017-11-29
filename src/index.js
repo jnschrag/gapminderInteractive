@@ -8,12 +8,15 @@ const yearRange = document.getElementById('year-range')
 const searchWarning = d3.select('.search-warning')
 let data
 let years
+let minYear
+let maxYear
 let currentYear
 let axisVars = []
+let playing = false
 
-let currentX = 'Life Expectancy'; // hard coded
-let currentY = 'GNI per capita'; // hard coded
-let currentRadius = 'Gross Domestic Product (PPP)'; // hard coded
+let currentX = 'Life Expectancy' // hard coded
+let currentY = 'GNI per capita' // hard coded
+let currentRadius = 'Gross Domestic Product (PPP)' // hard coded
 
 const COLORS = ['#58a897', '#83badc', '#3b75bb', '#a483a8', '#f7890e', '#69518d', '#f7d768', '#8cb561', '#728c99']
 const scaleC = d3.scaleOrdinal()
@@ -24,7 +27,7 @@ function loadData () {
   const dataCSV = require('./data/cpp-lifeexpectancy-20171127-test.csv')
 
   let obj = dataCSV.reduce(function (data, row) {
-    if ( axisVars.length == 0 ) {
+    if (axisVars.length == 0) {
       axisVars = Object.keys(row)
     }
 
@@ -52,82 +55,85 @@ function loadData () {
 
   data = obj
   years = Object.keys(data.years)
+  let range = d3.extent(years)
+  minYear = range[0]
+  maxYear = range[1]
 }
 
 function primaryItemClick () {
   let items = d3.selectAll('.item')
 
   items.on('click', function (d) {
-    console.log("click")
+    console.log('click')
   })
 }
 
-function setupAxisSelect() {
+function setupAxisSelect () {
   var xSelect = d3.select('.filter-axis-x')
     .append('select')
-      .attr("name", "axis-x");
+      .attr('name', 'axis-x')
 
   // Add Options
   var xOptions = xSelect
     .selectAll('option')
     .data(axisVars).enter()
     .append('option')
-      .text(function (d) { return d; })
-      .property("value", function (d) { return d; })
-      .property("selected", function(d){ return d === currentX; });
+      .text(function (d) { return d })
+      .property('value', function (d) { return d })
+      .property('selected', function (d) { return d === currentX })
 
   // Detect Change
-  xSelect.on('change', function() {
+  xSelect.on('change', function () {
     drawPrimaryChart()
   })
 
   var ySelect = d3.select('.filter-axis-y')
     .append('select')
-      .attr("name", "axis-y");
+      .attr('name', 'axis-y')
 
   // Add Options
   var yOptions = ySelect
     .selectAll('option')
     .data(axisVars).enter()
     .append('option')
-      .text(function (d) { return d; })
-      .property("value", function (d) { return d; })
-      .property("selected", function(d){ return d === currentY; });
+      .text(function (d) { return d })
+      .property('value', function (d) { return d })
+      .property('selected', function (d) { return d === currentY })
 
   // Detect Change
-  ySelect.on('change', function() {
+  ySelect.on('change', function () {
     drawPrimaryChart()
   })
 
   var rSelect = d3.select('.filter-radius')
     .append('select')
-      .attr("name", "radius");
+      .attr('name', 'radius')
 
   // Add Options
   var rOptions = rSelect
     .selectAll('option')
     .data(axisVars).enter()
     .append('option')
-      .text(function (d) { return d; })
-      .property("value", function (d) { return d; })
-      .property("selected", function(d){ return d === currentRadius; });
+      .text(function (d) { return d })
+      .property('value', function (d) { return d })
+      .property('selected', function (d) { return d === currentRadius })
 
   // Detect Change
-  rSelect.on('change', function() {
+  rSelect.on('change', function () {
     drawPrimaryChart()
   })
 }
 
-function calculateXSelect() {
-  return d3.select(".filter-axis-x select").property("value");
+function calculateXSelect () {
+  return d3.select('.filter-axis-x select').property('value')
 }
 
-function calculateYSelect() {
-  return d3.select(".filter-axis-y select").property("value");
+function calculateYSelect () {
+  return d3.select('.filter-axis-y select').property('value')
 }
 
-function calculateRadiusSelect() {
-  return d3.select(".filter-radius select").property("value");
+function calculateRadiusSelect () {
+  return d3.select('.filter-radius select').property('value')
 }
 
 function setupRegionFilter () {
@@ -195,24 +201,20 @@ function calculateRegions () {
 }
 
 function setupYearRange () {
-  let range = d3.extent(years)
-  let min = range[0]
-  let max = range[1]
-
   if (yearRange.noUiSlider != undefined) {
     yearRange.noUiSlider.destroy()
   }
 
   noUiSlider.create(yearRange, {
-    start: [ min ],
+    start: [ minYear ],
     connect: true, // Display a colored bar between the handles
     behaviour: 'tap-drag', // Move handle on tap, bar is draggable
     step: 1,
     tooltips: true,
     animate: true,
     range: {
-      'min': +min,
-      'max': +max
+      'min': +minYear,
+      'max': +maxYear
     },
     pips: {
       mode: 'count',
@@ -220,17 +222,17 @@ function setupYearRange () {
       density: 5
     },
     format: {
-      to: function ( value ) {
-      return value;
+      to: function (value) {
+        return value
       },
-      from: function ( value ) {
-      return value;
+      from: function (value) {
+        return value
       }
     }
   })
 
   yearRange.noUiSlider.on('update', function () {
-    console.log("update!")
+    console.log('update!')
     drawPrimaryChart()
   })
 
@@ -241,26 +243,29 @@ function calculateYears () {
   return yearRange.noUiSlider.get()
 }
 
-function setupPlayBtn() {
-  const playBtn = d3.select("#playbtn")
-  let playing = false
+function setupPlayBtn () {
+  const playBtn = d3.select('#playbtn')
 
-  var timer;  // create timer object
-  playBtn 
-    .on('click', function() {  // when user clicks the play button
-      if(playing == false) {  // if the map is currently playing
-        timer = setInterval(function(){   // set a JS interval
-          yearRange.noUiSlider.set( currentYear + 1 );
-        }, 2000);
-      
-        d3.select(this).html('stop');  // change the button label to stop
-        playing = true;   // change the status of the animation
+  var timer  // create timer object
+  playBtn
+    .on('click', function () {  // when user clicks the play button
+      if (playing == false) {  // if the map is currently playing
+        timer = setInterval(function () {   // set a JS interval
+          yearRange.noUiSlider.set(currentYear + 1)
+        }, 2000)
+
+        d3.select(this).html('stop')  // change the button label to stop
+        playing = true   // change the status of the animation
       } else {    // else if is currently playing
-        clearInterval(timer);   // stop the animation by clearing the interval
-        d3.select(this).html('play');   // change the button label to play
-        playing = false;   // change the status again
+        console.log('currentYear: ' + currentYear)
+        console.log('maxYear: ' + maxYear)
+        if (currentYear == maxYear) {
+          clearInterval(timer)   // stop the animation by clearing the interval
+          d3.select(this).html('play')   // change the button label to play
+          playing = false   // change the status again
+        }
       }
-  });
+    })
 }
 
 function drawPrimaryChart () {

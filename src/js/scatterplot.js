@@ -20,7 +20,7 @@ function resize () {
 }
 
 function scatterplot () {
-  const margin = {top: 30, right: 30, bottom: 30, left: 40};
+  const margin = {top: 30, right: 30, bottom: 30, left: 40}
   const scaleX = d3.scaleLinear()
   const scaleY = d3.scaleLinear()
   const scaleR = d3.scaleSqrt()
@@ -75,19 +75,21 @@ function scatterplot () {
       .range([height, 0])
 
     scaleR
-      .domain([d3.min(data, function (d) { return d[currentRadius] || Infinity }), d3.max(data, function (d) { return d[currentRadius] })])
-      .range([4, maxR])
+      .domain([d3.min(data, function (d) { return d[currentRadius] }), d3.max(data, function (d) { return d[currentRadius] })])
+      .range([2, 20])
+
+    console.log(scaleR.domain())
   }
 
   function updateDom ({ container, data }) {
     const svg = container.select('svg')
 
     svg
-      .attr("width", width + margin.left + margin.right)
-      .attr("height", height + margin.top + margin.bottom)
+      .attr('width', width + margin.left + margin.right)
+      .attr('height', height + margin.top + margin.bottom)
 
     const g = svg.select('g')
-      .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+      .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
     const plot = g.select('.g-plot')
 
     const circles = plot.selectAll('circle.item').data(data)
@@ -126,7 +128,7 @@ function scatterplot () {
     const maxY = scaleY.range()[0]
     const offset = maxY
 
-    x.attr("transform", "translate(0," + height + ")")
+    x.attr('transform', 'translate(0,' + height + ')')
       .call(axisBottom)
 
     x.selectAll('g').filter(function (d, i) {
@@ -135,7 +137,7 @@ function scatterplot () {
     .classed('major', true)
 
     x.select('.axis__label')
-      .attr('x', width / 2 )
+      .attr('x', width / 2)
       .attr('y', margin.bottom)
       .text(currentX)
 
@@ -144,8 +146,8 @@ function scatterplot () {
     y.call(axisLeft)
 
     y.select('.axis__label')
-      .attr("y", 0 - margin.left + 10)
-      .attr("x",0 - (height / 2))
+      .attr('y', 0 - margin.left + 10)
+      .attr('x', 0 - (height / 2))
       .attr('text-anchor', 'middle')
       .attr('transform', `rotate(-90)`)
   }
@@ -238,7 +240,7 @@ function showTooltip (d, item) {
     yPos = position.y
   }
 
-  if ( window.innerWidth <= 768 ) {
+  if (window.innerWidth <= 768) {
     xPos = xPos - 30
     yPos = yPos - 380
   } else {
