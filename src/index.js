@@ -11,8 +11,16 @@ let years
 let minYear
 let maxYear
 let currentYear
-let axisVars = []
+let axes = ['x', 'y', 'r']
+let axisVars = {}
+let axesSelect = {}
 let playing = false
+
+let current = {
+  x: 'Life Expectancy',
+  y: 'GNI per capita',
+  r: 'Gross Domestic Product (PPP)'
+}
 
 let currentX = 'Life Expectancy' // hard coded
 let currentY = 'GNI per capita' // hard coded
@@ -24,12 +32,16 @@ const scaleC = d3.scaleOrdinal()
   .range(COLORS)
 
 function loadData () {
-  const dataCSV = require('./data/cpp-lifeexpectancy-20171127-test.csv')
+  const dataCSV = require('./data/20171207-data.csv')
 
   let obj = dataCSV.reduce(function (data, row) {
-    if (axisVars.length == 0) {
-      axisVars = Object.keys(row)
+    data.axisVars = data.axisVars || []
+    if (data.axisVars.length == 0) {
+      data.axisVars = Object.keys(row)
     }
+
+    // Modify row properties
+    row = transformKeys(row)
 
     data.regions = data.regions || {}
     data.regions[row.Region] = data.regions[row.Region] || {}
@@ -54,10 +66,30 @@ function loadData () {
   }, {})
 
   data = obj
+  console.log(data)
+
+  setupAxisVars(data.axisVars)
+
   years = Object.keys(data.years)
   let range = d3.extent(years)
   minYear = range[0]
   maxYear = range[1]
+}
+
+function transformKeys (obj) {
+  return Object.keys(obj).reduce(function (o, prop) {
+    var value = obj[prop]
+    var newProp = prop.replace('x_', '').replace('y_', '').replace('r_', '')
+    o[newProp] = value
+    return o
+  }, {})
+}
+
+function setupAxisVars (columns) {
+  axes.forEach(function (axis) {
+    axisVars[axis] = columns.filter(column => column.includes(axis + '_'))
+      .map(column => column.split('_').pop())
+  })
 }
 
 function primaryItemClick () {
@@ -69,58 +101,22 @@ function primaryItemClick () {
 }
 
 function setupAxisSelect () {
-  var xSelect = d3.select('.filter-axis-x')
-    .append('select')
-      .attr('name', 'axis-x')
+  axes.forEach(function (axis) {
+    axesSelect[axis] = d3.select('.filter-axis-' + axis)
+      .append('select')
+      .attr('name', 'axis-' + axis)
 
-  // Add Options
-  var xOptions = xSelect
-    .selectAll('option')
-    .data(axisVars).enter()
-    .append('option')
-      .text(function (d) { return d })
-      .property('value', function (d) { return d })
-      .property('selected', function (d) { return d === currentX })
+    let options = axesSelect[axis]
+      .selectAll('option')
+      .data(axisVars[axis]).enter()
+      .append('option')
+        .text(d => d)
+        .property('value', d => d)
+        .property('selected', d => d === current[axis])
 
-  // Detect Change
-  xSelect.on('change', function () {
-    drawPrimaryChart()
-  })
-
-  var ySelect = d3.select('.filter-axis-y')
-    .append('select')
-      .attr('name', 'axis-y')
-
-  // Add Options
-  var yOptions = ySelect
-    .selectAll('option')
-    .data(axisVars).enter()
-    .append('option')
-      .text(function (d) { return d })
-      .property('value', function (d) { return d })
-      .property('selected', function (d) { return d === currentY })
-
-  // Detect Change
-  ySelect.on('change', function () {
-    drawPrimaryChart()
-  })
-
-  var rSelect = d3.select('.filter-radius')
-    .append('select')
-      .attr('name', 'radius')
-
-  // Add Options
-  var rOptions = rSelect
-    .selectAll('option')
-    .data(axisVars).enter()
-    .append('option')
-      .text(function (d) { return d })
-      .property('value', function (d) { return d })
-      .property('selected', function (d) { return d === currentRadius })
-
-  // Detect Change
-  rSelect.on('change', function () {
-    drawPrimaryChart()
+    axesSelect[axis].on('change', function () {
+      drawPrimaryChart()
+    })
   })
 }
 
@@ -133,7 +129,7 @@ function calculateYSelect () {
 }
 
 function calculateRadiusSelect () {
-  return d3.select('.filter-radius select').property('value')
+  return d3.select('.filter-axis-r select').property('value')
 }
 
 function setupRegionFilter () {
