@@ -57,6 +57,7 @@ function loadData () {
     data.years = data.years || {}
     data.years[row.Year] = data.years[row.Year] || []
     data.years[row.Year].push(row)
+    data.years[row.Year].sort(function (a, b) { return (a.ISO > b.ISO) ? 1 : ((b.ISO > a.ISO) ? -1 : 0) })
 
     // Group Countries
     data.countries = data.countries || {}
@@ -75,6 +76,7 @@ function loadData () {
   }, {})
 
   data = obj
+  console.log(data)
   // console.log(data)
 
   setupAxisVars(data.axisVars)
@@ -282,7 +284,7 @@ function setupPlayBtn () {
       if (playing == false) {  // if the map is currently playing
         timer = setInterval(function () {   // set a JS interval
           yearRange.noUiSlider.set(currentYear + 1)
-        }, 2000)
+        }, 1000)
 
         d3.select(this).html('stop')  // change the button label to stop
         playing = true   // change the status of the animation
@@ -316,8 +318,6 @@ function drawPrimaryChart () {
 
   let dataset = removeEmptyDataPoints(data.years[currentYear])
 
-  console.log(dataset)
-
   chart.init({
     data: dataset,
     currentX: currentX,
@@ -342,8 +342,8 @@ function init () {
   // setupRegionFilter()
   setupAxisSelect()
   setupYearRange()
-  drawPrimaryChart()
+  // drawPrimaryChart()
 }
 
 window.addEventListener('DOMContentLoaded', init)
-window.addEventListener('resize', resize)
+// window.addEventListener('resize', resize)

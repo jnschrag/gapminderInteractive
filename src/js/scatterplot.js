@@ -98,13 +98,13 @@ function scatterplot () {
     circles.exit().remove()
 
     circles.enter().append('circle')
-    .merge(circles)
       .attr('class', 'item')
       .attr('data-country', d => d.Country)
       .attr('data-iso', d => d.ISO)
+    .merge(circles)
+      .attr('r', d => scaleR(d[currentRadius]))
       .attr('cx', d => scaleX(d[currentX]))
       .attr('cy', d => scaleY(d[currentY]))
-      .attr('r', d => scaleR(d[currentRadius]))
       .attr('fill', d => scaleC(d[colorDomain.value]))
       .attr('stroke', d => d3.color(scaleC(d[colorDomain.value])).darker(0.7))
       .on('mouseover', function (d) {
