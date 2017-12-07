@@ -14,6 +14,7 @@ let currentYear
 let axes = ['x', 'y', 'r']
 let axisVars = {}
 let axesSelect = {}
+let ranges = {}
 let playing = false
 
 let current = {
@@ -43,6 +44,7 @@ function loadData () {
     // Modify row properties
     row = transformKeys(row)
 
+    // Group Regions
     data.regions = data.regions || {}
     data.regions[row.Region] = data.regions[row.Region] || {}
     data.regions[row.Region][row.ISO] = data.regions[row.Region][row.ISO] || {
@@ -50,10 +52,12 @@ function loadData () {
       iso: row.ISO
     }
 
+    // Group Years
     data.years = data.years || {}
     data.years[row.Year] = data.years[row.Year] || []
     data.years[row.Year].push(row)
 
+    // Group Countries
     data.countries = data.countries || {}
     data.countries[row.ISO] = data.countries[row.ISO] || {
       country: row.Country,
@@ -62,11 +66,15 @@ function loadData () {
     }
     data.countries[row.ISO].years.indexOf(row.Year) === -1 ? data.countries[row.ISO].years.push(row.Year) : ''
 
+    // All data
+    data.raw = data.raw || []
+    data.raw.push(row)
+
     return data
   }, {})
 
   data = obj
-  console.log(data)
+  // console.log(data)
 
   setupAxisVars(data.axisVars)
 
@@ -78,7 +86,11 @@ function loadData () {
 
 function transformKeys (obj) {
   return Object.keys(obj).reduce(function (o, prop) {
-    var value = obj[prop]
+    if (isNaN(parseInt(obj[prop]))) {
+      var value = obj[prop]
+    } else {
+      var value = parseInt(obj[prop])
+    }
     var newProp = prop.replace('x_', '').replace('y_', '').replace('r_', '')
     o[newProp] = value
     return o
@@ -89,6 +101,18 @@ function setupAxisVars (columns) {
   axes.forEach(function (axis) {
     axisVars[axis] = columns.filter(column => column.includes(axis + '_'))
       .map(column => column.split('_').pop())
+    calculateRanges(axisVars[axis])
+  })
+}
+
+function calculateRanges (axis) {
+  axis.forEach(function (column) {
+    ranges[column] = d3.extent(data.raw.reduce(function (result, value) {
+      if (value[column] != '') {
+        result.push(parseInt(value[column]))
+      }
+      return result
+    }, []))
   })
 }
 
@@ -271,8 +295,6 @@ function drawPrimaryChart () {
   currentY = calculateYSelect()
   currentRadius = calculateRadiusSelect()
 
-  console.log(currentYear)
-
   let dataset = data.years[currentYear]
 
   chart.init({
@@ -280,6 +302,7 @@ function drawPrimaryChart () {
     currentX: currentX,
     currentY: currentY,
     currentRadius: currentRadius,
+    currentRanges: {x: ranges[currentX], y: ranges[currentY], r: ranges[currentRadius]},
     container: '.chart-primary'
   })
 }

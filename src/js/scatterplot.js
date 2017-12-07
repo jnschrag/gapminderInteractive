@@ -6,7 +6,7 @@ const tooltip = d3.select('.tooltip')
 const COLORS = ['#58a897', '#83badc', '#3b75bb', '#a483a8', '#f7890e', '#69518d', '#f7d768', '#8cb561', '#728c99']
 const FONT_SIZE = 11
 const MAX_VAL = 100
-const formatAmount = d3.format(',.0f')
+const formatAmount = d3.format('.1s')
 const formatPercentage = d3.format('.3')
 const formatLegend = d3.format('$' + '.3s')
 
@@ -15,14 +15,15 @@ let el = d3.select('.chart')
 
 function resize () {
   const sz = Math.min(el.node().offsetWidth, window.innerHeight)
-  chart.width(sz).height(sz)
+  const height = el.node().offsetHeight
+  chart.width(sz).height(height)
   el.call(chart)
 }
 
 function scatterplot () {
   const margin = {top: 30, right: 30, bottom: 30, left: 40}
   const scaleX = d3.scaleLinear()
-  const scaleY = d3.scaleLinear()
+  const scaleY = d3.scaleLog()
   const scaleR = d3.scaleSqrt()
   const scaleC = d3.scaleOrdinal()
 
@@ -37,6 +38,7 @@ function scatterplot () {
   let currentX
   let currentY
   let currentRadius
+  let currentRanges
 
   function translate (x, y) {
     return `translate(${x}, ${y})`
@@ -64,21 +66,19 @@ function scatterplot () {
   }
 
   function updateScales ({ data }) {
-    const maxR = 10
+    const maxR = 40
 
     scaleX
-      .domain([d3.min(data, function (d) { return d[currentX] }), d3.max(data, function (d) { return d[currentX] })])
+      .domain(currentRanges.x)
       .range([1, width])
 
     scaleY
-      .domain([d3.min(data, function (d) { return d[currentY] }), d3.max(data, function (d) { return d[currentY] })])
+      .domain(currentRanges.y)
       .range([height, 0])
 
     scaleR
-      .domain([d3.min(data, function (d) { return d[currentRadius] }), d3.max(data, function (d) { return d[currentRadius] })])
-      .range([2, 20])
-
-    console.log(scaleR.domain())
+      .domain(currentRanges.r)
+      .range([2, maxR])
   }
 
   function updateDom ({ container, data }) {
@@ -99,14 +99,13 @@ function scatterplot () {
     circles.enter().append('circle')
     .merge(circles)
       .attr('class', 'item')
-      .attr('data-country', d => d.country)
-      .attr('data-iso', d => d.iso)
-      .attr('x', 0)
-      .attr('y', 0)
+      .attr('data-country', d => d.Country)
+      .attr('data-iso', d => d.ISO)
+      .attr('cx', d => scaleX(d[currentX]))
+      .attr('cy', d => scaleY(d[currentY]))
       .attr('r', d => scaleR(d[currentRadius]))
       // .attr('fill', d => scaleC(d.region))
       // .attr('stroke', d => d3.color(scaleC(d.region)).darker(0.7))
-      .attr('transform', d => translate(scaleX(d[currentX]), scaleY(d[currentY])))
       .on('mouseover', function (d) {
         let selectedItem = d3.select(this)
         mouseover(selectedItem, d)
@@ -117,7 +116,7 @@ function scatterplot () {
   function updateAxis ({ container, data }) {
     const axis = container.select('.g-axis')
 
-    const axisLeft = d3.axisLeft(scaleY)
+    const axisLeft = d3.axisLeft(scaleY).tickSizeOuter(0).tickSizeInner(-width).ticks(3).tickFormat(d => formatAmount(d))
     const axisBottom = d3.axisBottom(scaleX)
 
     axisBottom.tickFormat(function (d) {
@@ -199,6 +198,12 @@ function scatterplot () {
     return chart
   }
 
+  chart.currentRanges = function (...args) {
+    if (!args.length) return currentRanges
+    currentRanges = args[0]
+    return chart
+  }
+
   return chart
 }
 
@@ -273,10 +278,12 @@ function hideTooltip () {
 function init (args) {
   el = d3.select(args.container)
   el.datum(args.data)
-  el.call(chart)
   chart.currentX(args.currentX)
   chart.currentY(args.currentY)
   chart.currentRadius(args.currentRadius)
+  chart.currentRanges(args.currentRanges)
+  el.call(chart)
+
   resize()
 }
 
