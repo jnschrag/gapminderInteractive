@@ -27,10 +27,6 @@ function scatterplot () {
   const scaleR = d3.scaleSqrt()
   const scaleC = d3.scaleOrdinal()
 
-  scaleC
-      .domain(['Africa', 'Americas', 'Asia', 'Europe', 'Oceania'])
-      .range(COLORS)
-
   let width = 0
   let height = 0
   let chartWidth = 0
@@ -39,6 +35,7 @@ function scatterplot () {
   let currentY
   let currentRadius
   let currentRanges
+  let colorDomain
 
   function translate (x, y) {
     return `translate(${x}, ${y})`
@@ -79,6 +76,10 @@ function scatterplot () {
     scaleR
       .domain(currentRanges.r)
       .range([2, maxR])
+
+    scaleC
+      .domain(colorDomain.colors)
+      .range(COLORS)
   }
 
   function updateDom ({ container, data }) {
@@ -104,8 +105,8 @@ function scatterplot () {
       .attr('cx', d => scaleX(d[currentX]))
       .attr('cy', d => scaleY(d[currentY]))
       .attr('r', d => scaleR(d[currentRadius]))
-      // .attr('fill', d => scaleC(d.region))
-      // .attr('stroke', d => d3.color(scaleC(d.region)).darker(0.7))
+      .attr('fill', d => scaleC(d[colorDomain.value]))
+      .attr('stroke', d => d3.color(scaleC(d[colorDomain.value])).darker(0.7))
       .on('mouseover', function (d) {
         let selectedItem = d3.select(this)
         mouseover(selectedItem, d)
@@ -204,6 +205,12 @@ function scatterplot () {
     return chart
   }
 
+  chart.colorDomain = function (...args) {
+    if (!args.length) return colorDomain
+    colorDomain = args[0]
+    return chart
+  }
+
   return chart
 }
 
@@ -282,6 +289,7 @@ function init (args) {
   chart.currentY(args.currentY)
   chart.currentRadius(args.currentRadius)
   chart.currentRanges(args.currentRanges)
+  chart.colorDomain(args.colorDomain)
   el.call(chart)
 
   resize()

@@ -27,10 +27,11 @@ let currentX = 'Life Expectancy' // hard coded
 let currentY = 'GNI per capita' // hard coded
 let currentRadius = 'Gross Domestic Product (PPP)' // hard coded
 
-const COLORS = ['#58a897', '#83badc', '#3b75bb', '#a483a8', '#f7890e', '#69518d', '#f7d768', '#8cb561', '#728c99']
-const scaleC = d3.scaleOrdinal()
-  .domain(['Africa', 'Americas', 'Asia', 'Europe', 'Oceania'])
-  .range(COLORS)
+const colorValue = 'World Bank Classification'
+let colorDomain = {
+  value: colorValue,
+  colors: []
+}
 
 function loadData () {
   const dataCSV = require('./data/20171207-data.csv')
@@ -114,6 +115,15 @@ function calculateRanges (axis) {
       return result
     }, []))
   })
+}
+
+function calculateColors () {
+  return d3.extent(data.raw.reduce(function (result, value) {
+    if (value[colorValue] != '') {
+      result.push(parseInt(value[colorValue]))
+    }
+    return result
+  }, []))
 }
 
 function primaryItemClick () {
@@ -288,6 +298,15 @@ function setupPlayBtn () {
     })
 }
 
+function removeEmptyDataPoints (data) {
+  let filtered = data.filter(function (column) {
+    if (column[currentX] && column[currentY]) {
+      return column
+    }
+  })
+  return filtered
+}
+
 function drawPrimaryChart () {
   // let regions = calculateRegions()
   currentYear = calculateYears()
@@ -295,7 +314,9 @@ function drawPrimaryChart () {
   currentY = calculateYSelect()
   currentRadius = calculateRadiusSelect()
 
-  let dataset = data.years[currentYear]
+  let dataset = removeEmptyDataPoints(data.years[currentYear])
+
+  console.log(dataset)
 
   chart.init({
     data: dataset,
@@ -303,6 +324,7 @@ function drawPrimaryChart () {
     currentY: currentY,
     currentRadius: currentRadius,
     currentRanges: {x: ranges[currentX], y: ranges[currentY], r: ranges[currentRadius]},
+    colorDomain: colorDomain,
     container: '.chart-primary'
   })
 }
@@ -316,6 +338,7 @@ function resize () {
 
 function init () {
   loadData()
+  colorDomain.colors = calculateColors()
   // setupRegionFilter()
   setupAxisSelect()
   setupYearRange()
