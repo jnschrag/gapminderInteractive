@@ -15,7 +15,7 @@ let el = d3.select('.chart')
 
 function resize () {
   const sz = Math.min(el.node().offsetWidth, window.innerHeight)
-  const height = el.node().offsetHeight
+  const height = 500
   chart.width(sz).height(height)
   el.call(chart)
 }
@@ -59,7 +59,6 @@ function scatterplot () {
 
     y.append('text').attr('class', 'axis__label')
       .attr('text-anchor', 'end')
-      .text('% ODA-like')
   }
 
   function updateScales ({ data }) {
@@ -93,15 +92,20 @@ function scatterplot () {
       .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
     const plot = g.select('.g-plot')
 
-    const circles = plot.selectAll('circle.item').data(data)
+    const circles = plot.selectAll('circle.item').data(data, d => d.ISO);
 
-    circles.exit().remove()
+    circles.transition()
+        .duration(1000)
+        .attr('r', d => scaleR(d[currentRadius]))
+        .attr('cx', d => scaleX(d[currentX]))
+        .attr('cy', d => scaleY(d[currentY]))
+        .attr('fill', d => scaleC(d[colorDomain.value]))
+        .attr('stroke', d => d3.color(scaleC(d[colorDomain.value])).darker(0.7))
 
     circles.enter().append('circle')
       .attr('class', 'item')
       .attr('data-country', d => d.Country)
       .attr('data-iso', d => d.ISO)
-    .merge(circles)
       .attr('r', d => scaleR(d[currentRadius]))
       .attr('cx', d => scaleX(d[currentX]))
       .attr('cy', d => scaleY(d[currentY]))
@@ -112,6 +116,9 @@ function scatterplot () {
         mouseover(selectedItem, d)
       })
       .on('mouseout', mouseout)
+        
+
+      circles.exit().remove()
   }
 
   function updateAxis ({ container, data }) {
@@ -150,6 +157,7 @@ function scatterplot () {
       .attr('x', 0 - (height / 2))
       .attr('text-anchor', 'middle')
       .attr('transform', `rotate(-90)`)
+      .text(currentY)
   }
 
   function isMajorTick (d) {

@@ -15,6 +15,9 @@ let axes = ['x', 'y', 'r']
 let axisVars = {}
 let axesSelect = {}
 let ranges = {}
+
+const playBtn = d3.select('#playbtn')
+let timer
 let playing = false
 
 let current = {
@@ -120,12 +123,13 @@ function calculateRanges (axis) {
 }
 
 function calculateColors () {
-  return d3.extent(data.raw.reduce(function (result, value) {
-    if (value[colorValue] != '') {
-      result.push(parseInt(value[colorValue]))
-    }
-    return result
-  }, []))
+  // return d3.extent(data.raw.reduce(function (result, value) {
+  //   if (value[colorValue] != '') {
+  //     result.push(parseInt(value[colorValue]))
+  //   }
+  //   return result
+  // }, []))
+  return [...new Set(data.raw.map(column => parseInt(column[colorValue])))];
 }
 
 function primaryItemClick () {
@@ -266,6 +270,9 @@ function setupYearRange () {
   yearRange.noUiSlider.on('update', function () {
     console.log('update!')
     drawPrimaryChart()
+    if ( currentYear == maxYear ) {
+      stopAnimation(playBtn, timer)
+    }
   })
 
   setupPlayBtn()
@@ -276,28 +283,25 @@ function calculateYears () {
 }
 
 function setupPlayBtn () {
-  const playBtn = d3.select('#playbtn')
-
-  var timer  // create timer object
   playBtn
-    .on('click', function () {  // when user clicks the play button
-      if (playing == false) {  // if the map is currently playing
-        timer = setInterval(function () {   // set a JS interval
+    .on('click', function () {
+      if (playing == false) {
+        timer = setInterval(function () {
           yearRange.noUiSlider.set(currentYear + 1)
         }, 1000)
 
-        d3.select(this).html('stop')  // change the button label to stop
-        playing = true   // change the status of the animation
-      } else {    // else if is currently playing
-        console.log('currentYear: ' + currentYear)
-        console.log('maxYear: ' + maxYear)
-        if (currentYear == maxYear) {
-          clearInterval(timer)   // stop the animation by clearing the interval
-          d3.select(this).html('play')   // change the button label to play
-          playing = false   // change the status again
-        }
+        d3.select(this).html('stop')
+        playing = true
+      } else {
+          stopAnimation(playBtn, timer)
       }
     })
+}
+
+function stopAnimation(playBtn, timer) {
+  clearInterval(timer)
+  playBtn.html('play')
+  playing = false
 }
 
 function removeEmptyDataPoints (data) {

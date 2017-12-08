@@ -1,4 +1,4 @@
-Country,ISO,Region,Sub-region,Year,World Bank Classification,r_Gross Domestic Product (PPP),x_Life Expectancy,x_Social Indicator 2,y_GNI per capita,y_Economic Indicator 2
+Country,ISO,Region,Sub-region,Year,World Bank Classification,r_Gross Domestic Product (PPP),x_y_r_Life Expectancy,x_Social Indicator 2,x_y_r_GNI per capita,y_Economic Indicator 2
 Afghanistan,AFG,Asia,Southern Asia,1990,1,,49.86105,,,
 Albania,ALB,Europe,Southern Europe,1990,2,8940000000,71.95732,,680,
 Algeria,DZA,Africa,Northern Africa,1990,2,171000000000,66.69459,,2360,
