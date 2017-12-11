@@ -64,7 +64,7 @@ function scatterplot () {
   }
 
   function updateScales ({ data }) {
-    const maxR = 40
+    const maxR = 30
 
     scaleX
       .domain(currentRanges.x)
@@ -118,11 +118,15 @@ function scatterplot () {
       .attr('stroke', d => d3.color(scaleC(d[colorDomain.value])).darker(0.7))
       .attr('display', d => checkCurrentYear(d.Year))
       .attr('opacity', d => checkSelectedCountry(d))
-      .on('mouseover', function (d) {
-        let selectedItem = d3.select(this)
-        mouseover(selectedItem, d)
-      })
-      .on('mouseout', mouseout)
+      .merge(circles)
+        .on('mouseover', function (d) {
+          let selectedItem = d3.select(this)
+          mouseover(selectedItem, d)
+        })
+        .on('mouseout', mouseout)
+        .on('click', function (d) {
+          d3.select('.filter-region input[value="' + d.ISO + '"]').attr('checked', true).on('change')()
+        })
 
     circles.exit().remove()
   }

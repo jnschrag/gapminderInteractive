@@ -196,15 +196,6 @@ function setupRegionFilter () {
   })
 
   d3.selectAll('input[name="country"]').on('change', function () {
-    let value = this.value
-    const checkedBoxes = document.querySelectorAll('input[name="country"]')
-
-    let checkedCount = 0
-    checkedBoxes.forEach(function (option, index) {
-      if (option.checked == true) {
-        checkedCount++
-      }
-    })
     drawPrimaryChart(data)
   })
 }
@@ -255,7 +246,6 @@ function setupYearRange () {
   })
 
   yearRange.noUiSlider.on('update', function () {
-    console.log('update!')
     drawPrimaryChart()
     if (currentYear == maxYear) {
       stopAnimation(playBtn, timer)
