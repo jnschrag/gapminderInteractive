@@ -267,7 +267,10 @@ function setupPlayBtn () {
           yearRange.noUiSlider.set(currentYear + 1)
         }, 1000)
 
-        d3.select(this).html('stop')
+        d3.select(this)
+          .classed('active', true)
+        .select('span')
+          .attr('class', 'pause-icon')
         playing = true
       } else {
         stopAnimation(playBtn, timer)
@@ -277,7 +280,7 @@ function setupPlayBtn () {
 
 function stopAnimation (playBtn, timer) {
   clearInterval(timer)
-  playBtn.html('play')
+  playBtn.classed('active', false).select('span').attr('class', 'play-icon')
   playing = false
 }
 
