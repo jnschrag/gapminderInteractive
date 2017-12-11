@@ -1,0 +1,28 @@
+/*================================================
+=            Accordion: Region Filter            =
+================================================*/
+
+.accordion-toggle {
+	cursor: pointer;
+	margin: 0;
+}
+.accordion-content {
+  overflow: auto;
+  transition: max-height 0.3s cubic-bezier(1,0,1,0); // note that we're transitioning max-height, not height!
+  height: auto;
+  max-height: 300px; // pump it ALL the way up!
+
+  	label {
+        color: black;
+        clear: left;
+    }
+
+    .checkboxes {
+        float: left;
+    }    
+
+}
+.accordion-content.collapsed {
+  max-height: 0;
+  transition: max-height 0.3s cubic-bezier(0,1,0,1);
+}

@@ -194,42 +194,11 @@ path.item {
   stroke-dasharray: 2, 2;
   shape-rendering: crispEdges;
 }
-.legend-number {
-  font-size: .5em;
 
-  @include breakpoint("medium") {
-    font-size: .7em;
-  }
-}
-
-.legend-cross {
-  display: inline-block;
-   width: 15px;
-   height: 15px;
-   position: relative;
-
-   &:before,
-   &:after {
-    content: "";
-    position: absolute;
-    z-index: -1;
-    background: $white;
-    border: 1px solid $black;
-  }
-
-  &:before {
-    left: 50%;
-    width: 30%;
-    margin-left: -15%;
-    height: 100%;
-  }
-
-  &:after {
-    top: 50%;
-    height: 30%;
-    margin-top: -15%;
-    width: 100%;
-  }
+label {
+  font-family: $font-roboto;
+  color: gray;
+  display: block;
 }
 
 // Filter Options
@@ -552,40 +521,5 @@ input[type=range].slider:focus::-ms-fill-upper {
 }
 @import 'nouislider';
 
-// Info
-.info {
-  position: relative;
-
-  &::before {
-    content: "i";
-    position: absolute;
-    top: 50%;
-    left: -3px;
-    width: 14px;
-    height: 14px;
-    margin-top: -15px;
-    padding-top: 1px;
-    padding-right: 0.5px;
-    font-size: 9px;
-    line-height: 15px;
-    text-align: center;
-    color: $white;
-    background: $select-font-color;
-    -webkit-border-radius: 50%;
-    -moz-border-radius: 50%;
-    border-radius: 50%;
-  }
-}
-
-.other-desktop {
-  display: none;
-  @include breakpoint("medium") {
-    display: inline;
-  }
-}
-
-.other-mobile {
-  @include breakpoint("medium") {
-    display: none;
-  }
-}
+/*----------  Accordion  ----------*/
+@import 'accordion';

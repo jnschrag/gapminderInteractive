@@ -67,9 +67,9 @@ function loadData () {
     data.countries[row.ISO] = data.countries[row.ISO] || {
       country: row.Country,
       iso: row.ISO,
-      years: []
+      years: {}
     }
-    data.countries[row.ISO].years.indexOf(row.Year) === -1 ? data.countries[row.ISO].years.push(row.Year) : ''
+    data.countries[row.ISO].years[row.Year] = data.countries[row.ISO].years[row.Year] || row
 
     // All data
     data.raw = data.raw || []
@@ -123,13 +123,7 @@ function calculateRanges (axis) {
 }
 
 function calculateColors () {
-  // return d3.extent(data.raw.reduce(function (result, value) {
-  //   if (value[colorValue] != '') {
-  //     result.push(parseInt(value[colorValue]))
-  //   }
-  //   return result
-  // }, []))
-  return [...new Set(data.raw.map(column => parseInt(column[colorValue])))];
+  return [...new Set(data.raw.map(column => parseInt(column[colorValue])))]
 }
 
 function primaryItemClick () {
@@ -173,67 +167,58 @@ function calculateRadiusSelect () {
 }
 
 function setupRegionFilter () {
-  const regionCont = d3.select('.filter-region')
-  data.regions.forEach(function (region) {
-    let checkbox = regionCont.append('div')
-      .attr('class', 'checkbox-container')
-    checkbox.append('input')
-      .attr('type', 'checkbox')
-      .attr('name', 'region')
-      .attr('id', region)
-      .attr('value', region)
-      .attr('checked', function () { if (region === 'All') return true })
+  const regionsCont = d3.select('.filter-region')
+  const regions = Object.keys(data.regions).sort()
 
-    checkbox.append('label')
-      .attr('for', region)
+  regions.forEach(function (region) {
+    regionsCont.append('h3')
+      .attr('class', 'accordion-toggle')
       .text(region)
+      .on('click', function () {
+        d3.select(this.nextSibling).classed('collapsed', !d3.select(this.nextSibling).classed('collapsed'))
+      })
+    let regionCont = regionsCont.append('div')
+      .attr('class', 'region-containers accordion-content collapsed')
+      .attr('id', 'region-' + region)
 
-    checkbox.selectAll('label:not([for="All"])').append('div')
-      .attr('class', 'dot')
-      .style('background-color', function () { if (region !== 'All') { return scaleC(region) } })
+    let countries = Object.keys(data.regions[region])
+    let options = regionCont.selectAll('.option').data(countries)
+
+    options.enter().append('label')
+      .data(countries)
+      .text(d => data.regions[region][d].country)
+      .append('input')
+        .attr('name', 'country')
+        .attr('class', 'checkboxes')
+        .attr('type', 'checkbox')
+        .attr('value', d => d)
+        .attr('data-country', d => d)
   })
 
-  d3.selectAll('input[name="region"]').on('change', function () {
+  d3.selectAll('input[name="country"]').on('change', function () {
     let value = this.value
-    const checkedBoxes = document.querySelectorAll('input[name="region"]')
+    const checkedBoxes = document.querySelectorAll('input[name="country"]')
 
-    if (value === 'All') {
-      checkedBoxes.forEach(function (option) {
-        if (option.value != 'All') {
-          option.checked = false
-        } else {
-          option.checked = true
-        }
-      })
-    } else {
-      let checkedCount = 0
-      checkedBoxes.forEach(function (option, index) {
-        if (option.value === 'All') {
-          option.checked = false
-        }
-
-        if (option.checked == true) {
-          checkedCount++
-        }
-      })
-
-      // If no regions are checked, default to All
-      if (checkedCount === 0) {
-        document.querySelector('.filter-region input[value="All"]').checked = true
+    let checkedCount = 0
+    checkedBoxes.forEach(function (option, index) {
+      if (option.checked == true) {
+        checkedCount++
       }
-    }
-
+    })
     drawPrimaryChart(data)
   })
 }
 
-function calculateRegions () {
-  let regions = []
-  const checkedBoxes = document.querySelectorAll('input[name="region"]:checked')
-  checkedBoxes.forEach(function (region) {
-    regions.push(region.value)
+function calculateSelectedCountries () {
+  let countries = []
+  const checkedBoxes = document.querySelectorAll('input[name="country"]:checked')
+  checkedBoxes.forEach(function (country) {
+    let iso = country.value
+    let countryData = Object.values(data.countries[iso].years)
+    countries.push(countryData)
   })
-  return regions
+  let result = [].concat.apply([], countries)
+  return result
 }
 
 function setupYearRange () {
@@ -270,7 +255,7 @@ function setupYearRange () {
   yearRange.noUiSlider.on('update', function () {
     console.log('update!')
     drawPrimaryChart()
-    if ( currentYear == maxYear ) {
+    if (currentYear == maxYear) {
       stopAnimation(playBtn, timer)
     }
   })
@@ -293,12 +278,12 @@ function setupPlayBtn () {
         d3.select(this).html('stop')
         playing = true
       } else {
-          stopAnimation(playBtn, timer)
+        stopAnimation(playBtn, timer)
       }
     })
 }
 
-function stopAnimation(playBtn, timer) {
+function stopAnimation (playBtn, timer) {
   clearInterval(timer)
   playBtn.html('play')
   playing = false
@@ -314,16 +299,21 @@ function removeEmptyDataPoints (data) {
 }
 
 function drawPrimaryChart () {
-  // let regions = calculateRegions()
+  let countries = calculateSelectedCountries()
   currentYear = calculateYears()
   currentX = calculateXSelect()
   currentY = calculateYSelect()
   currentRadius = calculateRadiusSelect()
 
   let dataset = removeEmptyDataPoints(data.years[currentYear])
+  if (countries.length) {
+    countries = removeEmptyDataPoints(countries)
+    dataset = [].concat.apply(dataset, countries)
+  }
 
   chart.init({
     data: dataset,
+    currentYear: currentYear,
     currentX: currentX,
     currentY: currentY,
     currentRadius: currentRadius,
@@ -343,7 +333,7 @@ function resize () {
 function init () {
   loadData()
   colorDomain.colors = calculateColors()
-  // setupRegionFilter()
+  setupRegionFilter()
   setupAxisSelect()
   setupYearRange()
   // drawPrimaryChart()

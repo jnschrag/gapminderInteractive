@@ -36,6 +36,7 @@ function scatterplot () {
   let currentRadius
   let currentRanges
   let colorDomain
+  let currentYear
 
   function translate (x, y) {
     return `translate(${x}, ${y})`
@@ -84,6 +85,8 @@ function scatterplot () {
   function updateDom ({ container, data }) {
     const svg = container.select('svg')
 
+    console.log(currentYear)
+
     svg
       .attr('width', width + margin.left + margin.right)
       .attr('height', height + margin.top + margin.bottom)
@@ -92,7 +95,7 @@ function scatterplot () {
       .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
     const plot = g.select('.g-plot')
 
-    const circles = plot.selectAll('circle.item').data(data, d => d.ISO);
+    const circles = plot.selectAll('circle.item').data(data, d => d.ISO)
 
     circles.transition()
         .duration(1000)
@@ -101,24 +104,32 @@ function scatterplot () {
         .attr('cy', d => scaleY(d[currentY]))
         .attr('fill', d => scaleC(d[colorDomain.value]))
         .attr('stroke', d => d3.color(scaleC(d[colorDomain.value])).darker(0.7))
+        .attr('display', d => checkCurrentYear(d.Year))
 
     circles.enter().append('circle')
       .attr('class', 'item')
       .attr('data-country', d => d.Country)
       .attr('data-iso', d => d.ISO)
+      .attr('data-year', d => d.Year)
       .attr('r', d => scaleR(d[currentRadius]))
       .attr('cx', d => scaleX(d[currentX]))
       .attr('cy', d => scaleY(d[currentY]))
       .attr('fill', d => scaleC(d[colorDomain.value]))
       .attr('stroke', d => d3.color(scaleC(d[colorDomain.value])).darker(0.7))
+      .attr('display', d => checkCurrentYear(d.Year))
       .on('mouseover', function (d) {
         let selectedItem = d3.select(this)
         mouseover(selectedItem, d)
       })
       .on('mouseout', mouseout)
-        
 
-      circles.exit().remove()
+    circles.exit().remove()
+  }
+
+  function checkCurrentYear (dataYear) {
+    if (dataYear > currentYear) {
+      return 'none'
+    }
   }
 
   function updateAxis ({ container, data }) {
@@ -219,6 +230,12 @@ function scatterplot () {
     return chart
   }
 
+  chart.currentYear = function (...args) {
+    if (!args.length) return currentYear
+    currentYear = args[0]
+    return chart
+  }
+
   return chart
 }
 
@@ -298,8 +315,8 @@ function init (args) {
   chart.currentRadius(args.currentRadius)
   chart.currentRanges(args.currentRanges)
   chart.colorDomain(args.colorDomain)
+  chart.currentYear(args.currentYear)
   el.call(chart)
-
   resize()
 }
 
