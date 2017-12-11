@@ -37,6 +37,7 @@ function scatterplot () {
   let currentRanges
   let colorDomain
   let currentYear
+  let selectedCountries = []
 
   function translate (x, y) {
     return `translate(${x}, ${y})`
@@ -85,8 +86,6 @@ function scatterplot () {
   function updateDom ({ container, data }) {
     const svg = container.select('svg')
 
-    console.log(currentYear)
-
     svg
       .attr('width', width + margin.left + margin.right)
       .attr('height', height + margin.top + margin.bottom)
@@ -105,6 +104,7 @@ function scatterplot () {
         .attr('fill', d => scaleC(d[colorDomain.value]))
         .attr('stroke', d => d3.color(scaleC(d[colorDomain.value])).darker(0.7))
         .attr('display', d => checkCurrentYear(d.Year))
+        .attr('opacity', d => checkSelectedCountry(d))
 
     circles.enter().append('circle')
       .attr('class', 'item')
@@ -117,6 +117,7 @@ function scatterplot () {
       .attr('fill', d => scaleC(d[colorDomain.value]))
       .attr('stroke', d => d3.color(scaleC(d[colorDomain.value])).darker(0.7))
       .attr('display', d => checkCurrentYear(d.Year))
+      .attr('opacity', d => checkSelectedCountry(d))
       .on('mouseover', function (d) {
         let selectedItem = d3.select(this)
         mouseover(selectedItem, d)
@@ -129,6 +130,12 @@ function scatterplot () {
   function checkCurrentYear (dataYear) {
     if (dataYear > currentYear) {
       return 'none'
+    }
+  }
+
+  function checkSelectedCountry (data) {
+    if (selectedCountries.length && selectedCountries.indexOf(data.ISO) === -1) {
+      return 0.3
     }
   }
 
@@ -236,6 +243,12 @@ function scatterplot () {
     return chart
   }
 
+  chart.selectedCountries = function (...args) {
+    if (!args.length) return selectedCountries
+    selectedCountries = args[0]
+    return chart
+  }
+
   return chart
 }
 
@@ -316,6 +329,7 @@ function init (args) {
   chart.currentRanges(args.currentRanges)
   chart.colorDomain(args.colorDomain)
   chart.currentYear(args.currentYear)
+  chart.selectedCountries(args.selectedCountries)
   el.call(chart)
   resize()
 }

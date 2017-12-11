@@ -60,7 +60,7 @@ function loadData () {
     data.years = data.years || {}
     data.years[row.Year] = data.years[row.Year] || []
     data.years[row.Year].push(row)
-    data.years[row.Year].sort(function (a, b) { return (a.ISO > b.ISO) ? 1 : ((b.ISO > a.ISO) ? -1 : 0) })
+    // data.years[row.Year].sort(dynamicSort('ISO'))
 
     // Group Countries
     data.countries = data.countries || {}
@@ -210,14 +210,16 @@ function setupRegionFilter () {
 }
 
 function calculateSelectedCountries () {
+  let result = { countries: [] }
   let countries = []
   const checkedBoxes = document.querySelectorAll('input[name="country"]:checked')
   checkedBoxes.forEach(function (country) {
     let iso = country.value
     let countryData = Object.values(data.countries[iso].years)
     countries.push(countryData)
+    result.countries.push(iso)
   })
-  let result = [].concat.apply([], countries)
+  result.countriesData = [].concat.apply([], countries)
   return result
 }
 
@@ -299,26 +301,31 @@ function removeEmptyDataPoints (data) {
 }
 
 function drawPrimaryChart () {
-  let countries = calculateSelectedCountries()
+  let selectedCountries = calculateSelectedCountries()
   currentYear = calculateYears()
   currentX = calculateXSelect()
   currentY = calculateYSelect()
   currentRadius = calculateRadiusSelect()
 
   let dataset = removeEmptyDataPoints(data.years[currentYear])
-  if (countries.length) {
-    countries = removeEmptyDataPoints(countries)
-    dataset = [].concat.apply(dataset, countries)
+  if (selectedCountries.countriesData.length) {
+    let selectedCountriesData = removeEmptyDataPoints(selectedCountries.countriesData)
+    dataset = [].concat.apply(dataset, selectedCountriesData)
   }
 
+  let sortedData = dataset.sort(function (a, b) {
+    return b[currentRadius] - a[currentRadius]
+  })
+
   chart.init({
-    data: dataset,
+    data: sortedData,
     currentYear: currentYear,
     currentX: currentX,
     currentY: currentY,
     currentRadius: currentRadius,
     currentRanges: {x: ranges[currentX], y: ranges[currentY], r: ranges[currentRadius]},
     colorDomain: colorDomain,
+    selectedCountries: selectedCountries.countries,
     container: '.chart-primary'
   })
 }
