@@ -97,7 +97,9 @@ function scatterplot () {
 
     const circles = plot.selectAll('circle.item').data(data, d => d.ISO)
 
-    circles.transition()
+    circles
+      .attr('data-year', d => d.Year)
+      .transition()
         .duration(1000)
         .attr('r', d => scaleR(d[currentRadius]))
         .attr('cx', d => scaleX(d[currentX]))
@@ -140,7 +142,7 @@ function scatterplot () {
 
   function checkSelectedCountry (data) {
     if (selectedCountries.length && selectedCountries.indexOf(data.ISO) === -1) {
-      return 0.3
+      return 0.5
     }
   }
 

@@ -300,15 +300,18 @@ function drawPrimaryChart () {
   currentY = calculateYSelect()
   currentRadius = calculateRadiusSelect()
 
-  let dataset = removeEmptyDataPoints(data.years[currentYear])
-  if (selectedCountries.countriesData.length) {
-    let selectedCountriesData = removeEmptyDataPoints(selectedCountries.countriesData)
-    dataset = [].concat.apply(dataset, selectedCountriesData)
-  }
+  let sortedData = removeEmptyDataPoints(data.years[currentYear]).sort(dynamicSort('-' + currentRadius))
 
-  let sortedData = dataset.sort(function (a, b) {
-    return b[currentRadius] - a[currentRadius]
-  })
+  // If countries are selected, remove any empty data points and sort it by Year so the most recent year is always on top. Then remove that countries data from the existing array and append all of its data to the end of the existing array.
+  if (selectedCountries.countriesData.length) {
+    let selectedCountriesData = removeEmptyDataPoints(selectedCountries.countriesData).sort(dynamicSort('Year'))
+
+    let filteredData = sortedData.filter(function (country) {
+      return !selectedCountries.countries.includes(country.ISO)
+    })
+
+    sortedData = [].concat.apply(filteredData, selectedCountriesData)
+  }
 
   chart.init({
     data: sortedData,
@@ -336,6 +339,22 @@ function init () {
   setupRegionFilter()
   setupAxisSelect()
   setupYearRange()
+}
+
+function dynamicSort (property, comparisonType = 'string') {
+  var sortOrder = 1
+  if (property[0] === '-') {
+    sortOrder = -1
+    property = property.substr(1)
+  }
+  return function (a, b) {
+    if (comparisonType == 'string') {
+      var result = (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0
+    } else {
+      var result = a[property] - b[property]
+    }
+    return result * sortOrder
+  }
 }
 
 window.addEventListener('DOMContentLoaded', init)
