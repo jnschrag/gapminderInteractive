@@ -73,7 +73,6 @@ p.instructions {
 
 // Chart
 .chart {
-  max-width: 60rem;
   margin: 0 auto;
   text-align: center;
 }
@@ -86,9 +85,13 @@ p.instructions {
     fill: $gray;
   }
 
-  .axis--x .tick:not(.major) {
-    opacity: 0
+  .axis__label {
+    @include fontSize(16px);
+    text-transform: uppercase;
+    font-weight: bold;
+    fill: $black;
   }
+
 }
 
 .item {
@@ -107,19 +110,12 @@ path.item {
   position: relative;
 }
 
-.filter-options-primary {
-  @include breakpoint("medium") {
-    position: absolute;
-    z-index: 5;
-    max-width: 25%;
-  }
+.sidebar {
+
 }
 
 .chart-container {
-  @include breakpoint("medium") {
-    position: relative;
-    padding-left: 25%;
-  }
+  position: relative;
 }
 
 .chart-primary {

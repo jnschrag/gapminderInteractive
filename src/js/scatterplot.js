@@ -15,13 +15,13 @@ let el = d3.select('.chart')
 
 function resize () {
   const sz = Math.min(el.node().offsetWidth, window.innerHeight)
-  const height = 500
+  const height = 550
   chart.width(sz).height(height)
   el.call(chart)
 }
 
 function scatterplot () {
-  const margin = {top: 30, right: 30, bottom: 30, left: 40}
+  const margin = {top: 20, right: 30, bottom: 40, left: 60}
   const scaleX = d3.scaleLinear()
   const scaleY = d3.scaleLog()
   const scaleR = d3.scaleSqrt()
@@ -87,11 +87,12 @@ function scatterplot () {
     const svg = container.select('svg')
 
     svg
-      .attr('width', width + margin.left + margin.right)
-      .attr('height', height + margin.top + margin.bottom)
+      .attr('viewBox', '0 0 ' + (width + margin.left + margin.right) + ' ' + (height + margin.top + margin.bottom) + '')
+      // .attr('width', width + margin.left + margin.right)
+      // .attr('height', height + margin.top + margin.bottom)
 
     const g = svg.select('g')
-      .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
+      .attr('transform', 'translate(' + (margin.left) + ',' + margin.top + ')')
     const plot = g.select('.g-plot')
 
     const circles = plot.selectAll('circle.item').data(data, d => d.ISO)
@@ -175,7 +176,7 @@ function scatterplot () {
     y.call(axisLeft)
 
     y.select('.axis__label')
-      .attr('y', 0 - margin.left + 10)
+      .attr('y', 0 - (margin.left / 2))
       .attr('x', 0 - (height / 2))
       .attr('text-anchor', 'middle')
       .attr('transform', `rotate(-90)`)
