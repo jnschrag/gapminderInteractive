@@ -338,41 +338,13 @@ function mouseout (d) {
 }
 
 function showTooltip (d, item) {
-  let year = ''
-  if (d.Year != undefined) {
-    year = d.Year
-  }
-
-  let xPos = 0
-  let yPos = 0
-
-  if (d3.event != undefined) {
-    xPos = d3.event.pageX
-    yPos = d3.event.pageY
-  } else {
-    let position = item.node().getBoundingClientRect()
-    xPos = position.x
-    yPos = position.y
-  }
-
-  if (window.innerWidth <= 768) {
-    xPos = xPos - 30
-    yPos = yPos - 380
-  } else {
-    xPos = xPos - 50
-    yPos = yPos - 280
-  }
-
-  let totalAmount = '$' + formatAmount(d.total_sum)
-
-  if (d.total_sum == 0) {
-    totalAmount = 'N/A'
-  }
+  let xPos = d3.event.pageX
+  let yPos = d3.event.pageY
 
   tooltip.transition()
     .duration(200)
     .style('opacity', 0.9)
-  tooltip.html(`<p class="tooltip-heading">${d.Country} ${year}</p>
+  tooltip.html(`<p class="tooltip-heading">${d.Country} ${d.Year}</p>
     <p class="tooltip-body">
     </p>`)
     .style('left', xPos + 'px')

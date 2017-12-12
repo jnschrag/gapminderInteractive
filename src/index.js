@@ -307,6 +307,8 @@ function drawPrimaryChart () {
   if (selectedCountries.countriesData.length) {
     let selectedCountriesData = removeEmptyDataPoints(selectedCountries.countriesData).sort(dynamicSort('Year'))
 
+    selectedCountries.countriesData = selectedCountriesData
+
     let filteredData = sortedData.filter(function (country) {
       return !selectedCountries.countries.includes(country.ISO)
     })
