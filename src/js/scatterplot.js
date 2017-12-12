@@ -46,6 +46,9 @@ function scatterplot () {
     const svgEnter = svg.enter().append('svg')
     const gEnter = svgEnter.append('g')
 
+    const year = gEnter.append('g').attr('class', 'g-year')
+    year.append('text').attr('class', 'chart-year')
+
     gEnter.append('g').attr('class', 'g-plot')
 
     const axis = gEnter.append('g').attr('class', 'g-axis')
@@ -89,6 +92,7 @@ function scatterplot () {
 
     const g = svg.select('g')
       .attr('transform', 'translate(' + (margin.left) + ',' + margin.top + ')')
+
     const plot = g.select('.g-plot')
 
     const circles = plot.selectAll('circle.item').data(data, d => d.ISO)
@@ -177,6 +181,15 @@ function scatterplot () {
       .attr('text-anchor', 'middle')
       .attr('transform', `rotate(-90)`)
       .text(currentY)
+
+    // Year
+    const year = container.select('.g-year')
+    year.attr('transform', 'translate(' + width + ', ' + height + ')')
+    year.select('.chart-year')
+      .attr('text-anchor', 'end')
+      .transition()
+        .duration(1000)
+        .text(currentYear)
   }
 
   function isMajorTick (d) {
