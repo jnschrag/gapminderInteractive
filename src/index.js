@@ -47,6 +47,7 @@ function loadData () {
 
     // Modify row properties
     row = transformKeys(row)
+    row['ISO-Year'] = row.ISO + '-' + row.Year
 
     // Group Regions
     data.regions = data.regions || {}
@@ -321,7 +322,7 @@ function drawPrimaryChart () {
     currentRadius: currentRadius,
     currentRanges: {x: ranges[currentX], y: ranges[currentY], r: ranges[currentRadius]},
     colorDomain: colorDomain,
-    selectedCountries: selectedCountries.countries,
+    selectedCountries: selectedCountries,
     container: '.chart-primary'
   })
 }

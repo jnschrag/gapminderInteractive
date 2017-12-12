@@ -97,17 +97,17 @@ function scatterplot () {
 
     const circles = plot.selectAll('circle.item').data(data, d => d.ISO)
 
-    circles
-      .attr('data-year', d => d.Year)
-      .transition()
-        .duration(1000)
-        .attr('r', d => scaleR(d[currentRadius]))
-        .attr('cx', d => scaleX(d[currentX]))
-        .attr('cy', d => scaleY(d[currentY]))
-        .attr('fill', d => scaleC(d[colorDomain.value]))
-        .attr('stroke', d => d3.color(scaleC(d[colorDomain.value])).darker(0.7))
-        .attr('display', d => checkCurrentYear(d.Year))
-        .attr('opacity', d => checkSelectedCountry(d))
+    // circles
+    //   .attr('data-year', d => d.Year)
+    //   .transition()
+    //     .duration(1000)
+    //     .attr('r', d => scaleR(d[currentRadius]))
+    //     .attr('cx', d => scaleX(d[currentX]))
+    //     .attr('cy', d => scaleY(d[currentY]))
+    //     .attr('fill', d => scaleC(d[colorDomain.value]))
+    //     .attr('stroke', d => d3.color(scaleC(d[colorDomain.value])).darker(0.7))
+    //     // .attr('display', d => checkCurrentYear(d.Year))
+    //     .attr('opacity', d => checkSelectedCountry(d))
 
     circles.enter().append('circle')
       .attr('class', 'item')
@@ -121,17 +121,68 @@ function scatterplot () {
       .attr('stroke', d => d3.color(scaleC(d[colorDomain.value])).darker(0.7))
       .attr('display', d => checkCurrentYear(d.Year))
       .attr('opacity', d => checkSelectedCountry(d))
-      .merge(circles)
-        .on('mouseover', function (d) {
-          let selectedItem = d3.select(this)
-          mouseover(selectedItem, d)
-        })
+      .on('mouseover', function (d) {
+        let selectedItem = d3.select(this)
+        mouseover(selectedItem, d)
+      })
         .on('mouseout', mouseout)
         .on('click', function (d) {
           d3.select('.filter-region input[value="' + d.ISO + '"]').attr('checked', true).on('change')()
         })
+      .merge(circles)
+        .transition()
+          .duration(1000)
+          .attr('data-year', d => d.Year)
+          .attr('r', d => scaleR(d[currentRadius]))
+          .attr('cx', d => scaleX(d[currentX]))
+          .attr('cy', d => scaleY(d[currentY]))
+          .attr('fill', d => scaleC(d[colorDomain.value]))
+          .attr('stroke', d => d3.color(scaleC(d[colorDomain.value])).darker(0.7))
+          .attr('display', d => checkCurrentYear(d.Year))
+          .attr('opacity', d => checkSelectedCountry(d))
 
     circles.exit().remove()
+
+    // Lines
+    const lines = plot.selectAll('line.item').data(selectedCountries.countriesData, d => d['ISO-Year'])
+
+    lines.exit().remove()
+
+    lines.attr('display', d => checkCurrentYear(d.Year))
+
+    lines.enter().append('line')
+      .attr('data-iso', d => d['ISO-Year'])
+      .attr('class', 'item')
+      .attr('fill', 'none')
+      .attr('stroke', 'steelblue')
+      .attr('stroke-linejoin', 'round')
+      .attr('stroke-linecap', 'round')
+      .attr('stroke-width', 1.5)
+      .attr('x2', d => scaleX(d[currentX]))
+      .attr('y2', d => scaleY(d[currentY]))
+      .transition()
+        .duration(function (d, i) {
+          if (i == 0) {
+            return 0
+          }
+          return 1000
+        })
+          .attr('x1', function (d, i) {
+            if (i == 0) {
+              return scaleX(d[currentX])
+            } else {
+              let prev = selectedCountries.countriesData[i - 1]
+              return scaleX(prev[currentX])
+            }
+          })
+          .attr('y1', function (d, i) {
+            if (i == 0) {
+              return scaleY(d[currentY])
+            } else {
+              let prev = selectedCountries.countriesData[i - 1]
+              return scaleY(prev[currentY])
+            }
+          })
   }
 
   function checkCurrentYear (dataYear) {
@@ -141,8 +192,8 @@ function scatterplot () {
   }
 
   function checkSelectedCountry (data) {
-    if (selectedCountries.length && selectedCountries.indexOf(data.ISO) === -1) {
-      return 0.5
+    if (selectedCountries.countries.length && selectedCountries.countries.indexOf(data.ISO) === -1) {
+      return 0.4
     }
   }
 
