@@ -336,8 +336,7 @@ function init () {
   setupRegionFilter()
   setupAxisSelect()
   setupYearRange()
-  // drawPrimaryChart()
 }
 
 window.addEventListener('DOMContentLoaded', init)
-// window.addEventListener('resize', resize)
+window.addEventListener('resize', resize)

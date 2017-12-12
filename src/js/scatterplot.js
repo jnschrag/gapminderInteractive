@@ -29,8 +29,6 @@ function scatterplot () {
 
   let width = 0
   let height = 0
-  let chartWidth = 0
-  let chartHeight = 0
   let currentX
   let currentY
   let currentRadius
@@ -88,8 +86,6 @@ function scatterplot () {
 
     svg
       .attr('viewBox', '0 0 ' + (width + margin.left + margin.right) + ' ' + (height + margin.top + margin.bottom) + '')
-      // .attr('width', width + margin.left + margin.right)
-      // .attr('height', height + margin.top + margin.bottom)
 
     const g = svg.select('g')
       .attr('transform', 'translate(' + (margin.left) + ',' + margin.top + ')')
@@ -201,14 +197,12 @@ function scatterplot () {
   chart.width = function (...args) {
     if (!args.length) return width
     width = args[0]
-    chartWidth = width - margin * 2.5
     return chart
   }
 
   chart.height = function (...args) {
     if (!args.length) return height
     height = args[0]
-    chartHeight = height - margin * 2.5
     return chart
   }
 

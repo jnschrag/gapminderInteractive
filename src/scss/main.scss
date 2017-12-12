@@ -199,9 +199,11 @@ label {
 
 // Filter Options
 .filter-label {
+  display: block;
   font-family: $font-roboto;
-  font-size: 18px;
-  font-weight: bold;
+  font-size: 14px;
+  text-transform: uppercase;
+  color: gray;
   line-height: 1.4;
   margin: 0 0 5px;
 }
@@ -213,6 +215,10 @@ label {
 }
 
 p.filter-desc { line-height: 1.3; }
+
+.filter-option {
+  margin-bottom: 1rem;
+}
 
 .filter-country {
   margin-bottom: 0.5rem;
