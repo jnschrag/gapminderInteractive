@@ -316,13 +316,17 @@ function drawPrimaryChart () {
     sortedData = [].concat.apply(filteredData, selectedCountriesData)
   }
 
-  chart.init({
-    data: sortedData,
+  let currentValues = {
     currentYear: currentYear,
     currentX: currentX,
     currentY: currentY,
     currentRadius: currentRadius,
-    currentRanges: {x: ranges[currentX], y: ranges[currentY], r: ranges[currentRadius]},
+    currentRanges: {x: ranges[currentX], y: ranges[currentY], r: ranges[currentRadius]}
+  }
+
+  chart.init({
+    data: sortedData,
+    currentValues: currentValues,
     colorDomain: colorDomain,
     selectedCountries: selectedCountries,
     container: '.chart-primary'
