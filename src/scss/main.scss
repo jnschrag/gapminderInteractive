@@ -189,6 +189,14 @@ path.item {
     line-height: 1.2;
     color: $tooltip-gray;
   }
+
+  &.tooltip-selected {
+    opacity: 1;
+
+    .tooltip-heading {
+      margin-bottom: 0;
+    }
+  }
 }
 
 // Legends
