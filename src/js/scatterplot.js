@@ -21,7 +21,7 @@ function resize () {
 }
 
 function scatterplot () {
-  const margin = {top: 20, right: 30, bottom: 40, left: 60}
+  const margin = {top: 20, right: 30, bottom: 60, left: 80}
   const scaleX = d3.scaleLinear()
   const scaleY = d3.scaleLog()
   const scaleR = d3.scaleSqrt()
@@ -64,6 +64,12 @@ function scatterplot () {
 
     y.append('text').attr('class', 'axis__label')
       .attr('text-anchor', 'end')
+
+    const guidelines = gEnter.append('g').attr('class', 'g-guidelines')
+    guidelines.append('line').attr('class', 'chart-guidelines chart-guidelines--x')
+    guidelines.append('line').attr('class', 'chart-guidelines chart-guidelines--y')
+    guidelines.append('text').attr('class', 'chart-guidelines chart-guidelines-label--x')
+    guidelines.append('text').attr('class', 'chart-guidelines chart-guidelines-label--y')
   }
 
   function updateScales ({ data }) {
@@ -222,7 +228,7 @@ function scatterplot () {
     y.call(axisLeft)
 
     y.select('.axis__label')
-      .attr('y', 0 - (margin.left / 2))
+      .attr('y', 0 - (margin.left / 1.25))
       .attr('x', 0 - (height / 2))
       .attr('text-anchor', 'middle')
       .attr('transform', `rotate(-90)`)
@@ -236,6 +242,38 @@ function scatterplot () {
       .transition()
         .duration(1000)
         .text(currentValues.currentYear)
+  }
+
+  chart.updateGuidelines = function (d, action = 'show') {
+    const guidelines = d3.select('.g-guidelines')
+
+    if (action == 'show') {
+      guidelines.classed('active', true)
+      guidelines.select('.chart-guidelines--x')
+        .attr('x1', scaleX(d[currentValues.currentX]))
+        .attr('y1', scaleY(d[currentValues.currentY]))
+        .attr('x2', scaleX(d[currentValues.currentX]))
+        .attr('y2', height)
+
+      guidelines.select('.chart-guidelines-label--x')
+        .attr('x', scaleX(d[currentValues.currentX]))
+        .attr('y', height + 35)
+        .text(d[currentValues.currentX])
+
+      guidelines.select('.chart-guidelines--y')
+        .attr('x1', scaleX(d[currentValues.currentX]))
+        .attr('y1', scaleY(d[currentValues.currentY]))
+        .attr('x2', 0)
+        .attr('y2', scaleY(d[currentValues.currentY]))
+
+      guidelines.select('.chart-guidelines-label--y')
+        .attr('y', -25)
+        .attr('x', scaleY(d[currentValues.currentY]) * -1)
+        .attr('transform', 'rotate(-90)')
+        .text(d[currentValues.currentY])
+    } else {
+      guidelines.classed('active', false)
+    }
   }
 
   function chart (container) {
@@ -290,6 +328,7 @@ function mouseover (item, d, currentValues) {
   .style('stroke-width', 1.5)
   .style('fill-opacity', 1)
   showTooltip(d, item, currentValues)
+  chart.updateGuidelines(d, 'show')
 }
 
 function mouseout (d) {
@@ -297,6 +336,7 @@ function mouseout (d) {
     d3.selectAll('.item').style('fill-opacity', null)
     d3.select(this).style('fill', null).style('stroke-width', null).style('fill-opacity', null)
     hideTooltip()
+    chart.updateGuidelines(null, 'hide')
   }
 }
 

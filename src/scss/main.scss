@@ -111,6 +111,24 @@ path.item {
   font-size: 100px;
 }
 
+.g-guidelines {
+  display: none;
+
+  &.active {
+    display: block;
+  }
+
+  line, path {
+    stroke: $gray;
+    stroke-dasharray: 4;
+  }
+  text {
+    fill: $red;
+    text-anchor: middle;
+  }
+
+}
+
 .content-wrapper {
   position: relative;
 }
