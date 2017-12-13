@@ -127,7 +127,14 @@ function scatterplot () {
       })
         .on('mouseout', mouseout)
         .on('click', function (d) {
-          d3.select('.filter-region input[value="' + d.ISO + '"]').attr('checked', true).on('change')()
+          let checkbox = '.filter-region input[value="' + d.ISO + '"]'
+          let checked = d3.select(checkbox).property('checked')
+          let newCheckVal = true
+          if (checked) {
+            newCheckVal = false
+          }
+
+          d3.select(checkbox).property('checked', newCheckVal).on('change')()
         })
       .merge(circles)
         .transition()
@@ -146,8 +153,6 @@ function scatterplot () {
     // Lines
     const lines = plot.selectAll('line.item').data(selectedCountries.countriesData, d => d['ISO-Year'])
 
-    lines.exit().remove()
-
     lines.attr('display', d => checkCurrentYear(d.Year))
 
     lines.enter().append('line')
@@ -160,29 +165,24 @@ function scatterplot () {
       .attr('stroke-width', 1.5)
       .attr('x2', d => scaleX(d[currentX]))
       .attr('y2', d => scaleY(d[currentY]))
-      .transition()
-        .duration(function (d, i) {
-          if (i == 0) {
-            return 0
-          }
-          return 1000
-        })
-          .attr('x1', function (d, i) {
-            if (i == 0) {
-              return scaleX(d[currentX])
-            } else {
-              let prev = selectedCountries.countriesData[i - 1]
-              return scaleX(prev[currentX])
-            }
-          })
-          .attr('y1', function (d, i) {
-            if (i == 0) {
-              return scaleY(d[currentY])
-            } else {
-              let prev = selectedCountries.countriesData[i - 1]
-              return scaleY(prev[currentY])
-            }
-          })
+      .attr('x1', function (d, i) {
+        if (i == 0) {
+          return scaleX(d[currentX])
+        } else {
+          let prev = selectedCountries.countriesData[i - 1]
+          return scaleX(prev[currentX])
+        }
+      })
+      .attr('y1', function (d, i) {
+        if (i == 0) {
+          return scaleY(d[currentY])
+        } else {
+          let prev = selectedCountries.countriesData[i - 1]
+          return scaleY(prev[currentY])
+        }
+      })
+
+    lines.exit().remove()
   }
 
   function checkCurrentYear (dataYear) {

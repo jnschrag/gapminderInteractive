@@ -305,7 +305,7 @@ function drawPrimaryChart () {
 
   // If countries are selected, remove any empty data points and sort it by Year so the most recent year is always on top. Then remove that countries data from the existing array and append all of its data to the end of the existing array.
   if (selectedCountries.countriesData.length) {
-    let selectedCountriesData = removeEmptyDataPoints(selectedCountries.countriesData).sort(dynamicSort('Year'))
+    let selectedCountriesData = removeEmptyDataPoints(selectedCountries.countriesData).sort(dynamicSortMultiple('ISO', 'Year'))
 
     selectedCountries.countriesData = selectedCountriesData
 
@@ -357,6 +357,26 @@ function dynamicSort (property, comparisonType = 'string') {
       var result = a[property] - b[property]
     }
     return result * sortOrder
+  }
+}
+
+function dynamicSortMultiple () {
+  /*
+   * save the arguments object as it will be overwritten
+   * note that arguments object is an array-like object
+   * consisting of the names of the properties to sort by
+   */
+  var props = arguments
+  return function (obj1, obj2) {
+    var i = 0, result = 0, numberOfProperties = props.length
+      /* try getting a different result from 0 (equal)
+       * as long as we have extra properties to compare
+       */
+    while (result === 0 && i < numberOfProperties) {
+      result = dynamicSort(props[i])(obj1, obj2)
+      i++
+    }
+    return result
   }
 }
 
