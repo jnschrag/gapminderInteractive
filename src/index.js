@@ -335,7 +335,8 @@ function drawPrimaryChart () {
     currentX: currentX,
     currentY: currentY,
     currentRadius: currentRadius,
-    currentRanges: {x: ranges[currentX], y: ranges[currentY], r: ranges[currentRadius]}
+    currentRanges: {x: ranges[currentX], y: ranges[currentY], r: ranges[currentRadius]},
+    scaleC: scaleC
   }
 
   chart.init({

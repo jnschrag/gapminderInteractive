@@ -22,3 +22,25 @@
 		}
 	}
 }
+
+/*----------  Radius Legend  ----------*/
+.chart-radius-legend {
+	.radius-legend-bg {
+		fill: $off-white;
+		stroke: $dark-gray;
+	}
+
+	.radius-legend-circles {
+		fill: $white;
+		stroke: $dark-gray;
+	}
+
+	.radius-legend-circle-ring {
+		fill: none;
+		stroke: $red;
+	}
+
+	.radius-legend-label {
+		@include fontSize(12px);
+	}	
+}

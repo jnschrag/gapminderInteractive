@@ -3,9 +3,6 @@ import * as d3 from 'd3'
 const graphic = d3.select('.chart-container')
 const tooltip = d3.select('.tooltip')
 
-const COLORS = ['#58a897', '#83badc', '#3b75bb', '#a483a8', '#f7890e', '#69518d', '#f7d768', '#8cb561', '#728c99']
-const FONT_SIZE = 11
-const MAX_VAL = 100
 const formatAmount = d3.format('.1s')
 const formatPercentage = d3.format('.3')
 const formatLegend = d3.format('$' + '.3s')
@@ -25,7 +22,7 @@ function scatterplot () {
   const scaleX = d3.scaleLinear()
   const scaleY = d3.scaleLog()
   const scaleR = d3.scaleSqrt()
-  const scaleC = d3.scaleOrdinal()
+  let scaleC
 
   let width = 0
   let height = 0
@@ -70,6 +67,11 @@ function scatterplot () {
     guidelines.append('line').attr('class', 'chart-guidelines chart-guidelines--y')
     guidelines.append('text').attr('class', 'chart-guidelines chart-guidelines-label--x')
     guidelines.append('text').attr('class', 'chart-guidelines chart-guidelines-label--y')
+
+    // Legend
+    const legendSVG = d3.select('.chart-radius-legend-svg').selectAll('svg').data([data])
+    const legendSVGEnter = legendSVG.enter().append('svg')
+    const legendGEnter = legendSVGEnter.append('g')
   }
 
   function updateScales ({ data }) {
@@ -87,9 +89,7 @@ function scatterplot () {
       .domain(currentValues.currentRanges.r)
       .range([2, maxR])
 
-    scaleC
-      .domain(colorDomain.colors)
-      .range(COLORS)
+    scaleC = currentValues.scaleC
   }
 
   function updateDom ({ container, data }) {
@@ -245,7 +245,42 @@ function scatterplot () {
   }
 
   function updateLegends ({data}) {
+    const svg = d3.select('.chart-radius-legend svg')
+      .attr('width', '100%')
+      .attr('height', '100px')
 
+    const boundingClientRect = svg.node().getBoundingClientRect()
+
+    const g = svg.select('g')
+
+    g.selectAll('*').remove()
+
+    const rect = g.append('rect')
+      .attr('class', 'radius-legend-bg')
+      .attr('width', '100%')
+      .attr('height', '100%')
+
+    const radiusLegend = g.selectAll('.radius-legend-circles').data(scaleR.domain().reverse())
+    radiusLegend.enter().append('circle')
+      .attr('class', 'radius-legend-circles')
+      .attr('cx', boundingClientRect.width / 2)
+      .attr('cy', boundingClientRect.height / 2)
+      .attr('r', d => scaleR(d))
+
+    g.append('circle')
+      .attr('class', 'radius-legend-circle-ring')
+      .attr('cx', boundingClientRect.width / 2)
+      .attr('cy', boundingClientRect.height / 2)
+      .attr('r', 0)
+
+    d3.selectAll('.radius-legend-circles').select(function (d) {
+      const boundingClientRect = this.getBoundingClientRect()
+      g.append('text')
+        .attr('x', parseFloat(this.getAttribute('cx')) + boundingClientRect.width / 2)
+        .attr('y', parseFloat(this.getAttribute('cy')) + boundingClientRect.height / 2)
+        .attr('class', 'radius-legend-label')
+        .text(formatAmount(d))
+    })
   }
 
   function chart (container) {
@@ -320,6 +355,14 @@ function scatterplot () {
     }
   }
 
+  chart.updateRadiusLegend = function (d, action = 'show') {
+    if (action == 'show') {
+      d3.select('.radius-legend-circle-ring').attr('r', scaleR(d[currentValues.currentRadius]))
+    } else {
+      d3.select('.radius-legend-circle-ring').attr('r', 0)
+    }
+  }
+
   return chart
 }
 
@@ -334,6 +377,7 @@ function mouseover (item, d, currentValues) {
   .style('fill-opacity', 1)
   showTooltip(d, item, currentValues)
   chart.updateGuidelines(d, 'show')
+  chart.updateRadiusLegend(d, 'show')
 }
 
 function mouseout (d) {
@@ -342,6 +386,7 @@ function mouseout (d) {
     d3.select(this).style('fill', null).style('stroke-width', null).style('fill-opacity', null)
     hideTooltip()
     chart.updateGuidelines(null, 'hide')
+    chart.updateRadiusLegend(null, 'hide')
   }
 }
 
