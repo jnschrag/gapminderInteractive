@@ -192,27 +192,7 @@ path.item {
 }
 
 // Legends
-.legends {
-  .regional-entity {
-    display: inline-block;
-    width: 0.75rem;
-    height: 0.75rem;
-    border-radius: 50%;
-    background-color: $white;
-    border: 1px dashed $black;
-  }
-}
-
-.legend-circle {
-  fill: none;
-  stroke: #000;
-}
-
-.legend-dotted-line {
-  stroke: #000;
-  stroke-dasharray: 2, 2;
-  shape-rendering: crispEdges;
-}
+@import "legends";
 
 label {
   font-family: $font-roboto;

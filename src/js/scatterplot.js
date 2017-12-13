@@ -244,36 +244,8 @@ function scatterplot () {
         .text(currentValues.currentYear)
   }
 
-  chart.updateGuidelines = function (d, action = 'show') {
-    const guidelines = d3.select('.g-guidelines')
+  function updateLegends ({data}) {
 
-    if (action == 'show') {
-      guidelines.classed('active', true)
-      guidelines.select('.chart-guidelines--x')
-        .attr('x1', scaleX(d[currentValues.currentX]))
-        .attr('y1', scaleY(d[currentValues.currentY]))
-        .attr('x2', scaleX(d[currentValues.currentX]))
-        .attr('y2', height)
-
-      guidelines.select('.chart-guidelines-label--x')
-        .attr('x', scaleX(d[currentValues.currentX]))
-        .attr('y', height + 35)
-        .text(d[currentValues.currentX])
-
-      guidelines.select('.chart-guidelines--y')
-        .attr('x1', scaleX(d[currentValues.currentX]))
-        .attr('y1', scaleY(d[currentValues.currentY]))
-        .attr('x2', 0)
-        .attr('y2', scaleY(d[currentValues.currentY]))
-
-      guidelines.select('.chart-guidelines-label--y')
-        .attr('y', -25)
-        .attr('x', scaleY(d[currentValues.currentY]) * -1)
-        .attr('transform', 'rotate(-90)')
-        .text(d[currentValues.currentY])
-    } else {
-      guidelines.classed('active', false)
-    }
   }
 
   function chart (container) {
@@ -283,6 +255,7 @@ function scatterplot () {
     updateScales({ container, data })
     updateDom({ container, data })
     updateAxis({ container, data })
+    updateLegends({ container, data })
   }
 
   chart.width = function (...args) {
@@ -313,6 +286,38 @@ function scatterplot () {
     if (!args.length) return selectedCountries
     selectedCountries = args[0]
     return chart
+  }
+
+  chart.updateGuidelines = function (d, action = 'show') {
+    const guidelines = d3.select('.g-guidelines')
+
+    if (action == 'show') {
+      guidelines.classed('active', true)
+      guidelines.select('.chart-guidelines--x')
+        .attr('x1', scaleX(d[currentValues.currentX]))
+        .attr('y1', scaleY(d[currentValues.currentY]))
+        .attr('x2', scaleX(d[currentValues.currentX]))
+        .attr('y2', height)
+
+      guidelines.select('.chart-guidelines-label--x')
+        .attr('x', scaleX(d[currentValues.currentX]))
+        .attr('y', height + 35)
+        .text(d[currentValues.currentX])
+
+      guidelines.select('.chart-guidelines--y')
+        .attr('x1', scaleX(d[currentValues.currentX]))
+        .attr('y1', scaleY(d[currentValues.currentY]))
+        .attr('x2', 0)
+        .attr('y2', scaleY(d[currentValues.currentY]))
+
+      guidelines.select('.chart-guidelines-label--y')
+        .attr('y', -25)
+        .attr('x', scaleY(d[currentValues.currentY]) * -1)
+        .attr('transform', 'rotate(-90)')
+        .text(d[currentValues.currentY])
+    } else {
+      guidelines.classed('active', false)
+    }
   }
 
   return chart

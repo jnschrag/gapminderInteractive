@@ -31,10 +31,12 @@ let currentY = 'GNI per capita' // hard coded
 let currentRadius = 'Gross Domestic Product (PPP)' // hard coded
 
 const colorValue = 'World Bank Classification'
+let scaleC = d3.scaleOrdinal()
 let colorDomain = {
   value: colorValue,
   colors: []
 }
+const COLORS = ['#58a897', '#83badc', '#3b75bb', '#a483a8', '#f7890e', '#69518d', '#f7d768', '#8cb561', '#728c99']
 
 function loadData () {
   const dataCSV = require('./data/20171207-data.csv')
@@ -124,7 +126,7 @@ function calculateRanges (axis) {
 }
 
 function calculateColors () {
-  return [...new Set(data.raw.map(column => parseInt(column[colorValue])))]
+  return [...new Set(data.raw.map(column => parseInt(column[colorValue]) || 0))].sort()
 }
 
 function primaryItemClick () {
@@ -260,6 +262,18 @@ function calculateYears () {
   return yearRange.noUiSlider.get()
 }
 
+function setupColorLegend () {
+  const colorLegend = d3.select('.chart-color-legend').append('ul')
+
+  scaleC.domain(colorDomain.colors)
+    .range(COLORS)
+
+  let items = colorLegend.selectAll('li').data(colorDomain.colors)
+  items.enter().append('li')
+    .attr('class', d => d)
+    .html(d => '<span style="background-color:' + scaleC(d) + '"></span>' + d)
+}
+
 function setupPlayBtn () {
   playBtn
     .on('click', function () {
@@ -343,6 +357,7 @@ function resize () {
 function init () {
   loadData()
   colorDomain.colors = calculateColors()
+  setupColorLegend()
   setupRegionFilter()
   setupAxisSelect()
   setupYearRange()
