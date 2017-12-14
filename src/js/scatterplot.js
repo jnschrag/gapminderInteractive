@@ -220,7 +220,7 @@ function scatterplot () {
 
     x.select('.axis__label')
       .attr('x', width / 2)
-      .attr('y', margin.bottom)
+      .attr('y', margin.bottom / 1.5)
       .text(currentValues.currentX)
 
     const y = axis.select('.axis--y')
@@ -228,7 +228,7 @@ function scatterplot () {
     y.call(axisLeft)
 
     y.select('.axis__label')
-      .attr('y', 0 - (margin.left / 1.25))
+      .attr('y', 0 - (margin.left / 1.5))
       .attr('x', 0 - (height / 2))
       .attr('text-anchor', 'middle')
       .attr('transform', `rotate(-90)`)
