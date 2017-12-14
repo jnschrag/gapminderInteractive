@@ -19,26 +19,27 @@ function resize () {
 
 function scatterplot () {
   const margin = {top: 20, right: 30, bottom: 60, left: 80}
-  const scaleX = d3.scaleLog()
-  const scaleY = d3.scaleLinear()
-  const scaleR = d3.scaleSqrt()
-  let scaleC
+  let scales = {
+    r: d3.scaleSqrt(),
+    x: {
+      type: null,
+      direction: 'bottom'
+    },
+    y: {
+      type: null,
+      direction: 'left'
+    },
+    c: null
+  }
 
   let width = 0
   let height = 0
   let currentValues = {
-    currentX: null,
-    currentY: null,
-    currentRadius: null,
-    currentRanges: null,
-    currentYear: null
+    currentYear: null,
+    axes: null
   }
   let colorDomain
   let selectedCountries = []
-
-  function translate (x, y) {
-    return `translate(${x}, ${y})`
-  }
 
   function enter ({ container, data }) {
     const svg = container.selectAll('svg').data([data])
@@ -74,22 +75,31 @@ function scatterplot () {
     const legendGEnter = legendSVGEnter.append('g')
   }
 
+  function scaleType (axis) {
+    if (currentValues.axes[axis].scaleType == 'log') {
+      return d3.scaleLog()
+    }
+    return d3.scaleLinear()
+  }
+
   function updateScales ({ data }) {
     const maxR = 30
 
-    scaleX
-      .domain(currentValues.currentRanges.x)
+    scales.x.type = scaleType('x')
+    scales.x.type
+      .domain(currentValues.axes.x.range)
       .range([1, width])
 
-    scaleY
-      .domain(currentValues.currentRanges.y)
+    scales.y.type = scaleType('y')
+    scales.y.type
+      .domain(currentValues.axes.y.range)
       .range([height, 0])
 
-    scaleR
-      .domain(currentValues.currentRanges.r)
+    scales.r
+      .domain(currentValues.axes.radius.range)
       .range([2, maxR])
 
-    scaleC = currentValues.scaleC
+    scales.c = currentValues.scaleC
   }
 
   function updateDom ({ container, data }) {
@@ -109,11 +119,11 @@ function scatterplot () {
     //   .attr('data-year', d => d.Year)
     //   .transition()
     //     .duration(1000)
-    //     .attr('r', d => scaleR(d[currentRadius]))
-    //     .attr('cx', d => scaleX(d[currentX]))
-    //     .attr('cy', d => scaleY(d[currentY]))
-    //     .attr('fill', d => scaleC(d[colorDomain.value]))
-    //     .attr('stroke', d => d3.color(scaleC(d[colorDomain.value])).darker(0.7))
+    //     .attr('r', d => scales.r(d[currentRadius]))
+    //     .attr('cx', d => scales.x.type(d[currentX]))
+    //     .attr('cy', d => scales.y.type(d[currentY]))
+    //     .attr('fill', d => scales.c(d[colorDomain.value]))
+    //     .attr('stroke', d => d3.color(scales.c(d[colorDomain.value])).darker(0.7))
     //     // .attr('display', d => checkCurrentYear(d.Year))
     //     .attr('opacity', d => checkSelectedCountry(d))
 
@@ -122,11 +132,11 @@ function scatterplot () {
       .attr('data-country', d => d.Country)
       .attr('data-iso', d => d.ISO)
       .attr('data-year', d => d.Year)
-      .attr('r', d => scaleR(d[currentValues.currentRadius]))
-      .attr('cx', d => scaleX(d[currentValues.currentX]))
-      .attr('cy', d => scaleY(d[currentValues.currentY]))
-      .attr('fill', d => scaleC(d[colorDomain.value]))
-      .attr('stroke', d => d3.color(scaleC(d[colorDomain.value])).darker(0.7))
+      .attr('r', d => scales.r(d[currentValues.axes.radius.name]))
+      .attr('cx', d => scales.x.type(d[currentValues.axes.x.name]))
+      .attr('cy', d => scales.y.type(d[currentValues.axes.y.name]))
+      .attr('fill', d => scales.c(d[colorDomain.value]))
+      .attr('stroke', d => d3.color(scales.c(d[colorDomain.value])).darker(0.7))
       .attr('display', d => checkCurrentYear(d.Year))
       .attr('opacity', d => checkSelectedCountry(d))
       .on('mouseover', function (d) {
@@ -148,11 +158,11 @@ function scatterplot () {
         .transition()
           .duration(1000)
           .attr('data-year', d => d.Year)
-          .attr('r', d => scaleR(d[currentValues.currentRadius]))
-          .attr('cx', d => scaleX(d[currentValues.currentX]))
-          .attr('cy', d => scaleY(d[currentValues.currentY]))
-          .attr('fill', d => scaleC(d[colorDomain.value]))
-          .attr('stroke', d => d3.color(scaleC(d[colorDomain.value])).darker(0.7))
+          .attr('r', d => scales.r(d[currentValues.axes.radius.name]))
+          .attr('cx', d => scales.x.type(d[currentValues.axes.x.name]))
+          .attr('cy', d => scales.y.type(d[currentValues.axes.y.name]))
+          .attr('fill', d => scales.c(d[colorDomain.value]))
+          .attr('stroke', d => d3.color(scales.c(d[colorDomain.value])).darker(0.7))
           .attr('display', d => checkCurrentYear(d.Year))
           .attr('opacity', d => checkSelectedCountry(d))
 
@@ -167,26 +177,26 @@ function scatterplot () {
       .attr('data-iso', d => d['ISO-Year'])
       .attr('class', 'item')
       .attr('fill', 'none')
-      .attr('stroke', d => d3.color(scaleC(d[colorDomain.value])).darker(0.7))
+      .attr('stroke', d => d3.color(scales.c(d[colorDomain.value])).darker(0.7))
       .attr('stroke-linejoin', 'round')
       .attr('stroke-linecap', 'round')
       .attr('stroke-width', 1.5)
-      .attr('x2', d => scaleX(d[currentValues.currentX]))
-      .attr('y2', d => scaleY(d[currentValues.currentY]))
+      .attr('x2', d => scales.x.type(d[currentValues.axes.x.name]))
+      .attr('y2', d => scales.y.type(d[currentValues.axes.y.name]))
       .attr('x1', function (d, i) {
         if (i == 0) {
-          return scaleX(d[currentValues.currentX])
+          return scales.x.type(d[currentValues.axes.x.name])
         } else {
           let prev = selectedCountries.countriesData[i - 1]
-          return scaleX(prev[currentValues.currentX])
+          return scales.x.type(prev[currentValues.axes.x.name])
         }
       })
       .attr('y1', function (d, i) {
         if (i == 0) {
-          return scaleY(d[currentValues.currentY])
+          return scales.y.type(d[currentValues.axes.y.name])
         } else {
           let prev = selectedCountries.countriesData[i - 1]
-          return scaleY(prev[currentValues.currentY])
+          return scales.y.type(prev[currentValues.axes.y.name])
         }
       })
 
@@ -194,7 +204,7 @@ function scatterplot () {
   }
 
   function checkCurrentYear (dataYear) {
-    if (dataYear > currentValues.currentYear) {
+    if (dataYear > currentValues.axes.y.nameear) {
       return 'none'
     }
   }
@@ -208,11 +218,22 @@ function scatterplot () {
   function updateAxis ({ container, data }) {
     const axis = container.select('.g-axis')
 
-    const axisLeft = d3.axisLeft(scaleY).tickSizeOuter(0)
-    const axisBottom = d3.axisBottom(scaleX).tickSizeOuter(0).tickSizeInner(-height).ticks(3).tickFormat(d => formatAmount(d))
+    let axisLeft
+    let axisLeftScale
+    let axisBottom
+    let axisBottomScale;
+    ['x', 'y'].forEach(function (axis) {
+      if (scales[axis].direction == 'left') {
+        axisLeftScale = axis
+        axisLeft = d3.axisLeft(scales[axis].type).tickSizeOuter(0)
+      } else if (scales[axis].direction == 'bottom') {
+        axisBottomScale = axis
+        axisBottom = d3.axisBottom(scales[axis].type).tickSizeOuter(0).tickSizeInner(-height).ticks(3).tickFormat(d => formatAmount(d))
+      }
+    })
 
     const x = axis.select('.axis--x')
-    const maxY = scaleY.range()[0]
+    const maxY = scales[axisLeftScale].type.range()[0]
     const offset = maxY
 
     x.attr('transform', 'translate(0,' + height + ')')
@@ -221,7 +242,7 @@ function scatterplot () {
     x.select('.axis__label')
       .attr('x', width / 2)
       .attr('y', margin.bottom / 1.5)
-      .text(currentValues.currentX)
+      .text(currentValues.axes[axisBottomScale].name)
 
     const y = axis.select('.axis--y')
 
@@ -232,7 +253,7 @@ function scatterplot () {
       .attr('x', 0 - (height / 2))
       .attr('text-anchor', 'middle')
       .attr('transform', `rotate(-90)`)
-      .text(currentValues.currentY)
+      .text(currentValues.axes[axisLeftScale].name)
 
     // Year
     const year = container.select('.g-year')
@@ -260,12 +281,12 @@ function scatterplot () {
       .attr('width', '100%')
       .attr('height', '100%')
 
-    const radiusLegend = g.selectAll('.radius-legend-circles').data(scaleR.domain().reverse())
+    const radiusLegend = g.selectAll('.radius-legend-circles').data(scales.r.domain().reverse())
     radiusLegend.enter().append('circle')
       .attr('class', 'radius-legend-circles')
       .attr('cx', boundingClientRect.width / 2)
       .attr('cy', boundingClientRect.height / 2)
-      .attr('r', d => scaleR(d))
+      .attr('r', d => scales.r(d))
 
     g.append('circle')
       .attr('class', 'radius-legend-circle-ring')
@@ -329,27 +350,27 @@ function scatterplot () {
     if (action == 'show') {
       guidelines.classed('active', true)
       guidelines.select('.chart-guidelines--x')
-        .attr('x1', scaleX(d[currentValues.currentX]))
-        .attr('y1', scaleY(d[currentValues.currentY]))
-        .attr('x2', scaleX(d[currentValues.currentX]))
+        .attr('x1', scales.x.type(d[currentValues.axes.x.name]))
+        .attr('y1', scales.y.type(d[currentValues.axes.y.name]))
+        .attr('x2', scales.x.type(d[currentValues.axes.x.name]))
         .attr('y2', height - 15)
 
       guidelines.select('.chart-guidelines-label--x')
-        .attr('x', scaleX(d[currentValues.currentX]))
+        .attr('x', scales.x.type(d[currentValues.axes.x.name]))
         .attr('y', height - 1)
-        .text(d[currentValues.currentX])
+        .text(d[currentValues.axes.x.name])
 
       guidelines.select('.chart-guidelines--y')
-        .attr('x1', scaleX(d[currentValues.currentX]))
-        .attr('y1', scaleY(d[currentValues.currentY]))
+        .attr('x1', scales.x.type(d[currentValues.axes.x.name]))
+        .attr('y1', scales.y.type(d[currentValues.axes.y.name]))
         .attr('x2', 15)
-        .attr('y2', scaleY(d[currentValues.currentY]))
+        .attr('y2', scales.y.type(d[currentValues.axes.y.name]))
 
       guidelines.select('.chart-guidelines-label--y')
         .attr('y', 13.5)
-        .attr('x', scaleY(d[currentValues.currentY]) * -1)
+        .attr('x', scales.y.type(d[currentValues.axes.y.name]) * -1)
         .attr('transform', 'rotate(-90)')
-        .text(d[currentValues.currentY])
+        .text(d[currentValues.axes.y.name])
     } else {
       guidelines.classed('active', false)
     }
@@ -357,7 +378,7 @@ function scatterplot () {
 
   chart.updateRadiusLegend = function (d, action = 'show') {
     if (action == 'show') {
-      d3.select('.radius-legend-circle-ring').attr('r', scaleR(d[currentValues.currentRadius]))
+      d3.select('.radius-legend-circle-ring').attr('r', scales.r(d[currentValues.axes.radius.name]))
     } else {
       d3.select('.radius-legend-circle-ring').attr('r', 0)
     }
@@ -399,9 +420,9 @@ function showTooltip (d, item, currentValues) {
     .style('opacity', 0.9)
   tooltip.html(`<p class="tooltip-heading">${d.Country} ${d.Year}</p>
     <p class="tooltip-body">
-    <span class="tooltip-label">${currentValues.currentX}:</span> ${d[currentValues.currentX]}<br />
-    <span class="tooltip-label">${currentValues.currentY}:</span> ${d[currentValues.currentY]}<br />
-    <span class="tooltip-label">${currentValues.currentRadius}:</span> ${formatAmount(d[currentValues.currentRadius])}<br />
+    <span class="tooltip-label">${currentValues.axes.x.name}:</span> ${d[currentValues.axes.x.name]}<br />
+    <span class="tooltip-label">${currentValues.axes.y.name}:</span> ${d[currentValues.axes.y.name]}<br />
+    <span class="tooltip-label">${currentValues.axes.radius.name}:</span> ${formatAmount(d[currentValues.axes.radius.name])}<br />
     </p>`)
     .style('left', xPos + 'px')
     .style('top', yPos + 'px')

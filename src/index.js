@@ -17,20 +17,27 @@ let axes = ['x', 'y', 'r']
 let axisVars = {}
 let axesSelect = {}
 let ranges = {}
+let scaleTypes = ['linear', 'log']
 
 const playBtn = d3.select('#playbtn')
 let timer
 let playing = false
 
-let current = {
-  x: 'Life Expectancy',
-  y: 'GNI per capita',
-  r: 'Gross Domestic Product (PPP)'
+let currentAxes = {
+  x: {
+    name: 'GNI per capita',
+    scaleType: 'log',
+    direction: 'bottom'
+  },
+  y: {
+    name: 'Life Expectancy',
+    scaleType: 'linear',
+    direction: 'left'
+  },
+  radius: {
+    name: 'Gross Domestic Product (PPP)'
+  }
 }
-
-let currentY = 'Life Expectancy' // hard coded
-let currentX = 'GNI per capita' // hard coded
-let currentRadius = 'Gross Domestic Product (PPP)' // hard coded
 
 const colorValue = 'World Bank Classification'
 let scaleC = d3.scaleOrdinal()
@@ -143,7 +150,7 @@ function setupAxisSelect () {
     axesSelect[axis] = d3.select('.filter-axis-' + axis)
       .append('select')
       .attr('name', 'axis-' + axis)
-      .attr('class', 'filter-select')
+      .attr('class', 'filter-select axis-variable')
 
     let options = axesSelect[axis]
       .selectAll('option')
@@ -151,7 +158,11 @@ function setupAxisSelect () {
       .append('option')
         .text(d => d)
         .property('value', d => d)
-        .property('selected', d => d === current[axis])
+        .property('selected', d => d === currentAxes[axis])
+
+    if (axis == 'x' || axis == 'y') {
+      setupAxisSelctType(axis)
+    }
 
     axesSelect[axis].on('change', function () {
       drawPrimaryChart()
@@ -159,16 +170,39 @@ function setupAxisSelect () {
   })
 }
 
+function setupAxisSelctType (axis) {
+  axesSelect[axis] = d3.select('.filter-axis-' + axis)
+    .append('select')
+    .attr('name', 'axis-scaleType-' + axis)
+    .attr('class', 'filter-select axis-scaleType')
+
+  let options = axesSelect[axis]
+    .selectAll('option')
+    .data(scaleTypes).enter()
+    .append('option')
+      .text(d => d)
+      .property('value', d => d)
+      .property('selected', d => d === currentAxes[axis].scaleType)
+
+  axesSelect[axis].on('change', function () {
+    drawPrimaryChart()
+  })
+}
+
 function calculateXSelect () {
-  return d3.select('.filter-axis-x select').property('value')
+  return d3.select('.filter-axis-x .axis-variable').property('value')
 }
 
 function calculateYSelect () {
-  return d3.select('.filter-axis-y select').property('value')
+  return d3.select('.filter-axis-y .axis-variable').property('value')
 }
 
 function calculateRadiusSelect () {
-  return d3.select('.filter-axis-r select').property('value')
+  return d3.select('.filter-axis-r .axis-variable').property('value')
+}
+
+function calculateScaleTypes (axis) {
+  return d3.select('select[name="axis-scaleType-' + axis + '"]').property('value')
 }
 
 function setupRegionFilter () {
@@ -342,7 +376,7 @@ function stopAnimation (playBtn, timer) {
 
 function removeEmptyDataPoints (data) {
   let filtered = data.filter(function (column) {
-    if (column[currentX] && column[currentY]) {
+    if (column[currentAxes.x.name] && column[currentAxes.y.name]) {
       return column
     }
   })
@@ -352,11 +386,13 @@ function removeEmptyDataPoints (data) {
 function drawPrimaryChart () {
   let selectedCountries = calculateSelectedCountries()
   currentYear = calculateYears()
-  currentX = calculateXSelect()
-  currentY = calculateYSelect()
-  currentRadius = calculateRadiusSelect()
+  currentAxes.x.name = calculateXSelect()
+  currentAxes.x.scaleType = calculateScaleTypes('x')
+  currentAxes.y.name = calculateYSelect()
+  currentAxes.y.scaleType = calculateScaleTypes('y')
+  currentAxes.radius.name = calculateRadiusSelect()
 
-  let sortedData = removeEmptyDataPoints(data.years[currentYear]).sort(dynamicSort('-' + currentRadius))
+  let sortedData = removeEmptyDataPoints(data.years[currentYear]).sort(dynamicSort('-' + currentAxes.radius))
 
   // If countries are selected, remove any empty data points and sort it by Year so the most recent year is always on top. Then remove that countries data from the existing array and append all of its data to the end of the existing array.
   if (selectedCountries.countriesData.length) {
@@ -371,14 +407,17 @@ function drawPrimaryChart () {
     sortedData = [].concat.apply(filteredData, selectedCountriesData)
   }
 
+  currentAxes.x.range = ranges[currentAxes.x.name]
+  currentAxes.y.range = ranges[currentAxes.y.name]
+  currentAxes.radius.range = ranges[currentAxes.radius.name]
+
   let currentValues = {
     currentYear: currentYear,
-    currentX: currentX,
-    currentY: currentY,
-    currentRadius: currentRadius,
-    currentRanges: {x: ranges[currentX], y: ranges[currentY], r: ranges[currentRadius]},
-    scaleC: scaleC
+    scaleC: scaleC,
+    axes: currentAxes
   }
+
+  console.log(currentValues)
 
   chart.init({
     data: sortedData,
