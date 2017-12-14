@@ -1,6 +1,6 @@
 @import 'mixins';
 @import 'flexbox';
-@import url('https://fonts.googleapis.com/css?family=Hind:400,600|Roboto');
+@import url('https://fonts.googleapis.com/css?family=Hind|Roboto');
 
 // Variables
 $white: #fff;
@@ -16,7 +16,9 @@ $gray: #333;
 $tooltip-gray: #808081;
 $select-blue: #455a64;
 $select-font-color: #555;
-$form-focus: #f1f1f1;
+$disabled-button-color: #4a4a4a;
+$disabled-button-bg: $off-white;
+$form-focus: $off-white;
 $dark-gray: #d4d0cb;
 $dark-blue: #1D435E;
 $grid-lines: #c5c5c5;
@@ -78,12 +80,18 @@ a {
 
 .title {
   font-family: $font-roboto;
-  margin: 1rem 0;
-  font-size: 25px;
+  margin: 1rem 6rem 1rem 0;
+  @include fontSize(20px);
   font-weight: 400;
   line-height: 1.36;
   color: $black;
-  text-align: center;
+  text-align: left;
+
+  @include breakpoint("medium") {
+    @include fontSize(25px);
+    text-align: center;
+    margin: 1rem auto;
+  }
 }
 
 .subtitle {

@@ -38,7 +38,7 @@ let colorDomain = {
   value: colorValue,
   colors: []
 }
-const COLORS = ['#58a897', '#83badc', '#3b75bb', '#a483a8', '#f7890e', '#69518d', '#f7d768', '#8cb561', '#728c99']
+const COLORS = ['#d3d3d3', '#58a897', '#83badc', '#3b75bb', '#a483a8', '#f7890e', '#ed392a']
 
 function loadData () {
   const dataCSV = require('./data/20171207-data.csv')
@@ -85,7 +85,6 @@ function loadData () {
 
   data = obj
   console.log(data)
-  // console.log(data)
 
   setupAxisVars(data.axisVars)
 
@@ -144,6 +143,7 @@ function setupAxisSelect () {
     axesSelect[axis] = d3.select('.filter-axis-' + axis)
       .append('select')
       .attr('name', 'axis-' + axis)
+      .attr('class', 'filter-select')
 
     let options = axesSelect[axis]
       .selectAll('option')
@@ -180,6 +180,7 @@ function setupRegionFilter () {
       .attr('class', 'accordion-toggle')
       .text(region)
       .on('click', function () {
+        d3.select(this).classed('open', !d3.select(this).classed('open'))
         d3.select(this.nextSibling).classed('collapsed', !d3.select(this.nextSibling).classed('collapsed'))
       })
     let regionCont = regionsCont.append('div')
@@ -189,16 +190,21 @@ function setupRegionFilter () {
     let countries = Object.keys(data.regions[region])
     let options = regionCont.selectAll('.option').data(countries)
 
-    options.enter().append('label')
+    options.enter().append('div')
       .data(countries)
-      .text(d => data.regions[region][d].country)
+      .attr('class', 'checkbox-container')
       .append('input')
         .attr('name', 'country')
         .attr('class', 'checkboxes')
         .attr('type', 'checkbox')
+        .attr('id', d => d)
         .attr('value', d => d)
         .attr('data-country', d => d)
   })
+
+  d3.selectAll('.checkbox-container').append('label')
+      .attr('for', d => d)
+      .text(d => data.countries[d].country)
 
   d3.selectAll('input[name="country"]').on('change', function () {
     drawPrimaryChart(data)
@@ -258,8 +264,8 @@ function setupYearRange () {
     },
     pips: {
       mode: 'count',
-      values: 5,
-      density: 5
+      values: 6,
+      density: 4
     },
     format: {
       to: function (value) {
@@ -291,10 +297,21 @@ function setupColorLegend () {
   scaleC.domain(colorDomain.colors)
     .range(COLORS)
 
+  // Move No Data to End of list
+  colorDomain.colors.push(colorDomain.colors.shift())
+
   let items = colorLegend.selectAll('li').data(colorDomain.colors)
   items.enter().append('li')
-    .attr('class', d => d)
-    .html(d => '<span style="background-color:' + scaleC(d) + '"></span>' + d)
+    .attr('class', d => 'color' + d)
+    .html(function (d) {
+      let label = d
+      if (d == 6) {
+        label = 'China'
+      } else if (d == 0) {
+        label = 'No Data'
+      }
+      return '<span style="background-color:' + scaleC(d) + '"></span>' + label
+    })
 }
 
 function setupPlayBtn () {
@@ -371,10 +388,17 @@ function drawPrimaryChart () {
   })
 }
 
+function initSidebar () {
+  if (windowWidth <= 768) {
+    sidebar.sidebarMobile()
+  }
+}
+
 function resize () {
   if (windowWidth != window.innerWidth) {
     windowWidth = window.innerWidth
     chart.resize()
+    initSidebar()
   }
 }
 
@@ -385,6 +409,7 @@ function init () {
   setupRegionFilter()
   setupAxisSelect()
   setupYearRange()
+  initSidebar()
 }
 
 function dynamicSort (property, comparisonType = 'string') {

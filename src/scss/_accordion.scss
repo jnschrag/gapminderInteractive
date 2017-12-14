@@ -2,6 +2,14 @@
 =            Accordion: Region Filter            =
 ================================================*/
 
+.filter-country {
+  margin-bottom: 0.5rem;
+
+  @include breakpoint("medium") {
+    margin-bottom: 0;
+  }
+}
+
 .accordion-toggle {
 	cursor: pointer;
 	margin: 0 auto;
@@ -9,6 +17,22 @@
   background-color: $off-white;
   border: 1px solid $dark-gray;
   @include fontSize(16px);
+
+  &::before {
+    content: '';
+    display: inline-block;
+    width: 0;
+    height: 0;
+    border-top: .3em solid transparent;
+    border-left: 0.4em solid $black;
+    border-bottom: .3em solid transparent;
+    margin-right: 0.5rem;
+  }
+
+  &.open::before {
+    transform: rotate(90deg);
+    @include prefix(transition, (transform 0.3s ease-in-out));
+  }
 }
 .accordion-content {
   overflow: auto;

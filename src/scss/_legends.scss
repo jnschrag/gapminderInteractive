@@ -14,11 +14,16 @@
 		display: inline-block;
 		text-align: center;
 		margin-right: 5px;
+		@include fontSize(14px)
 
 		span {
 			display: block;
 			width: 15px;
 			height: 15px;
+		}
+
+		&.color0 {
+			margin-left: 8px;
 		}
 	}
 }

@@ -2,8 +2,12 @@
 =            Source            =
 ==============================*/
 .source {
-  margin-top: 2rem;
+  margin-top: 3.5rem;
   text-align: right;
+
+  @include breakpoint("medium") {
+    margin-top: 2rem;
+  }
 
   a {
     float:right;

@@ -3,19 +3,18 @@
 ===============================*/
 
 .sidebar {
-	$sidebar_width: 75vw;
+	$sidebar_width: 80vw;
 	position: fixed;
 	top: 0;
 	right: -$sidebar_width;
 	width: $sidebar_width;
 	background-color: $white;
-	padding-top: 1rem;
+	padding: 1rem;
 	overflow-y: scroll;
 	@include prefix(transition, (right 0.2s ease-in-out));
 
 	@include breakpoint("medium") {
-		padding-top: 0;
-		padding-left: 1rem;
+		padding: 0 0 0 1rem;
 		position: relative;
 		top: unset;
 		right: unset;
@@ -31,6 +30,11 @@
 }
 
 .sidebar-options {
+	@include fontSize(16px);
+	text-transform: uppercase;
+	color: $dark-red;
+	cursor: pointer;
+
 	@include breakpoint("medium") {
 		display: none;
 	}
@@ -38,11 +42,42 @@
 	&-open {
 		position: absolute;
 		right: 1rem;
+		z-index: 5;
+
+		&::before {
+			content: "";
+			position: absolute;
+			left: -1.25rem;
+			top: 0.35em;
+			width: 1em;
+			height: 0.1em;
+			background: $dark-red;
+			box-shadow: 
+			0 0.3em 0 0 $dark-red,
+			0 0.6em 0 0 $dark-red;
+		}
 	}
 
 	&-close {
-		@include breakpoint("medium") {
-			display: none;
+		position: relative;
+		text-align: right;
+		margin-bottom: 1rem;
+
+		&::before,
+		&::after {
+		  position: absolute;
+		  top: 0.25rem;
+		  right: 3.5rem;
+		  content: ' ';
+		  height: 15px;
+		  width: 2px;
+		  background-color: $dark-red;
+		}
+		&::before {
+			transform: rotate(45deg);
+		}
+		&::after {
+			transform: rotate(-45deg);
 		}
 	}	
 }

@@ -209,7 +209,7 @@ function scatterplot () {
     const axis = container.select('.g-axis')
 
     const axisLeft = d3.axisLeft(scaleY).tickSizeOuter(0).tickSizeInner(-width).ticks(3).tickFormat(d => formatAmount(d))
-    const axisBottom = d3.axisBottom(scaleX)
+    const axisBottom = d3.axisBottom(scaleX).tickSizeOuter(0)
 
     const x = axis.select('.axis--x')
     const maxY = scaleY.range()[0]
