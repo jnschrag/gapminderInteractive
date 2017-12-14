@@ -3,11 +3,11 @@
 ================================*/
 
 .tooltip {
+  display: none;
   font-size: 13px;
   line-height: 1.4;
   position: absolute;
   z-index: 10;
-  display: block;
   max-width: 225px;
   height: auto;
   margin: 0 15px;
@@ -16,6 +16,10 @@
   opacity: 0;
   border: 1px solid $blue-gray;
   background-color: $white;
+
+  @include breakpoint("medium") {
+    display: block;
+  }
 
   p { margin: 0; }
 
@@ -36,6 +40,7 @@
   }
 
   &.tooltip-selected {
+    display: block;
     opacity: 1;
 
     .tooltip-heading {

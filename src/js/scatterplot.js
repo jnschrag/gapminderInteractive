@@ -12,7 +12,7 @@ let el = d3.select('.chart')
 
 function resize () {
   const sz = Math.min(el.node().offsetWidth, window.innerHeight)
-  const height = 550
+  const height = 450
   chart.width(sz).height(height)
   el.call(chart)
 }
@@ -167,7 +167,7 @@ function scatterplot () {
       .attr('data-iso', d => d['ISO-Year'])
       .attr('class', 'item')
       .attr('fill', 'none')
-      .attr('stroke', 'steelblue')
+      .attr('stroke', d => d3.color(scaleC(d[colorDomain.value])).darker(0.7))
       .attr('stroke-linejoin', 'round')
       .attr('stroke-linecap', 'round')
       .attr('stroke-width', 1.5)

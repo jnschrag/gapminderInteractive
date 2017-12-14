@@ -221,6 +221,7 @@ function calculateSelectedCountries () {
     countries.push(countryData)
     result.countries.push(iso)
   })
+  result.countries.sort()
   result.countriesData = [].concat.apply([], countries)
   showSelectedTooltip(result.countries)
   // d3.selectAll('.tooltip-selected.to-remove').remove()
@@ -235,15 +236,15 @@ function showSelectedTooltip (selectedCountries) {
 
   tooltips.transition()
     .duration(1000)
-    .style('left', d => d3.selectAll('circle[data-iso="' + d + '"][data-year="' + currentYear + '"]').node().getBoundingClientRect().left + 'px')
-    .style('top', d => d3.selectAll('circle[data-iso="' + d + '"][data-year="' + currentYear + '"]').node().getBoundingClientRect().top + 'px')
+    .style('left', d => (d3.selectAll('circle[data-iso="' + d + '"][data-year="' + currentYear + '"]').node().getBoundingClientRect().left + window.scrollX) + 'px')
+    .style('top', d => (d3.selectAll('circle[data-iso="' + d + '"][data-year="' + currentYear + '"]').node().getBoundingClientRect().top + window.scrollY) + 'px')
 
   tooltips.enter().append('div')
     .attr('class', 'tooltip tooltip-selected')
     .attr('data-iso', d => d)
     .html(d => `<p class="tooltip-heading">${data.countries[d].country}</p>`)
-    .style('left', d => d3.selectAll('circle[data-iso="' + d + '"][data-year="' + currentYear + '"]').node().getBoundingClientRect().left + 'px')
-    .style('top', d => d3.selectAll('circle[data-iso="' + d + '"][data-year="' + currentYear + '"]').node().getBoundingClientRect().top + 'px')
+    .style('left', d => d3.event.pageX + 'px')
+    .style('top', d => d3.event.pageY + 'px')
 }
 
 function setupYearRange () {
