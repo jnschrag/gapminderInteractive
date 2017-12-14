@@ -209,7 +209,21 @@ function calculateScaleTypes (axis) {
 function setupAxesDirection () {
   const axesDirection = d3.select('.filter-swap')
     .on('click', function () {
-      console.log('clicked')
+      // Swap Variables
+      let oldX = axisVars.x
+      let oldY = axisVars.y
+      axisVars.x = oldY
+      axisVars.y = oldX
+      // Swap Scale Types
+      let oldXScaleType = currentAxes.x.scaleType
+      let oldYScaleType = currentAxes.y.scaleType
+      currentAxes.x.scaleType = oldYScaleType
+      currentAxes.y.scaleType = oldXScaleType
+      // Remove & Redraw
+      d3.selectAll('.axis-variable').remove()
+      d3.selectAll('.axis-scaleType').remove()
+      setupAxisSelect()
+      drawPrimaryChart()
     })
 }
 
@@ -424,8 +438,6 @@ function drawPrimaryChart () {
     scaleC: scaleC,
     axes: currentAxes
   }
-
-  console.log(currentValues)
 
   chart.init({
     data: sortedData,
