@@ -1,0 +1,156 @@
+/*=====================================
+=            Form Elements            =
+=====================================*/
+
+label {
+  font-family: $font-roboto;
+  color: gray;
+  display: block;
+}
+
+// Filter Options
+.filter-label {
+  display: block;
+  font-family: $font-roboto;
+  font-size: 14px;
+  text-transform: uppercase;
+  color: gray;
+  line-height: 1.4;
+  margin: 0 0 5px;
+}
+
+.filter-desc {
+  font-size: 12px;
+  margin-bottom: 5px;
+  color: gray;
+}
+
+p.filter-desc { line-height: 1.3; }
+
+.filter-option {
+  margin-bottom: 1rem;
+}
+
+.filter-country {
+  margin-bottom: 0.5rem;
+
+  @include breakpoint("medium") {
+    margin-bottom: 0;
+  }
+}
+
+// Checkbox
+.checkbox-container {
+  position: relative;
+  display: inline-block;
+  width: 33%;
+  margin-bottom: 2px;
+
+  @include breakpoint("medium") {
+    display: block;
+    width: unset;
+    margin-bottom: unset;
+  }
+
+    input[type=checkbox] {
+        position: absolute;
+        opacity: 0;
+        transition: 0.2s;
+    }
+    input[type=checkbox] + label {
+        display: inline-block;
+        font-weight: normal;
+    }
+    input[type=checkbox] + label:before {
+        content: "";
+        display: inline-block;
+        vertical-align: -0.2em;
+        width: 1rem;
+        height: 1rem;
+        border: 2px solid $select-blue;
+        border-radius: 0.2em;
+        margin-right: 0.3em;
+        background-color: white;
+        transition: 0.2s;
+    }
+
+    input[type=checkbox]:checked + label {
+        font-weight: semibold;
+        font-color: red;
+    }
+
+    input[type=checkbox]:focus + label:before,
+    input[type=checkbox]:checked:focus + label:before {
+        outline: 2px solid rgba(69, 90, 100, .5);
+    }
+
+    input[type=checkbox]:hover + label:before {
+        background-color: rgba(69, 90, 100, .5);
+        box-shadow: inset 0 0 0 0.15em white;
+    }
+
+    input[type=checkbox]:checked + label:before {
+        background-color: $select-blue;
+        box-shadow: inset 0 0 0 0.15em white;
+    }
+
+  .dot {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-left: 5px;
+  }
+}
+
+/*----------  Autocomplete  ----------*/
+.country-search {
+  margin: 0.5rem 0;
+  padding: 5px 9px;
+  background: $form-focus;
+  border: 1px solid $select-blue;
+  border-radius: 2px;
+  font-family: $font-roboto;
+  font-size: 15px;
+  line-height: 1.2;
+
+  &:focus {
+    background: $white;
+  }
+}
+
+.country-search-label {
+  margin: 0;
+}
+
+.autocomplete-suggestions {
+    text-align: left;
+    cursor: default;
+    border: 1px solid $select-blue;
+    border-top: 0;
+    background: $white;
+
+    /* core styles should not be changed */
+    position: absolute;
+    display: none;
+    z-index: 9999;
+    width: 300px;
+    max-height: 254px;
+    overflow: hidden;
+    overflow-y: auto;
+    box-sizing: border-box;
+}
+.autocomplete-suggestion {
+  position: relative;
+  padding: 0.25rem 0.5rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: $black;
+}
+
+.autocomplete-suggestion.selected {
+  background: $form-focus;
+}

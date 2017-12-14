@@ -25,6 +25,11 @@
 
 /*----------  Radius Legend  ----------*/
 .chart-radius-legend {
+	display: none;
+
+	@include breakpoint("medium") {
+		display: block;
+	}
 	.radius-legend-bg {
 		fill: $off-white;
 		stroke: $dark-gray;

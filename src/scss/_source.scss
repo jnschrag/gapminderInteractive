@@ -1,0 +1,30 @@
+/*==============================
+=            Source            =
+==============================*/
+.source {
+  margin-top: 2rem;
+  text-align: right;
+
+  a {
+    float:right;
+  }
+
+  svg {
+    width: 300px;
+    height: auto;
+  }
+
+  .source-details {
+    clear: right;
+    float: right;
+    max-width: 350px;
+  }
+
+  p {
+    font-size: 0.8rem;
+    line-height: 1.1;
+    margin: 0;
+    text-align: right;
+    color: gray;
+  }
+}

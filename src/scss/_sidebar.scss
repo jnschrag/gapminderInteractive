@@ -1,0 +1,48 @@
+/*===============================
+=            Sidebar            =
+===============================*/
+
+.sidebar {
+	$sidebar_width: 75vw;
+	position: fixed;
+	top: 0;
+	right: -$sidebar_width;
+	width: $sidebar_width;
+	background-color: $white;
+	padding-top: 1rem;
+	overflow-y: scroll;
+	@include prefix(transition, (right 0.2s ease-in-out));
+
+	@include breakpoint("medium") {
+		padding-top: 0;
+		padding-left: 1rem;
+		position: relative;
+		top: unset;
+		right: unset;
+		width: auto;
+	}
+
+	&.is-visible {
+		z-index: 10;
+		right: 0;
+		height: 100vh;
+		@include prefix(box-shadow, (0 0 5px rgba($black, 0.7)));
+	}
+}
+
+.sidebar-options {
+	@include breakpoint("medium") {
+		display: none;
+	}
+
+	&-open {
+		position: absolute;
+		right: 1rem;
+	}
+
+	&-close {
+		@include breakpoint("medium") {
+			display: none;
+		}
+	}	
+}

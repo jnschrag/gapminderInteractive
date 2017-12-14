@@ -1,0 +1,64 @@
+/*===================================
+=            Scatterplot            =
+===================================*/
+
+.chart {
+  margin: 0 auto;
+  text-align: center;
+}
+
+.g-axis {
+  line, path {
+    stroke: $gray;
+  }
+  text {
+    fill: $gray;
+  }
+
+  .tick line {
+    stroke: $grid-lines;
+  }
+
+  .axis__label {
+    @include fontSize(16px);
+    text-transform: uppercase;
+    font-weight: bold;
+    fill: $black;
+  }
+
+}
+
+.item {
+  fill-opacity: 0.8;
+
+  &.special {
+    stroke-dasharray: 3
+  }
+}
+
+path.item {
+  fill-opacity: 0.3;
+}
+
+.chart-year {
+  fill: $dark-gray;
+  font-size: 100px;
+}
+
+.g-guidelines {
+  display: none;
+
+  &.active {
+    display: block;
+  }
+
+  line, path {
+    stroke: $gray;
+    stroke-dasharray: 4;
+  }
+  text {
+    fill: $red;
+    text-anchor: middle;
+  }
+
+}
