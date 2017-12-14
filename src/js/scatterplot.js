@@ -3,9 +3,13 @@ import * as d3 from 'd3'
 const graphic = d3.select('.chart-container')
 const tooltip = d3.select('.tooltip')
 
+const formatComma = d3.format(',')
 const formatAmount = d3.format('.1s')
 const formatPercentage = d3.format('.3')
-const formatLegend = d3.format('$' + '.3s')
+
+function formatter (value) {
+  return value.replace('G', ' billion').replace('M', ' million').replace('T', ' trillion')
+}
 
 const chart = scatterplot()
 let el = d3.select('.chart')
@@ -226,9 +230,17 @@ function scatterplot () {
       if (scales[axis].direction == 'left') {
         axisLeftScale = axis
         axisLeft = d3.axisLeft(scales[axis].type).tickSizeOuter(0)
+
+        if (currentValues.axes[axis].scaleType == 'log') {
+          axisLeft.ticks(3).tickFormat(d => formatAmount(d))
+        }
       } else if (scales[axis].direction == 'bottom') {
         axisBottomScale = axis
-        axisBottom = d3.axisBottom(scales[axis].type).tickSizeOuter(0).tickSizeInner(-height).ticks(3).tickFormat(d => formatAmount(d))
+        axisBottom = d3.axisBottom(scales[axis].type).tickSizeOuter(0).tickSizeInner(-height)
+
+        if (currentValues.axes[axis].scaleType == 'log') {
+          axisBottom.ticks(3).tickFormat(d => formatAmount(d))
+        }
       }
     })
 
@@ -300,7 +312,7 @@ function scatterplot () {
         .attr('x', parseFloat(this.getAttribute('cx')) + boundingClientRect.width / 2)
         .attr('y', parseFloat(this.getAttribute('cy')) + boundingClientRect.height / 2)
         .attr('class', 'radius-legend-label')
-        .text(formatAmount(d))
+        .text(formatter(formatAmount(d)))
     })
   }
 
@@ -358,7 +370,7 @@ function scatterplot () {
       guidelines.select('.chart-guidelines-label--x')
         .attr('x', scales.x.type(d[currentValues.axes.x.name]))
         .attr('y', height - 1)
-        .text(d[currentValues.axes.x.name])
+        .text(formatComma(d[currentValues.axes.x.name]))
 
       guidelines.select('.chart-guidelines--y')
         .attr('x1', scales.x.type(d[currentValues.axes.x.name]))
@@ -370,7 +382,7 @@ function scatterplot () {
         .attr('y', 13.5)
         .attr('x', scales.y.type(d[currentValues.axes.y.name]) * -1)
         .attr('transform', 'rotate(-90)')
-        .text(d[currentValues.axes.y.name])
+        .text(formatComma(d[currentValues.axes.y.name]))
     } else {
       guidelines.classed('active', false)
     }
@@ -420,9 +432,9 @@ function showTooltip (d, item, currentValues) {
     .style('opacity', 0.9)
   tooltip.html(`<p class="tooltip-heading">${d.Country} ${d.Year}</p>
     <p class="tooltip-body">
-    <span class="tooltip-label">${currentValues.axes.x.name}:</span> ${d[currentValues.axes.x.name]}<br />
-    <span class="tooltip-label">${currentValues.axes.y.name}:</span> ${d[currentValues.axes.y.name]}<br />
-    <span class="tooltip-label">${currentValues.axes.radius.name}:</span> ${formatAmount(d[currentValues.axes.radius.name])}<br />
+    <span class="tooltip-label">${currentValues.axes.x.name}:</span> ${formatComma(d[currentValues.axes.x.name])}<br />
+    <span class="tooltip-label">${currentValues.axes.y.name}:</span> ${formatComma(d[currentValues.axes.y.name])}<br />
+    <span class="tooltip-label">${currentValues.axes.radius.name}:</span> ${formatter(formatAmount(d[currentValues.axes.radius.name]))}<br />
     </p>`)
     .style('left', xPos + 'px')
     .style('top', yPos + 'px')

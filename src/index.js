@@ -106,7 +106,7 @@ function transformKeys (obj) {
     if (isNaN(parseInt(obj[prop]))) {
       var value = obj[prop]
     } else {
-      var value = parseInt(obj[prop])
+      var value = parseFloat(obj[prop])
     }
     var newProp = prop.replace('x_', '').replace('y_', '').replace('r_', '')
     o[newProp] = value
