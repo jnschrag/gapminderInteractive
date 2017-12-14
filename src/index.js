@@ -180,13 +180,14 @@ function setupAxisSelctType (axis) {
     .selectAll('option')
     .data(scaleTypes).enter()
     .append('option')
-      .text(d => d)
+      .text(d => d.charAt(0).toUpperCase() + d.slice(1))
       .property('value', d => d)
       .property('selected', d => d === currentAxes[axis].scaleType)
 
   axesSelect[axis].on('change', function () {
     drawPrimaryChart()
   })
+  setupAxesDirection()
 }
 
 function calculateXSelect () {
@@ -203,6 +204,13 @@ function calculateRadiusSelect () {
 
 function calculateScaleTypes (axis) {
   return d3.select('select[name="axis-scaleType-' + axis + '"]').property('value')
+}
+
+function setupAxesDirection () {
+  const axesDirection = d3.select('.filter-swap')
+    .on('click', function () {
+      console.log('clicked')
+    })
 }
 
 function setupRegionFilter () {

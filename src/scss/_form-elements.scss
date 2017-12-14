@@ -59,6 +59,37 @@ p.filter-desc { line-height: 1.3; }
     -webkit-appearance: button;
 }
 
+.filter-axis-x,
+.filter-axis-y {
+  .filter-select {
+    width: calc(65% - 0.5rem);
+  }
+
+  .filter-select + .filter-select {
+    width: calc(35% - 0.5rem);
+    margin-left: 0.5rem;
+  }
+}
+
+// Swap
+.filter-swap-axes {
+  margin-bottom: 1rem;
+
+  .filter-swap {
+    display: block;
+    width: 20%;
+    height: 2rem;
+    margin: 0 auto;
+    border: 0;
+    cursor: pointer;
+
+    svg {
+      max-height: 100%;
+      width: auto;
+    }
+  }
+}
+
 // Checkbox
 .checkbox-container {
   position: relative;
