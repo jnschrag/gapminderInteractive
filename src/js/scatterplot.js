@@ -290,7 +290,7 @@ function scatterplot () {
     updateScales({ container, data })
     updateDom({ container, data })
     updateAxis({ container, data })
-    updateLegends({ container, data })
+    // updateLegends({ container, data })
   }
 
   chart.width = function (...args) {

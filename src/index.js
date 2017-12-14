@@ -8,8 +8,6 @@ const noUiSlider = require('./js/nouislider')
 const yearRange = document.getElementById('year-range')
 const searchWarning = d3.select('.search-warning')
 
-console.log(sidebar.sidebarMobile())
-
 let data
 let years
 let minYear
