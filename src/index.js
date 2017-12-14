@@ -28,8 +28,8 @@ let current = {
   r: 'Gross Domestic Product (PPP)'
 }
 
-let currentX = 'Life Expectancy' // hard coded
-let currentY = 'GNI per capita' // hard coded
+let currentY = 'Life Expectancy' // hard coded
+let currentX = 'GNI per capita' // hard coded
 let currentRadius = 'Gross Domestic Product (PPP)' // hard coded
 
 const colorValue = 'World Bank Classification'
@@ -41,7 +41,7 @@ let colorDomain = {
 const COLORS = ['#d3d3d3', '#58a897', '#83badc', '#3b75bb', '#a483a8', '#f7890e', '#ed392a']
 
 function loadData () {
-  const dataCSV = require('./data/20171207-data.csv')
+  const dataCSV = require('./data/20171214-data.csv')
 
   let obj = dataCSV.reduce(function (data, row) {
     data.axisVars = data.axisVars || []

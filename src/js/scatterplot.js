@@ -19,8 +19,8 @@ function resize () {
 
 function scatterplot () {
   const margin = {top: 20, right: 30, bottom: 60, left: 80}
-  const scaleX = d3.scaleLinear()
-  const scaleY = d3.scaleLog()
+  const scaleX = d3.scaleLog()
+  const scaleY = d3.scaleLinear()
   const scaleR = d3.scaleSqrt()
   let scaleC
 
@@ -208,8 +208,8 @@ function scatterplot () {
   function updateAxis ({ container, data }) {
     const axis = container.select('.g-axis')
 
-    const axisLeft = d3.axisLeft(scaleY).tickSizeOuter(0).tickSizeInner(-width).ticks(3).tickFormat(d => formatAmount(d))
-    const axisBottom = d3.axisBottom(scaleX).tickSizeOuter(0)
+    const axisLeft = d3.axisLeft(scaleY).tickSizeOuter(0)
+    const axisBottom = d3.axisBottom(scaleX).tickSizeOuter(0).tickSizeInner(-height).ticks(3).tickFormat(d => formatAmount(d))
 
     const x = axis.select('.axis--x')
     const maxY = scaleY.range()[0]
