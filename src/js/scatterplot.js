@@ -4,7 +4,7 @@ const graphic = d3.select('.chart-container')
 const tooltip = d3.select('.tooltip')
 
 const formatComma = d3.format(',')
-const formatAmount = d3.format('.1s')
+const formatAmount = d3.format('.3s')
 const formatPercentage = d3.format('.3')
 
 function formatter (value) {
@@ -140,12 +140,12 @@ function scatterplot () {
     lines.exit().remove()
   }
 
-  function createBubbles(plot, data, key, bubbleClass) {
+  function createBubbles (plot, data, key, bubbleClass) {
     let circles = plot.selectAll('circle.' + bubbleClass).data(data, d => d[key])
 
     let bubbleTransition
     if (bubbleClass == 'selected') {
-      bubbleTransition = function() {
+      bubbleTransition = function () {
         transition()
         .duration(1000)
         .attr('fill', '#000')

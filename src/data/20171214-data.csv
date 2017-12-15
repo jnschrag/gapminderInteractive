@@ -1,4 +1,4 @@
-Country,ISO,Region,Year,World Bank Classification,r_Gross Domestic Product (PPP),y_Life Expectancy,x_GNI per capita
+Country,ISO,Region,Year,World Bank Classification,r_Gross Domestic Product (PPP),y_Life Expectancy (years),x_GNI per capita (US$)
 Afghanistan,AFG,Asia,1990,1,,49.9,
 Albania,ALB,Europe,1990,2,8940000000,72.0,680
 Algeria,DZA,Africa,1990,2,171000000000,66.7,2360

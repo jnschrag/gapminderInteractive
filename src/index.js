@@ -262,7 +262,7 @@ function setupRegionFilter () {
   regionsCont.append('button')
     .attr('class', 'clear-filter')
     .text('Clear selected countries')
-    .on('click', function() {
+    .on('click', function () {
       d3.selectAll('input[name="country"]').property('checked', false)
       drawPrimaryChart()
     })
@@ -274,15 +274,14 @@ function calculateSelectedCountries () {
   const checkedBoxes = document.querySelectorAll('input[name="country"]:checked')
   checkedBoxes.forEach(function (country) {
     let iso = country.value
-    for(let i = minYear; i <= maxYear; i++) {
-      let prevYear = i - 1;
-      if ( i == minYear) {
-        prevYear = i;
+    for (let i = minYear; i <= maxYear; i++) {
+      let prevYear = i - 1
+      if (i == minYear) {
+        prevYear = i
       }
 
       data.countries[iso].years[i].prevX = data.countries[iso].years[prevYear][currentAxes.x.name] || data.countries[iso].years[i][currentAxes.x.name]
       data.countries[iso].years[i].prevY = data.countries[iso].years[prevYear][currentAxes.y.name] || data.countries[iso].years[i][currentAxes.y.name]
-
     }
     let countryData = Object.values(data.countries[iso].years)
     countries.push(countryData)
@@ -313,7 +312,7 @@ function showSelectedTooltip (selectedCountries) {
 
   tooltips.exit().remove()
 
-  function checkPos(event, direction, scroll, d) {
+  function checkPos (event, direction, scroll, d) {
     if (d3.event && d3.event.target.__data__.ISO == d) {
       return d3.event[event]
     } else {
@@ -434,7 +433,7 @@ function search () {
     minChars: 1,
     source: function (term, suggest) {
       term = term.toLowerCase()
-      var choices = Object.values(data.countries).map(obj => [obj.iso, obj.country]);
+      var choices = Object.values(data.countries).map(obj => [obj.iso, obj.country])
       var matches = []
       var suggestions = []
       for (let i = 0; i < choices.length; i++) {
@@ -451,7 +450,7 @@ function search () {
     onSelect: function (e, term, selectedItem) {
       e.preventDefault()
       let iso = selectedItem.getAttribute('data-iso')
-      d3.select('input[name="country"]#' + iso).property('checked', true).on('change')()
+      searchItem(iso)
     }
   })
 
@@ -464,24 +463,27 @@ function search () {
       let lowercase = this.value.toLowerCase()
       let selectedItem = document.querySelector('[data-val="' + capitalize + '"') || document.querySelector('[data-val="' + lowercase + '"')
       let iso = selectedItem.getAttribute('data-iso')
-
-      if (!data.countries[iso]) {
-        searchWarning.text('No data available for this item')
-        return
-      }
-
-      let itemInput = d3.select('input[name="country"]#' + iso)
-      if ( itemInput.property('disabled')) {
-        searchWarning.text('No data available for this item for the current year.')
-        return;
-      }
-
-      itemInput.property('checked', true).on('change')()
+      searchItem(iso)
 
       // Enter pressed
       return false
     }
   }
+}
+
+function searchItem (iso) {
+  if (!data.countries[iso]) {
+    searchWarning.text('No data available for this item')
+    return
+  }
+
+  let itemInput = d3.select('input[name="country"]#' + iso)
+  if (itemInput.property('disabled')) {
+    searchWarning.text('No data available for this item for the current year.')
+    return
+  }
+
+  itemInput.property('checked', true).on('change')()
 }
 
 function drawPrimaryChart () {
