@@ -23,7 +23,6 @@
   .axis__label {
     @include fontSize(16px);
     text-transform: uppercase;
-    font-weight: bold;
     fill: $black;
   }
 

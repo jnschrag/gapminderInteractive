@@ -362,13 +362,13 @@ function scatterplot () {
       guidelines.select('.chart-guidelines--y')
         .attr('x1', scales.x.type(d[currentValues.axes.x.name]))
         .attr('y1', scales.y.type(d[currentValues.axes.y.name]))
-        .attr('x2', 15)
+        .attr('x2', 0)
         .attr('y2', scales.y.type(d[currentValues.axes.y.name]))
 
       guidelines.select('.chart-guidelines-label--y')
-        .attr('y', 13.5)
-        .attr('x', scales.y.type(d[currentValues.axes.y.name]) * -1)
-        .attr('transform', 'rotate(-90)')
+        .attr('y', scales.y.type(d[currentValues.axes.y.name]) - 1)
+        .attr('x', 2)
+        .style('text-anchor', 'start')
         .text(formatComma(d[currentValues.axes.y.name]))
     } else {
       guidelines.classed('active', false)
@@ -431,6 +431,11 @@ function hideTooltip () {
   tooltip.transition()
     .duration(500)
     .style('opacity', 0)
+    .on('end', function () {
+      d3.select(this)
+        .style('left', null)
+        .style('top', null)
+    })
 }
 
 function init (args) {

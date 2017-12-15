@@ -309,6 +309,16 @@ function showSelectedTooltip (selectedCountries) {
     .html(d => `<p class="tooltip-heading">${data.countries[d].country}</p>`)
     .style('left', d => checkPos('pageX', 'left', 'scrollX', d) + 'px')
     .style('top', d => checkPos('pageY', 'top', 'scrollY', d) + 'px')
+    .on('click', function (d) {
+      let checkbox = '.filter-region input[value="' + d + '"]'
+      let checked = d3.select(checkbox).property('checked')
+      let newCheckVal = true
+      if (checked) {
+        newCheckVal = false
+      }
+
+      d3.select(checkbox).property('checked', newCheckVal).on('change')()
+    })
 
   tooltips.exit().remove()
 
