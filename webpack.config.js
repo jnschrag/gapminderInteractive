@@ -1,7 +1,8 @@
 const path = require('path')
+var CommonsChunkPlugin = require('webpack/lib/optimize/CommonsChunkPlugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
-// const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
 
 module.exports = {
   entry: {
@@ -75,17 +76,24 @@ module.exports = {
   },
 
   plugins: [
-    // new UglifyJSPlugin(),
+    new UglifyJSPlugin({
+      test: /\.js($|\?)/i
+    }),
+    new CommonsChunkPlugin({
+      name: 'commons',
+      filename: 'commons.js',
+      chunks: ['index', 'advanced']
+    }),
     new ExtractTextPlugin('style.css'),
     new HtmlWebpackPlugin({
       inject: 'body',
-      chunks: ['index'],
+      chunks: ['commons', 'index'],
       template: './src/index.html',
       filename: 'index.html'
     }),
     new HtmlWebpackPlugin({
       inject: 'body',
-      chunks: ['advanced'],
+      chunks: ['commons', 'advanced'],
       template: './src/advanced.html',
       filename: 'advanced.html'
     })
