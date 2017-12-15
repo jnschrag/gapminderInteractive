@@ -1,8 +1,9 @@
 const path = require('path')
-var CommonsChunkPlugin = require('webpack/lib/optimize/CommonsChunkPlugin')
+const CommonsChunkPlugin = require('webpack/lib/optimize/CommonsChunkPlugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 
 module.exports = {
   entry: {
@@ -76,6 +77,10 @@ module.exports = {
   },
 
   plugins: [
+    new BundleAnalyzerPlugin({
+      analyzerHost: '0.0.0.0',
+      analyzerPort: 8081
+    }),
     new UglifyJSPlugin({
       test: /\.js($|\?)/i
     }),

@@ -294,8 +294,6 @@ function createPlot (rawData) {
     result.countriesData = [].concat.apply([], countries)
     showSelectedTooltip(result.countries)
 
-    console.log(result)
-
     return result
   }
 
