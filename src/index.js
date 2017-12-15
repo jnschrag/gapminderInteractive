@@ -1,6 +1,7 @@
 import * as d3 from 'd3'
 import * as sidebar from './js/sidebar'
 import chart from './js/scatterplot'
+import autoComplete from './js/autocomplete'
 import './scss/main.scss'
 
 let windowWidth = window.innerWidth
@@ -137,14 +138,6 @@ function calculateColors () {
   return [...new Set(data.raw.map(column => parseInt(column[colorValue]) || 0))].sort()
 }
 
-function primaryItemClick () {
-  let items = d3.selectAll('.item')
-
-  items.on('click', function (d) {
-    console.log('click')
-  })
-}
-
 function setupAxisSelect () {
   axes.forEach(function (axis) {
     axesSelect[axis] = d3.select('.filter-axis-' + axis)
@@ -263,8 +256,16 @@ function setupRegionFilter () {
       .text(d => data.countries[d].country)
 
   d3.selectAll('input[name="country"]').on('change', function () {
-    drawPrimaryChart(data)
+    drawPrimaryChart()
   })
+
+  regionsCont.append('button')
+    .attr('class', 'clear-filter')
+    .text('Clear selected countries')
+    .on('click', function() {
+      d3.selectAll('input[name="country"]').property('checked', false)
+      drawPrimaryChart()
+    })
 }
 
 function calculateSelectedCountries () {
@@ -273,6 +274,16 @@ function calculateSelectedCountries () {
   const checkedBoxes = document.querySelectorAll('input[name="country"]:checked')
   checkedBoxes.forEach(function (country) {
     let iso = country.value
+    for(let i = minYear; i <= maxYear; i++) {
+      let prevYear = i - 1;
+      if ( i == minYear) {
+        prevYear = i;
+      }
+
+      data.countries[iso].years[i].prevX = data.countries[iso].years[prevYear][currentAxes.x.name] || data.countries[iso].years[i][currentAxes.x.name]
+      data.countries[iso].years[i].prevY = data.countries[iso].years[prevYear][currentAxes.y.name] || data.countries[iso].years[i][currentAxes.y.name]
+
+    }
     let countryData = Object.values(data.countries[iso].years)
     countries.push(countryData)
     result.countries.push(iso)
@@ -286,21 +297,29 @@ function calculateSelectedCountries () {
 }
 
 function showSelectedTooltip (selectedCountries) {
-  let tooltips = d3.selectAll('.tooltip-selected').data(selectedCountries)
-
-  tooltips.exit().remove()
+  let tooltips = d3.selectAll('.tooltip-selected').data(selectedCountries, d => d)
 
   tooltips.transition()
     .duration(1000)
-    .style('left', d => (d3.selectAll('circle[data-iso="' + d + '"][data-year="' + currentYear + '"]').node().getBoundingClientRect().left + window.scrollX) + 'px')
-    .style('top', d => (d3.selectAll('circle[data-iso="' + d + '"][data-year="' + currentYear + '"]').node().getBoundingClientRect().top + window.scrollY) + 'px')
+    .style('left', d => checkPos('pageX', 'left', 'scrollX', d) + 'px')
+    .style('top', d => checkPos('pageY', 'top', 'scrollY', d) + 'px')
 
   tooltips.enter().append('div')
     .attr('class', 'tooltip tooltip-selected')
     .attr('data-iso', d => d)
     .html(d => `<p class="tooltip-heading">${data.countries[d].country}</p>`)
-    .style('left', d => d3.event.pageX + 'px')
-    .style('top', d => d3.event.pageY + 'px')
+    .style('left', d => checkPos('pageX', 'left', 'scrollX', d) + 'px')
+    .style('top', d => checkPos('pageY', 'top', 'scrollY', d) + 'px')
+
+  tooltips.exit().remove()
+
+  function checkPos(event, direction, scroll, d) {
+    if (d3.event && d3.event.target.__data__.ISO == d) {
+      return d3.event[event]
+    } else {
+      return d3.selectAll('circle[data-iso="' + d + '"][data-year="' + currentYear + '"]').node().getBoundingClientRect()[direction] + window[scroll]
+    }
+  }
 }
 
 function setupYearRange () {
@@ -399,10 +418,70 @@ function stopAnimation (playBtn, timer) {
 function removeEmptyDataPoints (data) {
   let filtered = data.filter(function (column) {
     if (column[currentAxes.x.name] && column[currentAxes.y.name]) {
+      d3.select('.checkbox-container #' + column.ISO).property('disabled', false)
       return column
+    } else {
+      d3.select('.checkbox-container #' + column.ISO).property('disabled', true)
     }
   })
   return filtered
+}
+
+function search () {
+  var autocomplete = new autoComplete({
+    selector: 'input[name="country-search"]',
+    delay: 100,
+    minChars: 1,
+    source: function (term, suggest) {
+      term = term.toLowerCase()
+      var choices = Object.values(data.countries).map(obj => [obj.iso, obj.country]);
+      var matches = []
+      var suggestions = []
+      for (let i = 0; i < choices.length; i++) {
+        if (~(choices[i][1]).toLowerCase().indexOf(term)) suggestions.push(choices[i])
+      }
+      suggest(suggestions)
+    },
+    renderItem: function (item, search) {
+      searchWarning.text(null)
+      search = search.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&')
+      var re = new RegExp('(' + search.split(' ').join('|') + ')', 'gi')
+      return '<div class="autocomplete-suggestion" data-name="' + item[1] + '" data-iso="' + item[0] + '" data-val="' + search + '">' + item[1].replace(re, '<strong>$1</strong>') + '</div>'
+    },
+    onSelect: function (e, term, selectedItem) {
+      e.preventDefault()
+      let iso = selectedItem.getAttribute('data-iso')
+      d3.select('input[name="country"]#' + iso).property('checked', true).on('change')()
+    }
+  })
+
+  document.querySelector('input[name="country-search"]').onkeypress = function (e) {
+    if (!e) e = window.event
+    var keyCode = e.keyCode || e.which
+    searchWarning.text(null)
+    if (keyCode == '13') {
+      let capitalize = this.value.charAt(0).toUpperCase() + this.value.slice(1)
+      let lowercase = this.value.toLowerCase()
+      let selectedItem = document.querySelector('[data-val="' + capitalize + '"') || document.querySelector('[data-val="' + lowercase + '"')
+      let iso = selectedItem.getAttribute('data-iso')
+
+      if (!data.countries[iso]) {
+        searchWarning.text('No data available for this item')
+        return
+      }
+
+      let itemInput = d3.select('input[name="country"]#' + iso)
+      if ( itemInput.property('disabled')) {
+        searchWarning.text('No data available for this item for the current year.')
+        return;
+      }
+
+      itemInput.property('checked', true).on('change')()
+
+      // Enter pressed
+      return false
+    }
+  }
 }
 
 function drawPrimaryChart () {
@@ -425,8 +504,6 @@ function drawPrimaryChart () {
     let filteredData = sortedData.filter(function (country) {
       return !selectedCountries.countries.includes(country.ISO)
     })
-
-    sortedData = [].concat.apply(filteredData, selectedCountriesData)
   }
 
   currentAxes.x.range = ranges[currentAxes.x.name]
@@ -467,6 +544,7 @@ function init () {
   colorDomain.colors = calculateColors()
   setupColorLegend()
   setupRegionFilter()
+  search()
   setupAxisSelect()
   setupYearRange()
   initSidebar()

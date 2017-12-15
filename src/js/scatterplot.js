@@ -116,61 +116,8 @@ function scatterplot () {
       .attr('transform', 'translate(' + (margin.left) + ',' + margin.top + ')')
 
     const plot = g.select('.g-plot')
-
-    const circles = plot.selectAll('circle.item').data(data, d => d.ISO)
-
-    // circles
-    //   .attr('data-year', d => d.Year)
-    //   .transition()
-    //     .duration(1000)
-    //     .attr('r', d => scales.r(d[currentRadius]))
-    //     .attr('cx', d => scales.x.type(d[currentX]))
-    //     .attr('cy', d => scales.y.type(d[currentY]))
-    //     .attr('fill', d => scales.c(d[colorDomain.value]))
-    //     .attr('stroke', d => d3.color(scales.c(d[colorDomain.value])).darker(0.7))
-    //     // .attr('display', d => checkCurrentYear(d.Year))
-    //     .attr('opacity', d => checkSelectedCountry(d))
-
-    circles.enter().append('circle')
-      .attr('class', 'item')
-      .attr('data-country', d => d.Country)
-      .attr('data-iso', d => d.ISO)
-      .attr('data-year', d => d.Year)
-      .attr('r', d => scales.r(d[currentValues.axes.radius.name]))
-      .attr('cx', d => scales.x.type(d[currentValues.axes.x.name]))
-      .attr('cy', d => scales.y.type(d[currentValues.axes.y.name]))
-      .attr('fill', d => scales.c(d[colorDomain.value]))
-      .attr('stroke', d => d3.color(scales.c(d[colorDomain.value])).darker(0.7))
-      .attr('display', d => checkCurrentYear(d.Year))
-      .attr('opacity', d => checkSelectedCountry(d))
-      .on('mouseover', function (d) {
-        let selectedItem = d3.select(this)
-        mouseover(selectedItem, d, currentValues)
-      })
-        .on('mouseout', mouseout)
-        .on('click', function (d) {
-          let checkbox = '.filter-region input[value="' + d.ISO + '"]'
-          let checked = d3.select(checkbox).property('checked')
-          let newCheckVal = true
-          if (checked) {
-            newCheckVal = false
-          }
-
-          d3.select(checkbox).property('checked', newCheckVal).on('change')()
-        })
-      .merge(circles)
-        .transition()
-          .duration(1000)
-          .attr('data-year', d => d.Year)
-          .attr('r', d => scales.r(d[currentValues.axes.radius.name]))
-          .attr('cx', d => scales.x.type(d[currentValues.axes.x.name]))
-          .attr('cy', d => scales.y.type(d[currentValues.axes.y.name]))
-          .attr('fill', d => scales.c(d[colorDomain.value]))
-          .attr('stroke', d => d3.color(scales.c(d[colorDomain.value])).darker(0.7))
-          .attr('display', d => checkCurrentYear(d.Year))
-          .attr('opacity', d => checkSelectedCountry(d))
-
-    circles.exit().remove()
+    createBubbles(plot, data, 'ISO', 'main')
+    createBubbles(plot, selectedCountries.countriesData, 'ISO-Year', 'selected')
 
     // Lines
     const lines = plot.selectAll('line.item').data(selectedCountries.countriesData, d => d['ISO-Year'])
@@ -187,28 +134,68 @@ function scatterplot () {
       .attr('stroke-width', 1.5)
       .attr('x2', d => scales.x.type(d[currentValues.axes.x.name]))
       .attr('y2', d => scales.y.type(d[currentValues.axes.y.name]))
-      .attr('x1', function (d, i) {
-        if (i == 0) {
-          return scales.x.type(d[currentValues.axes.x.name])
-        } else {
-          let prev = selectedCountries.countriesData[i - 1]
-          return scales.x.type(prev[currentValues.axes.x.name])
-        }
-      })
-      .attr('y1', function (d, i) {
-        if (i == 0) {
-          return scales.y.type(d[currentValues.axes.y.name])
-        } else {
-          let prev = selectedCountries.countriesData[i - 1]
-          return scales.y.type(prev[currentValues.axes.y.name])
-        }
-      })
+      .attr('x1', d => scales.x.type(d.prevX))
+      .attr('y1', d => scales.y.type(d.prevY))
 
     lines.exit().remove()
   }
 
+  function createBubbles(plot, data, key, bubbleClass) {
+    let circles = plot.selectAll('circle.' + bubbleClass).data(data, d => d[key])
+
+    let bubbleTransition
+    if (bubbleClass == 'selected') {
+      bubbleTransition = function() {
+        transition()
+        .duration(1000)
+        .attr('fill', '#000')
+      }
+    }
+
+    circles.enter().append('circle')
+      .attr('class', 'item' + ' ' + bubbleClass)
+      .attr('data-country', d => d.Country)
+      .attr('data-iso', d => d.ISO)
+      .attr('data-year', d => d.Year)
+      .attr('r', d => scales.r(d[currentValues.axes.radius.name]))
+      .attr('cx', d => scales.x.type(d[currentValues.axes.x.name]))
+      .attr('cy', d => scales.y.type(d[currentValues.axes.y.name]))
+      .attr('fill', d => scales.c(d[colorDomain.value]))
+      .attr('stroke', d => d3.color(scales.c(d[colorDomain.value])).darker(0.7))
+      .attr('display', d => checkCurrentYear(d.Year))
+      .attr('opacity', d => checkSelectedCountry(d))
+      .on('mouseover', function (d) {
+        let selectedItem = d3.select(this)
+        mouseover(selectedItem, d, currentValues)
+      })
+      .on('mouseout', mouseout)
+      .on('click', function (d) {
+        let checkbox = '.filter-region input[value="' + d.ISO + '"]'
+        let checked = d3.select(checkbox).property('checked')
+        let newCheckVal = true
+        if (checked) {
+          newCheckVal = false
+        }
+
+        d3.select(checkbox).property('checked', newCheckVal).on('change')()
+      })
+      .merge(circles)
+        .attr('opacity', d => checkSelectedCountry(d))
+        .transition()
+          .duration(1000)
+          .attr('data-year', d => d.Year)
+          .attr('r', d => scales.r(d[currentValues.axes.radius.name]))
+          .attr('cx', d => scales.x.type(d[currentValues.axes.x.name]))
+          .attr('cy', d => scales.y.type(d[currentValues.axes.y.name]))
+          .attr('fill', d => scales.c(d[colorDomain.value]))
+          .attr('stroke', d => d3.color(scales.c(d[colorDomain.value])).darker(0.7))
+          .attr('display', d => checkCurrentYear(d.Year))
+
+    circles.exit().remove()
+  }
+
   function checkCurrentYear (dataYear) {
-    if (dataYear > currentValues.axes.y.nameear) {
+    if (dataYear > currentValues.currentYear) {
       return 'none'
     }
   }
