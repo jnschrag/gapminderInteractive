@@ -92,7 +92,6 @@ function loadData () {
   }, {})
 
   data = obj
-  console.log(data)
 
   setupAxisVars(data.axisVars)
 
@@ -216,6 +215,11 @@ function setupAxesDirection () {
       d3.selectAll('.axis-variable').remove()
       d3.selectAll('.axis-scaleType').remove()
       setupAxisSelect()
+
+      // Destroy Lines so they are redrawn
+      stopAnimation(playBtn, timer)
+      // console.log(d3.selectAll('.selectedLine'))
+      // d3.selectAll('.selectedLine').remove()
       drawPrimaryChart()
     })
 }
@@ -290,7 +294,8 @@ function calculateSelectedCountries () {
   result.countries.sort()
   result.countriesData = [].concat.apply([], countries)
   showSelectedTooltip(result.countries)
-  // d3.selectAll('.tooltip-selected.to-remove').remove()
+
+  console.log(result)
 
   return result
 }
@@ -323,7 +328,7 @@ function showSelectedTooltip (selectedCountries) {
   tooltips.exit().remove()
 
   function checkPos (event, direction, scroll, d) {
-    if (d3.event && d3.event.target.__data__.ISO == d) {
+    if (d3.event && d3.event.target.__data__ != undefined && d3.event.target.__data__.ISO == d) {
       return d3.event[event]
     } else {
       return d3.selectAll('circle[data-iso="' + d + '"][data-year="' + currentYear + '"]').node().getBoundingClientRect()[direction] + window[scroll]

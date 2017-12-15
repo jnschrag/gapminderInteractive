@@ -120,13 +120,13 @@ function scatterplot () {
     createBubbles(plot, selectedCountries.countriesData, 'ISO-Year', 'selected')
 
     // Lines
-    const lines = plot.selectAll('line.item').data(selectedCountries.countriesData, d => d['ISO-Year'])
+    const lines = plot.selectAll('line.selectedLine').data(selectedCountries.countriesData, d => d['ISO-Year'])
 
     lines.attr('display', d => checkCurrentYear(d.Year))
 
     lines.enter().append('line')
       .attr('data-iso', d => d['ISO-Year'])
-      .attr('class', 'item')
+      .attr('class', 'item selectedLine')
       .attr('fill', 'none')
       .attr('stroke', d => d3.color(scales.c(d[colorDomain.value])).darker(0.7))
       .attr('stroke-linejoin', 'round')
