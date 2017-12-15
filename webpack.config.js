@@ -4,9 +4,12 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin')
 // const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
 
 module.exports = {
-  entry: './src/index.js',
+  entry: {
+    'index': './src/index.js',
+    'advanced': './src/advanced.js'
+  },
   output: {
-    filename: 'bundle.js',
+    filename: '[name].js',
     path: path.resolve(process.cwd(), 'dist')
   },
   module: {
@@ -20,8 +23,13 @@ module.exports = {
         }
       },
       {
-        test: /\.(c|d|t)sv$/, // load all .csv, .dsv, .tsv files with dsv-loader
-        use: ['dsv-loader'] // or dsv-loader?delimiter=,
+        test: /\.csv$/,
+        loader: 'csv-loader',
+        options: {
+          dynamicTyping: true,
+          header: true,
+          skipEmptyLines: true
+        }
       },
       {
         test: /\.(png|jpg|gif|svg)$/,
@@ -70,9 +78,16 @@ module.exports = {
     // new UglifyJSPlugin(),
     new ExtractTextPlugin('style.css'),
     new HtmlWebpackPlugin({
+      inject: 'body',
+      chunks: ['index'],
       template: './src/index.html',
-      filename: 'index.html',
-      inject: 'body'
+      filename: 'index.html'
+    }),
+    new HtmlWebpackPlugin({
+      inject: 'body',
+      chunks: ['advanced'],
+      template: './src/advanced.html',
+      filename: 'advanced.html'
     })
   ]
 }
