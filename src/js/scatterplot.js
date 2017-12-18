@@ -219,16 +219,22 @@ function scatterplot () {
         axisLeft = d3.axisLeft(scales[axis].type).tickSizeOuter(0)
 
         if (currentValues.axes[axis].scaleType == 'log') {
-          axisLeft.ticks(3).tickFormat(d => formatAmount(d))
+          axisLeft.ticks(5, '.3s')
         }
       } else if (scales[axis].direction == 'bottom') {
         axisBottomScale = axis
         axisBottom = d3.axisBottom(scales[axis].type).tickSizeOuter(0).tickSizeInner(-height)
 
         if (currentValues.axes[axis].scaleType == 'log') {
-          axisBottom.ticks(3).tickFormat(d => formatAmount(d))
+          axisBottom.ticks(5, '.3s')
         }
       }
+    })
+
+    d3.selectAll('.tick.minor').classed('minor', false)
+    let emptyTicks = d3.selectAll('.tick text:empty')
+    emptyTicks.each(function (d) {
+      d3.select(d3.select(this).node().parentNode).classed('minor', true)
     })
 
     const x = axis.select('.axis--x')

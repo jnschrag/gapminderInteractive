@@ -20,6 +20,10 @@
     stroke: $grid-lines;
   }
 
+  .tick.minor {
+    display: none;
+  }
+
   .axis__label {
     @include fontSize(16px);
     text-transform: uppercase;

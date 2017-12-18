@@ -143,20 +143,13 @@ function createPlot (rawData) {
         .attr('name', 'axis-' + axis)
         .attr('class', 'filter-select axis-variable')
 
-      console.log(currentAxes)
-
       let options = axesSelect[axis]
         .selectAll('option')
         .data(axisVars[axis]).enter()
         .append('option')
           .text(d => d)
           .property('value', d => d)
-          .property('selected', function (d) {
-            if (d === currentAxes[axis].name) {
-              console.log(d)
-              return true
-            }
-          })
+          .property('selected', d => d === currentAxes[axis].name)
 
       if (axis == 'x' || axis == 'y') {
         setupAxisSelectType(axis)
@@ -207,21 +200,21 @@ function createPlot (rawData) {
   function setupAxesDirection () {
     const axesDirection = d3.select('.filter-swap')
       .on('click', function () {
-        console.log(currentAxes)
         // Swap Variables
         let oldX = axisVars.x
         let oldY = axisVars.y
         axisVars.x = oldY
         axisVars.y = oldX
 
-        // Swap Scale Types
+        // Swap Indicators & Scale Types
+        let oldXScaleName = currentAxes.x.name
+        let oldYScaleName = currentAxes.y.name
+        currentAxes.x.name = oldYScaleName
+        currentAxes.y.name = oldXScaleName
         let oldXScaleType = currentAxes.x.scaleType
         let oldYScaleType = currentAxes.y.scaleType
         currentAxes.x.scaleType = oldYScaleType
         currentAxes.y.scaleType = oldXScaleType
-
-        console.log('After switch')
-        console.log(currentAxes)
 
         // Remove & Redraw
         d3.selectAll('.axis-variable').remove()
@@ -519,9 +512,6 @@ function createPlot (rawData) {
     currentAxes.y.name = calculateYSelect()
     currentAxes.y.scaleType = calculateScaleTypes('y')
     currentAxes.r.name = calculateRadiusSelect()
-
-    console.log('on draw chart')
-    console.log(currentAxes)
 
     let sortField = '-' + currentAxes.r.name
     let sortedData = removeEmptyDataPoints(data.years[currentYear]).sort(dynamicSort(sortField, 'num'))

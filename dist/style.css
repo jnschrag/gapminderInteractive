@@ -893,6 +893,9 @@ p.instructions {
 .g-axis .tick line {
   stroke: #c5c5c5; }
 
+.g-axis .tick.minor {
+  display: none; }
+
 .g-axis .axis__label {
   font-size: 16px;
   font-size: 1rem;
