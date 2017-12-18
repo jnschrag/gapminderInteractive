@@ -152,16 +152,16 @@ function createPlot (rawData) {
           .property('selected', d => d === currentAxes[axis])
 
       if (axis == 'x' || axis == 'y') {
-        setupAxisSelctType(axis)
+        setupAxisSelectType(axis)
       }
 
-      axesSelect[axis].on('change', function () {
+      d3.selectAll('.axis-variable').on('change', function () {
         drawPrimaryChart()
       })
     })
   }
 
-  function setupAxisSelctType (axis) {
+  function setupAxisSelectType (axis) {
     axesSelect[axis] = d3.select('.filter-axis-' + axis)
       .append('select')
       .attr('name', 'axis-scaleType-' + axis)
@@ -175,7 +175,7 @@ function createPlot (rawData) {
         .property('value', d => d)
         .property('selected', d => d === currentAxes[axis].scaleType)
 
-    axesSelect[axis].on('change', function () {
+    d3.selectAll('.axis-scaleType').on('change', function () {
       drawPrimaryChart()
     })
     setupAxesDirection()
