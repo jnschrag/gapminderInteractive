@@ -27,16 +27,16 @@ function createPlot (rawData) {
 
   let currentAxes = {
     x: {
-      name: 'GNI per capita',
+      name: 'GNI per capita (US$)',
       scaleType: 'log',
       direction: 'bottom'
     },
     y: {
-      name: 'Life Expectancy',
+      name: 'Life Expectancy (years)',
       scaleType: 'linear',
       direction: 'left'
     },
-    radius: {
+    r: {
       name: 'Gross Domestic Product (PPP)'
     }
   }
@@ -143,13 +143,20 @@ function createPlot (rawData) {
         .attr('name', 'axis-' + axis)
         .attr('class', 'filter-select axis-variable')
 
+      console.log(currentAxes)
+
       let options = axesSelect[axis]
         .selectAll('option')
         .data(axisVars[axis]).enter()
         .append('option')
           .text(d => d)
           .property('value', d => d)
-          .property('selected', d => d === currentAxes[axis])
+          .property('selected', function (d) {
+            if (d === currentAxes[axis].name) {
+              console.log(d)
+              return true
+            }
+          })
 
       if (axis == 'x' || axis == 'y') {
         setupAxisSelectType(axis)
@@ -200,16 +207,22 @@ function createPlot (rawData) {
   function setupAxesDirection () {
     const axesDirection = d3.select('.filter-swap')
       .on('click', function () {
+        console.log(currentAxes)
         // Swap Variables
         let oldX = axisVars.x
         let oldY = axisVars.y
         axisVars.x = oldY
         axisVars.y = oldX
+
         // Swap Scale Types
         let oldXScaleType = currentAxes.x.scaleType
         let oldYScaleType = currentAxes.y.scaleType
         currentAxes.x.scaleType = oldYScaleType
         currentAxes.y.scaleType = oldXScaleType
+
+        console.log('After switch')
+        console.log(currentAxes)
+
         // Remove & Redraw
         d3.selectAll('.axis-variable').remove()
         d3.selectAll('.axis-scaleType').remove()
@@ -505,9 +518,13 @@ function createPlot (rawData) {
     currentAxes.x.scaleType = calculateScaleTypes('x')
     currentAxes.y.name = calculateYSelect()
     currentAxes.y.scaleType = calculateScaleTypes('y')
-    currentAxes.radius.name = calculateRadiusSelect()
+    currentAxes.r.name = calculateRadiusSelect()
 
-    let sortedData = removeEmptyDataPoints(data.years[currentYear]).sort(dynamicSort('-' + currentAxes.radius))
+    console.log('on draw chart')
+    console.log(currentAxes)
+
+    let sortField = '-' + currentAxes.r.name
+    let sortedData = removeEmptyDataPoints(data.years[currentYear]).sort(dynamicSort(sortField, 'num'))
 
     // If countries are selected, remove any empty data points and sort it by Year so the most recent year is always on top. Then remove that countries data from the existing array and append all of its data to the end of the existing array.
     if (selectedCountries.countriesData.length) {
@@ -522,7 +539,7 @@ function createPlot (rawData) {
 
     currentAxes.x.range = ranges[currentAxes.x.name]
     currentAxes.y.range = ranges[currentAxes.y.name]
-    currentAxes.radius.range = ranges[currentAxes.radius.name]
+    currentAxes.r.range = ranges[currentAxes.r.name]
 
     let currentValues = {
       currentYear: currentYear,

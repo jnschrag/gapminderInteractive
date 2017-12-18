@@ -897,7 +897,8 @@ p.instructions {
   font-size: 16px;
   font-size: 1rem;
   text-transform: uppercase;
-  fill: #000; }
+  fill: #000;
+  text-anchor: middle; }
 
 .item {
   fill-opacity: 0.8; }
@@ -933,6 +934,7 @@ path.item {
   height: auto;
   margin: 0 15px;
   padding: 8px 8px 10px;
+  visibliity: hidden;
   opacity: 0;
   border: 1px solid #728c99;
   background-color: #fff; }
@@ -1520,15 +1522,9 @@ p.filter-desc {
   @media screen and (min-width: 48em) {
     .source {
       margin-top: 2rem; } }
-  .source a {
-    float: right; }
   .source svg {
     width: 300px;
     height: auto; }
-  .source .source-details {
-    clear: right;
-    float: right;
-    max-width: 350px; }
   .source p {
     font-size: 0.8rem;
     line-height: 1.1;

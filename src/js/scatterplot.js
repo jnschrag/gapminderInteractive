@@ -53,6 +53,12 @@ function scatterplot () {
     const year = gEnter.append('g').attr('class', 'g-year')
     year.append('text').attr('class', 'chart-year')
 
+    const guidelines = gEnter.append('g').attr('class', 'g-guidelines')
+    guidelines.append('line').attr('class', 'chart-guidelines chart-guidelines--x')
+    guidelines.append('line').attr('class', 'chart-guidelines chart-guidelines--y')
+    guidelines.append('text').attr('class', 'chart-guidelines chart-guidelines-label--x')
+    guidelines.append('text').attr('class', 'chart-guidelines chart-guidelines-label--y')
+
     gEnter.append('g').attr('class', 'g-plot')
 
     const axis = gEnter.append('g').attr('class', 'g-axis')
@@ -66,12 +72,6 @@ function scatterplot () {
 
     y.append('text').attr('class', 'axis__label')
       .attr('text-anchor', 'end')
-
-    const guidelines = gEnter.append('g').attr('class', 'g-guidelines')
-    guidelines.append('line').attr('class', 'chart-guidelines chart-guidelines--x')
-    guidelines.append('line').attr('class', 'chart-guidelines chart-guidelines--y')
-    guidelines.append('text').attr('class', 'chart-guidelines chart-guidelines-label--x')
-    guidelines.append('text').attr('class', 'chart-guidelines chart-guidelines-label--y')
 
     // Legend
     const legendSVG = d3.select('.chart-radius-legend-svg').selectAll('svg').data([data])
@@ -100,7 +100,7 @@ function scatterplot () {
       .range([height, 0])
 
     scales.r
-      .domain(currentValues.axes.radius.range)
+      .domain(currentValues.axes.r.range)
       .range([2, maxR])
 
     scales.c = currentValues.scaleC
@@ -157,7 +157,7 @@ function scatterplot () {
       .attr('data-country', d => d.country)
       .attr('data-iso', d => d.ISO)
       .attr('data-year', d => d.Year)
-      .attr('r', d => scales.r(d[currentValues.axes.radius.name]))
+      .attr('r', d => scales.r(d[currentValues.axes.r.name]))
       .attr('cx', d => scales.x.type(d[currentValues.axes.x.name]))
       .attr('cy', d => scales.y.type(d[currentValues.axes.y.name]))
       .attr('fill', d => scales.c(d[colorDomain.value]))
@@ -184,7 +184,7 @@ function scatterplot () {
         .transition()
           .duration(1000)
           .attr('data-year', d => d.Year)
-          .attr('r', d => scales.r(d[currentValues.axes.radius.name]))
+          .attr('r', d => scales.r(d[currentValues.axes.r.name]))
           .attr('cx', d => scales.x.type(d[currentValues.axes.x.name]))
           .attr('cy', d => scales.y.type(d[currentValues.axes.y.name]))
           .attr('fill', d => scales.c(d[colorDomain.value]))
@@ -240,7 +240,7 @@ function scatterplot () {
 
     x.select('.axis__label')
       .attr('x', width / 2)
-      .attr('y', margin.bottom / 1.5)
+      .attr('y', margin.bottom - 5)
       .text(currentValues.axes[axisBottomScale].name)
 
     const y = axis.select('.axis--y')
@@ -248,7 +248,7 @@ function scatterplot () {
     y.call(axisLeft)
 
     y.select('.axis__label')
-      .attr('y', 0 - (margin.left / 1.5))
+      .attr('y', 0 - (margin.left / 1.25))
       .attr('x', 0 - (height / 2))
       .attr('text-anchor', 'middle')
       .attr('transform', `rotate(-90)`)
@@ -352,11 +352,11 @@ function scatterplot () {
         .attr('x1', scales.x.type(d[currentValues.axes.x.name]))
         .attr('y1', scales.y.type(d[currentValues.axes.y.name]))
         .attr('x2', scales.x.type(d[currentValues.axes.x.name]))
-        .attr('y2', height - 15)
+        .attr('y2', height)
 
       guidelines.select('.chart-guidelines-label--x')
         .attr('x', scales.x.type(d[currentValues.axes.x.name]))
-        .attr('y', height - 1)
+        .attr('y', height + 30)
         .text(formatComma(d[currentValues.axes.x.name]))
 
       guidelines.select('.chart-guidelines--y')
@@ -366,9 +366,10 @@ function scatterplot () {
         .attr('y2', scales.y.type(d[currentValues.axes.y.name]))
 
       guidelines.select('.chart-guidelines-label--y')
-        .attr('y', scales.y.type(d[currentValues.axes.y.name]) - 1)
-        .attr('x', 2)
-        .style('text-anchor', 'start')
+        .attr('y', -35)
+        .attr('x', scales.y.type(d[currentValues.axes.y.name]) * -1)
+        .attr('transform', 'rotate(-90)')
+        // .style('text-anchor', 'end')
         .text(formatComma(d[currentValues.axes.y.name]))
     } else {
       guidelines.classed('active', false)
@@ -377,7 +378,7 @@ function scatterplot () {
 
   chart.updateRadiusLegend = function (d, action = 'show') {
     if (action == 'show') {
-      d3.select('.radius-legend-circle-ring').attr('r', scales.r(d[currentValues.axes.radius.name]))
+      d3.select('.radius-legend-circle-ring').attr('r', scales.r(d[currentValues.axes.r.name]))
     } else {
       d3.select('.radius-legend-circle-ring').attr('r', 0)
     }
@@ -421,8 +422,9 @@ function showTooltip (d, item, currentValues) {
     <p class="tooltip-body">
     <span class="tooltip-label">${currentValues.axes.x.name}:</span> ${formatComma(d[currentValues.axes.x.name])}<br />
     <span class="tooltip-label">${currentValues.axes.y.name}:</span> ${formatComma(d[currentValues.axes.y.name])}<br />
-    <span class="tooltip-label">${currentValues.axes.radius.name}:</span> ${formatter(formatAmount(d[currentValues.axes.radius.name]))}<br />
+    <span class="tooltip-label">${currentValues.axes.r.name}:</span> ${formatter(formatAmount(d[currentValues.axes.r.name]))}<br />
     </p>`)
+    .style('visibility', 'visible')
     .style('left', xPos + 'px')
     .style('top', yPos + 'px')
 }
@@ -433,8 +435,7 @@ function hideTooltip () {
     .style('opacity', 0)
     .on('end', function () {
       d3.select(this)
-        .style('left', null)
-        .style('top', null)
+        .style('visibility', 'hidden')
     })
 }
 

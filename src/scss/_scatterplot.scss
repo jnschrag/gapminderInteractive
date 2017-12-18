@@ -24,6 +24,7 @@
     @include fontSize(16px);
     text-transform: uppercase;
     fill: $black;
+    text-anchor: middle;
   }
 
 }

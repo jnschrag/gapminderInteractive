@@ -11,6 +11,6 @@ module.exports = merge(common, {
   //   new BundleAnalyzerPlugin({
   //     analyzerHost: '0.0.0.0',
   //     analyzerPort: 8081
-  //   }),
+  //   })
   // ]
 })
