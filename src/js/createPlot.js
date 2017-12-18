@@ -539,6 +539,10 @@ function createPlot (rawData) {
     })
   }
 
+  function hideLoading () {
+    d3.select('.loading-container').style('display', 'none')
+  }
+
   function initSidebar () {
     if (windowWidth <= 768) {
       sidebar.sidebarMobile()
@@ -562,6 +566,7 @@ function createPlot (rawData) {
     setupAxisSelect()
     setupYearRange()
     initSidebar()
+    hideLoading()
   }
 
   function dynamicSort (property, comparisonType = 'string') {
