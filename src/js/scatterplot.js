@@ -154,7 +154,7 @@ function scatterplot () {
 
     circles.enter().append('circle')
       .attr('class', 'item' + ' ' + bubbleClass)
-      .attr('data-country', d => d.Country)
+      .attr('data-country', d => d.country)
       .attr('data-iso', d => d.ISO)
       .attr('data-year', d => d.Year)
       .attr('r', d => scales.r(d[currentValues.axes.radius.name]))
@@ -417,7 +417,7 @@ function showTooltip (d, item, currentValues) {
   tooltip.transition()
     .duration(200)
     .style('opacity', 0.9)
-  tooltip.html(`<p class="tooltip-heading">${d.Country} ${d.Year}</p>
+  tooltip.html(`<p class="tooltip-heading">${d.country} ${d.Year}</p>
     <p class="tooltip-body">
     <span class="tooltip-label">${currentValues.axes.x.name}:</span> ${formatComma(d[currentValues.axes.x.name])}<br />
     <span class="tooltip-label">${currentValues.axes.y.name}:</span> ${formatComma(d[currentValues.axes.y.name])}<br />

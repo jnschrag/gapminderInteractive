@@ -41,7 +41,7 @@ function createPlot (rawData) {
     }
   }
 
-  const colorValue = 'World Bank Classification'
+  const colorValue = 'world_bank_classification'
   let scaleC = d3.scaleOrdinal()
   let colorDomain = {
     value: colorValue,
@@ -62,9 +62,9 @@ function createPlot (rawData) {
 
       // Group Regions
       data.regions = data.regions || {}
-      data.regions[row.Region] = data.regions[row.Region] || {}
-      data.regions[row.Region][row.ISO] = data.regions[row.Region][row.ISO] || {
-        country: row.Country,
+      data.regions[row.region] = data.regions[row.region] || {}
+      data.regions[row.region][row.ISO] = data.regions[row.region][row.ISO] || {
+        country: row.country,
         iso: row.ISO
       }
 
@@ -77,7 +77,7 @@ function createPlot (rawData) {
       // Group Countries
       data.countries = data.countries || {}
       data.countries[row.ISO] = data.countries[row.ISO] || {
-        country: row.Country,
+        country: row.country,
         iso: row.ISO,
         years: {}
       }
