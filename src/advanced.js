@@ -1,5 +1,5 @@
 import * as plot from './js/createPlot'
-import Data from './data/20171214-data.csv'
+import Data from './data/advanced-20171219.csv'
 import './scss/main.scss'
 import intro from 'intro.js'
 
@@ -7,7 +7,7 @@ const introJs = intro.introJs()
 
 function init () {
   plot.createPlot(Data)
-  assignAnnotations()
+  // assignAnnotations()
 }
 
 function assignAnnotations () {

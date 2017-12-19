@@ -1540,9 +1540,6 @@ p.filter-desc {
 =            IntroJS            =
 ===============================*/
 /*----------  Page Layout  ----------*/
-.chart-sidebar {
-  display: none; }
-
 .introjs-overlay {
   position: absolute;
   box-sizing: content-box;
