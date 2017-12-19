@@ -6,6 +6,8 @@ const tooltip = d3.select('.tooltip')
 let indicators
 const formatComma = d3.format(',.3s')
 
+let transitionDuration
+
 function formatter (value) {
   return value.replace('G', ' billion').replace('M', ' million').replace('T', ' trillion')
 }
@@ -146,7 +148,7 @@ function scatterplot () {
     if (bubbleClass == 'selected') {
       bubbleTransition = function () {
         transition()
-        .duration(1000)
+        .duration(transitionDuration)
         .attr('fill', '#000')
       }
     }
@@ -181,7 +183,7 @@ function scatterplot () {
       .merge(circles)
         .attr('opacity', d => checkSelectedCountry(d))
         .transition()
-          .duration(1000)
+          .duration(transitionDuration)
           .attr('data-year', d => d.year)
           .attr('r', d => scales.r(d[currentValues.axes.r.name]))
           .attr('cx', d => scales.x.type(d[currentValues.axes.x.name]))
@@ -250,7 +252,10 @@ function scatterplot () {
     x.attr('transform', 'translate(0,' + height + ')')
       .call(axisBottom)
 
-    let xLabel = indicators[currentValues.axes[axisBottomScale].name][getLanguageProperty('name', currentValues.lang)] + ' (' + indicators[currentValues.axes[axisBottomScale].name][getLanguageProperty('units', currentValues.lang)] + ')'
+    let xLabel = indicators[currentValues.axes[axisBottomScale].name][getLanguageProperty('name', currentValues.lang)]
+    if (indicators[currentValues.axes[axisBottomScale].name][getLanguageProperty('units', currentValues.lang)]) {
+      xLabel += ' (' + indicators[currentValues.axes[axisBottomScale].name][getLanguageProperty('units', currentValues.lang)] + ')'
+    }
     x.select('.axis__label')
       .attr('x', width / 2)
       .attr('y', margin.bottom - 5)
@@ -260,7 +265,10 @@ function scatterplot () {
 
     y.call(axisLeft)
 
-    let yLabel = indicators[currentValues.axes[axisLeftScale].name][getLanguageProperty('name', currentValues.lang)] + ' (' + indicators[currentValues.axes[axisLeftScale].name][getLanguageProperty('units', currentValues.lang)] + ')'
+    let yLabel = indicators[currentValues.axes[axisLeftScale].name][getLanguageProperty('name', currentValues.lang)]
+    if (indicators[currentValues.axes[axisLeftScale].name][getLanguageProperty('units', currentValues.lang)]) {
+      yLabel += ' (' + indicators[currentValues.axes[axisLeftScale].name][getLanguageProperty('units', currentValues.lang)] + ')'
+    }
     y.select('.axis__label')
       .attr('y', 0 - (margin.left / 1.25))
       .attr('x', 0 - (height / 2))
@@ -274,7 +282,7 @@ function scatterplot () {
     year.select('.chart-year')
       .attr('text-anchor', 'end')
       .transition()
-        .duration(1000)
+        .duration(transitionDuration)
         .text(currentValues.currentYear)
   }
 
@@ -474,6 +482,7 @@ function init (args) {
   chart.colorDomain(args.colorDomain)
   chart.selectedCountries(args.selectedCountries)
   indicators = args.indicators
+  transitionDuration = args.transitionDuration
   el.call(chart)
   resize()
 }

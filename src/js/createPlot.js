@@ -33,7 +33,8 @@ function createPlot (args) {
   const playBtn = d3.select('#playbtn')
   let timer
   let playing = false
-  let transitionDuration = 1000
+  let defaultTransitionDuration = 1000
+  let transitionDuration = defaultTransitionDuration
 
   let currentAxes = {
     x: {
@@ -583,6 +584,7 @@ function createPlot (args) {
       colorDomain: colorDomain,
       selectedCountries: selectedCountries,
       indicators: indicators,
+      transitionDuration: transitionDuration,
       container: '.chart-primary'
     })
   }
@@ -669,7 +671,7 @@ function createPlot (args) {
       drawPrimaryChart()
     },
     updateTransitionLength: function (duration) {
-      transitionDuration = duration
+      transitionDuration = duration || defaultTransitionDuration
     }
   }
 }

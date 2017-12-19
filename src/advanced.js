@@ -149,6 +149,7 @@ function introWatchStepChange () {
     	updateDom.highlightCountries({
     		hide: ['USA', 'CHN', 'RUS', 'IND']
     	})
+    	plotted.updateTransitionLength()
     }
   })
 }
