@@ -4,7 +4,7 @@ import chart from './scatterplot'
 import autoComplete from './autocomplete'
 import '../scss/main.scss'
 
-function createPlot (rawData) {
+function createPlot (args) {
   let windowWidth = window.innerWidth
   const noUiSlider = require('./nouislider')
   const yearRange = document.getElementById('year-range')
@@ -24,6 +24,7 @@ function createPlot (rawData) {
   const playBtn = d3.select('#playbtn')
   let timer
   let playing = false
+  let transitionDuration = 1000
 
   let currentAxes = {
     x: {
@@ -50,7 +51,7 @@ function createPlot (rawData) {
   const COLORS = ['#d3d3d3', '#58a897', '#83badc', '#3b75bb', '#a483a8', '#f7890e', '#ed392a']
 
   function loadData () {
-    let obj = rawData.reduce(function (data, row) {
+    let obj = args.data.reduce(function (data, row) {
       data.axisVars = data.axisVars || []
       if (data.axisVars.length == 0) {
         data.axisVars = Object.keys(row)
@@ -97,7 +98,8 @@ function createPlot (rawData) {
     years = Object.keys(data.years)
     let range = d3.extent(years)
     minYear = range[0]
-    maxYear = range[1]
+    // maxYear = range[1]
+    maxYear = 2015
   }
 
   function transformKeys (obj) {
@@ -307,7 +309,7 @@ function createPlot (rawData) {
     let tooltips = d3.selectAll('.tooltip-selected').data(selectedCountries, d => d)
 
     tooltips.transition()
-      .duration(1000)
+      .duration(transitionDuration)
       .style('left', d => checkPos('pageX', 'left', 'scrollX', d) + 'px')
       .style('top', d => checkPos('pageY', 'top', 'scrollY', d) + 'px')
 
@@ -405,6 +407,8 @@ function createPlot (rawData) {
         }
         return '<span style="background-color:' + scaleC(d) + '"></span>' + label
       })
+
+    d3.select('.chart-color-legend').append('div').attr('class', 'clear')
   }
 
   function setupPlayBtn () {
@@ -413,7 +417,7 @@ function createPlot (rawData) {
         if (playing == false) {
           timer = setInterval(function () {
             yearRange.noUiSlider.set(currentYear + 1)
-          }, 1000)
+          }, transitionDuration)
 
           d3.select(this)
             .classed('active', true)
@@ -612,10 +616,22 @@ function createPlot (rawData) {
     }
   }
 
-  init()
+  // init()
 
   // window.addEventListener('DOMContentLoaded', init)
   window.addEventListener('resize', resize)
+
+  return {
+    init: function () {
+      init()
+    },
+    drawChart: function () {
+      drawPrimaryChart()
+    },
+    updateTransitionLength: function (duration) {
+      transitionDuration = duration
+    }
+  }
 }
 
 export { createPlot }

@@ -933,7 +933,7 @@ path.item {
   font-size: 13px;
   line-height: 1.4;
   position: absolute;
-  z-index: 15;
+  z-index: 20;
   height: auto;
   margin: 0 15px;
   padding: 8px 8px 10px;
@@ -959,7 +959,7 @@ path.item {
   .tooltip.tooltip-selected {
     display: block;
     opacity: 1;
-    z-index: 10;
+    z-index: 15;
     cursor: pointer; }
     .tooltip.tooltip-selected .tooltip-heading {
       margin-bottom: 0; }
@@ -988,6 +988,9 @@ path.item {
     margin-right: 5px; }
   .chart-color-legend li.color0 {
     margin-left: 1rem; }
+
+.chart-color-legend .clear {
+  clear: both; }
 
 /*----------  Radius Legend  ----------*/
 .chart-radius-legend {
@@ -1540,6 +1543,9 @@ p.filter-desc {
 =            IntroJS            =
 ===============================*/
 /*----------  Page Layout  ----------*/
+body.is-relative {
+  position: relative; }
+
 .is-hidden {
   display: none; }
 
@@ -1569,11 +1575,11 @@ p.filter-desc {
   box-shadow: 0 1px 10px rgba(0, 0, 0, 0.4); }
 
 .landing-container {
-  position: fixed !important;
   top: 0;
-  bottom: 0;
+  bottom: unset;
   left: 0;
   right: 0;
+  height: 100%;
   opacity: 0.9 !important;
   display: flex;
   justify-content: center;
@@ -1583,8 +1589,7 @@ p.filter-desc {
   position: relative;
   max-width: 70%; }
   .landing-content .second,
-  .landing-content .third,
-  .landing-content .btn-startIntro {
+  .landing-content .third {
     opacity: 0;
     visibility: hidden; }
   .landing-content .second {
@@ -1597,11 +1602,6 @@ p.filter-desc {
     -moz-animation: fadein 2s ease-in 6s forwards;
     -ms-animation: fadein 2s ease-in 6s forwards;
     animation: fadein 2s ease-in 6s forwards; }
-  .landing-content .btn-startIntro {
-    -webkit-animation: fadein 2s ease-in 6.5s forwards;
-    -moz-animation: fadein 2s ease-in 6.5s forwards;
-    -ms-animation: fadein 2s ease-in 6.5s forwards;
-    animation: fadein 2s ease-in 6.5s forwards; }
 
 @keyframes fadein {
   from {
@@ -1614,7 +1614,7 @@ p.filter-desc {
 .introjs-overlay {
   position: absolute;
   box-sizing: content-box;
-  z-index: 999999;
+  z-index: 10;
   opacity: 0; }
 
 .introjs-fixParent {
@@ -1629,10 +1629,11 @@ p.filter-desc {
 .introjs-showElement,
 tr.introjs-showElement > td,
 tr.introjs-showElement > th {
-  z-index: 9999999 !important; }
+  z-index: calc(10 + 2) !important;
+  pointer-events: none; }
 
 .introjs-disableInteraction {
-  z-index: 99999999 !important;
+  z-index: 10 !important;
   position: absolute;
   background-color: white;
   opacity: 0;
@@ -1646,7 +1647,7 @@ tr.introjs-showElement > th {
 .introjs-helperLayer {
   box-sizing: content-box;
   position: absolute;
-  z-index: 9999998;
+  z-index: calc(10 + 1);
   background-color: #FFF;
   background-color: rgba(255, 255, 255, 0.9);
   border: 1px solid #777;
@@ -1663,7 +1664,7 @@ tr.introjs-showElement > th {
   box-sizing: content-box;
   position: absolute;
   visibility: hidden;
-  z-index: 100000000;
+  z-index: calc(10 + 1);
   background-color: transparent;
   -webkit-transition: all 0.3s ease-out;
   -moz-transition: all 0.3s ease-out;
@@ -1686,7 +1687,7 @@ tr.introjs-showElement > th {
   visibility: visible;
   top: -16px;
   left: -16px;
-  z-index: 9999999999 !important;
+  z-index: 10 !important;
   padding: 2px;
   font-family: Arial, verdana, tahoma;
   font-size: 13px;
@@ -1775,8 +1776,8 @@ tr.introjs-showElement > th {
   border-right-color: white; }
 
 .introjs-tooltip {
-  min-width: 500px;
-  max-width: 600px;
+  min-width: 200px;
+  max-width: 250px;
   box-sizing: content-box;
   position: absolute;
   visibility: visible;

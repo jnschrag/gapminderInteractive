@@ -2,8 +2,15 @@
 =            IntroJS            =
 ===============================*/
 $overlay-color: $white;
+$overlay-z-index: 10;
 
 /*----------  Page Layout  ----------*/
+body {
+  &.is-relative {
+    position: relative;
+  }
+}
+
 .is-hidden {
   display: none;
 }
@@ -40,11 +47,11 @@ $overlay-color: $white;
 }
 
 .landing-container {
-  position: fixed !important;
   top: 0;
-  bottom: 0;
+  bottom: unset;
   left: 0;
   right: 0;
+  height: 100%;
   opacity: 0.9 !important;
   display: flex;
   justify-content: center;
@@ -57,8 +64,7 @@ $overlay-color: $white;
   max-width: 70%;
 
   .second,
-  .third,
-  .btn-startIntro {
+  .third {
     // position: absolute;
     opacity: 0;
     visibility: hidden;
@@ -70,9 +76,9 @@ $overlay-color: $white;
   .third {
     @include prefix(animation, (fadein 2s ease-in 6s forwards))
   }
-  .btn-startIntro {
-    @include prefix(animation, (fadein 2s ease-in 6.5s forwards))
-  }
+  // .btn-startIntro {
+  //   @include prefix(animation, (fadein 2s ease-in 6.5s forwards))
+  // }
 }
 
 
@@ -86,7 +92,7 @@ $overlay-color: $white;
   @extend %overlays;
   position: absolute;
   box-sizing: content-box;
-  z-index: 999999;
+  z-index: $overlay-z-index;
   opacity: 0;
 }
 
@@ -103,11 +109,12 @@ $overlay-color: $white;
 .introjs-showElement,
 tr.introjs-showElement > td,
 tr.introjs-showElement > th {
-  z-index: 9999999 !important;
+  z-index: calc(#{$overlay-z-index} + 2) !important;
+  pointer-events: none;
 }
 
 .introjs-disableInteraction {
-  z-index: 99999999 !important;
+  z-index: $overlay-z-index !important;
   position: absolute;
   background-color: white;
   opacity: 0;
@@ -123,7 +130,7 @@ tr.introjs-showElement > th {
 .introjs-helperLayer {
   box-sizing: content-box;
   position: absolute;
-  z-index: 9999998;
+  z-index: calc(#{$overlay-z-index} + 1);
   background-color: #FFF;
   background-color: rgba(255,255,255,.9);
   border: 1px solid #777;
@@ -141,7 +148,7 @@ tr.introjs-showElement > th {
   box-sizing: content-box;
   position: absolute;
   visibility: hidden;
-  z-index: 100000000;
+  z-index: calc(#{$overlay-z-index} + 1);
   background-color: transparent;
   -webkit-transition: all 0.3s ease-out;
      -moz-transition: all 0.3s ease-out;
@@ -166,7 +173,7 @@ tr.introjs-showElement > th {
   visibility: visible;
   top: -16px;
   left: -16px;
-  z-index: 9999999999 !important;
+  z-index: $overlay-z-index !important;
   padding: 2px;
   font-family: Arial, verdana, tahoma;
   font-size: 13px;
@@ -249,8 +256,8 @@ tr.introjs-showElement > th {
 
 .introjs-tooltip {
   @extend %tooltip;
-  min-width: 500px;
-  max-width: 600px;
+  min-width: 200px;
+  max-width: 250px;
   box-sizing: content-box;
   position: absolute;
   visibility: visible;
