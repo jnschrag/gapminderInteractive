@@ -99,11 +99,11 @@ function createPlot (args) {
     years = Object.keys(data.years)
     let range = d3.extent(years)
     minYear = range[0]
-    // maxYear = range[1]
-    maxYear = 2015
+    maxYear = range[1]
   }
 
   function loadIndicators () {
+    console.log(args.indicators)
     let result = args.indicators.map(function (indicator) {
       indicators[indicator.name] = indicator
 
@@ -111,7 +111,10 @@ function createPlot (args) {
         updatePageTitle(indicator)
         return
       }
-      setupAxisVars(indicator)
+
+      if (indicator.default_axis) {
+        setupAxisVars(indicator)
+      }
 
       if (indicator.type != 'color') {
         indicator.range = calculateRanges(indicator.name)
@@ -425,6 +428,8 @@ function createPlot (args) {
       }
     })
 
+    calculateYearRange(currentAxes.x.name, currentAxes.y.name)
+
     yearRange.noUiSlider.on('update', function () {
       drawPrimaryChart()
       if (currentYear == maxYear) {
@@ -437,6 +442,27 @@ function createPlot (args) {
 
   function calculateYears () {
     return yearRange.noUiSlider.get()
+  }
+
+  function calculateYearRange (currentX, currentY) {
+    if (indicators[currentX].min_years || indicators[currentY].min_years) {
+      let minX = indicators[currentX].min_years || minYear
+      let minY = indicators[currentY].min_years || minYear
+      minYear = Math.max(minX, minY)
+    }
+
+    if (indicators[currentX].max_years || indicators[currentY].max_years) {
+      let maxX = indicators[currentX].max_years || maxYear
+      let maxY = indicators[currentY].max_years || maxYear
+      maxYear = Math.min(maxX, maxY)
+    }
+
+    yearRange.noUiSlider.updateOptions({
+      range: {
+        'min': +minYear,
+        'max': +maxYear
+      }
+    })
   }
 
   function setupPlayBtn () {
@@ -539,11 +565,17 @@ function createPlot (args) {
   function drawPrimaryChart () {
     let selectedCountries = calculateSelectedCountries()
     currentYear = calculateYears()
+    let oldXName = currentAxes.x.name
     currentAxes.x.name = calculateXSelect()
     currentAxes.x.scaleType = calculateScaleTypes('x')
+    let oldYName = currentAxes.y.name
     currentAxes.y.name = calculateYSelect()
     currentAxes.y.scaleType = calculateScaleTypes('y')
     currentAxes.r.name = calculateRadiusSelect()
+
+    if (currentAxes.x.name != oldXName || currentAxes.y.name != oldYName) {
+      calculateYearRange(currentAxes.x.name, currentAxes.y.name)
+    }
 
     let colorIndicator = calculateColorSelect()
     let oldColor = currentAxes.c.name
@@ -658,9 +690,6 @@ function createPlot (args) {
     }
   }
 
-  // init()
-
-  // window.addEventListener('DOMContentLoaded', init)
   window.addEventListener('resize', resize)
 
   return {
