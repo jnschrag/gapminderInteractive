@@ -13,7 +13,7 @@ function init () {
   	indicators: Indicators
   })
   plotted.init()
-  // assignAnnotations()
+  assignAnnotations()
   setupBtns()
 }
 
