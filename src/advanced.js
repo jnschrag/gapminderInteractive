@@ -1,5 +1,6 @@
 import * as plot from './js/createPlot'
 import Data from './data/advanced-20171219.csv'
+import Indicators from './data/advanced-indicators-20171219.csv'
 import './scss/main.scss'
 import intro from 'intro.js'
 
@@ -7,9 +8,12 @@ const introJs = intro.introJs()
 let plotted
 
 function init () {
-  plotted = plot.createPlot({ data: Data })
+  plotted = plot.createPlot({
+  	data: Data,
+  	indicators: Indicators
+  })
   plotted.init()
-  assignAnnotations()
+  // assignAnnotations()
   setupBtns()
 }
 
@@ -22,7 +26,16 @@ function setupBtns () {
   let chartBtn = document.querySelector('.btn-chart')
   chartBtn.addEventListener('click', function () {
     console.log('go directly to chart')
+    exploreChart()
   })
+}
+
+function exploreChart () {
+  let overlays = document.querySelectorAll('.introjs-overlay')
+  overlays.forEach(function (element) { element.remove() })
+  updateDom.showSidebar()
+  updateDom.showColors()
+  updateDom.showTimeline()
 }
 
 function updateLandingText () {
@@ -127,6 +140,7 @@ function introWatchStepChange () {
     	})
     } else if (currentStep == 7) {
     	updateDom.showTimeline()
+    	updateDom.playTimeline()
     } else if (currentStep == 10) {
     	updateDom.highlightCountries({
     		show: ['CHN', 'RUS', 'IND'],
@@ -156,6 +170,10 @@ let updateDom = {
 	  }
 	  plotted.drawChart()
   },
+  playTimeline: function () {
+  	plotted.updateTransitionLength(300)
+    document.querySelector('#playbtn').click()
+  },
   showColors: function () {
     document.querySelector('.chart-color-legend').classList.toggle('is-hidden')
   },
@@ -166,9 +184,6 @@ let updateDom = {
   },
   showTimeline: function () {
     document.querySelector('#timeline').classList.toggle('is-hidden')
-    // Play
-    plotted.updateTransitionLength(300)
-    document.querySelector('#playbtn').click()
   }
 }
 

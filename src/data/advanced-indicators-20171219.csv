@@ -1,0 +1,18 @@
+name,type,name_eng,name_standard,name_traditional,default_axis,min_value,max_value,min_years,max_years,is_percentage,units_eng,units_standard,units_traditional,desc_eng,desc_standard,desc_traditional,hint_eng,hint_standard,hint_traditional,needs_average_line,is_logged_default,lower_is_better
+title,title,Development Tracker,,,,,,,,,,,,,,,,,,,,
+world_bank_classification,color,World Bank Classification,,,c,,,,,,,,,the description,,,,,,,,
+region,color,Regions,,,c,,,,,,,,,,,,,,,,,
+gdp_ppp,econ,Gross Domestic Product (PPP),,,r,,,,,,,,,,,,,,,,,
+life_expectancy,social,Life Expectancy,,,y,,,1990,2015,,Years,,,,,,,,,1,,
+gni_per_capita,econ,GNI per capita,,,x,,,,,,US$,,,,,,Current Year dollars? 2014???,,,,1,
+population,social,Population,,,r,,,,,,People,,,,,,,,,1,,
+gdp_per_capita_ppp,econ,GDP per capita (PPP),,,x,,,,,,,,,,,,,,,,1,
+mortality rate_under_5,social,Under 5 Mortality Rate,,,y,,,,,,,,,,,,,,,1,,1
+urban_population,social,Urbanization,,,y,,,,,1,,,,,,,,,,1,,
+literacy_rate_adult,social,Literacy Rate,,,y,,,,,1,,,,,,,,,,1,,
+labor_force_participation,social,Labor Force Participation,,,y,,,,,1,,,,,,,,,,1,,
+internet_penetration,social,Internet Penetration,,,y,,,,,1,,,,,,,,,,1,,
+population_growth,social,Population Growth,,,y,,,,,,,,,,,,,,,1,,
+energy_per_capita,social,Energy Use per capita,,,y,,,,,,,,,,,,,,,1,,
+co2_per_capita,social,CO2 Emissions per capita,,,y,,,,,,Years,,,,,,,,,1,,
+years_of_schooling,social,Expected Years in School,,,y,,,,,,,,,,,,,,,1,,

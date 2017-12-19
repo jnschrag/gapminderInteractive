@@ -50,6 +50,10 @@ function createPlot (args) {
   }
   const COLORS = ['#d3d3d3', '#58a897', '#83badc', '#3b75bb', '#a483a8', '#f7890e', '#ed392a']
 
+  function loadIndicators () {
+    console.log(args.indicators)
+  }
+
   function loadData () {
     let obj = args.data.reduce(function (data, row) {
       data.axisVars = data.axisVars || []
@@ -569,6 +573,7 @@ function createPlot (args) {
   }
 
   function init () {
+    loadIndicators()
     loadData()
     colorDomain.colors = calculateColors()
     setupColorLegend()
