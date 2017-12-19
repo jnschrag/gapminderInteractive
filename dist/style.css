@@ -1540,21 +1540,18 @@ p.filter-desc {
 =            IntroJS            =
 ===============================*/
 /*----------  Page Layout  ----------*/
-.chart-sidebar {
+.is-hidden {
   display: none; }
 
+/*----------  Landing Overlay  ----------*/
 .introjs-overlay {
-  position: absolute;
-  box-sizing: content-box;
-  z-index: 999999;
-  background-color: #000;
-  opacity: 0;
-  background: -moz-radial-gradient(center, ellipse cover, rgba(0, 0, 0, 0.4) 0, rgba(0, 0, 0, 0.9) 100%);
-  background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, rgba(0, 0, 0, 0.4)), color-stop(100%, rgba(0, 0, 0, 0.9)));
-  background: -webkit-radial-gradient(center, ellipse cover, rgba(0, 0, 0, 0.4) 0, rgba(0, 0, 0, 0.9) 100%);
-  background: -o-radial-gradient(center, ellipse cover, rgba(0, 0, 0, 0.4) 0, rgba(0, 0, 0, 0.9) 100%);
-  background: -ms-radial-gradient(center, ellipse cover, rgba(0, 0, 0, 0.4) 0, rgba(0, 0, 0, 0.9) 100%);
-  background: radial-gradient(center, ellipse cover, rgba(0, 0, 0, 0.4) 0, rgba(0, 0, 0, 0.9) 100%);
+  background-color: #fff;
+  background: -moz-radial-gradient(center, ellipse cover, rgba(255, 255, 255, 0.4) 0, rgba(255, 255, 255, 0.9) 100%);
+  background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, rgba(255, 255, 255, 0.4)), color-stop(100%, rgba(255, 255, 255, 0.9)));
+  background: -webkit-radial-gradient(center, ellipse cover, rgba(255, 255, 255, 0.4) 0, rgba(255, 255, 255, 0.9) 100%);
+  background: -o-radial-gradient(center, ellipse cover, rgba(255, 255, 255, 0.4) 0, rgba(255, 255, 255, 0.9) 100%);
+  background: -ms-radial-gradient(center, ellipse cover, rgba(255, 255, 255, 0.4) 0, rgba(255, 255, 255, 0.9) 100%);
+  background: radial-gradient(center, ellipse cover, rgba(255, 255, 255, 0.4) 0, rgba(255, 255, 255, 0.9) 100%);
   filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#66000000',endColorstr='#e6000000',GradientType=1)";
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
   filter: alpha(opacity=50);
@@ -1563,6 +1560,62 @@ p.filter-desc {
   -ms-transition: all 0.3s ease-out;
   -o-transition: all 0.3s ease-out;
   transition: all 0.3s ease-out; }
+
+.landing-content, .introjs-tooltip {
+  margin: 0 auto;
+  background-color: #fff;
+  opacity: 0.9;
+  padding: 1.5rem;
+  box-shadow: 0 1px 10px rgba(0, 0, 0, 0.4); }
+
+.landing-container {
+  position: fixed !important;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  opacity: 0.9 !important;
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+
+.landing-content {
+  position: relative;
+  max-width: 70%; }
+  .landing-content .second,
+  .landing-content .third,
+  .landing-content .btn-startIntro {
+    opacity: 0;
+    visibility: hidden; }
+  .landing-content .second {
+    -webkit-animation: fadein 2s ease-in 4s forwards;
+    -moz-animation: fadein 2s ease-in 4s forwards;
+    -ms-animation: fadein 2s ease-in 4s forwards;
+    animation: fadein 2s ease-in 4s forwards; }
+  .landing-content .third {
+    -webkit-animation: fadein 2s ease-in 6s forwards;
+    -moz-animation: fadein 2s ease-in 6s forwards;
+    -ms-animation: fadein 2s ease-in 6s forwards;
+    animation: fadein 2s ease-in 6s forwards; }
+  .landing-content .btn-startIntro {
+    -webkit-animation: fadein 2s ease-in 6.5s forwards;
+    -moz-animation: fadein 2s ease-in 6.5s forwards;
+    -ms-animation: fadein 2s ease-in 6.5s forwards;
+    animation: fadein 2s ease-in 6.5s forwards; }
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+    visibility: hidden; }
+  to {
+    opacity: 1;
+    visibility: visible; } }
+
+.introjs-overlay {
+  position: absolute;
+  box-sizing: content-box;
+  z-index: 999999;
+  opacity: 0; }
 
 .introjs-fixParent {
   z-index: auto !important;
@@ -1722,15 +1775,11 @@ tr.introjs-showElement > th {
   border-right-color: white; }
 
 .introjs-tooltip {
+  min-width: 500px;
+  max-width: 600px;
   box-sizing: content-box;
   position: absolute;
   visibility: visible;
-  padding: 10px;
-  background-color: white;
-  min-width: 200px;
-  max-width: 300px;
-  border-radius: 3px;
-  box-shadow: 0 1px 10px rgba(0, 0, 0, 0.4);
   -webkit-transition: opacity 0.1s ease-out;
   -moz-transition: opacity 0.1s ease-out;
   -ms-transition: opacity 0.1s ease-out;
