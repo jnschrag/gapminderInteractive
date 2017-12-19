@@ -3,9 +3,8 @@ import * as d3 from 'd3'
 const graphic = d3.select('.chart-container')
 const tooltip = d3.select('.tooltip')
 
-const formatComma = d3.format(',')
-const formatAmount = d3.format('.3s')
-const formatPercentage = d3.format('.3')
+let indicators
+const formatComma = d3.format(',.3s')
 
 function formatter (value) {
   return value.replace('G', ' billion').replace('M', ' million').replace('T', ' trillion')
@@ -122,7 +121,7 @@ function scatterplot () {
     // Lines
     const lines = plot.selectAll('line.selectedLine').data(selectedCountries.countriesData, d => d['ISO-Year'])
 
-    lines.attr('display', d => checkCurrentYear(d.Year))
+    lines.attr('display', d => checkCurrentYear(d.year))
 
     lines.enter().append('line')
       .attr('data-iso', d => d['ISO-Year'])
@@ -154,15 +153,15 @@ function scatterplot () {
 
     circles.enter().append('circle')
       .attr('class', 'item' + ' ' + bubbleClass)
-      .attr('data-country', d => d.country)
+      .attr('data-country', d => d.country_eng)
       .attr('data-iso', d => d.ISO)
-      .attr('data-year', d => d.Year)
+      .attr('data-year', d => d.year)
       .attr('r', d => scales.r(d[currentValues.axes.r.name]))
       .attr('cx', d => scales.x.type(d[currentValues.axes.x.name]))
       .attr('cy', d => scales.y.type(d[currentValues.axes.y.name]))
       .attr('fill', d => scales.c(d[colorDomain.value]))
       .attr('stroke', d => d3.color(scales.c(d[colorDomain.value])).darker(0.7))
-      .attr('display', d => checkCurrentYear(d.Year))
+      .attr('display', d => checkCurrentYear(d.year))
       .attr('opacity', d => checkSelectedCountry(d))
       .on('mouseover', function (d) {
         let selectedItem = d3.select(this)
@@ -183,13 +182,13 @@ function scatterplot () {
         .attr('opacity', d => checkSelectedCountry(d))
         .transition()
           .duration(1000)
-          .attr('data-year', d => d.Year)
+          .attr('data-year', d => d.year)
           .attr('r', d => scales.r(d[currentValues.axes.r.name]))
           .attr('cx', d => scales.x.type(d[currentValues.axes.x.name]))
           .attr('cy', d => scales.y.type(d[currentValues.axes.y.name]))
           .attr('fill', d => scales.c(d[colorDomain.value]))
           .attr('stroke', d => d3.color(scales.c(d[colorDomain.value])).darker(0.7))
-          .attr('display', d => checkCurrentYear(d.Year))
+          .attr('display', d => checkCurrentYear(d.year))
 
     circles.exit().remove()
   }
@@ -244,21 +243,23 @@ function scatterplot () {
     x.attr('transform', 'translate(0,' + height + ')')
       .call(axisBottom)
 
+    let xLabel = indicators[currentValues.axes[axisBottomScale].name][getLanguageProperty('name', currentValues.lang)] + ' (' + indicators[currentValues.axes[axisBottomScale].name][getLanguageProperty('units', currentValues.lang)] + ')'
     x.select('.axis__label')
       .attr('x', width / 2)
       .attr('y', margin.bottom - 5)
-      .text(currentValues.axes[axisBottomScale].name)
+      .text(xLabel)
 
     const y = axis.select('.axis--y')
 
     y.call(axisLeft)
 
+    let yLabel = indicators[currentValues.axes[axisLeftScale].name][getLanguageProperty('name', currentValues.lang)] + ' (' + indicators[currentValues.axes[axisLeftScale].name][getLanguageProperty('units', currentValues.lang)] + ')'
     y.select('.axis__label')
       .attr('y', 0 - (margin.left / 1.25))
       .attr('x', 0 - (height / 2))
       .attr('text-anchor', 'middle')
       .attr('transform', `rotate(-90)`)
-      .text(currentValues.axes[axisLeftScale].name)
+      .text(yLabel)
 
     // Year
     const year = container.select('.g-year')
@@ -305,7 +306,7 @@ function scatterplot () {
         .attr('x', parseFloat(this.getAttribute('cx')) + boundingClientRect.width / 2)
         .attr('y', parseFloat(this.getAttribute('cy')) + boundingClientRect.height / 2)
         .attr('class', 'radius-legend-label')
-        .text(formatter(formatAmount(d)))
+        .text(formatter(formatComma(d)))
     })
   }
 
@@ -421,18 +422,28 @@ function showTooltip (d, item, currentValues) {
   let xPos = d3.event.pageX
   let yPos = d3.event.pageY
 
+  let tooltipBody = ''
+  let axes = ['x', 'y', 'r']
+  axes.forEach(function (axis) {
+    tooltipBody += formatTooltipValue(currentValues.axes[axis].name, d[currentValues.axes[axis].name])
+  })
+
   tooltip.transition()
     .duration(200)
     .style('opacity', 0.9)
-  tooltip.html(`<p class="tooltip-heading">${d.country} ${d.Year}</p>
-    <p class="tooltip-body">
-    <span class="tooltip-label">${currentValues.axes.x.name}:</span> ${formatComma(d[currentValues.axes.x.name])}<br />
-    <span class="tooltip-label">${currentValues.axes.y.name}:</span> ${formatComma(d[currentValues.axes.y.name])}<br />
-    <span class="tooltip-label">${currentValues.axes.r.name}:</span> ${formatter(formatAmount(d[currentValues.axes.r.name]))}<br />
-    </p>`)
+  tooltip.html(`
+    <p class="tooltip-heading">${d[getLanguageProperty('country', currentValues.lang)]} ${d.year}</p>
+    <p class="tooltip-body">${tooltipBody}</p>`)
     .style('visibility', 'visible')
     .style('left', xPos + 'px')
     .style('top', yPos + 'px')
+
+  function formatTooltipValue (key, value) {
+    let label = indicators[key][getLanguageProperty('name', currentValues.lang)]
+    let unit = indicators[key][getLanguageProperty('units', currentValues.lang)]
+    let amount = formatter(formatComma(value)) + ' ' + unit
+    return `<span class="tooltip-label">${label}:</span> ${amount}<br />`
+  }
 }
 
 function hideTooltip () {
@@ -445,12 +456,17 @@ function hideTooltip () {
     })
 }
 
+function getLanguageProperty (property, lang) {
+  return property + '_' + lang
+}
+
 function init (args) {
   el = d3.select(args.container)
   el.datum(args.data)
   chart.currentValues(args.currentValues)
   chart.colorDomain(args.colorDomain)
   chart.selectedCountries(args.selectedCountries)
+  indicators = args.indicators
   el.call(chart)
   resize()
 }

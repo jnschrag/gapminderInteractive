@@ -10,6 +10,8 @@ function createPlot (args) {
   const yearRange = document.getElementById('year-range')
   const searchWarning = d3.select('.search-warning')
 
+  let lang
+
   let data
   let years
   let minYear
@@ -61,10 +63,11 @@ function createPlot (args) {
       row['ISO-Year'] = row.ISO + '-' + row.year
 
       // Group Regions
+      let region = row['region_' + lang]
       data.regions = data.regions || {}
-      data.regions[row.region] = data.regions[row.region] || {}
-      data.regions[row.region][row.ISO] = data.regions[row.region][row.ISO] || {
-        country: row.country,
+      data.regions[region] = data.regions[region] || {}
+      data.regions[region][row.ISO] = data.regions[region][row.ISO] || {
+        country: row['country_' + lang],
         iso: row.ISO
       }
 
@@ -72,12 +75,11 @@ function createPlot (args) {
       data.years = data.years || {}
       data.years[row.year] = data.years[row.year] || []
       data.years[row.year].push(row)
-      // data.years[row.year].sort(dynamicSort('ISO'))
 
       // Group Countries
       data.countries = data.countries || {}
       data.countries[row.ISO] = data.countries[row.ISO] || {
-        country: row.country,
+        country: row['country_' + lang],
         iso: row.ISO,
         years: {}
       }
@@ -106,6 +108,7 @@ function createPlot (args) {
       indicators[indicator.name] = indicator
 
       if (indicator.type === 'title') {
+        updatePageTitle(indicator)
         return
       }
       setupAxisVars(indicator)
@@ -119,11 +122,6 @@ function createPlot (args) {
     console.log(axisVars)
     console.log(currentAxes)
     console.log(ranges)
-    /**
-
-      TODO:
-      - Update page title
-     */
   }
 
   function setupAxisVars (indicator) {
@@ -152,6 +150,10 @@ function createPlot (args) {
     }, []))
   }
 
+  function updatePageTitle (indicator) {
+    d3.select('h1.title').text(indicator['name_' + lang])
+  }
+
   function calculateColors () {
     return [...new Set(data.raw.map(column => parseInt(column[colorValue]) || 0))].sort()
   }
@@ -167,7 +169,7 @@ function createPlot (args) {
         .selectAll('option')
         .data(axisVars[axis]).enter()
         .append('option')
-          .text(d => d)
+          .text(d => indicators[d]['name_' + lang])
           .property('value', d => d)
           .property('selected', d => d === currentAxes[axis].name)
 
@@ -556,7 +558,8 @@ function createPlot (args) {
     let currentValues = {
       currentYear: currentYear,
       scaleC: scaleC,
-      axes: currentAxes
+      axes: currentAxes,
+      lang: lang
     }
 
     chart.init({
@@ -564,6 +567,7 @@ function createPlot (args) {
       currentValues: currentValues,
       colorDomain: colorDomain,
       selectedCountries: selectedCountries,
+      indicators: indicators,
       container: '.chart-primary'
     })
   }
@@ -586,7 +590,12 @@ function createPlot (args) {
     }
   }
 
+  function checkLanguage () {
+    lang = 'eng'
+  }
+
   function init () {
+    checkLanguage()
     loadData()
     colorDomain.colors = calculateColors()
     setupColorLegend()
