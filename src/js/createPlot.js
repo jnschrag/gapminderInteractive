@@ -15,8 +15,15 @@ function createPlot (args) {
   let minYear
   let maxYear
   let currentYear
-  let axes = ['x', 'y', 'r']
-  let axisVars = {}
+
+  let indicators = {}
+  let axes = ['x', 'y', 'r', 'c']
+  let axisVars = {
+    x: [],
+    y: [],
+    r: [],
+    c: []
+  }
   let axesSelect = {}
   let ranges = {}
   let scaleTypes = ['linear', 'log']
@@ -28,17 +35,15 @@ function createPlot (args) {
 
   let currentAxes = {
     x: {
-      name: 'GNI per capita (US$)',
-      scaleType: 'log',
       direction: 'bottom'
     },
     y: {
-      name: 'Life Expectancy (years)',
-      scaleType: 'linear',
       direction: 'left'
     },
     r: {
-      name: 'Gross Domestic Product (PPP)'
+    },
+    c: {
+
     }
   }
 
@@ -50,20 +55,10 @@ function createPlot (args) {
   }
   const COLORS = ['#d3d3d3', '#58a897', '#83badc', '#3b75bb', '#a483a8', '#f7890e', '#ed392a']
 
-  function loadIndicators () {
-    console.log(args.indicators)
-  }
-
   function loadData () {
     let obj = args.data.reduce(function (data, row) {
-      data.axisVars = data.axisVars || []
-      if (data.axisVars.length == 0) {
-        data.axisVars = Object.keys(row)
-      }
-
       // Modify row properties
-      row = transformKeys(row)
-      row['ISO-Year'] = row.ISO + '-' + row.Year
+      row['ISO-Year'] = row.ISO + '-' + row.year
 
       // Group Regions
       data.regions = data.regions || {}
@@ -75,9 +70,9 @@ function createPlot (args) {
 
       // Group Years
       data.years = data.years || {}
-      data.years[row.Year] = data.years[row.Year] || []
-      data.years[row.Year].push(row)
-      // data.years[row.Year].sort(dynamicSort('ISO'))
+      data.years[row.year] = data.years[row.year] || []
+      data.years[row.year].push(row)
+      // data.years[row.year].sort(dynamicSort('ISO'))
 
       // Group Countries
       data.countries = data.countries || {}
@@ -86,7 +81,7 @@ function createPlot (args) {
         iso: row.ISO,
         years: {}
       }
-      data.countries[row.ISO].years[row.Year] = data.countries[row.ISO].years[row.Year] || row
+      data.countries[row.ISO].years[row.year] = data.countries[row.ISO].years[row.year] || row
 
       // All data
       data.raw = data.raw || []
@@ -97,7 +92,7 @@ function createPlot (args) {
 
     data = obj
 
-    setupAxisVars(data.axisVars)
+    loadIndicators()
 
     years = Object.keys(data.years)
     let range = d3.extent(years)
@@ -106,36 +101,55 @@ function createPlot (args) {
     maxYear = 2015
   }
 
-  function transformKeys (obj) {
-    return Object.keys(obj).reduce(function (o, prop) {
-      if (isNaN(parseInt(obj[prop]))) {
-        var value = obj[prop]
-      } else {
-        var value = parseFloat(obj[prop])
+  function loadIndicators () {
+    let result = args.indicators.map(function (indicator) {
+      indicators[indicator.name] = indicator
+
+      if (indicator.type === 'title') {
+        return
       }
-      var newProp = prop.replace('x_', '').replace('y_', '').replace('r_', '')
-      o[newProp] = value
-      return o
-    }, {})
+      setupAxisVars(indicator)
+
+      if (indicator.type != 'color') {
+        indicator.range = calculateRanges(indicator.name)
+      }
+    })
+
+    console.log(indicators)
+    console.log(axisVars)
+    console.log(currentAxes)
+    console.log(ranges)
+    /**
+
+      TODO:
+      - Update page title
+     */
   }
 
-  function setupAxisVars (columns) {
+  function setupAxisVars (indicator) {
+    let axes = indicator.default_axis.split(',')
     axes.forEach(function (axis) {
-      axisVars[axis] = columns.filter(column => column.includes(axis + '_'))
-        .map(column => column.split('_').pop())
-      calculateRanges(axisVars[axis])
+      axisVars[axis].push(indicator.name)
+
+      if (indicator.is_default_value == 1) {
+        currentAxes[axis].name = indicator.name
+
+        if (indicator.is_logged_default == 1) {
+          currentAxes[axis].scaleType = 'log'
+        } else {
+          currentAxes[axis].scaleType = 'linear'
+        }
+      }
     })
   }
 
-  function calculateRanges (axis) {
-    axis.forEach(function (column) {
-      ranges[column] = d3.extent(data.raw.reduce(function (result, value) {
-        if (value[column] != '') {
-          result.push(parseInt(value[column]))
-        }
-        return result
-      }, []))
-    })
+  function calculateRanges (indicator) {
+    return d3.extent(data.raw.reduce(function (result, value) {
+      if (value[indicator] != '') {
+        result.push(parseInt(value[indicator]))
+      }
+      return result
+    }, []))
   }
 
   function calculateColors () {
@@ -535,9 +549,9 @@ function createPlot (args) {
       })
     }
 
-    currentAxes.x.range = ranges[currentAxes.x.name]
-    currentAxes.y.range = ranges[currentAxes.y.name]
-    currentAxes.r.range = ranges[currentAxes.r.name]
+    currentAxes.x.range = indicators[currentAxes.x.name].range
+    currentAxes.y.range = indicators[currentAxes.y.name].range
+    currentAxes.r.range = indicators[currentAxes.r.name].range
 
     let currentValues = {
       currentYear: currentYear,
@@ -573,7 +587,6 @@ function createPlot (args) {
   }
 
   function init () {
-    loadIndicators()
     loadData()
     colorDomain.colors = calculateColors()
     setupColorLegend()

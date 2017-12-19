@@ -1,5 +1,5 @@
 import * as plot from './js/createPlot'
-import Data from './data/advanced-20171219.csv'
+import Data from './data/advanced-data-20171219.csv'
 import Indicators from './data/advanced-indicators-20171219.csv'
 import './scss/main.scss'
 import intro from 'intro.js'
