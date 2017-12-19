@@ -40,6 +40,8 @@ body {
   padding: 0;
   color: $gray;
 
+  --china-color: $red;
+
   &.sidebar-active {
     overflow: hidden;
   }

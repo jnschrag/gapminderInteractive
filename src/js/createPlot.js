@@ -49,13 +49,12 @@ function createPlot (args) {
     }
   }
 
-  const colorValue = 'world_bank_classification'
   let scaleC = d3.scaleOrdinal()
   let colorDomain = {
-    value: colorValue,
+    value: null,
     colors: []
   }
-  const COLORS = ['#d3d3d3', '#58a897', '#83badc', '#3b75bb', '#a483a8', '#f7890e', '#ed392a']
+  const COLORS = ['#d3d3d3', '#58a897', '#83badc', '#3b75bb', '#a483a8', '#f7890e']
 
   function loadData () {
     let obj = args.data.reduce(function (data, row) {
@@ -117,11 +116,6 @@ function createPlot (args) {
         indicator.range = calculateRanges(indicator.name)
       }
     })
-
-    console.log(indicators)
-    console.log(axisVars)
-    console.log(currentAxes)
-    console.log(ranges)
   }
 
   function setupAxisVars (indicator) {
@@ -155,7 +149,7 @@ function createPlot (args) {
   }
 
   function calculateColors () {
-    return [...new Set(data.raw.map(column => parseInt(column[colorValue]) || 0))].sort()
+    return [...new Set(data.raw.map(column => column[currentAxes.c.name] || 0))].sort()
   }
 
   function setupAxisSelect () {
@@ -175,6 +169,8 @@ function createPlot (args) {
 
       if (axis == 'x' || axis == 'y') {
         setupAxisSelectType(axis)
+      } else if (axis == 'c') {
+        setupColorLegend()
       }
 
       d3.selectAll('.axis-variable').on('change', function () {
@@ -249,6 +245,42 @@ function createPlot (args) {
         // d3.selectAll('.selectedLine').remove()
         drawPrimaryChart()
       })
+  }
+
+  function setupColorLegend () {
+    colorDomain.colors = calculateColors()
+    const colorCont = d3.select('.chart-color-legend')
+    const colorContList = colorCont.select('.chart-color-legend-list')
+    colorContList.selectAll('*').remove()
+    const colorLegend = colorContList.append('ul')
+
+    colorDomain.colors.push('China')
+    if (colorDomain.colors[0] != 0) {
+      colorDomain.colors.unshift(0)
+    }
+
+    scaleC.domain(colorDomain.colors)
+      .range(COLORS)
+
+    // Move No Data to End of list
+    colorDomain.colors.push(colorDomain.colors.shift())
+
+    let items = colorLegend.selectAll('li').data(colorDomain.colors)
+    items.enter().append('li')
+      .attr('class', d => 'color' + d)
+      .html(function (d) {
+        let label = d
+        if (d == 0) {
+          label = 'No Data'
+        }
+        return '<span style="background-color:' + scaleC(d) + '"></span>' + label
+      })
+
+    colorContList.append('div').attr('class', 'clear')
+  }
+
+  function calculateColorSelect () {
+    return d3.select('.filter-axis-c .axis-variable').property('value')
   }
 
   function setupRegionFilter () {
@@ -406,31 +438,6 @@ function createPlot (args) {
     return yearRange.noUiSlider.get()
   }
 
-  function setupColorLegend () {
-    const colorLegend = d3.select('.chart-color-legend').append('ul')
-
-    scaleC.domain(colorDomain.colors)
-      .range(COLORS)
-
-    // Move No Data to End of list
-    colorDomain.colors.push(colorDomain.colors.shift())
-
-    let items = colorLegend.selectAll('li').data(colorDomain.colors)
-    items.enter().append('li')
-      .attr('class', d => 'color' + d)
-      .html(function (d) {
-        let label = d
-        if (d == 6) {
-          label = 'China'
-        } else if (d == 0) {
-          label = 'No Data'
-        }
-        return '<span style="background-color:' + scaleC(d) + '"></span>' + label
-      })
-
-    d3.select('.chart-color-legend').append('div').attr('class', 'clear')
-  }
-
   function setupPlayBtn () {
     playBtn
       .on('click', function () {
@@ -537,6 +544,14 @@ function createPlot (args) {
     currentAxes.y.scaleType = calculateScaleTypes('y')
     currentAxes.r.name = calculateRadiusSelect()
 
+    let colorIndicator = calculateColorSelect()
+    let oldColor = currentAxes.c.name
+    currentAxes.c.name = colorIndicator
+    colorDomain.value = currentAxes.c.name
+    if (colorIndicator != oldColor) {
+      setupColorLegend()
+    }
+
     let sortField = '-' + currentAxes.r.name
     let sortedData = removeEmptyDataPoints(data.years[currentYear]).sort(dynamicSort(sortField, 'num'))
 
@@ -597,8 +612,6 @@ function createPlot (args) {
   function init () {
     checkLanguage()
     loadData()
-    colorDomain.colors = calculateColors()
-    setupColorLegend()
     setupRegionFilter()
     search()
     setupAxisSelect()

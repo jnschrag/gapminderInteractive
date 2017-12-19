@@ -1,7 +1,7 @@
 name,type,name_eng,name_standard,name_traditional,default_axis,is_default_value,min_value,max_value,min_years,max_years,is_percentage,units_eng,units_standard,units_traditional,desc_eng,desc_standard,desc_traditional,hint_eng,hint_standard,hint_traditional,needs_average_line,is_logged_default,lower_is_better
 title,title,Development Tracker,,,,,,,,,,,,,,,,,,,,,
 world_bank_classification,color,World Bank Classification,,,c,1,,,,,,,,,the description,,,,,,,,
-region,color,Regions,,,c,,,,,,,,,,,,,,,,,,
+region_eng,color,Regions,,,c,,,,,,,,,,,,,,,,,,
 gdp_ppp,econ,Gross Domestic Product (PPP),,,r,1,,,,,,,,,,,,,,,,,
 life_expectancy,social,Life Expectancy,,,y,1,,,1990,2015,,Years,,,,,,,,,1,,
 gni_per_capita,econ,GNI per capita,,,x,1,,,,,,US$,,,,,,Current Year dollars? 2014???,,,,1,

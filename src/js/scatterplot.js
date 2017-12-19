@@ -127,7 +127,7 @@ function scatterplot () {
       .attr('data-iso', d => d['ISO-Year'])
       .attr('class', 'item selectedLine')
       .attr('fill', 'none')
-      .attr('stroke', d => d3.color(scales.c(d[colorDomain.value])).darker(0.7))
+      .attr('stroke', d => d3.color(checkIfChina(d.ISO, scales.c(d[colorDomain.value]))).darker(0.7))
       .attr('stroke-linejoin', 'round')
       .attr('stroke-linecap', 'round')
       .attr('stroke-width', 1.5)
@@ -159,8 +159,8 @@ function scatterplot () {
       .attr('r', d => scales.r(d[currentValues.axes.r.name]))
       .attr('cx', d => scales.x.type(d[currentValues.axes.x.name]))
       .attr('cy', d => scales.y.type(d[currentValues.axes.y.name]))
-      .attr('fill', d => scales.c(d[colorDomain.value]))
-      .attr('stroke', d => d3.color(scales.c(d[colorDomain.value])).darker(0.7))
+      .attr('fill', d => checkIfChina(d.ISO, scales.c(d[colorDomain.value])))
+      .attr('stroke', d => d3.color(checkIfChina(d.ISO, scales.c(d[colorDomain.value]))).darker(0.7))
       .attr('display', d => checkCurrentYear(d.year))
       .attr('opacity', d => checkSelectedCountry(d))
       .on('mouseover', function (d) {
@@ -186,11 +186,18 @@ function scatterplot () {
           .attr('r', d => scales.r(d[currentValues.axes.r.name]))
           .attr('cx', d => scales.x.type(d[currentValues.axes.x.name]))
           .attr('cy', d => scales.y.type(d[currentValues.axes.y.name]))
-          .attr('fill', d => scales.c(d[colorDomain.value]))
-          .attr('stroke', d => d3.color(scales.c(d[colorDomain.value])).darker(0.7))
+          .attr('fill', d => checkIfChina(d.ISO, scales.c(d[colorDomain.value])))
+          .attr('stroke', d => d3.color(checkIfChina(d.ISO, scales.c(d[colorDomain.value]))).darker(0.7))
           .attr('display', d => checkCurrentYear(d.year))
 
     circles.exit().remove()
+  }
+
+  function checkIfChina (iso, defaultVal) {
+    if (iso === 'CHN') {
+      return getComputedStyle(document.body).getPropertyValue('--china-color')
+    }
+    return defaultVal
   }
 
   function checkCurrentYear (dataYear) {

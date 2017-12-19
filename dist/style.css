@@ -740,7 +740,8 @@ body {
   font-size: 18px;
   margin: 0;
   padding: 0;
-  color: #333; }
+  color: #333;
+  --china-color: #ed392a; }
   body.sidebar-active {
     overflow: hidden; }
 
@@ -969,6 +970,10 @@ path.item {
 =            Legends            =
 ===============================*/
 /*----------  Color Legend  ----------*/
+.chart-color-legend .filter-select {
+  width: auto;
+  margin-bottom: 0.5rem; }
+
 .chart-color-legend ul {
   list-style: none;
   padding: 0;
@@ -988,6 +993,8 @@ path.item {
     margin-right: 5px; }
   .chart-color-legend li.color0 {
     margin-left: 1rem; }
+  .chart-color-legend li.colorChina span {
+    background-color: #ed392a !important; }
 
 .chart-color-legend .clear {
   clear: both; }

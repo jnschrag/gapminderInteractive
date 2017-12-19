@@ -25,7 +25,6 @@ function setupBtns () {
 
   let chartBtn = document.querySelector('.btn-chart')
   chartBtn.addEventListener('click', function () {
-    console.log('go directly to chart')
     exploreChart()
   })
 }
