@@ -64,7 +64,8 @@ body {
   max-width: 70%;
 
   .second,
-  .third {
+  .third,
+  .btn-startIntro {
     // position: absolute;
     opacity: 0;
     visibility: hidden;
@@ -76,9 +77,9 @@ body {
   .third {
     @include prefix(animation, (fadein 2s ease-in 6s forwards))
   }
-  // .btn-startIntro {
-  //   @include prefix(animation, (fadein 2s ease-in 6.5s forwards))
-  // }
+  .btn-startIntro {
+    @include prefix(animation, (fadein 2s ease-in 6.5s forwards))
+  }
 }
 
 

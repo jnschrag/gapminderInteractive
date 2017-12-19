@@ -1589,7 +1589,8 @@ body.is-relative {
   position: relative;
   max-width: 70%; }
   .landing-content .second,
-  .landing-content .third {
+  .landing-content .third,
+  .landing-content .btn-startIntro {
     opacity: 0;
     visibility: hidden; }
   .landing-content .second {
@@ -1602,6 +1603,11 @@ body.is-relative {
     -moz-animation: fadein 2s ease-in 6s forwards;
     -ms-animation: fadein 2s ease-in 6s forwards;
     animation: fadein 2s ease-in 6s forwards; }
+  .landing-content .btn-startIntro {
+    -webkit-animation: fadein 2s ease-in 6.5s forwards;
+    -moz-animation: fadein 2s ease-in 6.5s forwards;
+    -ms-animation: fadein 2s ease-in 6.5s forwards;
+    animation: fadein 2s ease-in 6.5s forwards; }
 
 @keyframes fadein {
   from {
