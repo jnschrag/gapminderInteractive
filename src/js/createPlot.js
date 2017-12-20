@@ -33,7 +33,7 @@ function createPlot (args) {
   const playBtn = d3.select('#playbtn')
   let timer
   let playing = false
-  let defaultTransitionDuration = 1000
+  let defaultTransitionDuration = 750
   let transitionDuration = defaultTransitionDuration
 
   let currentAxes = {
@@ -612,10 +612,10 @@ function createPlot (args) {
     if (currentAxes.x.name != oldXName || currentAxes.y.name != oldYName) {
       calculateYearRange(currentAxes.x.name, currentAxes.y.name)
 
-      if (indicators[currentAxes.x.name]['desc_' + lang]) {
+      if (currentAxes.x.name != oldXName) {
         updatePageDesc(currentAxes.x.name)
         updateRecommendedComparisons(currentAxes.x.name)
-      } else if (indicators[currentAxes.y.name]['desc_' + lang]) {
+      } else if (currentAxes.y.name != oldYName) {
         updatePageDesc(currentAxes.y.name)
         updateRecommendedComparisons(currentAxes.y.name)
       }
