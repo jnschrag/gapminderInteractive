@@ -797,6 +797,9 @@ p {
 p.instructions {
   margin-bottom: 2rem; }
 
+.page-title .comparisons-country {
+  cursor: pointer; }
+
 .content-wrapper {
   position: relative; }
 
@@ -1205,9 +1208,7 @@ p.filter-desc {
 =            Timeline            =
 ================================*/
 #timeline {
-  margin-top: 2rem;
-  margin-left: 1rem;
-  margin-right: 1rem; }
+  margin: 2rem 1rem 3rem; }
 
 #year-range {
   padding: 1px;

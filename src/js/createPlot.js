@@ -129,6 +129,11 @@ function createPlot (args) {
       if (indicator.is_default_value == 1) {
         currentAxes[axis].name = indicator.name
 
+        if (indicator['desc_' + lang]) {
+          updatePageDesc(indicator.name)
+          updateRecommendedComparisons(indicator.name)
+        }
+
         if (indicator.is_logged_default == 1) {
           currentAxes[axis].scaleType = 'log'
         } else {
@@ -148,7 +153,35 @@ function createPlot (args) {
   }
 
   function updatePageTitle (indicator) {
-    d3.select('h1.title').text(indicator['name_' + lang])
+    d3.select('.page-title .title').text(indicator['name_' + lang])
+  }
+
+  function updatePageDesc (indicator) {
+    d3.select('.page-title .desc').html(indicators[indicator]['desc_' + lang])
+  }
+
+  function updateRecommendedComparisons (indicator) {
+    if (indicators[indicator].comparison_countries) {
+      let countries = indicators[indicator].comparison_countries.split(';')
+      let countriesHTML = ''
+      countries.forEach(function (country, i) {
+        let prefix = ', '
+        if (i == 0) {
+          prefix = ''
+        }
+        countriesHTML += prefix + '<a class="comparisons-country" data-iso="' + country + '">' + data.countries[country].country + '</a>'
+      })
+
+      d3.select('.page-title .comparisons').classed('is-hidden', false)
+      d3.select('.page-title .comparisons-countries').html(countriesHTML)
+
+      d3.selectAll('.comparisons-country').on('click', function () {
+        let iso = d3.select(this).attr('data-iso')
+        searchItem(iso)
+      })
+    } else {
+      d3.select('.page-title .comparisons').classed('is-hidden', true)
+    }
   }
 
   function calculateColors () {
@@ -578,6 +611,14 @@ function createPlot (args) {
 
     if (currentAxes.x.name != oldXName || currentAxes.y.name != oldYName) {
       calculateYearRange(currentAxes.x.name, currentAxes.y.name)
+
+      if (indicators[currentAxes.x.name]['desc_' + lang]) {
+        updatePageDesc(currentAxes.x.name)
+        updateRecommendedComparisons(currentAxes.x.name)
+      } else if (indicators[currentAxes.y.name]['desc_' + lang]) {
+        updatePageDesc(currentAxes.y.name)
+        updateRecommendedComparisons(currentAxes.y.name)
+      }
     }
 
     let colorIndicator = calculateColorSelect()
