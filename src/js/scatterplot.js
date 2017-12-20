@@ -137,6 +137,13 @@ function scatterplot () {
       .attr('y2', d => scales.y.type(d[currentValues.axes.y.name]))
       .attr('x1', d => scales.x.type(d.prevX))
       .attr('y1', d => scales.y.type(d.prevY))
+      .merge(lines)
+        .transition()
+          .duration(transitionDuration)
+          .attr('x2', d => scales.x.type(d[currentValues.axes.x.name]))
+          .attr('y2', d => scales.y.type(d[currentValues.axes.y.name]))
+          .attr('x1', d => scales.x.type(d.prevX))
+          .attr('y1', d => scales.y.type(d.prevY))
 
     lines.exit().remove()
   }

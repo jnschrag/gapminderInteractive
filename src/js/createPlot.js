@@ -103,7 +103,6 @@ function createPlot (args) {
   }
 
   function loadIndicators () {
-    console.log(args.indicators)
     let result = args.indicators.map(function (indicator) {
       indicators[indicator.name] = indicator
 
@@ -490,13 +489,17 @@ function createPlot (args) {
     playing = false
   }
 
-  function removeEmptyDataPoints (data) {
+  function removeEmptyDataPoints (data, disableCheckboxes = true) {
     let filtered = data.filter(function (column) {
       if (column[currentAxes.x.name] && column[currentAxes.y.name]) {
-        d3.select('.checkbox-container #' + column.ISO).property('disabled', false)
+        if (disableCheckboxes) {
+          d3.select('.checkbox-container #' + column.ISO).property('disabled', false)
+        }
         return column
       } else {
-        d3.select('.checkbox-container #' + column.ISO).property('disabled', true)
+        if (disableCheckboxes) {
+          d3.select('.checkbox-container #' + column.ISO).property('disabled', true)
+        }
       }
     })
     return filtered
@@ -590,7 +593,7 @@ function createPlot (args) {
 
     // If countries are selected, remove any empty data points and sort it by Year so the most recent year is always on top. Then remove that countries data from the existing array and append all of its data to the end of the existing array.
     if (selectedCountries.countriesData.length) {
-      let selectedCountriesData = removeEmptyDataPoints(selectedCountries.countriesData).sort(dynamicSortMultiple('ISO', 'Year'))
+      let selectedCountriesData = removeEmptyDataPoints(selectedCountries.countriesData, false).sort(dynamicSortMultiple('ISO', 'Year'))
 
       selectedCountries.countriesData = selectedCountriesData
 
