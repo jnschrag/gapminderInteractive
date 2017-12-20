@@ -60,6 +60,9 @@ function scatterplot () {
     guidelines.append('text').attr('class', 'chart-guidelines chart-guidelines-label--x')
     guidelines.append('text').attr('class', 'chart-guidelines chart-guidelines-label--y')
 
+    const gAvg = gEnter.append('g').attr('class', 'g-mean')
+    gAvg.append('line').attr('class', 'chart-mean-line')
+
     gEnter.append('g').attr('class', 'g-plot')
 
     const axis = gEnter.append('g').attr('class', 'g-axis')
@@ -293,6 +296,73 @@ function scatterplot () {
         .text(currentValues.currentYear)
   }
 
+  function updateMeanLine ({ container, data }) {
+    const line = container.select('.chart-mean-line')
+
+    if (!indicators[currentValues.axes.x.name].needs_average_line && !indicators[currentValues.axes.y.name].needs_average_line) {
+      return
+    }
+
+    let avg = 0
+    if (indicators[currentValues.axes.x.name].needs_average_line) {
+      avg = d3.mean(data, function (d) {
+        if (d.world_bank_classification == 4 || d.world_bank_classification == 5) {
+          return +d[currentValues.axes.x.name]
+        }
+      })
+
+      line
+        .on('mouseover', function () {
+          showAvgTooltip(indicators[currentValues.axes.x.name].name, 'test')
+          let name = indicators[currentValues.axes.x.name][getLanguageProperty('name', currentValues.lang)]
+          let unit = indicators[currentValues.axes.x.name][getLanguageProperty('units', currentValues.lang)]
+          let amount = formatter(formatComma(avg)) + ' ' + unit
+          showAvgTooltip(name, amount)
+        })
+        .on('mouseout', hideTooltip)
+        .transition()
+        .duration(transitionDuration)
+          .attr('x1', scales.x.type(avg))
+          .attr('y1', 0)
+          .attr('x2', scales.x.type(avg))
+          .attr('y2', height)
+    } else if (indicators[currentValues.axes.y.name].needs_average_line) {
+      avg = d3.mean(data, function (d) {
+        if (d.world_bank_classification == 4 || d.world_bank_classification == 5) {
+          return +d[currentValues.axes.y.name]
+        }
+      })
+
+      line
+        .on('mouseover', function () {
+          let name = indicators[currentValues.axes.y.name][getLanguageProperty('name', currentValues.lang)]
+          let unit = indicators[currentValues.axes.y.name][getLanguageProperty('units', currentValues.lang)]
+          let amount = formatter(formatComma(avg)) + ' ' + unit
+          showAvgTooltip(name, amount)
+        })
+        .on('mouseout', hideTooltip)
+        .transition()
+        .duration(transitionDuration)
+          .attr('x1', 0)
+          .attr('y1', scales.y.type(avg))
+          .attr('x2', width)
+          .attr('y2', scales.y.type(avg))
+    }
+
+    function showAvgTooltip (name, value) {
+      tooltip.transition()
+        .duration(200)
+        .style('opacity', 0.9)
+      tooltip.html(`
+        <p class="tooltip-heading">${name} ${currentValues.currentYear}</p>
+        <p class="tooltip-body">
+          <span class="tooltip-label">Average:</span> ${value}</p>`)
+        .style('visibility', 'visible')
+        .style('left', d3.event.pageX + 'px')
+        .style('top', d3.event.pageY + 'px')
+    }
+  }
+
   function updateLegends ({data}) {
     const svg = d3.select('.chart-radius-legend svg')
       .attr('width', '100%')
@@ -339,6 +409,7 @@ function scatterplot () {
     updateScales({ container, data })
     updateDom({ container, data })
     updateAxis({ container, data })
+    updateMeanLine({container, data})
     // updateLegends({ container, data })
   }
 

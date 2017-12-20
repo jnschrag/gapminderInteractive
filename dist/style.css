@@ -925,6 +925,11 @@ path.item {
     fill: #ed392a;
     text-anchor: middle; }
 
+/*----------  Mean Line  ----------*/
+.g-mean line {
+  stroke: #69518d;
+  stroke-width: 2; }
+
 /*----------  Tooltips  ----------*/
 /*================================
 =            Tooltips            =
@@ -1595,26 +1600,6 @@ body.is-relative {
 .landing-content {
   position: relative;
   max-width: 70%; }
-  .landing-content .second,
-  .landing-content .third,
-  .landing-content .btn-startIntro {
-    opacity: 0;
-    visibility: hidden; }
-  .landing-content .second {
-    -webkit-animation: fadein 2s ease-in 4s forwards;
-    -moz-animation: fadein 2s ease-in 4s forwards;
-    -ms-animation: fadein 2s ease-in 4s forwards;
-    animation: fadein 2s ease-in 4s forwards; }
-  .landing-content .third {
-    -webkit-animation: fadein 2s ease-in 6s forwards;
-    -moz-animation: fadein 2s ease-in 6s forwards;
-    -ms-animation: fadein 2s ease-in 6s forwards;
-    animation: fadein 2s ease-in 6s forwards; }
-  .landing-content .btn-startIntro {
-    -webkit-animation: fadein 2s ease-in 6.5s forwards;
-    -moz-animation: fadein 2s ease-in 6.5s forwards;
-    -ms-animation: fadein 2s ease-in 6.5s forwards;
-    animation: fadein 2s ease-in 6.5s forwards; }
 
 @keyframes fadein {
   from {

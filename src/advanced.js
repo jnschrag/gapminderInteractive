@@ -92,8 +92,8 @@ function assignAnnotations () {
         	position: 'right'
 	    },
 	    {
-        	element: document.querySelector('.chart-primary'),
-        	intro: 'The red horizontal line represents the average value for development economies. For life expectancy, you can see that in 1990 this average was [FILL IN] years',
+        	element: document.querySelector('.chart-mean-line'),
+        	intro: 'The purple horizontal line represents the average value for development economies. For life expectancy, you can see that in 1990 this average was [FILL IN] years',
         	position: 'right'
 	    },
 	    {

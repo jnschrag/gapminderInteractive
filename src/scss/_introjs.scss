@@ -63,23 +63,23 @@ body {
   position: relative;
   max-width: 70%;
 
-  .second,
-  .third,
-  .btn-startIntro {
-    // position: absolute;
-    opacity: 0;
-    visibility: hidden;
-  }
+  // .second,
+  // .third,
+  // .btn-startIntro {
+  //   // position: absolute;
+  //   opacity: 0;
+  //   visibility: hidden;
+  // }
 
-  .second {
-    @include prefix(animation, (fadein 2s ease-in 4s forwards))
-  }
-  .third {
-    @include prefix(animation, (fadein 2s ease-in 6s forwards))
-  }
-  .btn-startIntro {
-    @include prefix(animation, (fadein 2s ease-in 6.5s forwards))
-  }
+  // .second {
+  //   @include prefix(animation, (fadein 2s ease-in 4s forwards))
+  // }
+  // .third {
+  //   @include prefix(animation, (fadein 2s ease-in 6s forwards))
+  // }
+  // .btn-startIntro {
+  //   @include prefix(animation, (fadein 2s ease-in 6.5s forwards))
+  // }
 }
 
 

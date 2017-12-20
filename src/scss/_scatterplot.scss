@@ -61,5 +61,12 @@ path.item {
     fill: $red;
     text-anchor: middle;
   }
+}
 
+/*----------  Mean Line  ----------*/
+.g-mean {
+  line {
+    stroke: $dark-purple;
+    stroke-width: 2;
+  }
 }
