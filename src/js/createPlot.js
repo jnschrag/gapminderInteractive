@@ -702,6 +702,16 @@ function createPlot (args) {
     drawChart: function () {
       drawPrimaryChart()
     },
+    resetChart: function () {
+      currentYear = minYear
+      yearRange.noUiSlider.set(currentYear)
+      drawPrimaryChart()
+    },
+    jumpToTimelineEnd: function () {
+      currentYear = maxYear
+      yearRange.noUiSlider.set(currentYear)
+      drawPrimaryChart()
+    },
     updateTransitionLength: function (duration) {
       transitionDuration = duration || defaultTransitionDuration
     }

@@ -23,6 +23,9 @@ $dark-gray: #d4d0cb;
 $dark-blue: #1D435E;
 $dark-purple: #69518d;
 $grid-lines: #c5c5c5;
+$color__text-button-blue: $blue-gray;
+$color__background-button-blue: #2b3d46;
+$color__background-button-gray: #d6d6d6;
 
 $font-hind: 'Hind', sans-serif;
 $font-roboto: 'Roboto', sans-serif;
@@ -138,6 +141,9 @@ p.instructions {
 
 /*----------  Accordion  ----------*/
 @import 'accordion';
+
+/*----------  Buttons  ----------*/
+@import 'buttons';
 
 /*----------  Loading  ----------*/
 @import "loading";

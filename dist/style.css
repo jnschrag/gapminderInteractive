@@ -875,6 +875,9 @@ p.instructions {
     .sidebar-options-close::after {
       transform: rotate(-45deg); }
 
+.filter-intro {
+  text-align: right; }
+
 /*----------  Scatterplot  ----------*/
 /*===================================
 =            Scatterplot            =
@@ -1497,6 +1500,46 @@ p.filter-desc {
   transition: max-height 0.3s cubic-bezier(0, 1, 0, 1), padding 0.3s cubic-bezier(0, 1, 0, 1);
   border: 0; }
 
+/*----------  Buttons  ----------*/
+/*===============================
+=            Buttons            =
+===============================*/
+.btn, .introjs-button {
+  color: #fff;
+  text-transform: uppercase;
+  font-family: "Roboto", sans-serif;
+  font-size: 13px;
+  font-size: 0.8125rem;
+  line-height: 1.69;
+  letter-spacing: 0.7px;
+  padding: 0.25rem 0.75rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  border: 0;
+  border-radius: 2px;
+  cursor: pointer; }
+
+.btn.btn-red, .btn-red.introjs-button, .introjs-button.introjs-donebutton, .btn.introjs-donebutton {
+  background-color: #ed392a; }
+  .btn.btn-red:hover, .btn-red.introjs-button:hover, .introjs-button.introjs-donebutton:hover, .btn.introjs-donebutton:hover {
+    background-color: #c42d21; }
+
+.btn.btn-blue, .introjs-button {
+  background-color: #2b3d46; }
+  .btn.btn-blue:hover, .introjs-button:hover {
+    background-color: #728c99; }
+
+.btn.btn-transparent, .btn-transparent.introjs-button {
+  background-color: transparent;
+  color: #000;
+  text-transform: none; }
+
+.btn.btn-gray, .btn-gray.introjs-button {
+  background-color: #f1f1f1;
+  color: #808081; }
+  .btn.btn-gray:hover, .btn-gray.introjs-button:hover {
+    background-color: #d6d6d6; }
+
 /*----------  Loading  ----------*/
 /*===============================
 =            Loading            =
@@ -1592,14 +1635,18 @@ body.is-relative {
   left: 0;
   right: 0;
   height: 100%;
-  opacity: 0.9 !important;
+  opacity: 1 !important;
   display: flex;
   justify-content: center;
-  align-items: center; }
+  align-items: center;
+  color: #000; }
 
 .landing-content {
   position: relative;
-  max-width: 70%; }
+  max-width: 400px;
+  border: 1px solid #728c99; }
+  .landing-content .btn-container {
+    text-align: center; }
 
 @keyframes fadein {
   from {
@@ -1669,6 +1716,9 @@ tr.introjs-showElement > th {
   -ms-transition: all 0.3s ease-out;
   -o-transition: all 0.3s ease-out;
   transition: all 0.3s ease-out; }
+
+.intro-circleSelectRef {
+  z-index: calc(10 + 10); }
 
 .introjs-helperLayer *,
 .introjs-helperLayer *:before,
@@ -1777,6 +1827,7 @@ tr.introjs-showElement > th {
   min-width: 200px;
   max-width: 250px;
   box-sizing: content-box;
+  border: 1px solid #728c99;
   position: absolute;
   visibility: visible;
   -webkit-transition: opacity 0.1s ease-out;
@@ -1785,68 +1836,37 @@ tr.introjs-showElement > th {
   -o-transition: opacity 0.1s ease-out;
   transition: opacity 0.1s ease-out; }
 
+.intro-firstSlide {
+  min-width: 500px;
+  max-width: 600px; }
+
 .introjs-tooltipbuttons {
-  text-align: right;
-  white-space: nowrap; }
+  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center; }
 
-/*
- Buttons style by http://nicolasgallagher.com/lab/css3-github-buttons/
- Changed by Afshin Mehrabani
-*/
 .introjs-button {
-  box-sizing: content-box;
-  position: relative;
-  overflow: visible;
-  display: inline-block;
-  padding: 0.3em 0.8em;
-  border: 1px solid #d4d4d4;
-  margin: 0;
-  text-decoration: none;
-  text-shadow: 1px 1px 0 #fff;
-  font: 11px/normal sans-serif;
-  color: #333;
-  white-space: nowrap;
-  cursor: pointer;
-  outline: none;
-  background-color: #ececec;
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#f4f4f4), to(#ececec));
-  background-image: -moz-linear-gradient(#f4f4f4, #ececec);
-  background-image: -o-linear-gradient(#f4f4f4, #ececec);
-  background-image: linear-gradient(#f4f4f4, #ececec);
-  -webkit-background-clip: padding;
-  -moz-background-clip: padding;
-  -o-background-clip: padding-box;
-  /*background-clip: padding-box;*/
-  /* commented out due to Opera 11.10 bug */
-  -webkit-border-radius: 0.2em;
-  -moz-border-radius: 0.2em;
-  border-radius: 0.2em;
-  /* IE hacks */
-  zoom: 1;
-  *display: inline;
-  margin-top: 10px; }
-
-.introjs-button:hover {
-  border-color: #bcbcbc;
-  text-decoration: none;
-  box-shadow: 0px 1px 1px #e3e3e3; }
-
-.introjs-button:focus,
-.introjs-button:active {
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ececec), to(#f4f4f4));
-  background-image: -moz-linear-gradient(#ececec, #f4f4f4);
-  background-image: -o-linear-gradient(#ececec, #f4f4f4);
-  background-image: linear-gradient(#ececec, #f4f4f4); }
-
-/* overrides extra padding on button elements in Firefox */
-.introjs-button::-moz-focus-inner {
-  padding: 0;
-  border: 0; }
+  margin: 5px 0; }
 
 .introjs-skipbutton {
-  box-sizing: content-box;
-  margin-right: 5px;
-  color: #7a7a7a; }
+  order: 3;
+  display: block;
+  flex-basis: 100%;
+  background-color: transparent;
+  color: #c42d21;
+  margin: 0;
+  text-transform: none; }
+  .introjs-skipbutton:hover {
+    background-color: transparent; }
+
+.introjs-donebutton {
+  color: #fff;
+  flex-basis: auto;
+  text-transform: uppercase; }
+  .introjs-donebutton:hover {
+    background-color: #c42d21; }
 
 .introjs-prevbutton {
   -webkit-border-radius: 0.2em 0 0 0.2em;
@@ -1855,7 +1875,6 @@ tr.introjs-showElement > th {
   border-right: none; }
 
 .introjs-prevbutton.introjs-fullbutton {
-  border: 1px solid #d4d4d4;
   -webkit-border-radius: 0.2em;
   -moz-border-radius: 0.2em;
   border-radius: 0.2em; }

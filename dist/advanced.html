@@ -13,13 +13,13 @@
             <div class="loading"></div>
         </div>
         <div class="content-wrapper row">
-            <div class="chart-container col-xs-12">
-                <div class="chart-color-legend is-hidden">
+            <div class="chart-container col-xs-12 col-md-9">
+                <div class="chart-color-legend">
                     <div class="filter-axis-c"></div>
                     <div class="chart-color-legend-list"></div>
                 </div>
                 <div class="chart chart-primary"></div>
-                <div id="timeline" class="is-hidden">
+                <div id="timeline">
                     <div id="playbtn" class="play">
                         <div class="play-bg">
                             <span class="play-icon"></span>
@@ -28,10 +28,10 @@
                     <div id="year-range"></div>
                 </div>
             </div>
-            <div class="sidebar col-xs-12  col-md-3 is-hidden">
+            <div class="sidebar col-xs-12 col-md-3">
                 <div class="sidebar-options sidebar-options-close">Close</div>
                 <div class="filter-option filter-axis-x">
-                    <span class="filter-label">X-Axis Variable</span>
+                    <span class="filter-label">X-Axis</span>
                 </div>
                 <div class="filter-option filter-swap-axes">
                     <button class="filter-swap" title="Swap Axes">
@@ -39,15 +39,18 @@
                     </button>
                 </div>
                 <div class="filter-option filter-axis-y">
-                    <span class="filter-label">Y-Axis Variable</span>
+                    <span class="filter-label">Y-Axis</span>
                 </div>
                 <div class="filter-option filter-axis-r">
-                    <span class="filter-label">Circle Radius Variable</span>
+                    <span class="filter-label">Circle Radius</span>
                 </div>
                 <div class="filter-option filter-region">
                     <span class="filter-label">Select Countries</span>
                     <input type='text' class='country-search' name="country-search" placeholder="Search">
                     <div class="search-warning filter-desc"></div>
+                </div>
+                <div class="filter-option filter-intro">
+                    <button class="btn btn-gray btn-intro-restart">Retake the tour</button>
                 </div>
             </div>
         </div>
@@ -60,9 +63,11 @@
     </div>
     <div class="introjs-overlay landing-container">
         <div class="landing-content">
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-            <button class="btn btn-intro">Learn More</button>
-            <button class="btn btn-chart">Explore</button>
+            <p>The ChinaPower Development Tracker enables users to compare the relationship between China’s economic growth and development.</p>
+            <div class="btn-container">
+                <button class="btn btn-chart btn-blue">Use the Tracker</button> or 
+                <button class="btn btn-intro btn-blue">Take a Guided Tour</button>
+            </div>
         </div>
     </div>
     <div class="container-overlay"></div>

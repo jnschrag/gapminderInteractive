@@ -20,56 +20,53 @@ function init () {
 function setupBtns () {
   let introBtn = document.querySelector('.btn-intro')
   introBtn.addEventListener('click', event => {
-    updateLandingText()
+  	hideLanding()
+    startIntro()
   })
 
   let chartBtn = document.querySelector('.btn-chart')
   chartBtn.addEventListener('click', function () {
     exploreChart()
   })
+
+  let restartBtn = document.querySelector('.btn-intro-restart')
+  restartBtn.addEventListener('click', function () {
+  	plotted.resetChart()
+    startIntro()
+  })
 }
 
 function exploreChart () {
   let overlays = document.querySelectorAll('.introjs-overlay')
   overlays.forEach(function (element) { element.remove() })
-  updateDom.showSidebar()
-  updateDom.showColors()
-  updateDom.showTimeline()
 }
 
-function updateLandingText () {
-  let landingContent = document.querySelector('.landing-content')
-  landingContent.innerHTML = `
-  	<p class="first">China’s transformation from a developing country into an emerging global power is likely to be one of the most consequential factors in twenty-first century international politics. Its economy is now the second largest in the world, and in the process hundreds of millions of people have been lifted out of poverty.</p>
-  	<p class="second">Yet questions persist as to whether China is a developed or developing country – or both.</p>
-  	<p class="third">This Development Tracker empowers users to compare various economic and social indicators of development, and compare China’s level of development with other countries.</p>
-  	<button class="btn btn-startIntro">Next</button>
-  	`
-  let introBtn = document.querySelector('.btn-startIntro')
-  introBtn.addEventListener('click', event => {
-  	document.body.classList.toggle('is-relative')
-  	document.querySelector('.landing-container').classList.toggle('is-hidden')
-  	landingContent.classList.toggle('is-hidden')
-    startIntro()
-  })
+function hideLanding () {
+  updateDom.hideLanding()
 }
 
 function startIntro () {
-  updateDom.showSidebar()
   introJs.start()
   introWatchStepChange()
 }
 
 function assignAnnotations () {
   introJs.setOptions({
+  	skipLabel: 'Skip the Tour',
+  	hidePrev: true,
+  	hideNext: true,
+  	doneLabel: 'Use the Tracker',
+  	showStepNumbers: false,
     steps: [
     	{
-	        intro: 'Decades of breakneck economic growth have left questions as to China’s level of development.'
+    		intro: '<p>China’s transformation from a developing country into an emerging global power is likely to be one of the most consequential factors in twenty-first century international politics. Its economy is now the second largest in the world, and in the process hundreds of millions of people have been lifted out of poverty.</p><p>Yet questions persist as to whether China is a developed or developing country – or both.</p><p>The ChinaPower Development Tracker empowers users to explore various indicators of development, and compare China with other countries.</p>',
+    		tooltipClass: 'intro-firstSlide'
 	    },
 	    {
-        	element: document.querySelector('.filter-axis-r'),
-        	intro: 'The Development Tracker represents each country in the world as a bubble. The size of each bubble is determined by the size of a country’s economy.',
-        	position: 'left'
+        	element: document.querySelector('circle[data-iso="CHN"]'),
+        	intro: 'Each country is represented as a bubble. The size of each bubble is determined by the size of a country’s economy.',
+        	position: 'right',
+        	tooltipClass: 'intro-circleSelect'
 	    },
 	    {
         	element: document.querySelector('.filter-axis-x'),
@@ -78,7 +75,7 @@ function assignAnnotations () {
 	    },
 	    {
         	element: document.querySelector('.chart-color-legend'),
-        	intro: 'The colors of each bubble correspond to the four income groups assigned by the World Bank.',
+        	intro: 'The colors of each bubble correspond to the income groups assigned by the World Bank',
         	position: 'bottom'
 	    },
 	    {
@@ -87,13 +84,13 @@ function assignAnnotations () {
         	position: 'right'
 	    },
 	    {
-        	element: document.querySelector('.chart-primary'),
-        	intro: 'The Development Tracker enables users to compare the relationship between economic growth and social development.',
-        	position: 'right'
+        	element: document.querySelector('.filter-axis-y'),
+        	intro: 'Use the Y-Axis to select a social indication, such as life expectancy.',
+        	position: 'left'
 	    },
 	    {
         	element: document.querySelector('.chart-mean-line'),
-        	intro: 'The purple horizontal line represents the average value for development economies. For life expectancy, you can see that in 1990 this average was [FILL IN] years',
+        	intro: 'The purple horizontal line represents the average value for high-income economies. For life expectancy, you can see that in 1990 this average was 75.3 years.',
         	position: 'right'
 	    },
 	    {
@@ -103,26 +100,16 @@ function assignAnnotations () {
 	    },
 	    {
         	element: document.querySelector('.chart-primary'),
-        	intro: 'By 2015, we can see the size of China’s economy [FILL IN], per capita income [FILL IN], and average life expectancy increased by [FILL IN] years.',
+        	intro: 'By 2015, the size of China’s economy increased by more than 10 times, per capita incomes rose by (FACTOR?), and average life expectancy increased by almost seven years. Importantly, China’s life expectancy in 2015 remained three and a half behind the average of high-income economies.',
         	position: 'right'
 	    },
 	    {
         	element: document.querySelector('.chart-primary'),
-        	intro: 'The Development Tracker makes it easy to visually compare the development levels of different countries.',
+        	intro: '<p>The Development Tracker makes it easy to visually compare the development levels of different countries.</p><p>For instance, when comparing China to India and South Africa, we can see that all three countries have followed very different paths.</p>',
         	position: 'right'
 	    },
 	    {
-        	element: document.querySelector('.chart-primary'),
-        	intro: 'Since 2000, we can see that India, Russia, and China have followed very different paths in terms of income and life expectancy.',
-        	position: 'right'
-	    },
-	    {
-        	element: document.querySelector('.sidebar'),
-        	intro: 'The Development Tracker is preloaded with several economic and social indicators.',
-        	position: 'left'
-	    },
-	    {
-        	intro: 'We hope this tool helps you to better understand China’s level development. Enjoy!'
+	    	intro: '<p>The Development Tracker is preloaded with several economic and social indicators.</p><p>We hope this tool helps you to better understand China’s level development. Enjoy!</p>'
 	    }
     ]
   })
@@ -131,30 +118,47 @@ function assignAnnotations () {
 function introWatchStepChange () {
   introJs.onbeforechange(function (targetElement) {
   	let currentStep = this._currentStep
-    if (currentStep == 3) {
-    	updateDom.showColors()
-    } else if (currentStep == 4) {
+    if (currentStep == 4) {
     	updateDom.highlightCountries({
-    		show: ['USA', 'CHN']
+    		show: ['USA', 'CHN'],
+    		hide: ['ZAF', 'IND']
     	})
     } else if (currentStep == 7) {
-    	updateDom.showTimeline()
+    	plotted.resetChart()
     	updateDom.playTimeline()
-    } else if (currentStep == 10) {
+    } else if (currentStep == 9) {
     	updateDom.highlightCountries({
-    		show: ['CHN', 'RUS', 'IND'],
+    		show: ['CHN', 'ZAF', 'IND'],
     		hide: ['USA']
     	})
-    } else if (currentStep == 11) {
+    } else if (currentStep == 10) {
     	updateDom.highlightCountries({
-    		hide: ['USA', 'CHN', 'RUS', 'IND']
+    		hide: ['USA', 'CHN', 'ZAF', 'IND']
     	})
     	plotted.updateTransitionLength()
     }
   })
+
+  introJs.onchange(function (targetElement) {
+  	let currentStep = this._currentStep
+  	if (currentStep == 1 || currentStep == 5) {
+    	document.querySelector('.introjs-tooltipReferenceLayer').classList.add('intro-circleSelectRef')
+  	} else if (currentStep != 0) {
+  		document.querySelector('.introjs-tooltipReferenceLayer').classList.remove('intro-circleSelectRef')
+  	}
+  })
+
+  introJs.onexit(function () {
+  	plotted.resetChart()
+  })
 }
 
 let updateDom = {
+  hideLanding: function () {
+    document.body.classList.toggle('is-relative')
+  	document.querySelector('.landing-container').classList.toggle('is-hidden')
+  	document.querySelector('.landing-content').classList.toggle('is-hidden')
+  },
   highlightCountries: function (args) {
   	if (args.hide) {
 	    args.hide.forEach(function (country) {
@@ -173,17 +177,6 @@ let updateDom = {
   playTimeline: function () {
   	plotted.updateTransitionLength(300)
     document.querySelector('#playbtn').click()
-  },
-  showColors: function () {
-    document.querySelector('.chart-color-legend').classList.toggle('is-hidden')
-  },
-  showSidebar: function () {
-    document.querySelector('.chart-container').classList.toggle('col-md-9')
-    document.querySelector('.sidebar').classList.toggle('is-hidden')
-    plotted.drawChart()
-  },
-  showTimeline: function () {
-    document.querySelector('#timeline').classList.toggle('is-hidden')
   }
 }
 
