@@ -769,7 +769,6 @@ function createPlot (args) {
       windowWidth = window.innerWidth
       chart.resize()
       initSidebar()
-      setupAxisSelect()
     }
   }
 
