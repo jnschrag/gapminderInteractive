@@ -37,7 +37,9 @@
 		}
 
 		&.color0 {
-			margin-left: 1rem;
+			@include breakpoint("medium") {
+				margin-left: 1rem;
+			}
 		}
 
 		&.colorChina {

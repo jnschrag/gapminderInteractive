@@ -180,7 +180,7 @@ function createPlot (args) {
       let enterComparisons = comparisons.enter().append('span')
         .attr('class', 'checkbox-container')
       enterComparisons.append('input')
-          .attr('name', 'country')
+          .attr('name', 'comparison-country')
           .attr('class', 'checkboxes')
           .attr('type', 'checkbox')
           .attr('id', d => d)
@@ -192,8 +192,15 @@ function createPlot (args) {
         .attr('for', d => d)
         .text(d => data.countries[d].country)
 
-      container.selectAll('input[name="country"]').on('change', function () {
-        clickCountryCheckbox(this)
+      container.selectAll('input[name="comparison-country"]').on('change', function () {
+        let checkedItem = d3.select(this)
+        let iso = checkedItem.attr('data-iso')
+        let checked = checkedItem.property('checked')
+        let newCheckVal = true
+        if (checked) {
+          newCheckVal = false
+        }
+        d3.select('input[name="country"][data-iso="' + iso + '"]').property('checked', checked).on('change')()
       })
 
       d3.select('.page-title .comparisons').classed('is-hidden', false)
@@ -334,6 +341,16 @@ function createPlot (args) {
         let label = d
         if (d == 0) {
           label = 'No Data'
+        } else if (d == 1) {
+          label = 'Poor'
+        } else if (d == 2) {
+          label = 'Low'
+        } else if (d == 3) {
+          label = 'Lower-Middle'
+        } else if (d == 4) {
+          label = 'Upper-Middle'
+        } else if (d == 5) {
+          label = 'High'
         }
         return '<span style="background-color:' + scaleC(d) + '"></span>' + label
       })
@@ -395,15 +412,6 @@ function createPlot (args) {
   }
 
   function clickCountryCheckbox (checkbox) {
-    let checkedItem = d3.select(checkbox)
-    let iso = checkedItem.attr('data-iso')
-    let checked = checkedItem.property('checked')
-    let newCheckVal = false
-    if (checked) {
-      newCheckVal = true
-    }
-    let checkboxes = d3.selectAll('input[name="country"][data-iso="' + iso + '"]')
-    d3.selectAll('input[name="country"][data-iso="' + iso + '"]').property('checked', newCheckVal)
     drawPrimaryChart()
   }
 

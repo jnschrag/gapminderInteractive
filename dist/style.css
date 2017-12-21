@@ -1051,8 +1051,9 @@ path.item {
     width: 12px;
     height: 12px;
     margin-right: 5px; }
-  .chart-color-legend li.color0 {
-    margin-left: 1rem; }
+  @media screen and (min-width: 48em) {
+    .chart-color-legend li.color0 {
+      margin-left: 1rem; } }
   .chart-color-legend li.colorChina span {
     background-color: #ed392a !important; }
 

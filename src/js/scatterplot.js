@@ -187,7 +187,7 @@ function scatterplot () {
         if (checked) {
           newCheckVal = false
         }
-
+        d3.select('input[name="comparison-country"][data-iso="' + d.ISO + '"]').property('checked', newCheckVal)
         d3.select(checkbox).property('checked', newCheckVal).on('change')()
       })
       .merge(circles)
