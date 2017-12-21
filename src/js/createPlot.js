@@ -118,6 +118,25 @@ function createPlot (args) {
       if (indicator.type != 'color') {
         indicator.range = calculateRanges(indicator.name)
       }
+
+      if (indicator.step_alt) {
+        indicator.steps = {}
+        let breaks = indicator.step_alt.split(';')
+        breaks.forEach(function (chunk, i) {
+          let step = chunk.split(':')
+          let year = parseInt(step[0])
+          let stepGap = parseInt(step[1])
+          if (stepGap > 1) {
+            let nextBreak = parseInt(breaks[i + 1].split(':')[0])
+            for (let counter = year; counter < nextBreak;) {
+              indicator.steps[counter] = stepGap
+              counter = counter + stepGap
+            }
+          } else {
+            indicator.steps[year] = stepGap
+          }
+        })
+      }
     })
   }
 
@@ -565,7 +584,9 @@ function createPlot (args) {
       .on('click', function () {
         if (playing == false) {
           timer = setInterval(function () {
-            yearRange.noUiSlider.set(currentYear + 1)
+            let step = calculateSliderStep()
+            let newYear = currentYear + step
+            yearRange.noUiSlider.set(newYear)
           }, transitionDuration)
 
           d3.select(this)
@@ -583,6 +604,16 @@ function createPlot (args) {
     clearInterval(timer)
     playBtn.classed('active', false).select('span').attr('class', 'play-icon')
     playing = false
+  }
+
+  function calculateSliderStep () {
+    if (indicators[currentAxes.x.name].steps && indicators[currentAxes.x.name].steps[currentYear]) {
+      return parseInt(indicators[currentAxes.x.name].steps[currentYear])
+    } else if (indicators[currentAxes.y.name].steps && indicators[currentAxes.y.name].steps[currentYear]) {
+      return parseInt(indicators[currentAxes.y.name].steps[currentYear])
+    } else {
+      return 1
+    }
   }
 
   function removeEmptyDataPoints (data, disableCheckboxes = true) {
