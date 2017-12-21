@@ -164,12 +164,10 @@ function createPlot (args) {
   }
 
   function calculateRanges (indicator) {
-    if (indicators[indicator].is_percentage) {
-      return [0, 100]
+    if (indicators[indicator].min_value && indicators[indicator].max_value) {
+      return [indicators[indicator].min_value, indicators[indicator].max_value]
     }
-    // if (indicators[indicator].min_value && indicators[indicator].max_value) {
-    //   return [indicators[indicator].min_value, indicators[indicator].max_value]
-    // }
+
     return d3.extent(data.raw.reduce(function (result, value) {
       if (value[indicator] != '') {
         result.push(parseFloat(value[indicator]))
@@ -290,12 +288,22 @@ function createPlot (args) {
           if (indicators[value].is_logged_default) {
             d3.select('select[name="axis-scaleType-' + axis + '"]').property('value', 'log')
           }
+          disableLoggedScale(axis, value)
         }
         updateHints(axis, value)
 
         drawPrimaryChart()
       })
     })
+  }
+
+  function disableLoggedScale (axis, indicator) {
+    if (indicators[indicator].range[0] < 0 || indicators[indicator].range[1] < 0) {
+      d3.select('select[name="axis-scaleType-' + axis + '"]').property('value', 'linear')
+      d3.select('select[name="axis-scaleType-' + axis + '"] option[value="log"]').property('disabled', true)
+    } else {
+      d3.select('select[name="axis-scaleType-' + axis + '"] option[value="log"]').property('disabled', false)
+    }
   }
 
   function setupAxisTypeLabel () {
@@ -363,10 +371,11 @@ function createPlot (args) {
         d3.selectAll('.axis-scaleType').remove()
         setupAxisSelect()
 
+        disableLoggedScale('x', currentAxes.x.name)
+        disableLoggedScale('y', currentAxes.y.name)
+
         // Destroy Lines so they are redrawn
         stopAnimation(playBtn, timer)
-        // console.log(d3.selectAll('.selectedLine'))
-        // d3.selectAll('.selectedLine').remove()
         drawPrimaryChart()
       })
   }
