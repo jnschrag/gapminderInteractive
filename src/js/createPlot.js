@@ -144,9 +144,15 @@ function createPlot (args) {
   }
 
   function calculateRanges (indicator) {
+    if (indicators[indicator].is_percentage) {
+      return [0, 100]
+    }
+    // if (indicators[indicator].min_value && indicators[indicator].max_value) {
+    //   return [indicators[indicator].min_value, indicators[indicator].max_value]
+    // }
     return d3.extent(data.raw.reduce(function (result, value) {
       if (value[indicator] != '') {
-        result.push(parseInt(value[indicator]))
+        result.push(parseFloat(value[indicator]))
       }
       return result
     }, []))

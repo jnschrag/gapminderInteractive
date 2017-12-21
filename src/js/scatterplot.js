@@ -8,6 +8,16 @@ const formatComma = d3.format(',.3s')
 
 let transitionDuration
 
+function chooseFormat (value, indicator) {
+  if (indicators[indicator].is_percentage) {
+    return value + '%'
+  } else if (indicators[indicator].no_formatting) {
+    return value.toString()
+  } else {
+    return formatComma(value)
+  }
+}
+
 function formatter (value) {
   return value.replace('G', ' billion').replace('M', ' million').replace('T', ' trillion')
 }
@@ -263,9 +273,6 @@ function scatterplot () {
       .call(axisBottom)
 
     let xLabel = indicators[currentValues.axes[axisBottomScale].name][getLanguageProperty('name', currentValues.lang)]
-    if (indicators[currentValues.axes[axisBottomScale].name][getLanguageProperty('units', currentValues.lang)]) {
-      xLabel += ' (' + indicators[currentValues.axes[axisBottomScale].name][getLanguageProperty('units', currentValues.lang)] + ')'
-    }
     x.select('.axis__label')
       .attr('x', width / 2)
       .attr('y', margin.bottom - 5)
@@ -276,9 +283,6 @@ function scatterplot () {
     y.call(axisLeft)
 
     let yLabel = indicators[currentValues.axes[axisLeftScale].name][getLanguageProperty('name', currentValues.lang)]
-    if (indicators[currentValues.axes[axisLeftScale].name][getLanguageProperty('units', currentValues.lang)]) {
-      yLabel += ' (' + indicators[currentValues.axes[axisLeftScale].name][getLanguageProperty('units', currentValues.lang)] + ')'
-    }
     y.select('.axis__label')
       .attr('y', 0 - (margin.left / 1.25))
       .attr('x', 0 - (height / 2))
@@ -316,7 +320,7 @@ function scatterplot () {
           showAvgTooltip(indicators[currentValues.axes.x.name].name, 'test')
           let name = indicators[currentValues.axes.x.name][getLanguageProperty('name', currentValues.lang)]
           let unit = indicators[currentValues.axes.x.name][getLanguageProperty('units', currentValues.lang)]
-          let amount = formatter(formatComma(avg)) + ' ' + unit
+          let amount = formatter(chooseFormat(avg, currentValues.axes.x.name)) + ' ' + unit
           showAvgTooltip(name, amount)
         })
         .on('mouseout', hideTooltip)
@@ -337,7 +341,7 @@ function scatterplot () {
         .on('mouseover', function () {
           let name = indicators[currentValues.axes.y.name][getLanguageProperty('name', currentValues.lang)]
           let unit = indicators[currentValues.axes.y.name][getLanguageProperty('units', currentValues.lang)]
-          let amount = formatter(formatComma(avg)) + ' ' + unit
+          let amount = formatter(chooseFormat(avg, currentValues.axes.y.name)) + ' ' + unit
           showAvgTooltip(name, amount)
         })
         .on('mouseout', hideTooltip)
@@ -398,7 +402,7 @@ function scatterplot () {
         .attr('x', parseFloat(this.getAttribute('cx')) + boundingClientRect.width / 2)
         .attr('y', parseFloat(this.getAttribute('cy')) + boundingClientRect.height / 2)
         .attr('class', 'radius-legend-label')
-        .text(formatter(formatComma(d)))
+        .text(formatter(chooseFormat(d, currentValues.axes.r.name)))
     })
   }
 
@@ -457,7 +461,7 @@ function scatterplot () {
       guidelines.select('.chart-guidelines-label--x')
         .attr('x', scales.x.type(d[currentValues.axes.x.name]))
         .attr('y', height + 30)
-        .text(formatComma(d[currentValues.axes.x.name]))
+        .text(chooseFormat(d[currentValues.axes.x.name], currentValues.axes.x.name))
 
       guidelines.select('.chart-guidelines--y')
         .attr('x1', scales.x.type(d[currentValues.axes.x.name]))
@@ -469,8 +473,7 @@ function scatterplot () {
         .attr('y', -35)
         .attr('x', scales.y.type(d[currentValues.axes.y.name]) * -1)
         .attr('transform', 'rotate(-90)')
-        // .style('text-anchor', 'end')
-        .text(formatComma(d[currentValues.axes.y.name]))
+        .text(chooseFormat(d[currentValues.axes.y.name], currentValues.axes.y.name))
     } else {
       guidelines.classed('active', false)
     }
@@ -534,7 +537,13 @@ function showTooltip (d, item, currentValues) {
   function formatTooltipValue (key, value) {
     let label = indicators[key][getLanguageProperty('name', currentValues.lang)]
     let unit = indicators[key][getLanguageProperty('units', currentValues.lang)]
-    let amount = formatter(formatComma(value)) + ' ' + unit
+    let needsPercentage = false
+    let amount
+    if (indicators[key].is_prefix) {
+      amount = unit + formatter(chooseFormat(value, indicators[key].name))
+    } else {
+      amount = formatter(chooseFormat(value, indicators[key].name)) + ' ' + unit
+    }
     return `<span class="tooltip-label">${label}:</span> ${amount}<br />`
   }
 }
