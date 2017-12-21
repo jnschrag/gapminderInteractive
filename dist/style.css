@@ -797,8 +797,20 @@ p {
 p.instructions {
   margin-bottom: 2rem; }
 
-.page-title .comparisons-country {
-  cursor: pointer; }
+.page-title .desc {
+  margin-bottom: 1rem; }
+
+.page-title .comparisons {
+  font-size: 16px;
+  font-size: 1rem; }
+
+.page-title .comparisons-countries {
+  margin-left: 0.5rem; }
+  .page-title .comparisons-countries .checkbox-container {
+    display: inline;
+    margin-right: 1rem; }
+    .page-title .comparisons-countries .checkbox-container label {
+      color: #000; }
 
 .content-wrapper {
   position: relative; }
