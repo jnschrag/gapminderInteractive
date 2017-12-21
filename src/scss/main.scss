@@ -43,8 +43,20 @@ body {
   margin: 0;
   padding: 0;
   color: $gray;
-
   --china-color: $red;
+  --breakpoint: "xsmall";
+
+  @include breakpoint("small") {
+      --breakpoint: "small";
+  }
+
+  @include breakpoint("medium") {
+      --breakpoint: "medium";
+  }
+
+  @include breakpoint("large") {
+      --breakpoint: "large";
+  }
 
   &.sidebar-active {
     overflow: hidden;
@@ -63,12 +75,13 @@ a {
 
 .container-overlay {
   display: none;
-  position: absolute;
+  position: fixed;
   top: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: $black;
-  opacity: 0.1;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: $white;
+  opacity: 0.8;
 
   @include breakpoint("medium") {
     display: none;
@@ -76,6 +89,13 @@ a {
 
   &.sidebar-active {
     display: block;
+  }
+}
+
+.intro-mobile {
+
+  @include breakpoint("medium") {
+    display: none;
   }
 }
 
@@ -123,7 +143,12 @@ p.instructions {
   }
 
   .comparisons-countries {
-    margin-left: 0.5rem;
+    display: block;
+    @include breakpoint("medium") {
+      display: inline;
+      margin-left: 0.5rem;
+    }
+
 
     .checkbox-container {
       display: inline;

@@ -84,5 +84,10 @@
 }
 
 .filter-intro {
-	text-align: right;
+	display: none;
+
+	@include breakpoint("medium") {
+		display: block;
+		text-align: right;
+	}
 }

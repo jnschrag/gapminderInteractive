@@ -741,7 +741,17 @@ body {
   margin: 0;
   padding: 0;
   color: #333;
-  --china-color: #ed392a; }
+  --china-color: #ed392a;
+  --breakpoint: "xsmall"; }
+  @media screen and (min-width: 35em) {
+    body {
+      --breakpoint: "small"; } }
+  @media screen and (min-width: 48em) {
+    body {
+      --breakpoint: "medium"; } }
+  @media screen and (min-width: 64em) {
+    body {
+      --breakpoint: "large"; } }
   body.sidebar-active {
     overflow: hidden; }
 
@@ -755,17 +765,22 @@ a {
 
 .container-overlay {
   display: none;
-  position: absolute;
+  position: fixed;
   top: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: #000;
-  opacity: 0.1; }
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #fff;
+  opacity: 0.8; }
   @media screen and (min-width: 48em) {
     .container-overlay {
       display: none; } }
   .container-overlay.sidebar-active {
     display: block; }
+
+@media screen and (min-width: 48em) {
+  .intro-mobile {
+    display: none; } }
 
 .content {
   max-width: 700px;
@@ -805,7 +820,11 @@ p.instructions {
   font-size: 1rem; }
 
 .page-title .comparisons-countries {
-  margin-left: 0.5rem; }
+  display: block; }
+  @media screen and (min-width: 48em) {
+    .page-title .comparisons-countries {
+      display: inline;
+      margin-left: 0.5rem; } }
   .page-title .comparisons-countries .checkbox-container {
     display: inline;
     margin-right: 1rem; }
@@ -891,7 +910,11 @@ p.instructions {
       transform: rotate(-45deg); }
 
 .filter-intro {
-  text-align: right; }
+  display: none; }
+  @media screen and (min-width: 48em) {
+    .filter-intro {
+      display: block;
+      text-align: right; } }
 
 /*----------  Scatterplot  ----------*/
 /*===================================
@@ -1611,8 +1634,9 @@ p.filter-desc {
 =            IntroJS            =
 ===============================*/
 /*----------  Page Layout  ----------*/
-body.is-relative {
-  position: relative; }
+@media screen and (min-width: 48em) {
+  body.is-relative {
+    position: relative; } }
 
 .is-hidden {
   display: none; }
@@ -1643,16 +1667,19 @@ body.is-relative {
   box-shadow: 0 1px 10px rgba(0, 0, 0, 0.4); }
 
 .landing-container {
-  top: 0;
-  bottom: unset;
-  left: 0;
-  right: 0;
-  height: 100%;
-  opacity: 1 !important;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: #000; }
+  display: none; }
+  @media screen and (min-width: 48em) {
+    .landing-container {
+      top: 0;
+      bottom: unset;
+      left: 0;
+      right: 0;
+      height: 100%;
+      opacity: 1 !important;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #000; } }
 
 .landing-content {
   position: relative;

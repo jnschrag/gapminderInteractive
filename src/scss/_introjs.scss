@@ -7,7 +7,9 @@ $overlay-z-index: 10;
 /*----------  Page Layout  ----------*/
 body {
   &.is-relative {
-    position: relative;
+    @include breakpoint("medium") {
+      position: relative;
+    }
   }
 }
 
@@ -43,16 +45,20 @@ body {
 }
 
 .landing-container {
-  top: 0;
-  bottom: unset;
-  left: 0;
-  right: 0;
-  height: 100%;
-  opacity: 1 !important;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: $black;
+  display: none;
+
+  @include breakpoint("medium") {
+    top: 0;
+    bottom: unset;
+    left: 0;
+    right: 0;
+    height: 100%;
+    opacity: 1 !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: $black;
+  }
 }
 
 .landing-content {

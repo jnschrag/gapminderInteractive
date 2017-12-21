@@ -6,6 +6,7 @@ import intro from 'intro.js'
 
 const introJs = intro.introJs()
 let plotted
+let breakpoint = calculateBreakpoint()
 
 function init () {
   plotted = plot.createPlot({
@@ -13,11 +14,19 @@ function init () {
   	indicators: Indicators
   })
   plotted.init()
-  assignAnnotations()
-  setupBtns()
+  loadIntro()
 }
 
-function setupBtns () {
+function loadIntro () {
+  setupRestartTourBtn()
+  if (breakpoint == 'xsmall' || breakpoint == 'small') {
+  	return
+  }
+  assignAnnotations()
+  setupTourBtns()
+}
+
+function setupTourBtns () {
   let introBtn = document.querySelector('.btn-intro')
   introBtn.addEventListener('click', event => {
   	hideLanding()
@@ -28,7 +37,9 @@ function setupBtns () {
   chartBtn.addEventListener('click', function () {
     exploreChart()
   })
+}
 
+function setupRestartTourBtn () {
   let restartBtn = document.querySelector('.btn-intro-restart')
   restartBtn.addEventListener('click', function () {
   	plotted.resetChart()
@@ -180,4 +191,14 @@ let updateDom = {
   }
 }
 
+function calculateBreakpoint () {
+  return getComputedStyle(document.body).getPropertyValue('--breakpoint').replace(/\"/g, '')
+}
+
+function resize () {
+  breakpoint = calculateBreakpoint()
+  loadIntro()
+}
+
 window.addEventListener('DOMContentLoaded', init)
+window.addEventListener('resize', resize)
