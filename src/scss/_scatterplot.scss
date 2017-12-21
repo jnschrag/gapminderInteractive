@@ -5,6 +5,10 @@
 .chart {
   margin: 0 auto;
   text-align: center;
+
+  @include breakpoint("medium") {
+    max-height: 600px;
+  }
 }
 
 .g-axis {

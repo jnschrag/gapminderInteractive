@@ -929,6 +929,9 @@ p.instructions {
 .chart {
   margin: 0 auto;
   text-align: center; }
+  @media screen and (min-width: 48em) {
+    .chart {
+      max-height: 600px; } }
 
 .g-axis line, .g-axis path {
   stroke: #333; }
