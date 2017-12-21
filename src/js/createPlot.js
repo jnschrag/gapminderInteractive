@@ -708,6 +708,7 @@ function createPlot (args) {
   }
 
   function hideLoading () {
+    d3.selectAll('.hide-on-load').classed('hide-on-load', false)
     d3.select('.loading-container').style('display', 'none')
   }
 

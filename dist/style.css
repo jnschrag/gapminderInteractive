@@ -778,9 +778,11 @@ a {
   .container-overlay.sidebar-active {
     display: block; }
 
-@media screen and (min-width: 48em) {
-  .intro-mobile {
-    display: none; } }
+.intro-mobile {
+  margin-bottom: 2rem; }
+  @media screen and (min-width: 48em) {
+    .intro-mobile {
+      display: none; } }
 
 .content {
   max-width: 700px;
@@ -789,8 +791,8 @@ a {
 .title {
   font-family: "Roboto", sans-serif;
   margin: 1rem 6rem 1rem 0;
-  font-size: 20px;
-  font-size: 1.25rem;
+  font-size: 23px;
+  font-size: 1.4375rem;
   font-weight: 400;
   line-height: 1.36;
   color: #000;
@@ -1615,6 +1617,10 @@ p.filter-desc {
     -webkit-transform: rotate(0deg); }
   100% {
     -webkit-transform: rotate(360deg); } }
+
+.hide-on-load {
+  opacity: 0;
+  visibility: hidden; }
 
 /*----------  Source  ----------*/
 /*==============================

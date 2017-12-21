@@ -29,3 +29,7 @@
   100%{-webkit-transform:rotate(360deg)}
 }
 
+.hide-on-load {
+  opacity: 0;
+  visibility: hidden;
+}
