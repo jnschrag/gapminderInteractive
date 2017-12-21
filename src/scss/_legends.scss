@@ -9,6 +9,9 @@
 
 		@include breakpoint("medium") {
 			display: block;
+			width: -moz-fit-content;
+			width: fit-content;
+			padding-right: 1.5rem;
 		}
 	}
 

@@ -1,6 +1,6 @@
 import * as plot from './js/createPlot'
 import Data from './data/advanced-data-20171220.csv'
-import Indicators from './data/advanced-indicators-20171220-1.csv'
+import Indicators from './data/advanced-indicators-20171221.csv'
 import './scss/main.scss'
 import intro from 'intro.js'
 
@@ -11,7 +11,8 @@ let breakpoint = calculateBreakpoint()
 function init () {
   plotted = plot.createPlot({
   	data: Data,
-  	indicators: Indicators
+  	indicators: Indicators,
+  	useHints: true
   })
   plotted.init()
   loadIntro()
@@ -51,6 +52,7 @@ function setupRestartTourBtn () {
 function exploreChart () {
   let overlays = document.querySelectorAll('.introjs-overlay')
   overlays.forEach(function (element) { element.remove() })
+  setupHints()
 }
 
 function hideLanding () {
@@ -71,7 +73,7 @@ function assignAnnotations () {
   	showStepNumbers: false,
     steps: [
     	{
-    		intro: '<p>China’s transformation from a developing country into an emerging global power is likely to be one of the most consequential factors in twenty-first century international politics. Its economy is now the second largest in the world, and in the process hundreds of millions of people have been lifted out of poverty.</p><p>Yet questions persist as to whether China is a developed or developing country – or both.</p><p>The ChinaPower Development Tracker empowers users to explore various indicators of development, and compare China with other countries.</p>',
+    		intro: '<p>China’s transformation from a developing country into an emerging global power is likely to be one of the most consequential factors in twenty-first century international politics. Its economy is now the second largest in the world, and in the process hundreds of millions of people have been lifted out of poverty.</p><p>Yet questions persist as to whether China is a developed or developing country – or both.</p><p>The China Development Tracker empowers users to explore various indicators of development, and compare China with other countries.</p>',
     		tooltipClass: 'intro-firstSlide'
 	    },
 	    {
@@ -87,7 +89,7 @@ function assignAnnotations () {
 	    },
 	    {
         	element: document.querySelector('.chart-color-legend'),
-        	intro: 'The colors of each bubble correspond to the income groups assigned by the World Bank',
+        	intro: 'The colors of each bubble correspond to the income groups assigned by the World Bank.',
         	position: 'bottom'
 	    },
 	    {
@@ -97,7 +99,7 @@ function assignAnnotations () {
 	    },
 	    {
         	element: document.querySelector('.filter-axis-y'),
-        	intro: 'Use the Y-Axis to select a social indication, such as life expectancy.',
+        	intro: 'Use the Y-Axis to select a social indicator, such as life expectancy.',
         	position: 'left'
 	    },
 	    {
@@ -107,12 +109,12 @@ function assignAnnotations () {
 	    },
 	    {
         	element: document.querySelector('.chart-container'),
-        	intro: 'Use the play button to see how these factors have changed over time.',
+        	intro: 'Use the play button to see how these indicators have changed over time.',
         	position: 'bottom'
 	    },
 	    {
         	element: document.querySelector('.chart-primary'),
-        	intro: 'By 2015, the size of China’s economy increased by more than 10 times, per capita incomes rose by (FACTOR?), and average life expectancy increased by almost seven years. Importantly, China’s life expectancy in 2015 remained three and a half behind the average of high-income economies.',
+        	intro: 'By 2015, the size of China’s economy increased by more than 10 times, per capita incomes rose by a factor of 25, and average life expectancy increased by almost seven years. Importantly, China’s life expectancy in 2015 remained three and a half years behind the average of high-income economies.',
         	position: 'right'
 	    },
 	    {
@@ -121,7 +123,7 @@ function assignAnnotations () {
         	position: 'right'
 	    },
 	    {
-	    	intro: '<p>The Development Tracker is preloaded with several economic and social indicators.</p><p>We hope this tool helps you to better understand China’s level development. Enjoy!</p>'
+	    	intro: '<p>The Development Tracker is preloaded with several economic and social indicators.</p><p>We hope this tool helps you to better understand China’s level of development. Enjoy!</p>'
 	    }
     ]
   })
@@ -190,6 +192,27 @@ let updateDom = {
   	plotted.updateTransitionLength(300)
     document.querySelector('#playbtn').click()
   }
+}
+
+function setupHints () {
+  introJs.setOptions({
+    hintPosition: 'middle-left'
+  })
+  let axes = ['x', 'y', 'c', 'r']
+  axes.forEach(function (axis) {
+    let filter = document.querySelector('.filter-axis-' + axis)
+
+    if (axis == 'c') {
+    	document.querySelector('.filter-axis-c').setAttribute('data-hintPosition', 'middle-right')
+    }
+
+    filter.addEventListener('change', function (e) {
+    	document.querySelector('.introjs-hints').innerHTML = ''
+    	introJs.addHints()
+	  	introJs.showHints()
+  	})
+  })
+  introJs.showHints()
 }
 
 function calculateBreakpoint () {

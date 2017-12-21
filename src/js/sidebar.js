@@ -8,8 +8,10 @@ function sidebarMobile () {
   var optionBtns = document.querySelectorAll('.sidebar-options')
 
   Array.from(optionBtns).forEach(btn => {
-  	btn.addEventListener('click', toggleSidebar)
+    btn.addEventListener('click', toggleSidebar)
   })
+
+  overlay.addEventListener('click', toggleSidebar)
 
   function toggleSidebar () {
     sidebar.classList.toggle('is-visible')

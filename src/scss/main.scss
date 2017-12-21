@@ -92,13 +92,6 @@ a {
   }
 }
 
-.intro-mobile {
-  margin-bottom: 2rem;
-  @include breakpoint("medium") {
-    display: none;
-  }
-}
-
 .content {
   max-width: 700px;
   margin: 0 auto;
@@ -106,7 +99,7 @@ a {
 
 .title {
   font-family: $font-roboto;
-  margin: 1rem 6rem 1rem 0;
+  margin: 1rem auto;
   @include fontSize(23px);
   font-weight: 400;
   line-height: 1.36;
@@ -134,12 +127,23 @@ p.instructions {
 }
 
 .page-title {
+  margin-right: 5rem;
+
+  @include breakpoint("medium") {
+    margin-right: 0;
+  }
+
   .desc {
     margin-bottom: 1rem;
   }
 
   .comparisons {
+    width: 90vw;
     @include fontSize(16px);
+
+    @include breakpoint("medium") {
+      width: auto;
+    }
   }
 
   .comparisons-countries {

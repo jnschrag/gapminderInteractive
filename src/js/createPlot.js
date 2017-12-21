@@ -147,6 +147,7 @@ function createPlot (args) {
 
       if (indicator.is_default_value == 1) {
         currentAxes[axis].name = indicator.name
+        updateHints(axis, indicator.name)
 
         if (indicator['desc_' + lang]) {
           updatePageDesc(indicator.name)
@@ -196,6 +197,7 @@ function createPlot (args) {
     }
     if (indicators[indicator].comparison_countries) {
       let countries = indicators[indicator].comparison_countries.split(';')
+      countries.map(c => c.trim())
 
       let container = d3.select('.comparisons-countries')
 
@@ -231,6 +233,17 @@ function createPlot (args) {
       d3.select('.page-title .comparisons').classed('is-hidden', false)
     } else {
       d3.select('.page-title .comparisons').classed('is-hidden', true)
+    }
+  }
+
+  function updateHints (axis, indicator) {
+    if (args.useHints) {
+      let hint = indicators[indicator]['hint_' + lang]
+      if (hint) {
+        d3.select('.filter-axis-' + axis).attr('data-hint', hint)
+      } else {
+        d3.select('.filter-axis-' + axis).attr('data-hint', null)
+      }
     }
   }
 
@@ -271,12 +284,15 @@ function createPlot (args) {
       d3.selectAll('.axis-variable').on('change', function () {
         let selector = d3.select(this)
         let axis = selector.attr('data-axis')
+        let value = selector.property('value')
         if (axis == 'x' || axis == 'y') {
           let value = selector.property('value')
           if (indicators[value].is_logged_default) {
             d3.select('select[name="axis-scaleType-' + axis + '"]').property('value', 'log')
           }
         }
+        updateHints(axis, value)
+
         drawPrimaryChart()
       })
     })
@@ -285,7 +301,6 @@ function createPlot (args) {
   function setupAxisTypeLabel () {
     d3.select('.filter-axis-x .axis-type').text(indicators[currentAxes.x.name].type)
     d3.select('.filter-axis-y .axis-type').text(indicators[currentAxes.y.name].type)
-    d3.select('.filter-axis-r .axis-type').text(indicators[currentAxes.r.name].type)
   }
 
   function setupAxisSelectType (axis) {
