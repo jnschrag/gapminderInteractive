@@ -871,6 +871,11 @@ p.instructions {
     -moz-box-shadow: 0 0 5px rgba(0, 0, 0, 0.7);
     -ms-box-shadow: 0 0 5px rgba(0, 0, 0, 0.7);
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.7); }
+  @media screen and (min-width: 48em) {
+    .sidebar .filter-axis-c {
+      display: none; } }
+  .sidebar .filter-label .axis-type {
+    text-transform: capitalize; }
 
 .sidebar-options {
   font-size: 16px;
@@ -917,10 +922,6 @@ p.instructions {
     .filter-intro {
       display: block;
       text-align: right; } }
-
-@media screen and (min-width: 48em) {
-  .sidebar .filter-axis-c {
-    display: none; } }
 
 /*----------  Scatterplot  ----------*/
 /*===================================

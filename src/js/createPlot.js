@@ -282,6 +282,12 @@ function createPlot (args) {
     })
   }
 
+  function setupAxisTypeLabel () {
+    d3.select('.filter-axis-x .axis-type').text(indicators[currentAxes.x.name].type)
+    d3.select('.filter-axis-y .axis-type').text(indicators[currentAxes.y.name].type)
+    d3.select('.filter-axis-r .axis-type').text(indicators[currentAxes.r.name].type)
+  }
+
   function setupAxisSelectType (axis) {
     axesSelect[axis] = d3.select('.filter-axis-' + axis)
       .append('select')
@@ -708,6 +714,7 @@ function createPlot (args) {
       updatePageDesc(currentAxes.x.name, currentAxes.y.name)
       updateRecommendedComparisons(currentAxes.x.name, currentAxes.y.name)
     }
+    setupAxisTypeLabel()
 
     let colorIndicator = calculateColorSelect()
     let oldColor = currentAxes.c.name

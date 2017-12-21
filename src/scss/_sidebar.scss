@@ -28,6 +28,16 @@
 		height: 100vh;
 		@include prefix(box-shadow, (0 0 5px rgba($black, 0.7)));
 	}
+
+	.filter-axis-c {
+		@include breakpoint("medium") {
+			display: none;
+		}
+	}
+
+	.filter-label .axis-type {
+		text-transform: capitalize;
+	}
 }
 
 .sidebar-options {
@@ -89,13 +99,5 @@
 	@include breakpoint("medium") {
 		display: block;
 		text-align: right;
-	}
-}
-
-.sidebar {
-	.filter-axis-c {
-		@include breakpoint("medium") {
-			display: none;
-		}
 	}
 }
