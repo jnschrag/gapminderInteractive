@@ -156,29 +156,47 @@ function createPlot (args) {
     d3.select('.page-title .title').text(indicator['name_' + lang])
   }
 
-  function updatePageDesc (indicator) {
+  function updatePageDesc (indicator1, indicator2 = null) {
+    let indicator = indicator1
+    if (indicator2 && indicators[indicator2]['desc_' + lang]) {
+      indicator = indicator2
+    }
     d3.select('.page-title .desc').html(indicators[indicator]['desc_' + lang])
   }
 
-  function updateRecommendedComparisons (indicator) {
+  function updateRecommendedComparisons (indicator1, indicator2 = null) {
+    let indicator = indicator1
+    if (indicator2 && indicators[indicator2].comparison_countries) {
+      indicator = indicator2
+    }
     if (indicators[indicator].comparison_countries) {
       let countries = indicators[indicator].comparison_countries.split(';')
-      let countriesHTML = ''
-      countries.forEach(function (country, i) {
-        let prefix = ', '
-        if (i == 0) {
-          prefix = ''
-        }
-        countriesHTML += prefix + '<a class="comparisons-country" data-iso="' + country + '">' + data.countries[country].country + '</a>'
+
+      let container = d3.select('.comparisons-countries')
+
+      let comparisons = container.selectAll('.checkbox-container').data(countries, d => d)
+      comparisons.exit().remove()
+
+      let enterComparisons = comparisons.enter().append('span')
+        .attr('class', 'checkbox-container')
+      enterComparisons.append('input')
+          .attr('name', 'country')
+          .attr('class', 'checkboxes')
+          .attr('type', 'checkbox')
+          .attr('id', d => d)
+          .attr('value', d => d)
+          .attr('data-iso', d => d)
+          .attr('data-country', d => d)
+
+      enterComparisons.append('label')
+        .attr('for', d => d)
+        .text(d => data.countries[d].country)
+
+      container.selectAll('input[name="country"]').on('change', function () {
+        clickCountryCheckbox(this)
       })
 
       d3.select('.page-title .comparisons').classed('is-hidden', false)
-      d3.select('.page-title .comparisons-countries').html(countriesHTML)
-
-      d3.selectAll('.comparisons-country').on('click', function () {
-        let iso = d3.select(this).attr('data-iso')
-        searchItem(iso)
-      })
     } else {
       d3.select('.page-title .comparisons').classed('is-hidden', true)
     }
@@ -347,15 +365,16 @@ function createPlot (args) {
           .attr('type', 'checkbox')
           .attr('id', d => d)
           .attr('value', d => d)
+          .attr('data-iso', d => d)
           .attr('data-country', d => d)
     })
 
-    d3.selectAll('.checkbox-container').append('label')
+    regionsCont.selectAll('.checkbox-container').append('label')
         .attr('for', d => d)
         .text(d => data.countries[d].country)
 
-    d3.selectAll('input[name="country"]').on('change', function () {
-      drawPrimaryChart()
+    regionsCont.selectAll('input[name="country"]').on('change', function () {
+      clickCountryCheckbox(this)
     })
 
     regionsCont.append('button')
@@ -365,6 +384,19 @@ function createPlot (args) {
         d3.selectAll('input[name="country"]').property('checked', false)
         drawPrimaryChart()
       })
+  }
+
+  function clickCountryCheckbox (checkbox) {
+    let checkedItem = d3.select(checkbox)
+    let iso = checkedItem.attr('data-iso')
+    let checked = checkedItem.property('checked')
+    let newCheckVal = false
+    if (checked) {
+      newCheckVal = true
+    }
+    let checkboxes = d3.selectAll('input[name="country"][data-iso="' + iso + '"]')
+    d3.selectAll('input[name="country"][data-iso="' + iso + '"]').property('checked', newCheckVal)
+    drawPrimaryChart()
   }
 
   function calculateSelectedCountries () {
@@ -611,14 +643,8 @@ function createPlot (args) {
 
     if (currentAxes.x.name != oldXName || currentAxes.y.name != oldYName) {
       calculateYearRange(currentAxes.x.name, currentAxes.y.name)
-
-      if (currentAxes.x.name != oldXName) {
-        updatePageDesc(currentAxes.x.name)
-        updateRecommendedComparisons(currentAxes.x.name)
-      } else if (currentAxes.y.name != oldYName) {
-        updatePageDesc(currentAxes.y.name)
-        updateRecommendedComparisons(currentAxes.y.name)
-      }
+      updatePageDesc(currentAxes.x.name, currentAxes.y.name)
+      updateRecommendedComparisons(currentAxes.x.name, currentAxes.y.name)
     }
 
     let colorIndicator = calculateColorSelect()

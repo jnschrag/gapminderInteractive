@@ -114,8 +114,25 @@ p.instructions {
 }
 
 .page-title {
-  .comparisons-country {
-    cursor: pointer;
+  .desc {
+    margin-bottom: 1rem;
+  }
+
+  .comparisons {
+    @include fontSize(16px);
+  }
+
+  .comparisons-countries {
+    margin-left: 0.5rem;
+
+    .checkbox-container {
+      display: inline;
+      margin-right: 1rem;
+
+      label {
+        color: $black;
+      }
+    }
   }
 }
 
