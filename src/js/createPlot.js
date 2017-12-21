@@ -227,6 +227,7 @@ function createPlot (args) {
         .append('select')
         .attr('name', 'axis-' + axis)
         .attr('class', 'filter-select axis-variable')
+        .attr('data-axis', axis)
 
       let options = axesSelect[axis]
         .selectAll('option')
@@ -243,6 +244,14 @@ function createPlot (args) {
       }
 
       d3.selectAll('.axis-variable').on('change', function () {
+        let selector = d3.select(this)
+        let axis = selector.attr('data-axis')
+        if (axis == 'x' || axis == 'y') {
+          let value = selector.property('value')
+          if (indicators[value].is_logged_default) {
+            d3.select('select[name="axis-scaleType-' + axis + '"]').property('value', 'log')
+          }
+        }
         drawPrimaryChart()
       })
     })
