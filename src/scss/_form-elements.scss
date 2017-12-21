@@ -32,7 +32,10 @@ p.filter-desc { line-height: 1.3; }
 
 .filter-option {
   padding-bottom: 1.5rem;
-  padding-left: 1.25rem;
+  
+  @include breakpoint("medium") {
+    padding-left: 1.25rem;
+  }
 }
 
 // Select

@@ -196,7 +196,6 @@ function createPlot (args) {
     if (indicators[indicator].comparison_countries) {
       let countries = indicators[indicator].comparison_countries.split(';')
       countries.map(c => c.trim())
-
       let container = d3.select('.comparisons-countries')
 
       let comparisons = container.selectAll('.checkbox-container').data(countries, d => d)
