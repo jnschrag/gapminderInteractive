@@ -25,10 +25,14 @@
   }
 
   .axis__label {
-    @include fontSize(16px);
+    @include fontSize(14px);
     text-transform: uppercase;
     fill: $black;
     text-anchor: middle;
+
+    @include breakpoint("medium") {
+      @include fontSize(16px);
+    }
   }
 
 }

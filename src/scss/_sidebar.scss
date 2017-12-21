@@ -91,3 +91,11 @@
 		text-align: right;
 	}
 }
+
+.sidebar {
+	.filter-axis-c {
+		@include breakpoint("medium") {
+			display: none;
+		}
+	}
+}

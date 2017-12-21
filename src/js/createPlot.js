@@ -208,7 +208,15 @@ function createPlot (args) {
 
   function setupAxisSelect () {
     axes.forEach(function (axis) {
-      axesSelect[axis] = d3.select('.filter-axis-' + axis)
+      // Move select dropdown to the sidebar on small screens
+      let container = ''
+      if (axis == 'c' && windowWidth <= 768) {
+        container = '.sidebar '
+        d3.select('.chart-color-legend .filter-axis-c').remove()
+      } else if (axis == 'c' && windowWidth > 768) {
+        d3.select('.sidebar .filter-axis-c').remove()
+      }
+      axesSelect[axis] = d3.select(container + '.filter-axis-' + axis)
         .append('select')
         .attr('name', 'axis-' + axis)
         .attr('class', 'filter-select axis-variable')
@@ -706,6 +714,7 @@ function createPlot (args) {
       windowWidth = window.innerWidth
       chart.resize()
       initSidebar()
+      setupAxisSelect()
     }
   }
 

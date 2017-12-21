@@ -4,6 +4,14 @@
 
 /*----------  Color Legend  ----------*/
 .chart-color-legend {
+	.filter-axis-c {
+		display: none;
+
+		@include breakpoint("medium") {
+			display: block;
+		}
+	}
+
 	.filter-select {
 		width: auto;
 		margin-bottom: 0.5rem;

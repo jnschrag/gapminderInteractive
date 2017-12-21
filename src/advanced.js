@@ -20,10 +20,11 @@ function init () {
 function loadIntro () {
   setupRestartTourBtn()
   if (breakpoint == 'xsmall' || breakpoint == 'small') {
-  	return
+
+  } else {
+	  assignAnnotations()
+	  setupTourBtns()
   }
-  assignAnnotations()
-  setupTourBtns()
 }
 
 function setupTourBtns () {

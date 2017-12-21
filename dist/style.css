@@ -916,6 +916,10 @@ p.instructions {
       display: block;
       text-align: right; } }
 
+@media screen and (min-width: 48em) {
+  .sidebar .filter-axis-c {
+    display: none; } }
+
 /*----------  Scatterplot  ----------*/
 /*===================================
 =            Scatterplot            =
@@ -939,11 +943,15 @@ p.instructions {
   display: none; }
 
 .g-axis .axis__label {
-  font-size: 16px;
-  font-size: 1rem;
+  font-size: 14px;
+  font-size: 0.875rem;
   text-transform: uppercase;
   fill: #000;
   text-anchor: middle; }
+  @media screen and (min-width: 48em) {
+    .g-axis .axis__label {
+      font-size: 16px;
+      font-size: 1rem; } }
 
 .item {
   fill-opacity: 0.8; }
@@ -1016,6 +1024,12 @@ path.item {
 =            Legends            =
 ===============================*/
 /*----------  Color Legend  ----------*/
+.chart-color-legend .filter-axis-c {
+  display: none; }
+  @media screen and (min-width: 48em) {
+    .chart-color-legend .filter-axis-c {
+      display: block; } }
+
 .chart-color-legend .filter-select {
   width: auto;
   margin-bottom: 0.5rem; }
@@ -1142,15 +1156,7 @@ p.filter-desc {
       width: auto; }
 
 .checkbox-container {
-  position: relative;
-  display: inline-block;
-  width: 33%;
-  margin-bottom: 2px; }
-  @media screen and (min-width: 48em) {
-    .checkbox-container {
-      display: block;
-      width: unset;
-      margin-bottom: unset; } }
+  position: relative; }
   .checkbox-container input[type=checkbox] {
     position: absolute;
     opacity: 0;
