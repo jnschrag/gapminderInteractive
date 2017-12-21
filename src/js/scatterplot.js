@@ -75,6 +75,9 @@ function scatterplot () {
 
     gEnter.append('g').attr('class', 'g-plot')
 
+    const gMsg = gEnter.append('g').attr('class', 'g-message')
+    gMsg.append('text').attr('class', 'chart-message')
+
     const axis = gEnter.append('g').attr('class', 'g-axis')
 
     const x = axis.append('g').attr('class', 'axis axis--x')
@@ -307,6 +310,13 @@ function scatterplot () {
       return
     }
 
+    if (data.length == 0) {
+      line.classed('is-hidden', true)
+      return
+    } else {
+      line.classed('is-hidden', false)
+    }
+
     let avg = 0
     if (indicators[currentValues.axes.x.name].needs_average_line) {
       avg = d3.mean(data, function (d) {
@@ -314,6 +324,13 @@ function scatterplot () {
           return +d[currentValues.axes.x.name]
         }
       })
+
+      if (avg == 0 || avg == undefined) {
+        line.classed('is-hidden', true)
+        return
+      } else {
+        line.classed('is-hidden', false)
+      }
 
       line
         .on('mouseover', function () {
@@ -336,6 +353,12 @@ function scatterplot () {
           return +d[currentValues.axes.y.name]
         }
       })
+      if (avg == 0 || avg == undefined) {
+        line.classed('is-hidden', true)
+        return
+      } else {
+        line.classed('is-hidden', false)
+      }
 
       line
         .on('mouseover', function () {
@@ -406,6 +429,19 @@ function scatterplot () {
     })
   }
 
+  function updateMessage ({container, data}) {
+    let msgContainer = container.select('.g-message .chart-message')
+    if (data.length) {
+      msgContainer.text(null)
+    } else {
+      msgContainer
+        .attr('x', width / 2)
+        .attr('y', height / 2)
+        .attr('text-anchor', 'middle')
+        .text('There is no data available for this year.')
+    }
+  }
+
   function chart (container) {
     const data = container.datum()
 
@@ -414,6 +450,7 @@ function scatterplot () {
     updateDom({ container, data })
     updateAxis({ container, data })
     updateMeanLine({container, data})
+    updateMessage({container, data})
     // updateLegends({ container, data })
   }
 
