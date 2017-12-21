@@ -5,13 +5,14 @@ const tooltip = d3.select('.tooltip')
 
 let indicators
 const formatComma = d3.format(',.3s')
-const formatSig = d3.format(',.2')
+const formatSig = d3.format(',.2s')
+const formatSigPercentage = d3.format('.3r')
 
 let transitionDuration
 
 function chooseFormat (value, indicator) {
   if (indicators[indicator].is_percentage) {
-    return value + '%'
+    return formatSigPercentage(value) + '%'
   } else if (indicators[indicator].no_formatting) {
     return formatSig(value)
   } else {
